@@ -507,7 +507,7 @@ async function init() {
     showToast("Lokal saqlovdan " + vocab.length + " ta so'z yuklandi", 'success');
   } else {
     try {
-      const res = await fetch('./vocabulary.json');
+      const res = await fetch('./data/vocabulary.json');
       if (res.ok) {
         const data = await res.json();
         vocab = data.words || data;

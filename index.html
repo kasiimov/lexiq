@@ -641,7 +641,7 @@ body::after { width:300px; height:300px; background: var(--eng); bottom:-80px; r
       2. So'zlarni qo'shing yoki tahrirlang<br>
       3. <b>"💾 JSON eksport"</b> tugmasini bosing<br>
       4. Yuklab olingan <code>vocabulary-...json</code> faylni shu yerda yuklang<br><br>
-      Yoki <code>vocabulary.json</code> faylni shu HTML bilan bir papkaga qo'ying — avtomatik yuklanadi.
+      Yoki <code>vocabulary.json</code> faylni <code>data/</code> papkasiga qo'ying — avtomatik yuklanadi.
     </div>
   </div>
 </div>
@@ -1109,7 +1109,7 @@ async function loadVocab() {
 
   // Try fetching vocabulary.json from same folder
   try {
-    const res = await fetch('./vocabulary.json');
+    const res = await fetch('./data/vocabulary.json');
     if (res.ok) {
       const data = await res.json();
       VOCAB = data.words || data;

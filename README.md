@@ -1,162 +1,146 @@
-# LexiQ - English Learning Platform for Uzbek Speakers
+# LexiQ — English Learning Platform for Uzbek Speakers
 
-An interactive web-based English learning application specifically designed for Uzbek speakers, featuring game-based vocabulary learning, spaced repetition (Leitner algorithm), and IELTS/CEFR tracking.
+An interactive web-based English learning application designed for Uzbek speakers, featuring game-based vocabulary practice, spaced repetition (Leitner algorithm) and CEFR-aligned word levels.
+
+**Live:** https://lexiq-uz.netlify.app
 
 ## 🎯 Project Overview
 
-LexiQ is a free educational platform that makes learning English engaging and effective. The application uses proven learning techniques like spaced repetition and game mechanics to help students build vocabulary faster and retain information longer.
+LexiQ is a free educational platform that makes learning English engaging and effective. It uses proven techniques — spaced repetition and game mechanics — to help learners build vocabulary faster and retain it longer.
 
-**Target Audience:** Uzbek speakers (A1-B2 level)  
-**Focus:** Vocabulary building with IELTS & CEFR alignment
+**Target audience:** Uzbek speakers (A1–C1)
+**Focus:** Vocabulary building with CEFR alignment
 
 ## 🛠️ Technology Stack
 
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **Data Storage:** JSON (localStorage for client-side)
-- **Admin Panel:** Separate admin interface for vocabulary management
-- **Database:** Pre-loaded vocabulary sets (169K+ words in JSON format)
-- **No Backend Required:** Fully client-side operation
+- **Frontend:** HTML5, CSS3, vanilla JavaScript — no framework, no build step
+- **Data:** single JSON dictionary, loaded with `fetch()`
+- **Persistence:** browser `localStorage` (progress, edited vocabulary)
+- **Admin panel:** separate static page for editing the dictionary
+- **Backend:** none — fully client-side
+- **Hosting:** Netlify, continuous deploy from `main`
 
 ## 📁 Project Structure
 
 ```
-LexiQ/
-├── ang.html          # Main learning application
-├── ang2.html         # Alternative/updated version
-├── admin.html        # Admin panel for vocabulary management
-└── vocabulary.json   # Complete vocabulary database
+lexiq/
+├── index.html            # Main learning application
+├── admin.html            # Admin panel for vocabulary management
+├── data/
+│   └── vocabulary.json   # Vocabulary database (558 words)
+├── netlify.toml          # Netlify build/redirect/header config
+├── README.md
+└── .gitignore
 ```
+
+There is no build system: every file in the repository root is published as-is.
 
 ## ✨ Key Features
 
-### 🎮 Game Modes (6 Types)
-1. **Flashcards** - Traditional spaced repetition cards
-2. **Multiple Choice** - Select correct meaning
-3. **Fill-in-the-Blank** - Complete sentences
-4. **Matching** - Match words to definitions
-5. **Word Typing** - Spell words correctly
-6. **Speed Round** - Timed vocabulary challenges
+### 🎮 Game Modes
+1. **Flashcards** — traditional spaced-repetition cards
+2. **Multiple choice** — select the correct meaning
+3. **Fill-in-the-blank** — complete sentences
+4. **Matching** — match words to definitions
+5. **Word typing** — spell words correctly
+6. **Speed round** — timed vocabulary challenge
 
 ### 📚 Learning System
-- **Leitner Algorithm** - Scientifically proven spaced repetition
-- **Progressive Difficulty** - Words adapt to user level
-- **CEFR Levels** - Aligned with European framework (A1-B2)
-- **IELTS Preparation** - Band-specific vocabulary
-- **Vocabulary Tracking** - Progress visualization
+- **Leitner algorithm** — spaced repetition across boxes
+- **CEFR levels** — A1 through C1
+- **Topic and part-of-speech tagging** — 40+ topics
+- **Example sentences** — every entry carries an English example with its Uzbek translation
+- **Progress tracking** — statistics stored locally in the browser
 
 ### 👤 User Features
-- **User Profiles** - Track learning history
-- **Achievement System** - Badges and milestones
-- **Statistics Dashboard** - Words learned, retention rate
-- **Personalized Lists** - Create custom vocabulary sets
-- **Offline Access** - Works without internet
+- Learning history and statistics dashboard
+- Achievements and milestones
+- Custom vocabulary lists
+- Offline use after first load
 
 ### 🛠️ Admin Features
-- **Vocabulary Management** - Add/edit/delete words
-- **Bulk Import** - Load new vocabulary sets
-- **Word Properties** - Difficulty level, word type, examples
-- **Analytics** - User engagement tracking
-- **Export/Import** - Backup and restore data
+- Add / edit / delete words
+- Bulk import from JSON
+- Word properties: level, topic, part of speech, examples, status
+- Export back to `vocabulary.json` for committing to the repo
 
 ## 📊 Vocabulary Database
 
-The platform includes:
-- **169,000+ words** in vocabulary.json
-- **Multiple formats:** Single words, phrases, example sentences
-- **Categorization:** By CEFR level (A1, A2, B1, B2)
-- **Metadata:** Word frequency, pronunciation guides, examples
-- **Pipe-delimited format:** Easy parsing and manipulation
+`data/vocabulary.json` (169 KB) holds `meta` plus a `words` array of **558 entries**.
 
-## 🎓 Learning Path Example
+Entry format:
 
+```json
+{
+  "id": "a001",
+  "en": "a",
+  "uz": ["bir"],
+  "level": "A1",
+  "topic": "grammar",
+  "pos": "article",
+  "example_en": "I have a book.",
+  "example_uz": "Menda bir kitob bor.",
+  "status": "ok"
+}
 ```
-Level A1 (Beginner)
-└─ Common 500 words → Game modes practice
-   └─ Retention check (Leitner boxes)
 
-Level A2 (Elementary)  
-└─ Common 1000 words → Contextual learning
-   └─ IELTS band 3-4 vocabulary
+Distribution by CEFR level:
 
-Level B1 (Intermediate)
-└─ 1500+ words → IELTS band 5-6 focus
-   └─ Business & academic terms
-
-Level B2 (Upper-Intermediate)
-└─ 2500+ words → IELTS band 6.5-7 focus
-   └─ Advanced conversational English
-```
+| Level | Words |
+|-------|-------|
+| A1    | 289   |
+| A2    | 37    |
+| B1    | 64    |
+| B2    | 82    |
+| C1    | 86    |
 
 ## 🚀 Getting Started
 
-### Play LexiQ
-1. Open `ang.html` in a modern web browser
-2. No installation or backend required
-3. Works offline - data stored in browser
+### Run locally
 
-### Admin Panel
+The app fetches `data/vocabulary.json`, so it needs an HTTP server — opening the file over `file://` will block the request:
+
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+Admin panel: http://localhost:8000/admin.html
+
+If the dictionary cannot be loaded, the app falls back to a manual JSON upload screen.
+
+### Editing the vocabulary
+
 1. Open `admin.html`
-2. Manage vocabulary database
-3. Create custom word sets
-4. Monitor user progress
+2. Add or edit words
+3. Press **"💾 JSON eksport"**
+4. Replace `data/vocabulary.json` with the exported file and commit
 
-### Customization
-Edit `vocabulary.json` to:
-- Add new words
-- Adjust difficulty levels
-- Create themed word sets
-- Include pronunciation guides
+## 🌐 Deployment
 
-## 💡 Unique Selling Points
+Hosted on Netlify as project `lexiq-uz`, connected to this repository. Every push to `main` triggers an automatic deploy — there is no build command, the repository root is published directly.
 
-✅ **Free and Open** - No paid content or ads  
-✅ **Uzbek-Optimized** - Built specifically for Uzbek speakers  
-✅ **Science-Based** - Uses Leitner algorithm (proven effective)  
-✅ **Offline-First** - Learn anywhere, anytime  
-✅ **Gamified** - Makes learning fun with 6 game modes  
-✅ **Comprehensive** - 169K+ word database  
-✅ **Standards-Aligned** - CEFR & IELTS compatible
-
-## 📈 Learning Effectiveness
-
-Research shows our approach improves retention:
-- **Spaced Repetition:** 70% better retention than passive study
-- **Game-Based Learning:** 25% increase in engagement
-- **Interactive Feedback:** Accelerated learning speed
+`netlify.toml` also keeps two legacy paths alive: `/vocabulary.json` redirects to `/data/vocabulary.json`, and `/ang.html` (the old entry point) redirects to `/`.
 
 ## 🔧 Browser Support
 
-- ✅ Chrome/Chromium (60+)
-- ✅ Firefox (55+)
-- ✅ Safari (12+)
-- ✅ Edge (79+)
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+- Chrome / Chromium 60+
+- Firefox 55+
+- Safari 12+
+- Edge 79+
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
-## 📝 File Details
+## 💡 Design Notes
 
-- **ang.html** (73 KB) - Main application
-- **ang2.html** (77 KB) - Alternative version with enhancements
-- **admin.html** (37 KB) - Administrative interface
-- **vocabulary.json** (169 KB) - Core vocabulary database
-
-## 🎓 Learning Outcomes
-
-This project demonstrates:
-- **Educational Game Design** - Effective learning mechanics
-- **Web Application Development** - Pure HTML/CSS/JS
-- **Data Management** - Large JSON datasets
-- **UX for Learning** - Interface optimization for comprehension
-- **Offline-First Architecture** - LocalStorage patterns
-
-## 🌟 Impact
-
-- Designed to serve **free English education** to Uzbek-speaking communities
-- Ideal for **classroom supplementation** or **self-study**
-- Scalable to other language pairs
+- **Free and open** — no paid content, no ads
+- **Uzbek-optimized** — translations and UI copy in Uzbek (Latin)
+- **Science-based** — Leitner spaced repetition
+- **Offline-first** — progress lives in `localStorage`
+- **Zero dependencies** — no npm, no bundler, no backend to operate
 
 ---
 
-**Developer:** KasImov  
-**Location:** Tashkent, Uzbekistan  
-**Project Type:** Educational Web App  
+**Developer:** KasImov
+**Location:** Tashkent, Uzbekistan
+**Project type:** Educational web app
 **License:** Open for educational use

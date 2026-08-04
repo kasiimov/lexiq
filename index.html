@@ -118,6 +118,11 @@
       <span class="ac-title">Statistika</span>
       <span class="ac-sub">Batafsil natijalar</span>
     </button>
+    <button class="action-card tutor-card" onclick="show('s-tutor')">
+      <span class="ac-ico">🤖</span>
+      <span class="ac-title">AI Ustoz</span>
+      <span class="ac-sub">Savol bering</span>
+    </button>
   </div>
 </div>
 
@@ -321,6 +326,29 @@
     </div>
   </div>
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
+</div>
+
+<!-- AI USTOZ -->
+<div id="s-tutor" class="screen">
+  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
+
+  <div class="tutor-head">
+    <div class="tutor-ava">🤖</div>
+    <div class="tutor-head-txt">
+      <div class="tutor-name">AI Ustoz</div>
+      <div class="tutor-sub" id="tutor-level-label">Daraja: A1</div>
+    </div>
+    <button class="tutor-clear" onclick="tutorReset()" title="Suhbatni tozalash">🗑</button>
+  </div>
+
+  <div class="chat-log" id="chat-log"></div>
+
+  <div class="chat-chips" id="chat-chips"></div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" class="chat-input" rows="1" placeholder="Savolingizni yozing..." oninput="tutorAutoGrow(this)"></textarea>
+    <button class="chat-send" id="chat-send" onclick="tutorSend()" aria-label="Yuborish">➤</button>
+  </div>
 </div>
 
 </div>

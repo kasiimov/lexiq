@@ -11,3 +11,6 @@
 .agents
 .claude
 skills-lock.json
+
+# Local env for netlify dev (ключи ИИ)
+.env

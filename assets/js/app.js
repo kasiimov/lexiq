@@ -168,6 +168,7 @@ function show(id) {
     if (id === 's-home') updateHomeStats();
     if (id === 's-topics') renderTopics();
     if (id === 's-stats') renderStats();
+    if (id === 's-tutor') tutorInit();
     window.scrollTo(0,0);
     overlay.classList.remove('active');
   }, 1000); // 2000 мс = 2 секунды
@@ -879,3 +880,196 @@ async function init() {
 }
 
 init();
+
+// ────────────────────────────────────────────────────────────────────
+// AI USTOZ — чат с ИИ-репетитором.
+// Ключи провайдеров на сервере, фронт ходит только в /api/tutor
+// и читает ответ потоком, дописывая текст в пузырь по мере прихода.
+// ────────────────────────────────────────────────────────────────────
+const TUTOR_ENDPOINT = '/api/tutor';
+const TUTOR_HISTORY_KEY = 'lexiq_tutor_history';
+const TUTOR_MAX_HISTORY = 24;
+
+const TUTOR_CHIPS = [
+  { label: "🆕 5 ta yangi so'z", text: "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan." },
+  { label: '✍️ Gapimni tekshiring', text: 'Men yozgan inglizcha gapni tekshiring va xatolarimni tushuntiring: ' },
+  { label: '📖 Grammatika', text: "Present Simple qoidasini oddiy qilib tushuntiring, 3 ta misol bilan." },
+  { label: '💬 Suhbat', text: "Men bilan oddiy inglizcha suhbat boshlang. Birinchi savolni bering." },
+];
+
+let tutorHistory = [];
+let tutorBusy = false;
+let tutorWired = false;
+
+function tutorLoadHistory() {
+  try {
+    const raw = localStorage.getItem(TUTOR_HISTORY_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    tutorHistory = Array.isArray(parsed) ? parsed.slice(-TUTOR_MAX_HISTORY) : [];
+  } catch (e) {
+    tutorHistory = [];
+  }
+}
+
+function tutorSaveHistory() {
+  try {
+    localStorage.setItem(TUTOR_HISTORY_KEY, JSON.stringify(tutorHistory.slice(-TUTOR_MAX_HISTORY)));
+  } catch (e) {
+    // Переполнение localStorage не должно ломать чат.
+  }
+}
+
+function tutorEscape(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Из разметки модели поддерживаем только **жирный** — остальное показываем как текст.
+function tutorFormat(s) {
+  return tutorEscape(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+}
+
+function tutorAutoGrow(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function tutorScrollDown() {
+  const log = document.getElementById('chat-log');
+  if (log) log.scrollTop = log.scrollHeight;
+}
+
+function tutorBubble(role, html) {
+  const log = document.getElementById('chat-log');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  div.innerHTML = html;
+  log.appendChild(div);
+  tutorScrollDown();
+  return div;
+}
+
+function tutorRenderChips() {
+  const box = document.getElementById('chat-chips');
+  box.innerHTML = '';
+  TUTOR_CHIPS.forEach(chip => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip';
+    b.textContent = chip.label;
+    b.onclick = () => {
+      const input = document.getElementById('chat-input');
+      input.value = chip.text;
+      input.focus();
+      tutorAutoGrow(input);
+      if (!chip.text.endsWith(' ')) tutorSend();
+    };
+    box.appendChild(b);
+  });
+}
+
+function tutorRenderLog() {
+  const log = document.getElementById('chat-log');
+  log.innerHTML = '';
+  if (tutorHistory.length === 0) {
+    tutorBubble('bot', tutorFormat(
+      "Salom! Men LexiQ Ustozman 👋\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
+    ));
+    return;
+  }
+  tutorHistory.forEach(m => tutorBubble(m.role === 'user' ? 'user' : 'bot', tutorFormat(m.content)));
+}
+
+function tutorInit() {
+  const level = getCEFRLevel();
+  document.getElementById('tutor-level-label').textContent = 'Daraja: ' + level;
+
+  if (!tutorWired) {
+    tutorLoadHistory();
+    tutorRenderChips();
+    const input = document.getElementById('chat-input');
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); tutorSend(); }
+    });
+    tutorWired = true;
+  }
+  tutorRenderLog();
+}
+
+function tutorReset() {
+  tutorHistory = [];
+  tutorSaveHistory();
+  tutorRenderLog();
+}
+
+function tutorSetBusy(state) {
+  tutorBusy = state;
+  const btn = document.getElementById('chat-send');
+  if (btn) btn.disabled = state;
+}
+
+async function tutorSend() {
+  if (tutorBusy) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  tutorAutoGrow(input);
+
+  tutorHistory.push({ role: 'user', content: text });
+  tutorHistory = tutorHistory.slice(-TUTOR_MAX_HISTORY);
+  tutorSaveHistory();
+  tutorBubble('user', tutorFormat(text));
+
+  tutorSetBusy(true);
+  const bubble = tutorBubble('bot', '<span class="chat-typing"><i></i><i></i><i></i></span>');
+  let answer = '';
+
+  try {
+    const res = await fetch(TUTOR_ENDPOINT, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ messages: tutorHistory, level: getCEFRLevel() }),
+    });
+
+    if (!res.ok || !res.body) {
+      const info = await res.json().catch(() => ({}));
+      bubble.className = 'chat-msg err';
+      bubble.innerHTML = tutorEscape(info.error || ('Xatolik: ' + res.status)) +
+        (info.hint ? '<span class="cm-hint">' + tutorEscape(info.hint) + '</span>' : '');
+      tutorHistory.pop();
+      tutorSaveHistory();
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      answer += decoder.decode(value, { stream: true });
+      bubble.innerHTML = tutorFormat(answer);
+      tutorScrollDown();
+    }
+
+    if (!answer.trim()) {
+      bubble.className = 'chat-msg err';
+      bubble.textContent = "Javob bo'sh keldi. Yana urinib ko'ring.";
+      tutorHistory.pop();
+      tutorSaveHistory();
+      return;
+    }
+
+    tutorHistory.push({ role: 'assistant', content: answer });
+    tutorHistory = tutorHistory.slice(-TUTOR_MAX_HISTORY);
+    tutorSaveHistory();
+  } catch (e) {
+    bubble.className = 'chat-msg err';
+    bubble.textContent = 'Aloqa xatosi: ' + e.message;
+    tutorHistory.pop();
+    tutorSaveHistory();
+  } finally {
+    tutorSetBusy(false);
+  }
+}

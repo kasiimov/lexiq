@@ -36,7 +36,10 @@ lexiq/
 │       └── admin.js      # Admin panel logic
 ├── data/
 │   └── vocabulary.json   # Vocabulary database (558 words)
-├── netlify.toml          # Netlify build/redirect/header config
+├── netlify/
+│   └── edge-functions/
+│       └── tutor.ts      # AI tutor proxy (/api/tutor), provider keys stay server-side
+├── netlify.toml          # Netlify build/redirect/header/edge-function config
 ├── README.md
 └── .gitignore
 ```
@@ -123,6 +126,30 @@ If the dictionary cannot be loaded, the app falls back to a manual JSON upload s
 2. Add or edit words
 3. Press **"💾 JSON eksport"**
 4. Replace `data/vocabulary.json` with the exported file and commit
+
+## 🤖 AI Tutor
+
+The **AI Ustoz** screen talks to `/api/tutor`, a Netlify edge function that proxies an
+OpenAI-compatible chat endpoint and streams the answer back as plain text. The system
+prompt makes the model explain in Uzbek, answer at the learner's CEFR level and always
+give an example sentence.
+
+Provider keys never reach the browser — they are read from the site's environment
+variables. Configure at least one:
+
+| Variable | Purpose |
+|----------|---------|
+| `GEMINI_API_KEY` | primary key (`gemini-2.5-flash`) — holds Uzbek grammar noticeably better than Llama |
+| `GROQ_API_KEY` | fallback (Groq, `llama-3.3-70b-versatile`), used on 429/5xx |
+| `GROQ_API_KEY_2` | optional second fallback |
+| `GROQ_API_KEY_3` | optional third fallback |
+
+Providers are tried in that order, so a rate-limited key rolls over to the next one
+without the learner noticing.
+
+Set them in Netlify → Site configuration → Environment variables, or locally in a
+`.env` file for `netlify dev`. Without a key the endpoint answers `503` with a hint
+instead of failing silently.
 
 ## 🌐 Deployment
 

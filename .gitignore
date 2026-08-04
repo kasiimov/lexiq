@@ -1,0 +1,13 @@
+# Netlify local state
+.netlify
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode
+
+# Claude Code / agent skills
+.agents
+.claude
+skills-lock.json

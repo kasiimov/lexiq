@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexiQ Admin — Lug'at tahrirlash</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+:root {
+  --bg: #0c0c14; --s1: #13131f; --s2: #1c1c2e; --s3: #252535;
+  --accent: #7c3aed; --accent2: #a855f7;
+  --txt: #f1f0ff; --muted: #6b6b8a;
+  --ok: #10b981; --todo: #fbbf24; --review: #ec4899; --danger: #ef4444;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--txt);
+  min-height: 100vh; padding: 20px; font-size: 14px;
+}
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; padding: 16px 20px;
+  background: linear-gradient(135deg, #6B36CF, #2a1a4e);
+  border-radius: 16px; border: 1px solid #7c3aed33;
+  flex-wrap: wrap; gap: 12px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 14px; }
+.logo-box {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; box-shadow: 0 6px 18px #7c3aed44;
+}
+.logo-text .t1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800;
+  background: linear-gradient(90deg, #fff, #c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.logo-text .t2 { font-size: 11px; color: #c4b5fd; margin-top: 2px; }
+.header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.btn {
+  border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700; font-size: 13px;
+  padding: 10px 16px; border-radius: 10px;
+  transition: all .15s;
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(.96); }
+.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 4px 14px #7c3aed44; }
+.btn-secondary { background: var(--s2); color: var(--txt); border: 1px solid #ffffff15; }
+.btn-success { background: var(--ok); color: #fff; }
+.btn-warning { background: var(--todo); color: #1c0a00; }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-ghost { background: transparent; color: var(--muted); }
+.btn-sm { padding: 6px 10px; font-size: 11px; }
+.btn-xs { padding: 4px 8px; font-size: 11px; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+.stat-card {
+  background: var(--s1); border: 1px solid #ffffff08;
+  border-radius: 12px; padding: 12px 14px;
+}
+.stat-v { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; line-height: 1.1; }
+.stat-l { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; letter-spacing: 0.5px; }
+.stat-v.total { color: #c4b5fd; }
+.stat-v.ok { color: var(--ok); }
+.stat-v.todo { color: var(--todo); }
+.stat-v.review { color: var(--review); }
+.stat-v.unsaved { color: var(--danger); }
+
+.controls {
+  background: var(--s1); border-radius: 16px;
+  padding: 16px; border: 1px solid #ffffff08;
+  margin-bottom: 16px;
+}
+.search-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.search-input {
+  flex: 1; min-width: 200px;
+  background: var(--s2); border: 1px solid #ffffff10;
+  border-radius: 10px; padding: 10px 14px;
+  color: var(--txt); font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 14px; outline: none;
+}
+.search-input:focus { border-color: var(--accent); }
+
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filter-label { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.filter-select {
+  background: var(--s2); border: 1px solid #ffffff10;
+  border-radius: 8px; padding: 6px 10px;
+  color: var(--txt); font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 12px; cursor: pointer; outline: none;
+}
+
+.filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill {
+  border: none; cursor: pointer;
+  background: var(--s2); color: var(--muted);
+  padding: 6px 12px; border-radius: 99px;
+  font-size: 11px; font-weight: 700; transition: all .15s;
+}
+.pill.active.todo { background: var(--todo); color: #1c0a00; }
+.pill.active.ok { background: var(--ok); color: #fff; }
+.pill.active.review { background: var(--review); color: #fff; }
+.pill.active.all { background: var(--accent); color: #fff; }
+.pill:active { transform: scale(.94); }
+
+.words-list { display: flex; flex-direction: column; gap: 10px; }
+.word-row {
+  background: var(--s1); border: 1px solid #ffffff08;
+  border-radius: 14px; padding: 14px 16px;
+  display: grid; grid-template-columns: 1fr; gap: 10px;
+  transition: all .15s;
+}
+.word-row.status-ok { border-left: 4px solid var(--ok); }
+.word-row.status-todo { border-left: 4px solid var(--todo); }
+.word-row.status-review { border-left: 4px solid var(--review); }
+
+.word-header {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px;
+}
+.word-en { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--todo); }
+.word-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.meta-badge {
+  background: var(--s2); color: var(--muted);
+  padding: 3px 8px; border-radius: 6px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.meta-badge.level-A1 { background: #052e1a; color: var(--ok); }
+.meta-badge.level-A2 { background: #05402a; color: #34d399; }
+.meta-badge.level-B1 { background: #2d1a00; color: var(--todo); }
+.meta-badge.level-B2 { background: #3d2400; color: #fed7aa; }
+.meta-badge.level-C1 { background: #2a1a4e; color: #c4b5fd; }
+.meta-badge.level-C2 { background: #3a1f5e; color: #e9d5ff; }
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+}
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field-label { font-size: 10px; color: var(--muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.field-input {
+  background: var(--s2); border: 1px solid #ffffff10;
+  border-radius: 8px; padding: 8px 10px;
+  color: var(--txt); font-family: 'DM Sans', sans-serif;
+  font-weight: 500; font-size: 13px; outline: none;
+}
+.field-input:focus { border-color: var(--accent); }
+.field-input.uz { color: #34d399; font-weight: 600; }
+.field-input.example { color: #c4b5fd; }
+
+.row-actions {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  align-items: center; justify-content: flex-end;
+  padding-top: 6px; border-top: 1px solid #ffffff08;
+}
+.status-buttons { display: flex; gap: 4px; }
+.status-btn {
+  border: none; cursor: pointer;
+  padding: 6px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 700;
+  background: var(--s2); color: var(--muted);
+  transition: all .15s;
+}
+.status-btn:active { transform: scale(.94); }
+.status-btn.active.ok { background: var(--ok); color: #fff; }
+.status-btn.active.todo { background: var(--todo); color: #1c0a00; }
+.status-btn.active.review { background: var(--review); color: #fff; }
+
+.modal-backdrop {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7); z-index: 100;
+  align-items: center; justify-content: center;
+  padding: 20px; backdrop-filter: blur(4px);
+}
+.modal-backdrop.show { display: flex; }
+.modal {
+  background: var(--s1); border: 1px solid #ffffff15;
+  border-radius: 18px; padding: 24px;
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal h2 { font-family: 'Syne', sans-serif; font-size: 18px; margin-bottom: 16px; color: #c4b5fd; }
+.modal .field { margin-bottom: 12px; }
+.modal-actions {
+  display: flex; gap: 8px; justify-content: flex-end;
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid #ffffff10;
+}
+
+.bulk-textarea {
+  width: 100%; background: var(--s2);
+  border: 1px solid #ffffff10; border-radius: 10px;
+  padding: 12px; color: var(--txt);
+  font-family: 'Courier New', monospace;
+  font-size: 12px; line-height: 1.5;
+  outline: none; resize: vertical; min-height: 200px;
+}
+.bulk-textarea:focus { border-color: var(--accent); }
+
+.bulk-help {
+  background: var(--s2); border-radius: 10px;
+  padding: 12px; font-size: 12px;
+  color: var(--muted); line-height: 1.5; margin-bottom: 10px;
+}
+.bulk-help code {
+  background: var(--bg); color: var(--todo);
+  padding: 2px 6px; border-radius: 4px; font-size: 11px;
+}
+
+.empty-state {
+  background: var(--s1); border-radius: 14px;
+  padding: 40px 20px; text-align: center;
+  color: var(--muted); border: 1px solid #ffffff08;
+}
+.empty-state-icon { font-size: 48px; margin-bottom: 12px; }
+
+.pagination {
+  display: flex; justify-content: center; align-items: center;
+  gap: 10px; margin-top: 20px;
+}
+.page-info { color: var(--muted); font-size: 12px; font-weight: 600; }
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--s2); border: 1px solid var(--accent);
+  border-radius: 12px; padding: 12px 20px;
+  font-size: 13px; font-weight: 700; color: var(--txt);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  z-index: 200; transition: transform .3s;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { border-color: var(--ok); }
+.toast.error { border-color: var(--danger); }
+
+.help-bar {
+  background: var(--s1); border: 1px solid #fbbf2433;
+  border-left: 4px solid var(--todo); border-radius: 10px;
+  padding: 12px 16px; margin-bottom: 16px;
+  font-size: 12px; color: var(--muted); line-height: 1.5;
+}
+.help-bar b { color: var(--todo); }
+
+.file-input-wrap { position: relative; display: inline-block; }
+.file-input-wrap input[type=file] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  body { padding: 12px; font-size: 13px; }
+  header { padding: 12px; }
+  .word-row { padding: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-box">🔧</div>
+    <div class="logo-text">
+      <div class="t1">LexiQ Admin</div>
+      <div class="t2">Lug'at boshqaruv paneli</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="file-input-wrap">
+      <button class="btn btn-secondary">📥 JSON yuklash</button>
+      <input type="file" accept=".json,application/json" onchange="importJSON(event)">
+    </div>
+    <button class="btn btn-secondary" onclick="openBulkAddModal()">📋 Ko'p so'z</button>
+    <button class="btn btn-secondary" onclick="openAddModal()">➕ Yangi so'z</button>
+    <button class="btn btn-primary" onclick="exportJSON()">💾 JSON eksport</button>
+  </div>
+</header>
+
+<div class="help-bar">
+  <b>💡 Maslahat:</b> Foydalanuvchilar faqat <span style="color:var(--ok)">✓ OK</span> belgisi bo'lgan so'zlarni ko'radi.
+  <span style="color:var(--todo)">⏳ Todo</span> — tekshirilishi kerak.
+  Tahrirlardan keyin <b>"💾 JSON eksport"</b> tugmasini bosing — fayl yuklab olinadi.
+  Barcha o'zgartirishlar avtomatik saqlanadi (brauzerda).
+</div>
+
+<div class="stats-grid" id="stats-grid"></div>
+
+<div class="controls">
+  <div class="search-row">
+    <input type="text" class="search-input" id="search-input" placeholder="🔍 So'z yoki tarjima bo'yicha qidirish..." oninput="onSearchChange()">
+  </div>
+
+  <div class="filter-row" style="margin-bottom:10px;">
+    <span class="filter-label">Holat:</span>
+    <div class="filter-pills" id="status-pills">
+      <button class="pill active todo" data-status="todo" onclick="setStatusFilter('todo')">⏳ Todo</button>
+      <button class="pill" data-status="ok" onclick="setStatusFilter('ok')">✓ OK</button>
+      <button class="pill" data-status="review" onclick="setStatusFilter('review')">⚠ Review</button>
+      <button class="pill" data-status="all" onclick="setStatusFilter('all')">Hammasi</button>
+    </div>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-label">Daraja:</span>
+    <select class="filter-select" id="level-filter" onchange="onFilterChange()">
+      <option value="all">Hammasi</option>
+      <option value="A1">A1</option>
+      <option value="A2">A2</option>
+      <option value="B1">B1</option>
+      <option value="B2">B2</option>
+      <option value="C1">C1</option>
+      <option value="C2">C2</option>
+    </select>
+
+    <span class="filter-label" style="margin-left:8px;">Mavzu:</span>
+    <select class="filter-select" id="topic-filter" onchange="onFilterChange()">
+      <option value="all">Hammasi</option>
+    </select>
+
+    <span class="filter-label" style="margin-left:8px;">Saralash:</span>
+    <select class="filter-select" id="sort-by" onchange="onFilterChange()">
+      <option value="alpha">A-Z</option>
+      <option value="alpha-desc">Z-A</option>
+      <option value="recent">So'nggi qo'shilgan</option>
+      <option value="level">Daraja bo'yicha</option>
+    </select>
+  </div>
+</div>
+
+<div id="words-list-container"></div>
+
+<div class="pagination" id="pagination" style="display:none">
+  <button class="btn btn-secondary btn-sm" id="prev-page" onclick="prevPage()">← Oldingi</button>
+  <span class="page-info" id="page-info">1 / 1</span>
+  <button class="btn btn-secondary btn-sm" id="next-page" onclick="nextPage()">Keyingi →</button>
+</div>
+
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-backdrop" id="add-modal">
+  <div class="modal">
+    <h2 id="add-modal-title">➕ Yangi so'z qo'shish</h2>
+    <input type="hidden" id="add-id">
+    <div class="field">
+      <label class="field-label">English word *</label>
+      <input type="text" class="field-input" id="add-en" placeholder="apple">
+    </div>
+    <div class="field">
+      <label class="field-label">O'zbekcha tarjima(lar) * (vergul bilan)</label>
+      <input type="text" class="field-input uz" id="add-uz" placeholder="olma, mevali olma">
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+      <div class="field">
+        <label class="field-label">Daraja</label>
+        <select class="field-input" id="add-level">
+          <option value="A1">A1 — Beginner</option>
+          <option value="A2">A2 — Elementary</option>
+          <option value="B1">B1 — Intermediate</option>
+          <option value="B2">B2 — Upper-Int.</option>
+          <option value="C1">C1 — Advanced</option>
+          <option value="C2">C2 — Mastery</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Mavzu</label>
+        <input type="text" class="field-input" id="add-topic" placeholder="food" list="topics-datalist">
+        <datalist id="topics-datalist"></datalist>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+      <div class="field">
+        <label class="field-label">So'z turi (pos)</label>
+        <select class="field-input" id="add-pos">
+          <option value="noun">noun (ot)</option>
+          <option value="verb">verb (fe'l)</option>
+          <option value="adj">adj (sifat)</option>
+          <option value="adv">adv (ravish)</option>
+          <option value="prep">prep (ko'makchi)</option>
+          <option value="pron">pron (olmosh)</option>
+          <option value="conj">conj (bog'lovchi)</option>
+          <option value="det">det</option>
+          <option value="article">article</option>
+          <option value="interj">interj</option>
+          <option value="modal">modal</option>
+          <option value="noun/verb">noun/verb</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label">Transkripsiya (ixtiyoriy)</label>
+        <input type="text" class="field-input" id="add-phon" placeholder="/aepl/">
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label">Misol — Inglizcha</label>
+      <input type="text" class="field-input example" id="add-example-en" placeholder="I eat an apple every day.">
+    </div>
+    <div class="field">
+      <label class="field-label">Misol — O'zbekcha tarjima</label>
+      <input type="text" class="field-input example" id="add-example-uz" placeholder="Men har kuni olma yeyman.">
+    </div>
+    <div class="field">
+      <label class="field-label">Holat</label>
+      <select class="field-input" id="add-status">
+        <option value="ok">✓ OK — foydalanuvchilarga ko'rsatish</option>
+        <option value="todo">⏳ Todo — tekshirish kerak</option>
+        <option value="review">⚠ Review — qayta ko'rib chiqish</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeAddModal()">Bekor qilish</button>
+      <button class="btn btn-primary" onclick="saveNewWord()">💾 Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<!-- BULK ADD MODAL -->
+<div class="modal-backdrop" id="bulk-modal">
+  <div class="modal" style="max-width:680px;">
+    <h2>📋 Ko'p so'z qo'shish</h2>
+    <div class="bulk-help">
+      <b style="color:var(--ok)">Format:</b> Har bir qatorda bitta so'z, ustunlar <code>|</code> bilan ajraladi:<br><br>
+      <code>en | uz | level | topic | example_en | example_uz</code><br><br>
+      <b style="color:var(--todo)">Misol:</b><br>
+      <code>book | kitob | A1 | objects | I read a book. | Men kitob o'qiyman.</code><br>
+      <code>cat | mushuk | A1 | animals | The cat is white. | Mushuk oq.</code><br><br>
+      <b>en</b> va <b>uz</b> majburiy. Boshqalari ixtiyoriy.<br>
+      Bir nechta tarjima — <code>vergul</code> bilan: <code>do'st, o'rtoq</code><br>
+      Standart: <b>level=A1</b>, <b>topic=common</b>
+    </div>
+    <div class="field">
+      <label class="field-label">So'zlar (har qator — bitta so'z)</label>
+      <textarea class="bulk-textarea" id="bulk-text" placeholder="apple | olma | A1 | food | I eat an apple. | Men olma yeyman."></textarea>
+    </div>
+    <div class="field">
+      <label class="field-label">Holat (yangi so'zlar uchun)</label>
+      <select class="field-input" id="bulk-status">
+        <option value="todo">⏳ Todo — tekshirish kerak</option>
+        <option value="ok">✓ OK — foydalanuvchilarga ko'rsatish</option>
+        <option value="review">⚠ Review</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeBulkAddModal()">Bekor qilish</button>
+      <button class="btn btn-primary" onclick="processBulkAdd()">📥 Qo'shish</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════════════════════════════
+let vocab = [];
+let filtered = [];
+let statusFilter = 'todo';
+let levelFilter = 'all';
+let topicFilter = 'all';
+let sortBy = 'alpha';
+let searchQuery = '';
+let currentPage = 1;
+const PAGE_SIZE = 30;
+let unsavedChanges = false;
+let editingId = null;
+
+const STORAGE_KEY = 'lexiq_admin_vocab';
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(vocab));
+  } catch(e) {
+    showToast("Saqlash xatosi: " + e.message, 'error');
+  }
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) { vocab = JSON.parse(raw); return true; }
+  } catch(e) { console.warn('Load fail', e); }
+  return false;
+}
+
+async function init() {
+  if (loadFromStorage()) {
+    showToast("Lokal saqlovdan " + vocab.length + " ta so'z yuklandi", 'success');
+  } else {
+    try {
+      const res = await fetch('./vocabulary.json');
+      if (res.ok) {
+        const data = await res.json();
+        vocab = data.words || data;
+        saveToStorage();
+        showToast("vocabulary.json dan " + vocab.length + " ta so'z yuklandi", 'success');
+      } else {
+        showToast("Bo'sh boshlandi. JSON yuklang yoki so'z qo'shing.", 'success');
+      }
+    } catch(e) {
+      showToast("Bo'sh boshlandi. JSON yuklang yoki so'z qo'shing.", 'success');
+    }
+  }
+  buildTopicsList();
+  render();
+}
+
+function importJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      const words = data.words || data;
+      if (!Array.isArray(words)) {
+        showToast("JSON formati noto'g'ri", 'error');
+        return;
+      }
+      if (vocab.length > 0) {
+        if (!confirm("Hozir " + vocab.length + " ta so'z bor. Yangi fayl bilan birlashtirilsinmi?\n\nOK — birlashtirish (id bo'yicha)\nCancel — bekor qilish")) return;
+        const byId = {};
+        for (const w of vocab) byId[w.id] = w;
+        for (const w of words) byId[w.id] = w;
+        vocab = Object.values(byId);
+      } else {
+        vocab = words;
+      }
+      saveToStorage();
+      buildTopicsList();
+      currentPage = 1;
+      render();
+      showToast(words.length + " ta so'z yuklandi. Jami: " + vocab.length, 'success');
+    } catch(err) {
+      showToast("JSON o'qish xatosi: " + err.message, 'error');
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function exportJSON() {
+  if (vocab.length === 0) {
+    showToast("Eksport qilish uchun so'z yo'q", 'error');
+    return;
+  }
+  const exportData = {
+    meta: {
+      version: "1.0",
+      total_words: vocab.length,
+      language: "Uzbek (Latin)",
+      exported_at: new Date().toISOString(),
+      status_ok: vocab.filter(w => w.status === 'ok').length,
+      status_todo: vocab.filter(w => w.status === 'todo').length,
+      status_review: vocab.filter(w => w.status === 'review').length
+    },
+    words: vocab
+  };
+  const json = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const today = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = 'vocabulary-' + today + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(vocab.length + " ta so'z eksport qilindi", 'success');
+}
+
+function setStatusFilter(s) {
+  statusFilter = s;
+  document.querySelectorAll('#status-pills .pill').forEach(p => {
+    p.classList.remove('active', 'ok', 'todo', 'review', 'all');
+    if (p.dataset.status === s) p.classList.add('active', s);
+  });
+  currentPage = 1;
+  render();
+}
+
+function onFilterChange() {
+  levelFilter = document.getElementById('level-filter').value;
+  topicFilter = document.getElementById('topic-filter').value;
+  sortBy = document.getElementById('sort-by').value;
+  currentPage = 1;
+  render();
+}
+
+function onSearchChange() {
+  searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+  currentPage = 1;
+  render();
+}
+
+function applyFilters() {
+  let result = vocab.slice();
+  if (statusFilter !== 'all') result = result.filter(w => w.status === statusFilter);
+  if (levelFilter !== 'all') result = result.filter(w => w.level === levelFilter);
+  if (topicFilter !== 'all') result = result.filter(w => w.topic === topicFilter);
+  if (searchQuery) {
+    result = result.filter(w => {
+      const uzText = (w.uz || []).join(' ').toLowerCase();
+      return w.en.toLowerCase().includes(searchQuery) ||
+             uzText.includes(searchQuery) ||
+             (w.id || '').toLowerCase().includes(searchQuery);
+    });
+  }
+  if (sortBy === 'alpha') result.sort((a,b) => a.en.localeCompare(b.en));
+  else if (sortBy === 'alpha-desc') result.sort((a,b) => b.en.localeCompare(a.en));
+  else if (sortBy === 'level') {
+    const order = {A1:1, A2:2, B1:3, B2:4, C1:5, C2:6};
+    result.sort((a,b) => (order[a.level]||9) - (order[b.level]||9) || a.en.localeCompare(b.en));
+  } else if (sortBy === 'recent') {
+    const idIdx = {};
+    vocab.forEach((w,i) => idIdx[w.id] = i);
+    result.sort((a,b) => (idIdx[b.id]||0) - (idIdx[a.id]||0));
+  }
+  return result;
+}
+
+function buildTopicsList() {
+  const topics = [...new Set(vocab.map(w => w.topic).filter(Boolean))].sort();
+  const sel = document.getElementById('topic-filter');
+  const dl = document.getElementById('topics-datalist');
+  sel.innerHTML = '<option value="all">Hammasi</option>';
+  dl.innerHTML = '';
+  for (const t of topics) {
+    const opt = document.createElement('option');
+    opt.value = t;
+    opt.textContent = t;
+    sel.appendChild(opt);
+    const dlOpt = document.createElement('option');
+    dlOpt.value = t;
+    dl.appendChild(dlOpt);
+  }
+}
+
+function render() {
+  renderStats();
+  filtered = applyFilters();
+  renderWordsList();
+  renderPagination();
+}
+
+function renderStats() {
+  const total = vocab.length;
+  const ok = vocab.filter(w => w.status === 'ok').length;
+  const todo = vocab.filter(w => w.status === 'todo').length;
+  const review = vocab.filter(w => w.status === 'review').length;
+  document.getElementById('stats-grid').innerHTML =
+    '<div class="stat-card"><div class="stat-v total">' + total + '</div><div class="stat-l">Jami so\'z</div></div>' +
+    '<div class="stat-card"><div class="stat-v ok">' + ok + '</div><div class="stat-l">✓ OK</div></div>' +
+    '<div class="stat-card"><div class="stat-v todo">' + todo + '</div><div class="stat-l">⏳ Todo</div></div>' +
+    '<div class="stat-card"><div class="stat-v review">' + review + '</div><div class="stat-l">⚠ Review</div></div>';
+}
+
+function escapeAttr(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function escapeHtml(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderWordsList() {
+  const container = document.getElementById('words-list-container');
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📭</div><div style="font-weight:700; font-size:15px; color:var(--txt); margin-bottom:6px;">So\'zlar topilmadi</div><div>Filtrlarni o\'zgartiring yoki yangi so\'z qo\'shing</div></div>';
+    return;
+  }
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = filtered.slice(start, start + PAGE_SIZE);
+  let html = '<div class="words-list">';
+  for (const w of pageItems) html += renderWordRow(w);
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function renderWordRow(w) {
+  const uzStr = (w.uz || []).join(', ');
+  const status = w.status || 'todo';
+  return '<div class="word-row status-' + status + '" data-id="' + w.id + '">' +
+    '<div class="word-header">' +
+      '<div class="word-en">' + escapeHtml(w.en) + '</div>' +
+      '<div class="word-meta">' +
+        '<span class="meta-badge level-' + w.level + '">' + w.level + '</span>' +
+        '<span class="meta-badge">' + escapeHtml(w.topic || 'common') + '</span>' +
+        (w.pos ? '<span class="meta-badge">' + escapeHtml(w.pos) + '</span>' : '') +
+        (w.phon ? '<span class="meta-badge">' + escapeHtml(w.phon) + '</span>' : '') +
+        '<span class="meta-badge">' + w.id + '</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="field-grid">' +
+      '<div class="field"><label class="field-label">O\'zbekcha (vergul bilan)</label>' +
+        '<input type="text" class="field-input uz" value="' + escapeAttr(uzStr) + '" oninput="updateField(\'' + w.id + '\', \'uz\', this.value)"></div>' +
+      '<div class="field"><label class="field-label">English (so\'z)</label>' +
+        '<input type="text" class="field-input" value="' + escapeAttr(w.en) + '" oninput="updateField(\'' + w.id + '\', \'en\', this.value)"></div>' +
+    '</div>' +
+    '<div class="field-grid">' +
+      '<div class="field"><label class="field-label">Misol — English</label>' +
+        '<input type="text" class="field-input example" value="' + escapeAttr(w.example_en) + '" oninput="updateField(\'' + w.id + '\', \'example_en\', this.value)"></div>' +
+      '<div class="field"><label class="field-label">Misol — O\'zbekcha</label>' +
+        '<input type="text" class="field-input example" value="' + escapeAttr(w.example_uz) + '" oninput="updateField(\'' + w.id + '\', \'example_uz\', this.value)"></div>' +
+    '</div>' +
+    '<div class="row-actions">' +
+      '<button class="btn btn-ghost btn-xs" onclick="openEditModal(\'' + w.id + '\')">✏ Batafsil</button>' +
+      '<button class="btn btn-danger btn-xs" onclick="deleteWord(\'' + w.id + '\')">🗑 O\'chirish</button>' +
+      '<div style="flex:1"></div>' +
+      '<div class="status-buttons">' +
+        '<button class="status-btn ' + (status==='ok'?'active ok':'') + '" onclick="setWordStatus(\'' + w.id + '\',\'ok\')">✓ OK</button>' +
+        '<button class="status-btn ' + (status==='todo'?'active todo':'') + '" onclick="setWordStatus(\'' + w.id + '\',\'todo\')">⏳ Todo</button>' +
+        '<button class="status-btn ' + (status==='review'?'active review':'') + '" onclick="setWordStatus(\'' + w.id + '\',\'review\')">⚠ Review</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderPagination() {
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pagEl = document.getElementById('pagination');
+  if (totalPages <= 1) { pagEl.style.display = 'none'; return; }
+  pagEl.style.display = 'flex';
+  document.getElementById('page-info').textContent = currentPage + ' / ' + totalPages + ' (jami ' + filtered.length + ')';
+  document.getElementById('prev-page').disabled = currentPage === 1;
+  document.getElementById('next-page').disabled = currentPage === totalPages;
+}
+
+function prevPage() {
+  if (currentPage > 1) { currentPage--; renderWordsList(); renderPagination(); window.scrollTo(0,0); }
+}
+function nextPage() {
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  if (currentPage < totalPages) { currentPage++; renderWordsList(); renderPagination(); window.scrollTo(0,0); }
+}
+
+function updateField(id, field, value) {
+  const w = vocab.find(v => v.id === id);
+  if (!w) return;
+  if (field === 'uz') {
+    w.uz = value.split(',').map(s => s.trim()).filter(Boolean);
+  } else {
+    w[field] = value;
+  }
+  saveToStorage();
+  renderStats();
+}
+
+function setWordStatus(id, status) {
+  const w = vocab.find(v => v.id === id);
+  if (!w) return;
+  w.status = status;
+  saveToStorage();
+  render();
+  showToast('"' + w.en + '" — ' + status.toUpperCase(), 'success');
+}
+
+function deleteWord(id) {
+  const w = vocab.find(v => v.id === id);
+  if (!w) return;
+  if (!confirm('"' + w.en + '" so\'zini o\'chirishni xohlaysizmi?')) return;
+  vocab = vocab.filter(v => v.id !== id);
+  saveToStorage();
+  render();
+  showToast('"' + w.en + '" o\'chirildi', 'success');
+}
+
+function openAddModal() {
+  editingId = null;
+  document.getElementById('add-modal-title').textContent = "➕ Yangi so'z qo'shish";
+  document.getElementById('add-id').value = '';
+  document.getElementById('add-en').value = '';
+  document.getElementById('add-uz').value = '';
+  document.getElementById('add-level').value = 'A1';
+  document.getElementById('add-topic').value = 'common';
+  document.getElementById('add-pos').value = 'noun';
+  document.getElementById('add-phon').value = '';
+  document.getElementById('add-example-en').value = '';
+  document.getElementById('add-example-uz').value = '';
+  document.getElementById('add-status').value = 'todo';
+  document.getElementById('add-modal').classList.add('show');
+  setTimeout(() => document.getElementById('add-en').focus(), 100);
+}
+
+function openEditModal(id) {
+  const w = vocab.find(v => v.id === id);
+  if (!w) return;
+  editingId = id;
+  document.getElementById('add-modal-title').textContent = '✏ Tahrirlash: ' + w.en;
+  document.getElementById('add-id').value = w.id;
+  document.getElementById('add-en').value = w.en || '';
+  document.getElementById('add-uz').value = (w.uz || []).join(', ');
+  document.getElementById('add-level').value = w.level || 'A1';
+  document.getElementById('add-topic').value = w.topic || 'common';
+  document.getElementById('add-pos').value = w.pos || 'noun';
+  document.getElementById('add-phon').value = w.phon || '';
+  document.getElementById('add-example-en').value = w.example_en || '';
+  document.getElementById('add-example-uz').value = w.example_uz || '';
+  document.getElementById('add-status').value = w.status || 'todo';
+  document.getElementById('add-modal').classList.add('show');
+}
+
+function closeAddModal() {
+  document.getElementById('add-modal').classList.remove('show');
+  editingId = null;
+}
+
+function saveNewWord() {
+  const en = document.getElementById('add-en').value.trim();
+  const uzStr = document.getElementById('add-uz').value.trim();
+  if (!en) { showToast("Inglizcha so'z bo'sh", 'error'); return; }
+  if (!uzStr) { showToast("O'zbekcha tarjima bo'sh", 'error'); return; }
+
+  const uz = uzStr.split(',').map(s => s.trim()).filter(Boolean);
+  const data = {
+    en: en.toLowerCase(),
+    uz: uz,
+    level: document.getElementById('add-level').value,
+    topic: document.getElementById('add-topic').value.trim() || 'common',
+    pos: document.getElementById('add-pos').value,
+    phon: document.getElementById('add-phon').value.trim(),
+    example_en: document.getElementById('add-example-en').value.trim(),
+    example_uz: document.getElementById('add-example-uz').value.trim(),
+    status: document.getElementById('add-status').value
+  };
+
+  if (editingId) {
+    const w = vocab.find(v => v.id === editingId);
+    if (w) {
+      Object.assign(w, data);
+      showToast('"' + en + '" yangilandi', 'success');
+    }
+  } else {
+    const existing = vocab.find(v => v.en.toLowerCase() === data.en);
+    if (existing) {
+      if (!confirm('"' + en + '" so\'zi allaqachon bor (id: ' + existing.id + '). Baribir qo\'shilsinmi?')) return;
+    }
+    data.id = generateId(data.en);
+    vocab.push(data);
+    showToast('"' + en + '" qo\'shildi', 'success');
+  }
+
+  saveToStorage();
+  buildTopicsList();
+  render();
+  closeAddModal();
+}
+
+function generateId(en) {
+  const m1 = en.toLowerCase().match(/[a-z]/);
+  const firstChar = m1 ? m1[0] : 'x';
+  const sameLetterIds = vocab
+    .map(w => w.id)
+    .filter(id => id && id.startsWith(firstChar))
+    .map(id => {
+      const m = id.match(/^[a-z](\d+)$/);
+      return m ? parseInt(m[1]) : 0;
+    });
+  const maxNum = sameLetterIds.length > 0 ? Math.max.apply(null, sameLetterIds) : 0;
+  const nextNum = String(maxNum + 1).padStart(3, '0');
+  return firstChar + nextNum;
+}
+
+function openBulkAddModal() {
+  document.getElementById('bulk-text').value = '';
+  document.getElementById('bulk-status').value = 'todo';
+  document.getElementById('bulk-modal').classList.add('show');
+}
+function closeBulkAddModal() {
+  document.getElementById('bulk-modal').classList.remove('show');
+}
+
+function processBulkAdd() {
+  const text = document.getElementById('bulk-text').value.trim();
+  const defaultStatus = document.getElementById('bulk-status').value;
+  if (!text) { showToast("Matn bo'sh", 'error'); return; }
+
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  let added = 0, skipped = 0, errors = [];
+
+  for (const line of lines) {
+    const parts = line.split('|').map(p => p.trim());
+    if (parts.length < 2) { skipped++; errors.push('Format: "' + line + '"'); continue; }
+    const en = parts[0].toLowerCase();
+    if (!en) { skipped++; continue; }
+    const uz = parts[1].split(',').map(s => s.trim()).filter(Boolean);
+    if (uz.length === 0) { skipped++; errors.push('Tarjima yo\'q: "' + line + '"'); continue; }
+    if (vocab.find(v => v.en.toLowerCase() === en)) { skipped++; continue; }
+
+    const data = {
+      id: generateId(en),
+      en: en,
+      uz: uz,
+      level: parts[2] || 'A1',
+      topic: parts[3] || 'common',
+      pos: '',
+      phon: '',
+      example_en: parts[4] || '',
+      example_uz: parts[5] || '',
+      status: defaultStatus
+    };
+    vocab.push(data);
+    added++;
+  }
+
+  saveToStorage();
+  buildTopicsList();
+  render();
+  closeBulkAddModal();
+
+  let msg = added + " ta so'z qo'shildi";
+  if (skipped > 0) msg += ', ' + skipped + ' o\'tkazib yuborildi';
+  showToast(msg, added > 0 ? 'success' : 'error');
+  if (errors.length > 0 && errors.length <= 5) {
+    setTimeout(() => alert("Xatoliklar:\n\n" + errors.join('\n')), 500);
+  }
+}
+
+let toastTimer = null;
+function showToast(msg, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast show' + (type ? ' ' + type : '');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-backdrop.show').forEach(m => m.classList.remove('show'));
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    exportJSON();
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+    e.preventDefault();
+    openAddModal();
+  }
+});
+
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', (e) => {
+    if (e.target === m) m.classList.remove('show');
+  });
+});
+
+init();
+</script>
+
+</body>
+</html>

@@ -14,6 +14,7 @@ LexiQ is a free educational platform that makes learning English engaging and ef
 ## 🛠️ Technology Stack
 
 - **Frontend:** HTML5, CSS3, vanilla JavaScript — no framework, no build step
+- **Palette:** Dark Gray `#323232` + Vivid Yellow `#FFDB00`, exposed as CSS variables in `assets/css/*.css`
 - **Data:** single JSON dictionary, loaded with `fetch()`
 - **Persistence:** browser `localStorage` (progress, edited vocabulary)
 - **Admin panel:** separate static page for editing the dictionary
@@ -24,8 +25,15 @@ LexiQ is a free educational platform that makes learning English engaging and ef
 
 ```
 lexiq/
-├── index.html            # Main learning application
+├── index.html            # Main learning application (markup only)
 ├── admin.html            # Admin panel for vocabulary management
+├── assets/
+│   ├── css/
+│   │   ├── app.css       # Styles for index.html
+│   │   └── admin.css     # Styles for admin.html
+│   └── js/
+│       ├── app.js        # Application logic
+│       └── admin.js      # Admin panel logic
 ├── data/
 │   └── vocabulary.json   # Vocabulary database (558 words)
 ├── netlify.toml          # Netlify build/redirect/header config

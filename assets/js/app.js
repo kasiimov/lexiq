@@ -164,6 +164,7 @@ function show(id) {
   if (id === 's-stats') renderStats();
   if (id === 's-tutor') tutorInit();
   if (id === 's-ai') aiInit();
+  if (id === 's-map') renderMap();
   window.scrollTo(0,0);
 }
 
@@ -254,6 +255,8 @@ function updateHomeStats() {
     nextLevel === level ? 'Maksimum darajada!' : nextLevel + ' gacha: ' + (nextThr - known) + " so'z";
 
   document.getElementById('ms-streak').textContent = stats.streakDays || 0;
+  renderStreak();
+  renderDailyCard();
   document.getElementById('ms-known').textContent = known;
   document.getElementById('ms-today').textContent = stats.todayLearned || 0;
 
@@ -366,6 +369,7 @@ function startTraining(filtered) {
 }
 
 function renderTrainCard() {
+  pronSetup();
   const w = trainPool[trainIdx];
   if (!w) return;
   trainFlipped = false;
@@ -997,8 +1001,21 @@ LexiQAuth.init();
 // и читает ответ потоком, дописывая текст в пузырь по мере прихода.
 // ────────────────────────────────────────────────────────────────────
 const TUTOR_ENDPOINT = '/api/tutor';
-const TUTOR_HISTORY_KEY = 'lexiq_tutor_history';
+const TUTOR_HISTORY_KEY = 'lexiq_tutor_history';   // режим «Ustoz»
+const TALK_HISTORY_KEY = 'lexiq_talk_history';     // режим «Suhbat»
 const TUTOR_MAX_HISTORY = 24;
+
+// Сценарии разговора — местные ситуации, а не абстрактные диалоги.
+const TALK_SCENARIOS = [
+  { id: 'tanishuv',   label: '👋 Tanishuv',   opener: 'Hello! Nice to meet you. What is your name?' },
+  { id: 'aeroport',   label: '✈️ Aeroport',   opener: 'Good morning! Can I see your passport and ticket, please?' },
+  { id: 'bozor',      label: '🍅 Bozor',      opener: 'Hello! These tomatoes are very fresh. How many kilos do you want?' },
+  { id: 'kafe',       label: '☕️ Kafe',       opener: 'Welcome! Here is the menu. What would you like to drink?' },
+  { id: 'universitet',label: '🎓 Universitet',opener: 'Hi! Are you a new student here? Which faculty are you in?' },
+  { id: 'ish',        label: '💼 Ish suhbati',opener: 'Good afternoon. Please tell me a little about yourself.' },
+  { id: 'shifokor',   label: '🩺 Shifokor',   opener: 'Hello. What is the problem? Where does it hurt?' },
+  { id: 'yol',        label: '🚌 Yo\'lda',    opener: 'Excuse me, does this bus go to the city centre?' },
+];
 
 const TUTOR_CHIPS = [
   { label: "🆕 5 ta yangi so'z", text: "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan." },
@@ -1008,13 +1025,19 @@ const TUTOR_CHIPS = [
 ];
 
 let tutorHistory = [];
+let tutorMode = 'ustoz';      // 'ustoz' — объясняет по-узбекски, 'suhbat' — говорит по-английски
+let talkScenario = 'tanishuv';
 let tutorBusy = false;
 let tutorWired = false;
 let tutorPending = null;   // вопрос, заданный с другого экрана
 
+function tutorHistoryKey() {
+  return tutorMode === 'suhbat' ? TALK_HISTORY_KEY : TUTOR_HISTORY_KEY;
+}
+
 function tutorLoadHistory() {
   try {
-    const raw = localStorage.getItem(TUTOR_HISTORY_KEY);
+    const raw = localStorage.getItem(tutorHistoryKey());
     const parsed = raw ? JSON.parse(raw) : [];
     tutorHistory = Array.isArray(parsed) ? parsed.slice(-TUTOR_MAX_HISTORY) : [];
   } catch (e) {
@@ -1024,7 +1047,7 @@ function tutorLoadHistory() {
 
 function tutorSaveHistory() {
   try {
-    localStorage.setItem(TUTOR_HISTORY_KEY, JSON.stringify(tutorHistory.slice(-TUTOR_MAX_HISTORY)));
+    localStorage.setItem(tutorHistoryKey(), JSON.stringify(tutorHistory.slice(-TUTOR_MAX_HISTORY)));
   } catch (e) {
     // Переполнение localStorage не должно ломать чат.
   }
@@ -1038,7 +1061,12 @@ function tutorEscape(s) {
 
 // Из разметки модели поддерживаем только **жирный** — остальное показываем как текст.
 function tutorFormat(s) {
-  return tutorEscape(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  const html = tutorEscape(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  // Разговорный режим присылает исправление двумя строками с маркерами —
+  // показываем их отдельным блоком, а не как часть реплики.
+  return html
+    .replace(/^\u270D\uFE0F?\s*(.+)$/gm, '<span class="cm-fix">✍️ $1</span>')
+    .replace(/^\u2139\uFE0F?\s*(.+)$/gm, '<span class="cm-why">ℹ️ $1</span>');
 }
 
 function tutorAutoGrow(el) {
@@ -1084,11 +1112,52 @@ function tutorRenderLog() {
   log.innerHTML = '';
   if (tutorHistory.length === 0) {
     tutorBubble('bot', tutorFormat(
-      "Salom! Men LexiQ Ustozman 👋\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
+      tutorMode === 'suhbat'
+        ? "Keling, ingliz tilida gaplashamiz 💬\n\nVaziyatni tanlang va inglizcha yozing. Xato qilsangiz, avval to'g'ri variantni ko'rsataman, keyin suhbatni davom ettiraman."
+        : "Salom! Men LexiQ Ustozman 👋\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
     ));
     return;
   }
   tutorHistory.forEach(m => tutorBubble(m.role === 'user' ? 'user' : 'bot', tutorFormat(m.content)));
+}
+
+function tutorSetMode(mode) {
+  if (tutorBusy || mode === tutorMode) return;
+  tutorMode = mode;
+  document.getElementById('tm-ustoz').classList.toggle('active', mode === 'ustoz');
+  document.getElementById('tm-suhbat').classList.toggle('active', mode === 'suhbat');
+  document.getElementById('tutor-name').textContent = mode === 'suhbat' ? 'Suhbat' : 'AI Ustoz';
+  document.getElementById('tutor-ava').textContent = mode === 'suhbat' ? '💬' : '🤖';
+  document.getElementById('chat-input').placeholder =
+    mode === 'suhbat' ? 'Write in English...' : 'Savolingizni yozing...';
+  document.getElementById('chat-scenarios').style.display = mode === 'suhbat' ? '' : 'none';
+  document.getElementById('chat-chips').style.display = mode === 'suhbat' ? 'none' : '';
+  tutorLoadHistory();
+  tutorRenderLog();
+}
+
+function tutorRenderScenarios() {
+  const box = document.getElementById('chat-scenarios');
+  box.innerHTML = '';
+  TALK_SCENARIOS.forEach(sc => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip' + (sc.id === talkScenario ? ' on' : '');
+    b.textContent = sc.label;
+    b.onclick = () => tutorPickScenario(sc.id);
+    box.appendChild(b);
+  });
+}
+
+// Смена ситуации начинает разговор заново: реплики из аэропорта в кафе не нужны.
+function tutorPickScenario(id) {
+  if (tutorBusy) return;
+  const sc = TALK_SCENARIOS.find(x => x.id === id);
+  if (!sc) return;
+  talkScenario = id;
+  tutorRenderScenarios();
+  tutorHistory = [{ role: 'assistant', content: sc.opener }];
+  tutorSaveHistory();
+  tutorRenderLog();
 }
 
 function tutorInit() {
@@ -1098,6 +1167,7 @@ function tutorInit() {
   if (!tutorWired) {
     tutorLoadHistory();
     tutorRenderChips();
+    tutorRenderScenarios();
     const input = document.getElementById('chat-input');
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); tutorSend(); }
@@ -1156,7 +1226,12 @@ async function tutorSend() {
     const res = await fetch(TUTOR_ENDPOINT, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ messages: tutorHistory, level: getCEFRLevel() }),
+      body: JSON.stringify({
+        messages: tutorHistory,
+        level: getCEFRLevel(),
+        mode: tutorMode,
+        scenario: talkScenario,
+      }),
     });
 
     if (!res.ok || !res.body) {
@@ -1494,4 +1569,414 @@ function aiRenderResult() {
 
   aiShowView('ai-result');
   window.scrollTo(0, 0);
+}
+
+// ────────────────────────────────────────────────────────────────────
+// SERIYA — визуальный слой над streakDays, который уже считается.
+// Огонь растёт вместе с серией и гаснет, если день пропущен.
+// ────────────────────────────────────────────────────────────────────
+const STREAK_BEST_KEY = 'lexiq_streak_best';
+const STREAK_STAGES = [
+  { from: 0,  icon: '🕯', text: "Bugun mashq qiling — seriya boshlanadi" },
+  { from: 1,  icon: '✨', text: "Boshlandi! Ertaga ham qaytib keling" },
+  { from: 3,  icon: '🔥', text: "Yaxshi ketyapti, olov yonmoqda" },
+  { from: 7,  icon: '🔥', text: "Bir hafta! Odat shakllanmoqda" },
+  { from: 14, icon: '🌋', text: "Ikki hafta — bu allaqachon jiddiy" },
+  { from: 30, icon: '🏆', text: "Bir oy uzluksiz. Zo'r natija" },
+];
+
+function daysBetween(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+
+function streakBest(current) {
+  let best = 0;
+  try { best = parseInt(localStorage.getItem(STREAK_BEST_KEY) || '0', 10) || 0; } catch (e) {}
+  if (current > best) {
+    best = current;
+    try { localStorage.setItem(STREAK_BEST_KEY, String(best)); } catch (e) {}
+  }
+  return best;
+}
+
+// Серия жива, если играли сегодня или вчера: вчерашняя ещё не сгорела,
+// но человек должен успеть сегодня — об этом и предупреждаем.
+function streakState(stats) {
+  const today = todayStr();
+  if (!stats.lastDayPlayed) return { days: 0, alive: false, playedToday: false };
+  const gap = daysBetween(stats.lastDayPlayed, today);
+  if (gap === 0) return { days: stats.streakDays || 0, alive: true, playedToday: true };
+  if (gap === 1) return { days: stats.streakDays || 0, alive: true, playedToday: false };
+  return { days: 0, alive: false, playedToday: false };
+}
+
+function renderStreak() {
+  const card = document.getElementById('streak-card');
+  if (!card) return;
+  const stats = getStats();
+  const st = streakState(stats);
+  const stage = STREAK_STAGES.slice().reverse().find(s => st.days >= s.from) || STREAK_STAGES[0];
+
+  card.classList.toggle('lit', st.alive && st.days > 0);
+  card.classList.toggle('cold', !st.alive || st.days === 0);
+  document.getElementById('sk-flame').textContent = stage.icon;
+  document.getElementById('sk-count').textContent = st.days;
+  document.getElementById('sk-best').textContent = streakBest(st.days);
+
+  let sub = stage.text;
+  if (st.alive && !st.playedToday) {
+    const left = 24 - new Date().getHours();
+    sub = `Seriya ${left} soatdan keyin uziladi — bugun mashq qiling`;
+  }
+  document.getElementById('sk-sub').textContent = sub;
+
+  // Полоски последней недели: закрашены дни, попавшие внутрь серии.
+  const week = document.getElementById('sk-week');
+  week.innerHTML = '';
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    const within = st.alive && stats.lastDayPlayed &&
+      daysBetween(key, stats.lastDayPlayed) >= 0 &&
+      daysBetween(key, stats.lastDayPlayed) < st.days;
+    const el = document.createElement('div');
+    el.className = 'sk-day' + (key === todayStr() && st.playedToday ? ' today' : within ? ' on' : '');
+    week.appendChild(el);
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// KUN TOPSHIRIG'I — одно задание в день, одинаковое для всех.
+// Слова выбираются детерминированно по дате, поэтому общий сервер не нужен:
+// у двух людей в один день набор совпадает.
+// ────────────────────────────────────────────────────────────────────
+const DAILY_KEY = 'lexiq_daily';
+const DAILY_SIZE = 10;
+
+// Простой детерминированный генератор: одна и та же дата — одна и та же выборка.
+function seededRandom(seed) {
+  let x = seed;
+  return function () {
+    x = (x * 1103515245 + 12345) & 0x7fffffff;
+    return x / 0x7fffffff;
+  };
+}
+
+function dateSeed(dateStr) {
+  let h = 0;
+  for (let i = 0; i < dateStr.length; i++) h = (h * 31 + dateStr.charCodeAt(i)) & 0x7fffffff;
+  return h;
+}
+
+let dailyWords = [];
+let dailyIdx = 0;
+let dailyCorrect = 0;
+
+function dailyBuild() {
+  const rnd = seededRandom(dateSeed(todayStr()));
+  const pool = VOCAB.slice();
+  const picked = [];
+  const used = new Set();
+  while (picked.length < Math.min(DAILY_SIZE, pool.length)) {
+    const i = Math.floor(rnd() * pool.length);
+    if (used.has(i)) continue;
+    used.add(i);
+    picked.push(pool[i]);
+  }
+  return picked.map(word => {
+    const options = [word];
+    const guard = new Set([word.id]);
+    while (options.length < 4 && options.length < pool.length) {
+      const cand = pool[Math.floor(rnd() * pool.length)];
+      if (guard.has(cand.id)) continue;
+      guard.add(cand.id);
+      options.push(cand);
+    }
+    // Тасуем варианты тем же генератором — порядок тоже одинаков у всех.
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(rnd() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return { word, options, correct: options.findIndex(o => o.id === word.id) };
+  });
+}
+
+function dailyLoad() {
+  try {
+    const raw = localStorage.getItem(DAILY_KEY);
+    const data = raw ? JSON.parse(raw) : null;
+    return data && data.date === todayStr() ? data : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function dailySave(score) {
+  const prev = dailyLoad();
+  const best = Math.max(score, (prev && prev.best) || 0);
+  try {
+    localStorage.setItem(DAILY_KEY, JSON.stringify({ date: todayStr(), score, best, done: true }));
+  } catch (e) {}
+}
+
+function renderDailyCard() {
+  const card = document.getElementById('daily-card');
+  if (!card) return;
+  const done = dailyLoad();
+  card.classList.toggle('done', !!done);
+  document.getElementById('dc-state').textContent = done ? `${done.score} / ${DAILY_SIZE}` : 'Bajarilmagan';
+  document.getElementById('dc-title').textContent = done
+    ? "Bugungi topshiriq bajarildi"
+    : `Bugungi ${DAILY_SIZE} ta so'z`;
+  document.getElementById('dc-sub').textContent = done
+    ? "Ertaga yangi topshiriq. Yana urinib ko'rishingiz mumkin."
+    : "Hamma uchun bir xil. Xatosiz bajaring va rekordni yangilang.";
+}
+
+function dailyStart() {
+  if (!VOCAB.length) return;
+  dailyWords = dailyBuild();
+  dailyIdx = 0;
+  dailyCorrect = 0;
+  document.getElementById('daily-play').style.display = '';
+  document.getElementById('daily-done').style.display = 'none';
+  document.getElementById('dh-date').textContent = todayStr();
+  show('s-daily');
+  dailyRender();
+}
+
+function dailyRender() {
+  const q = dailyWords[dailyIdx];
+  document.getElementById('dl-counter').textContent = (dailyIdx + 1) + ' / ' + dailyWords.length;
+  document.getElementById('dl-score').textContent = dailyCorrect + ' ball';
+  document.getElementById('dl-word').textContent = q.word.en;
+
+  const grid = document.getElementById('dl-options');
+  grid.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'mc-opt';
+    b.textContent = Array.isArray(opt.uz) ? opt.uz[0] : opt.uz;
+    b.onclick = () => dailyAnswer(i, b);
+    grid.appendChild(b);
+  });
+}
+
+function dailyAnswer(picked, btn) {
+  const q = dailyWords[dailyIdx];
+  const buttons = document.getElementById('dl-options').querySelectorAll('.mc-opt');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.correct) b.classList.add('correct');
+    else if (i === picked) b.classList.add('wrong');
+  });
+  if (picked === q.correct) dailyCorrect++;
+
+  setTimeout(() => {
+    dailyIdx++;
+    if (dailyIdx < dailyWords.length) dailyRender();
+    else dailyFinish();
+  }, 700);
+}
+
+function dailyFinish() {
+  recordDayActivity();
+  dailySave(dailyCorrect);
+  const data = dailyLoad();
+  const pct = Math.round((dailyCorrect / dailyWords.length) * 100);
+
+  document.getElementById('daily-play').style.display = 'none';
+  document.getElementById('daily-done').style.display = '';
+  document.getElementById('dl-correct').textContent = dailyCorrect;
+  document.getElementById('dl-best').textContent = (data && data.best) || dailyCorrect;
+  document.getElementById('dl-emoji').textContent = pct === 100 ? '🏆' : pct >= 70 ? '👍' : '💪';
+  document.getElementById('dl-title').textContent =
+    pct === 100 ? "Mukammal!" : pct >= 70 ? "Yaxshi natija" : "Yana mashq kerak";
+  document.getElementById('dl-sub').textContent = pct + "% to'g'ri";
+  document.getElementById('dl-note').textContent =
+    "Bugungi topshiriq hamma uchun bir xil edi. Reyting ro'yxatdan o'tgan foydalanuvchilar uchun qo'shiladi.";
+}
+
+// ────────────────────────────────────────────────────────────────────
+// XARITA — путь по уровням. Каждый CEFR это «город»: видно, сколько слов
+// в нём пройдено, какой открыт, а какой ещё закрыт.
+// Правило открытия: следующий город открывается, когда в текущем
+// изучено больше половины слов.
+// ────────────────────────────────────────────────────────────────────
+const MAP_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
+const CITY_UNLOCK_PCT = 50;
+
+function levelProgress(level) {
+  const words = VOCAB.filter(w => w.level === level);
+  if (words.length === 0) return { known: 0, total: 0, pct: 0 };
+  const srs = srsLoad();
+  let known = 0;
+  words.forEach(w => { if (srs[w.id] && srs[w.id].box >= 3) known++; });
+  return { known, total: words.length, pct: Math.round((known / words.length) * 100) };
+}
+
+function renderMap() {
+  const box = document.getElementById('map-path');
+  if (!box) return;
+  box.innerHTML = '';
+
+  let unlocked = true;   // A1 открыт всегда
+  let currentMarked = false;
+
+  MAP_LEVELS.forEach(level => {
+    const p = levelProgress(level);
+    const done = p.pct >= CITY_UNLOCK_PCT;
+    const isCurrent = unlocked && !done && !currentMarked;
+    if (isCurrent) currentMarked = true;
+
+    const card = document.createElement('button');
+    card.className = 'city' + (!unlocked ? ' locked' : '') + (done ? ' done' : '') + (isCurrent ? ' current' : '');
+    card.innerHTML =
+      '<div class="city-top">' +
+        '<span class="city-code">' + level + '</span>' +
+        '<span class="city-name">' + (CEFR_NAMES[level] || '') + '</span>' +
+        '<span class="city-state">' + (!unlocked ? '🔒' : done ? '✅' : CEFR_ICONS[level] || '📍') + '</span>' +
+      '</div>' +
+      '<div class="city-bar"><i style="width:' + (unlocked ? p.pct : 0) + '%"></i></div>' +
+      '<div class="city-meta">' +
+        '<span>' + (unlocked ? p.known + ' / ' + p.total + " so'z" : "Yopiq") + '</span>' +
+        '<span>' + (unlocked ? p.pct + '%' : 'Oldingi darajani ' + CITY_UNLOCK_PCT + '% ga yeting') + '</span>' +
+      '</div>';
+
+    if (unlocked) {
+      card.onclick = () => {
+        setLevelFilter(level);
+        show('s-topics');
+      };
+    }
+    box.appendChild(card);
+
+    // Следующий город открыт, только если этот пройден больше чем наполовину
+    unlocked = unlocked && done;
+  });
+}
+
+// ────────────────────────────────────────────────────────────────────
+// TALAFFUZ — проверка произношения через распознавание речи браузера.
+// API есть не везде (Chrome — да, Safari — частично), поэтому кнопка
+// показывается только там, где оно реально работает, и никогда не
+// блокирует занятие: не распозналось — просто подсказка, а не ошибка.
+// ────────────────────────────────────────────────────────────────────
+const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+let pronActive = false;
+
+// Насколько похожи два слова: 1 — совпадают, 0 — ничего общего.
+// Расстояние Левенштейна, нормированное на длину.
+function wordSimilarity(a, b) {
+  a = a.toLowerCase().replace(/[^a-z]/g, '');
+  b = b.toLowerCase().replace(/[^a-z]/g, '');
+  if (!a || !b) return 0;
+  if (a === b) return 1;
+  const m = a.length, n = b.length;
+  let prev = Array.from({ length: n + 1 }, (_, i) => i);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return 1 - prev[n] / Math.max(m, n);
+}
+
+function pronShow(cls, text) {
+  const box = document.getElementById('pron-result');
+  if (!box) return;
+  box.className = 'pron-result ' + cls;
+  box.textContent = text;
+  box.style.display = '';
+}
+
+function pronSetup() {
+  const btn = document.getElementById('fc-mic');
+  if (!btn) return;
+  btn.style.display = SpeechRec ? '' : 'none';
+  const box = document.getElementById('pron-result');
+  if (box) box.style.display = 'none';
+}
+
+function pronStart() {
+  if (!SpeechRec || pronActive) return;
+  const word = trainPool[trainIdx];
+  if (!word) return;
+
+  const btn = document.getElementById('fc-mic');
+  const rec = new SpeechRec();
+  rec.lang = 'en-US';
+  rec.interimResults = false;
+  rec.maxAlternatives = 3;
+
+  pronActive = true;
+  btn.classList.add('listening');
+  btn.textContent = '🎤 Eshitilmoqda...';
+  pronShow('near', "Mikrofonga so'zni ayting");
+
+  rec.onresult = (e) => {
+    const heard = [];
+    for (let i = 0; i < e.results[0].length; i++) heard.push(e.results[0][i].transcript.trim());
+    const best = heard.reduce((acc, h) => Math.max(acc, wordSimilarity(h, word.en)), 0);
+
+    if (best >= 0.85) pronShow('ok', '✅ Zo\'r! "' + word.en + '" to\'g\'ri aytildi');
+    else if (best >= 0.55) pronShow('near', '🟡 Yaqin. Eshitildi: "' + heard[0] + '". Yana urinib ko\'ring');
+    else pronShow('bad', '❌ Eshitildi: "' + heard[0] + '". Avval 🔊 tugmasini bosib tinglang');
+  };
+
+  rec.onerror = (e) => {
+    if (e.error === 'not-allowed') pronShow('bad', 'Mikrofonga ruxsat berilmadi');
+    else if (e.error === 'no-speech') pronShow('near', 'Ovoz eshitilmadi. Yana urinib ko\'ring');
+    else pronShow('bad', 'Xatolik: ' + e.error);
+  };
+
+  rec.onend = () => {
+    pronActive = false;
+    btn.classList.remove('listening');
+    btn.textContent = '🎤 Ayting';
+  };
+
+  try {
+    rec.start();
+  } catch (e) {
+    pronActive = false;
+    btn.classList.remove('listening');
+    btn.textContent = '🎤 Ayting';
+    pronShow('bad', 'Mikrofon ishga tushmadi');
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// MENING XATOLARIM — тест по личным слабым местам.
+// Слабыми считаются слова из младших коробок Лейтнера: именно на них
+// ученик спотыкается чаще всего.
+// ────────────────────────────────────────────────────────────────────
+const WEAK_WORDS_LIMIT = 12;
+
+function weakWords() {
+  const srs = srsLoad();
+  const seen = VOCAB.filter(w => srs[w.id]);
+  // Коробка 0-1 — слово ещё не закрепилось; сортируем от самых проблемных.
+  return seen
+    .filter(w => (srs[w.id].box || 0) <= 1)
+    .sort((a, b) => (srs[a.id].box || 0) - (srs[b.id].box || 0))
+    .slice(0, WEAK_WORDS_LIMIT);
+}
+
+function aiWeakSpots() {
+  const weak = weakWords();
+  if (weak.length < 4) {
+    aiShowView('ai-error');
+    document.getElementById('ai-error-txt').innerHTML =
+      "Hali yetarli ma'lumot yo'q" +
+      '<span class="cm-hint">Bir necha marta o\'ynang — qaysi so\'zlar qiyin ekani aniqlansin, keyin shu yerda shaxsiy test paydo bo\'ladi.</span>';
+    return;
+  }
+  const list = weak.map(w => w.en).join(', ');
+  document.getElementById('ai-topic').value = "mening qiyin so'zlarim: " + list;
+  aiTopic = "qiyin so'zlar: " + list;
+  aiGenerate('quiz');
 }

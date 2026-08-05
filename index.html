@@ -213,5 +213,15 @@
 })();
 </script>
 
+<script>
+// Офлайн-режим. Регистрация не должна ронять страницу, если браузер не умеет.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function (e) {
+      console.info('sw ro\'yxatdan o\'tmadi', e);
+    });
+  });
+}
+</script>
 </body>
 </html>

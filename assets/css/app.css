@@ -796,3 +796,135 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
 }
 .uc-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .uc-out { color:var(--muted); font-size:13px; }
+
+/* Режимы чата: наставник и разговорный партнёр */
+.tutor-modes { display:grid; grid-template-columns:1fr 1fr; gap:6px; background:var(--s2); border-radius:14px; padding:4px; }
+.tutor-mode {
+  border:none; cursor:pointer; background:transparent; color:var(--muted);
+  padding:10px; border-radius:10px;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700; transition:all .15s;
+}
+.tutor-mode.active { background:var(--paper); color:var(--on-accent); }
+.chat-scenarios { display:flex; gap:6px; flex-wrap:wrap; }
+
+/* Блок исправления внутри реплики разговорного партнёра */
+.cm-fix {
+  display:block; margin:-2px 0 6px; padding:8px 10px;
+  background:#2f3a31; border-left:3px solid var(--success);
+  border-radius:0 10px 10px 0; font-weight:700; color:#cfe4d4;
+}
+.cm-why { display:block; margin:-2px 0 8px; font-size:12px; color:var(--muted); line-height:1.5; }
+
+/* ────────────────────────────────────────────────────────────────────
+   SERIYA — огонь растёт вместе с серией и гаснет при пропуске
+   ──────────────────────────────────────────────────────────────────── */
+
+.streak-card {
+  display:flex; align-items:center; gap:14px;
+  background:var(--s1); border:1px solid #ffffff12;
+  border-radius:20px; padding:16px;
+}
+.streak-card.cold { opacity:.75; }
+.sk-flame { font-size:34px; line-height:1; filter:grayscale(1); transition:all .3s; }
+.streak-card.lit .sk-flame { filter:none; animation:flameBeat 2.4s ease-in-out infinite; }
+@keyframes flameBeat { 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.12) } }
+.sk-body { flex:1; min-width:0; }
+.sk-days { font-family:'Syne',sans-serif; font-size:18px; font-weight:800; }
+.sk-sub { font-size:12px; color:var(--muted); margin-top:2px; line-height:1.4; }
+.sk-week { display:flex; gap:4px; margin-top:10px; }
+.sk-day {
+  flex:1; height:6px; border-radius:99px; background:var(--s3);
+}
+.sk-day.on { background:var(--paper); }
+.sk-day.today { background:var(--success); }
+.sk-best { text-align:center; flex-shrink:0; }
+.sk-best span { display:block; font-family:'Syne',sans-serif; font-size:20px; font-weight:800; }
+.sk-best small { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.6px; }
+
+/* Задание дня */
+.daily-card {
+  width:100%; text-align:left; cursor:pointer;
+  background:linear-gradient(135deg, var(--s1), var(--s2));
+  border:1px solid #ffffff14; border-radius:20px; padding:16px;
+  display:flex; flex-direction:column; gap:6px;
+  font-family:'DM Sans',sans-serif; color:var(--txt); transition:all .15s;
+}
+.daily-card:active { transform:scale(.98); }
+.daily-card.done { border-color:#4a7c5966; }
+.dc-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.dc-tag { font-size:10px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); }
+.dc-state {
+  font-size:10px; font-weight:800; letter-spacing:0.6px; text-transform:uppercase;
+  padding:4px 8px; border-radius:99px; background:var(--s3); color:#c9c6bb;
+}
+.daily-card.done .dc-state { background:#2f3a31; color:#cfe4d4; }
+.dc-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:800; }
+.dc-sub { font-size:12px; color:var(--muted); line-height:1.45; }
+
+.daily-head { text-align:center; padding:6px 0 2px; }
+.dh-date { font-size:11px; color:var(--muted); font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.dh-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; margin-top:4px; }
+.dh-sub { font-size:12px; color:var(--muted); margin-top:2px; }
+.daily-note { font-size:12px; color:var(--muted); text-align:center; line-height:1.5; padding:0 10px; }
+
+/* ────────────────────────────────────────────────────────────────────
+   XARITA — путь по уровням: каждый CEFR это «город» на дороге
+   ──────────────────────────────────────────────────────────────────── */
+
+.map-head { padding:4px 2px 2px; }
+.mh-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; }
+.mh-sub { font-size:12px; color:var(--muted); margin-top:4px; line-height:1.5; }
+
+.map-path { position:relative; display:flex; flex-direction:column; gap:14px; padding-left:34px; }
+/* Дорога, соединяющая города */
+.map-path::before {
+  content:''; position:absolute; left:15px; top:12px; bottom:12px;
+  width:2px; background:linear-gradient(180deg, var(--paper), var(--s3));
+  opacity:.35;
+}
+
+.city {
+  position:relative; width:100%; text-align:left; cursor:pointer;
+  background:var(--s1); border:1px solid #ffffff12; border-radius:20px;
+  padding:16px; font-family:'DM Sans',sans-serif; color:var(--txt);
+  transition:all .15s;
+}
+.city:active { transform:scale(.985); }
+.city.locked { opacity:.5; cursor:default; }
+.city.current { border-color:var(--paper); }
+/* Точка города на дороге */
+.city::before {
+  content:''; position:absolute; left:-27px; top:24px;
+  width:14px; height:14px; border-radius:50%;
+  background:var(--s3); border:3px solid var(--bg);
+}
+.city.done::before { background:var(--success); }
+.city.current::before { background:var(--paper); }
+
+.city-top { display:flex; align-items:center; gap:10px; }
+.city-code { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; }
+.city-name { font-size:12px; color:var(--muted); font-weight:600; }
+.city-state { margin-left:auto; font-size:18px; }
+.city-bar { height:6px; border-radius:99px; background:var(--s3); margin-top:12px; overflow:hidden; }
+.city-bar i { display:block; height:100%; background:var(--paper); border-radius:99px; transition:width .4s ease; }
+.city-meta { display:flex; justify-content:space-between; font-size:11px; color:var(--muted); margin-top:8px; }
+
+/* Произношение: микрофон рядом с озвучкой */
+.fc-actions { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+.fc-mic {
+  border:1px solid #ffffff1a; cursor:pointer;
+  background:var(--s2); color:var(--txt);
+  padding:10px 16px; border-radius:12px;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700; transition:all .15s;
+}
+.fc-mic:active { transform:scale(.95); }
+.fc-mic.listening { background:var(--paper); color:var(--on-accent); animation:micPulse 1.1s ease infinite; }
+@keyframes micPulse { 0%,100%{ opacity:1 } 50%{ opacity:.65 } }
+
+.pron-result {
+  margin-top:12px; padding:12px 14px; border-radius:12px;
+  font-size:13px; line-height:1.5; text-align:center;
+}
+.pron-result.ok { background:#2f3a31; color:#cfe4d4; }
+.pron-result.near { background:#3a3730; color:#e0d9c2; }
+.pron-result.bad { background:#3a2e2b; color:#e5aca2; }

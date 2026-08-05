@@ -167,6 +167,7 @@ function show(id) {
   if (id === 's-ai') aiInit();
   if (id === 's-map') renderMap();
   if (id === 's-profile') renderProfile();
+  if (id === 's-read') readInit();
   window.scrollTo(0,0);
 }
 
@@ -2235,5 +2236,253 @@ async function syncPull() {
     }
   } catch (e) {
     console.warn('progress yuklanmadi', e);
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// O'QISH — чтение с заданиями.
+// Текст, словарик и вопросы приходят одним ответом: если запрашивать
+// вопросы отдельно, они окажутся про другой текст.
+// ────────────────────────────────────────────────────────────────────
+const READ_VIEWS = ['read-setup', 'read-loading', 'read-error', 'read-text', 'read-quiz', 'read-done'];
+const READ_GENRES = [
+  { id: 'hikoya',  label: '📚 Hikoya' },
+  { id: 'dialog',  label: '💬 Dialog' },
+  { id: 'yangilik',label: '📰 Yangilik' },
+  { id: 'ilmiy',   label: '🔬 Ilmiy' },
+];
+const READ_TOPICS = [
+  "kundalik hayot", "sayohat", "do'stlik", "texnologiya",
+  "sport", "ovqat", "maktab va universitet", "ish",
+];
+
+let readGenre = 'hikoya';
+let readTopic = READ_TOPICS[0];
+let readData = null;
+let readIdx = 0;
+let readCorrect = 0;
+let readBusy = false;
+let readWired = false;
+
+function readShowView(id) {
+  READ_VIEWS.forEach(v => {
+    const el = document.getElementById(v);
+    if (el) el.style.display = (v === id) ? '' : 'none';
+  });
+}
+
+function readBack() {
+  speechSynthesis.cancel();
+  readShowView('read-setup');
+}
+
+function readChips(boxId, items, current, onPick) {
+  const box = document.getElementById(boxId);
+  box.innerHTML = '';
+  items.forEach(item => {
+    const id = item.id || item;
+    const b = document.createElement('button');
+    b.className = 'chat-chip' + (id === current ? ' on' : '');
+    b.textContent = item.label || item;
+    b.onclick = () => onPick(id);
+    box.appendChild(b);
+  });
+}
+
+function readInit() {
+  document.getElementById('read-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  if (!readWired) {
+    readWired = true;
+  }
+  readChips('read-genres', READ_GENRES, readGenre, id => { readGenre = id; readInit(); });
+  readChips('read-topics', READ_TOPICS, readTopic, id => {
+    readTopic = id;
+    document.getElementById('read-topic').value = id;
+    readInit();
+  });
+  readShowView('read-setup');
+}
+
+async function readGenerate() {
+  if (readBusy) return;
+  readBusy = true;
+  speechSynthesis.cancel();
+
+  const typed = document.getElementById('read-topic').value.trim();
+  const topic = typed || readTopic;
+  readShowView('read-loading');
+
+  try {
+    const res = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ mode: 'reading', level: getCEFRLevel(), topic, genre: readGenre }),
+    });
+    if (!res.ok) {
+      const info = await res.json().catch(() => ({}));
+      readShowView('read-error');
+      document.getElementById('read-error-txt').innerHTML =
+        tutorEscape(info.error || ('Xatolik ' + res.status)) +
+        (info.hint ? '<span class="cm-hint">' + tutorEscape(info.hint) + '</span>' : '');
+      return;
+    }
+    const data = await res.json();
+    readData = data.reading;
+    readRenderText(data);
+  } catch (e) {
+    readShowView('read-error');
+    document.getElementById('read-error-txt').textContent = 'Aloqa xatosi: ' + e.message;
+  } finally {
+    readBusy = false;
+  }
+}
+
+function readRenderText(data) {
+  const r = readData;
+  document.getElementById('rd-title').textContent = r.title || 'Matn';
+  const words = (r.text || '').split(/\s+/).filter(Boolean).length;
+  document.getElementById('rd-meta').textContent =
+    data.level + ' · ' + words + " so'z · " + (data.topic || '');
+
+  // Слова из словарика подчёркиваем прямо в тексте: перевод виден по наведению.
+  const body = document.getElementById('rd-body');
+  body.textContent = r.text || '';
+  (r.glossary || []).forEach(g => {
+    const re = new RegExp('\\b(' + g.en.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\b', 'i');
+    const html = body.innerHTML;
+    if (re.test(html)) {
+      body.innerHTML = html.replace(re, '<span class="gl" title="' + tutorEscape(g.uz) + '">$1</span>');
+    }
+  });
+
+  const gloss = document.getElementById('rd-gloss');
+  gloss.innerHTML = '';
+  (r.glossary || []).forEach(g => {
+    const row = document.createElement('div');
+    row.className = 'gloss-row';
+    row.innerHTML = '<span class="gloss-en"></span><span class="gloss-uz"></span>' +
+      '<button class="gloss-say">🔊</button>';
+    row.querySelector('.gloss-en').textContent = g.en;
+    row.querySelector('.gloss-uz').textContent = g.uz;
+    row.querySelector('.gloss-say').onclick = () => aiSpeak(g.en);
+    gloss.appendChild(row);
+  });
+
+  document.getElementById('rd-add').disabled = false;
+  document.getElementById('rd-add').textContent = "➕ So'zlarni lug'atga qo'shish";
+  readShowView('read-text');
+  window.scrollTo(0, 0);
+}
+
+// Озвучка текста целиком — то же аудирование, только с текстом перед глазами.
+function readSpeak() {
+  const btn = document.getElementById('rd-speak');
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    btn.classList.remove('on');
+    btn.textContent = '🔊 Tinglash';
+    return;
+  }
+  if (!readData || !readData.text) return;
+  const u = new SpeechSynthesisUtterance(readData.text);
+  u.lang = 'en-US';
+  // На младших уровнях читаем медленнее — иначе половина слов сливается.
+  const lvl = getCEFRLevel();
+  u.rate = (lvl === 'A1' || lvl === 'A2') ? 0.78 : 0.92;
+  u.onend = () => { btn.classList.remove('on'); btn.textContent = '🔊 Tinglash'; };
+  btn.classList.add('on');
+  btn.textContent = '⏹ To\'xtatish';
+  speechSynthesis.speak(u);
+}
+
+// Слова из текста уезжают в общий словарь — с примером из самого текста.
+function readAddWords() {
+  if (!readData || !readData.glossary) return;
+  const have = new Set(VOCAB.map(w => w.id));
+  const level = getCEFRLevel();
+  let added = 0;
+
+  readData.glossary.forEach(g => {
+    const id = 'ai-' + g.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    if (have.has(id)) return;
+    const sentence = (readData.text || '').split(/(?<=[.!?])\s+/)
+      .find(s => new RegExp('\\b' + g.en + '\\b', 'i').test(s)) || '';
+    VOCAB.push({
+      id, en: g.en.toLowerCase(), uz: [g.uz], level,
+      topic: 'reading', pos: '', example_en: sentence.trim(), example_uz: '', status: 'ok',
+    });
+    added++;
+  });
+
+  saveVocab();
+  const btn = document.getElementById('rd-add');
+  btn.disabled = true;
+  btn.textContent = added ? '✓ ' + added + " ta so'z qo'shildi" : "Bu so'zlar allaqachon lug'atda";
+}
+
+function readStartQuiz() {
+  speechSynthesis.cancel();
+  readIdx = 0;
+  readCorrect = 0;
+  readShowView('read-quiz');
+  readRenderQuestion();
+}
+
+function readRenderQuestion() {
+  const q = readData.questions[readIdx];
+  document.getElementById('rd-counter').textContent = (readIdx + 1) + ' / ' + readData.questions.length;
+  document.getElementById('rd-q').textContent = q.q;
+  document.getElementById('rd-explain').style.display = 'none';
+  document.getElementById('rd-next').style.display = 'none';
+
+  const grid = document.getElementById('rd-options');
+  grid.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'mc-opt';
+    b.textContent = opt;
+    b.onclick = () => readAnswer(i);
+    grid.appendChild(b);
+  });
+  window.scrollTo(0, 0);
+}
+
+function readAnswer(picked) {
+  const q = readData.questions[readIdx];
+  const buttons = document.getElementById('rd-options').querySelectorAll('.mc-opt');
+  if (buttons[0].disabled) return;
+
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.correct) b.classList.add('correct');
+    else if (i === picked) b.classList.add('wrong');
+  });
+  if (picked === q.correct) readCorrect++;
+
+  const exp = document.getElementById('rd-explain');
+  exp.className = 'ai-explain' + (picked === q.correct ? '' : ' wrong');
+  exp.textContent = (picked === q.correct ? '✅ ' : '❌ ') +
+    (q.explanation || ("To'g'ri javob: " + q.options[q.correct]));
+  exp.style.display = '';
+
+  const next = document.getElementById('rd-next');
+  next.textContent = (readIdx + 1 < readData.questions.length) ? 'Keyingi →' : "Natijani ko'rish";
+  next.style.display = '';
+}
+
+function readNext() {
+  if (readIdx + 1 < readData.questions.length) {
+    readIdx++;
+    readRenderQuestion();
+  } else {
+    const total = readData.questions.length;
+    const pct = Math.round((readCorrect / total) * 100);
+    document.getElementById('rd-emoji').textContent = pct >= 75 ? '🏆' : pct >= 50 ? '👍' : '💪';
+    document.getElementById('rd-title2').textContent =
+      pct >= 75 ? 'Matnni yaxshi tushundingiz' : pct >= 50 ? "Yomon emas" : "Matnni qayta o'qing";
+    document.getElementById('rd-sub').textContent = readCorrect + ' / ' + total + " to'g'ri";
+    recordDayActivity();
+    readShowView('read-done');
+    window.scrollTo(0, 0);
   }
 }

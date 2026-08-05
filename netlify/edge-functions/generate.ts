@@ -20,6 +20,7 @@ const MIN_QUESTIONS = 3;
 const GENERATION_ATTEMPTS = 2;
 const MAX_QUESTIONS = 8;
 const WORDS_TOKENS = 2600;
+const READING_TOKENS = 2600;
 const MIN_WORDS = 6;
 const MAX_WORDS = 30;
 
@@ -76,6 +77,37 @@ function lessonPrompt(level: string, topic: string): string {
 
 // Словарь теперь не лежит файлом, его собирает модель. Требования жёстче,
 // чем к тесту: это данные, на которых потом строятся все игры.
+// Чтение: текст под уровень плюс словарик и вопросы на понимание.
+// Всё одним запросом — иначе вопросы окажутся про другой текст.
+const GENRES: Record<string, string> = {
+  hikoya: "a short everyday story with a small twist at the end",
+  yangilik: "a short news report about a real-sounding everyday event",
+  dialog: "a dialogue between two people in a real situation",
+  ilmiy: "a short popular-science text explaining one simple fact",
+};
+
+function readingPrompt(level: string, genre: string, topic: string): string {
+  const kind = GENRES[genre] || GENRES.hikoya;
+  const length = level === "A1" || level === "A2" ? "90-130" : level === "B1" ? "130-180" : "180-240";
+  return [
+    `You are LexiQ, writing reading practice for Uzbek learners of English at CEFR level ${level}.`,
+    `Write ${kind} about: ${topic}. Length: ${length} words.`,
+    "",
+    "Requirements:",
+    `- The text must be readable at ${level}: sentence length and vocabulary match that level.`,
+    "- 'title' is a short English title.",
+    "- 'glossary': 5-8 words from the text that are hardest at this level, each with its Uzbek translation.",
+    "- 'questions': 4 comprehension questions about THIS text, each with 4 English options and one correct answer.",
+    "  Questions may be asked in Uzbek, options stay English. Answers must be findable in the text.",
+    "  'explanation' is in Uzbek and points to the place in the text that proves the answer.",
+    "- NEVER put a double quote inside a string value; use single quotes instead.",
+    "",
+    "Answer with JSON only, exactly this shape:",
+    '{"title":"...","text":"...","glossary":[{"en":"...","uz":"..."}],' +
+      '"questions":[{"q":"...","options":["...","...","...","..."],"correct":0,"explanation":"..."}]}',
+  ].join("\n");
+}
+
 function wordsPrompt(level: string, topic: string, count: number): string {
   return [
     "You are LexiQ, building a vocabulary list for Uzbek speakers learning English.",
@@ -152,6 +184,25 @@ interface Question {
   explanation: string;
 }
 
+function normalizeReading(data: Record<string, unknown>) {
+  const glossaryRaw = Array.isArray(data.glossary) ? data.glossary : [];
+  const glossary = glossaryRaw
+    .filter((g) => !!g && typeof g === "object")
+    .map((g) => ({
+      en: str((g as Record<string, unknown>).en, 60),
+      uz: str((g as Record<string, unknown>).uz, 60),
+    }))
+    .filter((g) => g.en && g.uz)
+    .slice(0, 10);
+
+  return {
+    title: str(data.title, 120),
+    text: str(data.text, 2500),
+    glossary,
+    questions: normalizeQuiz(data),
+  };
+}
+
 function normalizeQuiz(data: Record<string, unknown>): Question[] {
   const raw = Array.isArray(data.questions) ? data.questions : [];
   const seen = new Set<string>();
@@ -212,14 +263,15 @@ export default async function handler(request: Request): Promise<Response> {
   }
   if (request.method !== "POST") return jsonError(405, "Faqat POST");
 
-  let body: { mode?: unknown; level?: unknown; topic?: unknown; count?: unknown };
+  let body: { mode?: unknown; level?: unknown; topic?: unknown; count?: unknown; genre?: unknown };
   try {
     body = await request.json();
   } catch {
     return jsonError(400, "Noto'g'ri JSON");
   }
 
-  const mode = body.mode === "lesson" || body.mode === "words" ? body.mode : "quiz";
+  const KNOWN = ["lesson", "words", "reading"];
+  const mode = typeof body.mode === "string" && KNOWN.includes(body.mode) ? body.mode : "quiz";
   const level = normalizeLevel(body.level);
   const topic = str(body.topic, MAX_TOPIC_CHARS) || "kundalik ingliz tili";
   const countRaw = typeof body.count === "number" ? Math.trunc(body.count) : (mode === "words" ? 20 : 5);
@@ -229,11 +281,14 @@ export default async function handler(request: Request): Promise<Response> {
 
   if (configuredProviders().length === 0) return jsonError(503, "AI kaliti sozlanmagan", NO_KEY_HINT);
 
+  const genre = typeof body.genre === "string" ? body.genre : "hikoya";
   const prompt = mode === "lesson"
     ? lessonPrompt(level, topic)
     : mode === "words"
       ? wordsPrompt(level, topic, count)
-      : quizPrompt(level, topic, count);
+      : mode === "reading"
+        ? readingPrompt(level, genre, topic)
+        : quizPrompt(level, topic, count);
   const ask = mode === "lesson"
     ? `Mavzu: ${topic}`
     : mode === "words"
@@ -251,7 +306,10 @@ export default async function handler(request: Request): Promise<Response> {
         { role: "system", content: prompt },
         { role: "user", content: ask },
       ],
-      maxTokens: mode === "lesson" ? LESSON_TOKENS : mode === "words" ? WORDS_TOKENS : QUIZ_TOKENS,
+      maxTokens: mode === "lesson" ? LESSON_TOKENS
+        : mode === "words" ? WORDS_TOKENS
+        : mode === "reading" ? READING_TOKENS
+        : QUIZ_TOKENS,
       temperature: 0.3,
       stream: false,
       json: true,
@@ -264,6 +322,18 @@ export default async function handler(request: Request): Promise<Response> {
     if (!parsed) {
       lastProblem = "javob JSON emas: " + result.text.slice(0, 150);
       continue;
+    }
+
+    if (mode === "reading") {
+      const reading = normalizeReading(parsed);
+      // Текст без вопросов — это не упражнение, а просто абзац: гоним заново.
+      if (!reading.text || reading.questions.length < 3) {
+        lastProblem = `matn ${reading.text.length} belgi, savollar ${reading.questions.length}`;
+        continue;
+      }
+      return new Response(JSON.stringify({ mode, level, topic, genre, reading }), {
+        headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+      });
     }
 
     if (mode === "words") {

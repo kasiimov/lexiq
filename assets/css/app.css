@@ -1097,3 +1097,53 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
 /* Итоговый экран: рейтинг и подпись под ним не должны липнуть к кнопке */
 #daily-done .daily-note { margin-bottom:2px; }
 .leaderboard { margin-top:2px; }
+
+/* ────────────────────────────────────────────────────────────────────
+   O'QISH — текст с заданиями
+   ──────────────────────────────────────────────────────────────────── */
+
+#read-setup, #read-text, #read-quiz, #read-done, #read-error, #read-loading {
+  display:flex; flex-direction:column; gap:14px;
+}
+
+.read-card {
+  background:var(--s1); border:1px solid #ffffff12;
+  border-radius:22px; padding:22px;
+}
+.read-title { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; line-height:1.25; }
+.read-meta {
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-top:8px; font-size:11px; color:var(--muted);
+  font-weight:700; letter-spacing:0.6px; text-transform:uppercase;
+}
+.read-speak {
+  border:1px solid #ffffff1a; cursor:pointer;
+  background:var(--s2); color:var(--txt);
+  padding:7px 12px; border-radius:10px;
+  font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+  text-transform:none; letter-spacing:0;
+}
+.read-speak:active { transform:scale(.95); }
+.read-speak.on { background:var(--paper); color:var(--on-accent); }
+
+/* Текст читают долго — интервал крупнее, чем в остальном интерфейсе */
+.read-body {
+  margin-top:16px; font-size:16px; line-height:1.85; color:var(--txt);
+  white-space:pre-wrap;
+}
+.read-body .gl {
+  border-bottom:1.5px dotted var(--muted); cursor:help;
+}
+
+.read-gloss { display:flex; flex-direction:column; gap:6px; }
+.gloss-row {
+  display:flex; align-items:center; gap:10px;
+  background:var(--s1); border:1px solid #ffffff0d;
+  border-radius:12px; padding:10px 12px;
+}
+.gloss-en { font-weight:700; font-size:14px; }
+.gloss-uz { color:var(--muted); font-size:13px; flex:1; }
+.gloss-say {
+  border:none; cursor:pointer; background:transparent;
+  color:var(--muted); font-size:14px; padding:2px 6px;
+}

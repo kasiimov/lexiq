@@ -68,7 +68,7 @@
   <div class="loading-screen">
     <div class="spinner"></div>
     <div class="ls-title">LexiQ</div>
-    <div class="ls-sub">Lug'at yuklanmoqda...</div>
+    <div class="ls-sub" id="ls-sub">Lug'at yuklanmoqda...</div>
   </div>
 </div>
 
@@ -189,6 +189,11 @@
       <span class="ac-ico">🗺</span>
       <span class="ac-title">Xarita</span>
       <span class="ac-sub">Yo'lingiz</span>
+    </button>
+    <button class="action-card tutor-card" onclick="show('s-read')">
+      <span class="ac-ico">📖</span>
+      <span class="ac-title">O'qish</span>
+      <span class="ac-sub">Matn va savollar</span>
     </button>
     <button class="action-card tutor-card" onclick="show('s-ai')">
       <span class="ac-ico">🧠</span>
@@ -403,6 +408,90 @@
     </div>
   </div>
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
+</div>
+
+<!-- O'QISH -->
+<div id="s-read" class="screen">
+  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
+
+  <!-- выбор -->
+  <div id="read-setup">
+    <div class="tutor-head">
+      <div class="tutor-ava">📖</div>
+      <div class="tutor-head-txt">
+        <div class="tutor-name">O'qish</div>
+        <div class="tutor-sub" id="read-level-label">Daraja: A1</div>
+      </div>
+    </div>
+
+    <div class="sec-lbl">Janr</div>
+    <div class="chat-chips" id="read-genres"></div>
+
+    <div class="sec-lbl">Mavzu</div>
+    <div class="chat-chips" id="read-topics"></div>
+
+    <div class="ai-topic-wrap">
+      <input class="ai-topic-input" id="read-topic" type="text" autocomplete="off"
+             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80">
+    </div>
+
+    <button class="big-btn primary" onclick="readGenerate()">📖 Matn tayyorlash</button>
+    <div class="ai-note">Matn sizning darajangizga moslab yoziladi. So'ngida tushunish savollari bo'ladi.</div>
+  </div>
+
+  <!-- загрузка -->
+  <div id="read-loading" style="display:none">
+    <div class="ai-loading-box">
+      <span class="chat-typing"><i></i><i></i><i></i></span>
+      <div class="ai-loading-txt">Matn yozilmoqda...</div>
+    </div>
+  </div>
+
+  <!-- ошибка -->
+  <div id="read-error" style="display:none">
+    <div class="chat-msg err" id="read-error-txt"></div>
+    <button class="big-btn secondary" onclick="readBack()">← Qaytish</button>
+  </div>
+
+  <!-- текст -->
+  <div id="read-text" style="display:none">
+    <div class="read-card">
+      <div class="read-title" id="rd-title">—</div>
+      <div class="read-meta">
+        <span id="rd-meta">—</span>
+        <button class="read-speak" id="rd-speak" onclick="readSpeak()">🔊 Tinglash</button>
+      </div>
+      <div class="read-body" id="rd-body"></div>
+    </div>
+
+    <div class="sec-lbl">Yangi so'zlar</div>
+    <div class="read-gloss" id="rd-gloss"></div>
+    <button class="big-btn secondary" onclick="readAddWords()" id="rd-add">➕ So'zlarni lug'atga qo'shish</button>
+    <button class="big-btn primary" onclick="readStartQuiz()">✓ Savollarga o'tish</button>
+  </div>
+
+  <!-- вопросы -->
+  <div id="read-quiz" style="display:none">
+    <div class="ai-quiz-top">
+      <div class="ai-q-counter" id="rd-counter">1 / 4</div>
+      <div class="ai-q-topic">Matn bo'yicha savol</div>
+    </div>
+    <div class="ai-q-card" id="rd-q">—</div>
+    <div class="mc-grid" id="rd-options"></div>
+    <div class="ai-explain" id="rd-explain" style="display:none"></div>
+    <button class="big-btn primary" id="rd-next" onclick="readNext()" style="display:none">Keyingi →</button>
+  </div>
+
+  <!-- итог -->
+  <div id="read-done" style="display:none">
+    <div class="result-card">
+      <div class="rc-emoji" id="rd-emoji">🎯</div>
+      <div class="rc-title" id="rd-title2">Tugadi!</div>
+      <div class="rc-sub" id="rd-sub"></div>
+    </div>
+    <button class="big-btn primary" onclick="readGenerate()">📖 Yangi matn</button>
+    <button class="big-btn secondary" onclick="readBack()">← Boshqa mavzu</button>
+  </div>
 </div>
 
 <!-- PROFIL -->

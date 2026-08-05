@@ -928,3 +928,25 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
 .pron-result.ok { background:#2f3a31; color:#cfe4d4; }
 .pron-result.near { background:#3a3730; color:#e0d9c2; }
 .pron-result.bad { background:#3a2e2b; color:#e5aca2; }
+
+/* Рейтинг задания дня */
+.lb-head { display:flex; align-items:baseline; justify-content:space-between; gap:10px; padding:2px; }
+.lb-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; }
+.lb-sub { font-size:11px; color:var(--muted); }
+.leaderboard { display:flex; flex-direction:column; gap:6px; }
+.lb-row {
+  display:flex; align-items:center; gap:10px;
+  background:var(--s1); border:1px solid #ffffff0d;
+  border-radius:14px; padding:10px 12px;
+}
+.lb-row.me { border-color:var(--paper); }
+.lb-pos {
+  width:26px; height:26px; flex-shrink:0; border-radius:8px;
+  background:var(--s3); color:var(--txt);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
+}
+.lb-row.top .lb-pos { background:var(--paper); color:var(--on-accent); }
+.lb-name { flex:1; min-width:0; font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.lb-score { font-family:'Syne',sans-serif; font-size:14px; font-weight:800; }
+.lb-empty { font-size:12px; color:var(--muted); text-align:center; padding:14px; line-height:1.5; }

@@ -87,6 +87,7 @@ function getStats() {
 }
 function todayStr() { return new Date().toISOString().slice(0,10); }
 function recordDayActivity() {
+  if (typeof syncSoon === 'function') syncSoon();
   const stats = getStats();
   const today = todayStr();
   if (stats.todayDate !== today) { stats.todayDate = today; stats.todayLearned = 0; }
@@ -979,6 +980,7 @@ function onAuthChange(user) {
   if (user) {
     renderUser(user);
     startApp();
+    syncPull();
   } else {
     appStarted = false;
     authApplyMode();
@@ -1783,6 +1785,8 @@ function dailyAnswer(picked, btn) {
 function dailyFinish() {
   recordDayActivity();
   dailySave(dailyCorrect);
+  lbSubmit(dailyCorrect).then(lbRender);
+  syncSoon();
   const data = dailyLoad();
   const pct = Math.round((dailyCorrect / dailyWords.length) * 100);
 
@@ -1979,4 +1983,140 @@ function aiWeakSpots() {
   document.getElementById('ai-topic').value = "mening qiyin so'zlarim: " + list;
   aiTopic = "qiyin so'zlar: " + list;
   aiGenerate('quiz');
+}
+
+// ────────────────────────────────────────────────────────────────────
+// REYTING — таблица лидеров задания дня.
+// Набор слов уже одинаков у всех (выбирается по дате), поэтому сравнение
+// честное. Пишем только свою строку: путь daily/{дата}/scores/{uid},
+// остальное запрещают правила Firestore.
+// ────────────────────────────────────────────────────────────────────
+const LB_LIMIT = 20;
+
+function lbReady() {
+  return typeof firebase !== 'undefined' &&
+    firebase.apps && firebase.apps.length > 0 &&
+    typeof firebase.firestore === 'function' &&
+    LexiQAuth.current() && !LexiQAuth.current().guest;
+}
+
+async function lbSubmit(score) {
+  if (!lbReady()) return;
+  const user = LexiQAuth.current();
+  try {
+    await firebase.firestore()
+      .collection('daily').doc(todayStr())
+      .collection('scores').doc(user.uid)
+      .set({
+        name: (user.name || 'Talaba').slice(0, 40),
+        score: score,
+        at: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+  } catch (e) {
+    console.warn('reyting yozilmadi', e);
+  }
+}
+
+async function lbRender() {
+  const box = document.getElementById('leaderboard');
+  const sub = document.getElementById('lb-sub');
+  if (!box) return;
+  box.innerHTML = '';
+
+  if (!lbReady()) {
+    sub.textContent = '';
+    box.innerHTML = '<div class="lb-empty">Reytingda qatnashish uchun ro\'yxatdan o\'ting — mehmon rejimida natijalar faqat shu qurilmada qoladi.</div>';
+    return;
+  }
+
+  sub.textContent = 'yuklanmoqda...';
+  try {
+    const snap = await firebase.firestore()
+      .collection('daily').doc(todayStr())
+      .collection('scores')
+      .orderBy('score', 'desc')
+      .limit(LB_LIMIT)
+      .get();
+
+    const me = LexiQAuth.current().uid;
+    if (snap.empty) {
+      sub.textContent = '';
+      box.innerHTML = '<div class="lb-empty">Bugun hali hech kim topshiriqni bajarmagan. Siz birinchisiz!</div>';
+      return;
+    }
+
+    sub.textContent = snap.size + ' ta ishtirokchi';
+    let pos = 0;
+    snap.forEach(doc => {
+      pos++;
+      const d = doc.data();
+      const row = document.createElement('div');
+      row.className = 'lb-row' + (pos <= 3 ? ' top' : '') + (doc.id === me ? ' me' : '');
+      row.innerHTML =
+        '<span class="lb-pos">' + pos + '</span>' +
+        '<span class="lb-name"></span>' +
+        '<span class="lb-score">' + d.score + '</span>';
+      // Имя приходит от другого пользователя — вставляем только как текст.
+      row.querySelector('.lb-name').textContent = d.name || 'Talaba';
+      box.appendChild(row);
+    });
+  } catch (e) {
+    sub.textContent = '';
+    box.innerHTML = '<div class="lb-empty">Reytingni yuklab bo\'lmadi. Internetni tekshiring.</div>';
+    console.warn('reyting o\'qilmadi', e);
+  }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// Синхронизация прогресса с аккаунтом: статистика и коробки Лейтнера
+// уезжают в users/{uid} и возвращаются на другом устройстве.
+// ────────────────────────────────────────────────────────────────────
+let syncTimer = null;
+
+function syncReady() {
+  return lbReady();
+}
+
+async function syncPush() {
+  if (!syncReady()) return;
+  const user = LexiQAuth.current();
+  try {
+    await firebase.firestore().collection('users').doc(user.uid).set({
+      stats: getStats(),
+      srs: srsLoad(),
+      streakBest: parseInt(localStorage.getItem(STREAK_BEST_KEY) || '0', 10) || 0,
+      at: firebase.firestore.FieldValue.serverTimestamp(),
+    }, { merge: true });
+  } catch (e) {
+    console.warn('progress saqlanmadi', e);
+  }
+}
+
+// Записей много (каждый ответ), поэтому копим и отправляем пачкой.
+function syncSoon() {
+  if (!syncReady()) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(syncPush, 4000);
+}
+
+async function syncPull() {
+  if (!syncReady()) return;
+  const user = LexiQAuth.current();
+  try {
+    const doc = await firebase.firestore().collection('users').doc(user.uid).get();
+    if (!doc.exists) return;
+    const data = doc.data();
+    // Берём облачное только если там больше прогресса — иначе свежая
+    // локальная игра затёрлась бы старой копией из аккаунта.
+    const localKnown = Object.keys(srsLoad()).length;
+    const cloudKnown = data.srs ? Object.keys(data.srs).length : 0;
+    if (cloudKnown > localKnown) {
+      srsSave(data.srs);
+      if (data.stats) statsSave(data.stats);
+      if (data.streakBest) localStorage.setItem(STREAK_BEST_KEY, String(data.streakBest));
+      updateHomeStats();
+    }
+  } catch (e) {
+    console.warn('progress yuklanmadi', e);
+  }
 }

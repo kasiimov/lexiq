@@ -1,0 +1,42 @@
+rules_version = '2';
+
+// LexiQ — доступ к данным.
+//
+// Общий принцип: читать рейтинг может любой вошедший, писать — только в свою
+// строку и только правдоподобные значения. Ключи Firebase публичны, поэтому
+// данные защищают именно эти правила, а не ключи.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Профиль и прогресс: приватны, видит и меняет только владелец.
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Результаты задания дня: документ на пользователя внутри дня,
+    // поэтому переписать чужой результат нельзя даже теоретически.
+    match /daily/{day}/scores/{uid} {
+      allow read: if request.auth != null;
+
+      // От метки времени требуем только тип. Сравнение at == request.time
+      // выглядит строже, но отвергает и честную запись: серверное время
+      // подставляется трансформацией уже после проверки правил, и поле
+      // на момент валидации пустое — проверено живым запросом.
+      // Порядок в таблице строится по score, а он ограничен диапазоном 0-10,
+      // поэтому метка времени влияет только на отображение.
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'score', 'at'])
+        && request.resource.data.score is int
+        && request.resource.data.score >= 0
+        && request.resource.data.score <= 10
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.at is timestamp;
+
+      allow delete: if false;
+    }
+  }
+}

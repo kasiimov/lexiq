@@ -17,13 +17,30 @@ export interface Provider {
 // (Llama ломает падежи и сбивается на турецкий). Groq остаётся резервом —
 // он быстрее, и на нём три ключа для обхода rate-limit.
 //
-// reasoning_effort: "none" обязателен. Gemini 2.5 Flash по умолчанию «думает»,
+// Порядок моделей Gemini — не про качество, а про квоту. На бесплатном тарифе
+// лимит считается ОТДЕЛЬНО ПО КАЖДОЙ МОДЕЛИ (quotaId
+// GenerateRequestsPerDayPerProjectPerModel-FreeTier), и у gemini-2.5-flash это
+// всего 20 запросов в сутки — как основная модель он умирает на третьем уроке.
+// Поэтому первым идёт flash-lite с заметно большей суточной квотой, а flash
+// остаётся следующей ступенью: свои 20 запросов он отдаст, когда lite споткнётся.
+// Один и тот же ключ обслуживает обе — отдельный ключ для этого не нужен.
+//
+// reasoning_effort: "none" обязателен. Gemini 2.5 по умолчанию «думает»,
 // и thinking-токены расходуют тот же max_tokens — при 700 ответ обрывался на
 // первом предложении с finish_reason: "length".
+const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+
 export const PROVIDERS: Provider[] = [
   {
-    name: "gemini",
-    url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+    name: "gemini-lite",
+    url: GEMINI_URL,
+    keyEnv: "GEMINI_API_KEY",
+    model: "gemini-2.5-flash-lite",
+    extra: { reasoning_effort: "none" },
+  },
+  {
+    name: "gemini-flash",
+    url: GEMINI_URL,
     keyEnv: "GEMINI_API_KEY",
     model: "gemini-2.5-flash",
     extra: { reasoning_effort: "none" },
@@ -43,6 +60,21 @@ export function jsonError(status: number, error: string, hint?: string): Respons
     status,
     headers: { "content-type": "application/json; charset=utf-8" },
   });
+}
+
+// Когда цепочка кончилась, «AI hozir javob bermayapti; gemini: 429» ученику
+// ничего не говорит. Если все провайдеры уперлись в лимит — так и пишем,
+// и подсказываем, что лечится это запасным ключом.
+export function failureResponse(failures: string[]): Response {
+  const allRateLimited = failures.length > 0 && failures.every((f) => f.includes("429"));
+  if (allRateLimited) {
+    return jsonError(
+      429,
+      "AI limiti tugadi. Biroz kutib, qayta urinib ko'ring.",
+      "Zaxira kalit qo'shilsa, limit tugaganda so'rov avtomatik boshqa provayderga o'tadi: " + failures.join("; "),
+    );
+  }
+  return jsonError(502, "AI hozir javob bermayapti", failures.join("; "));
 }
 
 export function configuredProviders(): Provider[] {
@@ -74,6 +106,13 @@ export interface CallResult {
   fatal?: Response;      // ошибка, которую нет смысла ретраить
 }
 
+// 503 у Gemini — это «модель сейчас перегружена», состояние секундное. Уходить
+// с неё сразу по цепочке расточительно: одна короткая пауза чаще всего решает.
+// 429 (кончилась квота) так не лечится — по нему сразу идём дальше.
+const RETRY_DELAY_MS = 1200;
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 // Идёт по провайдерам сверху вниз: 429 и 5xx — пробуем следующий ключ,
 // остальные ошибки возвращаем сразу, повтор их не исправит.
 export async function callLLM(opts: CallOptions): Promise<CallResult> {
@@ -91,43 +130,55 @@ export async function callLLM(opts: CallOptions): Promise<CallResult> {
     };
     if (opts.json) body.response_format = { type: "json_object" };
 
-    try {
-      const upstream = await fetch(provider.url, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${Deno.env.get(provider.keyEnv)}`,
-        },
-        body: JSON.stringify(body),
-      });
+    let overloadRetried = false;
 
-      if (upstream.status === 429 || upstream.status >= 500) {
-        failures.push(`${provider.name}: ${upstream.status}`);
-        continue;
-      }
-      if (!upstream.ok) {
-        const detail = (await upstream.text()).slice(0, 300);
-        failures.push(`${provider.name}: ${upstream.status}`);
-        return { failures, fatal: jsonError(upstream.status, "AI xatosi", detail) };
-      }
+    // Внутренний цикл — только ради одного повтора по 503. Любой другой исход
+    // либо возвращает результат, либо ломает цикл и передаёт ход следующему провайдеру.
+    while (true) {
+      try {
+        const upstream = await fetch(provider.url, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${Deno.env.get(provider.keyEnv)}`,
+          },
+          body: JSON.stringify(body),
+        });
 
-      if (opts.stream) {
-        if (!upstream.body) {
-          failures.push(`${provider.name}: bo'sh oqim`);
+        if (upstream.status === 503 && !overloadRetried) {
+          overloadRetried = true;
+          await sleep(RETRY_DELAY_MS);
           continue;
         }
-        return { response: upstream, provider: provider.name, failures };
-      }
+        if (upstream.status === 429 || upstream.status >= 500) {
+          failures.push(`${provider.name}: ${upstream.status}`);
+          break;
+        }
+        if (!upstream.ok) {
+          const detail = (await upstream.text()).slice(0, 300);
+          failures.push(`${provider.name}: ${upstream.status}`);
+          return { failures, fatal: jsonError(upstream.status, "AI xatosi", detail) };
+        }
 
-      const data = await upstream.json();
-      const text = data?.choices?.[0]?.message?.content ?? "";
-      if (!String(text).trim()) {
-        failures.push(`${provider.name}: bo'sh javob`);
-        continue;
+        if (opts.stream) {
+          if (!upstream.body) {
+            failures.push(`${provider.name}: bo'sh oqim`);
+            break;
+          }
+          return { response: upstream, provider: provider.name, failures };
+        }
+
+        const data = await upstream.json();
+        const text = data?.choices?.[0]?.message?.content ?? "";
+        if (!String(text).trim()) {
+          failures.push(`${provider.name}: bo'sh javob`);
+          break;
+        }
+        return { text: String(text), provider: provider.name, failures };
+      } catch (e) {
+        failures.push(`${provider.name}: ${(e as Error).message}`);
+        break;
       }
-      return { text: String(text), provider: provider.name, failures };
-    } catch (e) {
-      failures.push(`${provider.name}: ${(e as Error).message}`);
     }
   }
 

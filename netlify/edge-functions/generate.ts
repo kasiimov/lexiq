@@ -6,6 +6,7 @@
 import {
   callLLM,
   configuredProviders,
+  failureResponse,
   jsonError,
   NO_KEY_HINT,
   normalizeLevel,
@@ -161,7 +162,7 @@ export default async function handler(request: Request): Promise<Response> {
   });
 
   if (result.fatal) return result.fatal;
-  if (!result.text) return jsonError(502, "AI hozir javob bermayapti", result.failures.join("; "));
+  if (!result.text) return failureResponse(result.failures);
 
   const parsed = parseJsonObject(result.text);
   if (!parsed) return jsonError(502, "AI javobini o'qib bo'lmadi", result.text.slice(0, 200));

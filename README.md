@@ -142,13 +142,20 @@ variables. Configure at least one:
 
 | Variable | Purpose |
 |----------|---------|
-| `GEMINI_API_KEY` | primary key (`gemini-2.5-flash`) — holds Uzbek grammar noticeably better than Llama |
+| `GEMINI_API_KEY` | primary key — holds Uzbek grammar noticeably better than Llama |
 | `GROQ_API_KEY` | fallback (Groq, `llama-3.3-70b-versatile`), used on 429/5xx |
 | `GROQ_API_KEY_2` | optional second fallback |
 | `GROQ_API_KEY_3` | optional third fallback |
 
 Providers are tried in that order, so a rate-limited key rolls over to the next one
 without the learner noticing.
+
+One Gemini key covers two chain entries, because the free tier counts its quota
+**per model** (`GenerateRequestsPerDayPerProjectPerModel-FreeTier`): `gemini-2.5-flash`
+allows only 20 requests a day, so `gemini-2.5-flash-lite` goes first and flash serves as
+the next step. A 503 ("model is experiencing high demand") is retried once on the same
+model after a short pause — it is a momentary spike, not an exhausted quota — while a 429
+moves straight on to the next provider.
 
 Set them in Netlify → Site configuration → Environment variables, or locally in a
 `.env` file for `netlify dev`. Without a key the endpoint answers `503` with a hint

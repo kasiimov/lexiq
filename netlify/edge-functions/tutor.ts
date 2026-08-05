@@ -4,6 +4,7 @@
 import {
   callLLM,
   configuredProviders,
+  failureResponse,
   jsonError,
   NO_KEY_HINT,
   normalizeLevel,
@@ -74,9 +75,7 @@ export default async function handler(request: Request): Promise<Response> {
   });
 
   if (result.fatal) return result.fatal;
-  if (!result.response?.body) {
-    return jsonError(502, "AI hozir javob bermayapti", result.failures.join("; "));
-  }
+  if (!result.response?.body) return failureResponse(result.failures);
 
   return new Response(toPlainTextStream(result.response.body), {
     headers: {

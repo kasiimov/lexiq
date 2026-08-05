@@ -2372,6 +2372,7 @@ function readRenderText(data) {
 
   document.getElementById('rd-add').disabled = false;
   document.getElementById('rd-add').textContent = "➕ So'zlarni lug'atga qo'shish";
+  readReveal();
   readShowView('read-text');
   window.scrollTo(0, 0);
 }
@@ -2599,4 +2600,28 @@ function writeRender(check) {
 
   writeShowView('write-result');
   window.scrollTo(0, 0);
+}
+
+// ────────────────────────────────────────────────────────────────────
+// TINGLASH — то же чтение, но текст закрыт: остаётся только звук.
+// Отдельного запроса к ИИ не нужно, материал уже сгенерирован.
+// ────────────────────────────────────────────────────────────────────
+let readHiddenMode = false;
+
+function readListenMode() {
+  readHiddenMode = !readHiddenMode;
+  document.getElementById('rd-body').style.display = readHiddenMode ? 'none' : '';
+  document.getElementById('rd-hidden').style.display = readHiddenMode ? '' : 'none';
+  document.getElementById('rd-listen').classList.toggle('on', readHiddenMode);
+  // Словарик тоже прячем: в нём половина ответов на вопросы.
+  document.getElementById('rd-gloss').style.display = readHiddenMode ? 'none' : '';
+  if (readHiddenMode && !speechSynthesis.speaking) readSpeak();
+}
+
+function readReveal() {
+  readHiddenMode = false;
+  document.getElementById('rd-body').style.display = '';
+  document.getElementById('rd-hidden').style.display = 'none';
+  document.getElementById('rd-gloss').style.display = '';
+  document.getElementById('rd-listen').classList.remove('on');
 }

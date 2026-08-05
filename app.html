@@ -524,9 +524,16 @@
       <div class="read-title" id="rd-title">—</div>
       <div class="read-meta">
         <span id="rd-meta">—</span>
-        <button class="read-speak" id="rd-speak" onclick="readSpeak()">🔊 Tinglash</button>
+        <span class="read-actions">
+          <button class="read-speak" id="rd-speak" onclick="readSpeak()">🔊 Tinglash</button>
+          <button class="read-speak" id="rd-listen" onclick="readListenMode()">🎧 Faqat tinglash</button>
+        </span>
       </div>
       <div class="read-body" id="rd-body"></div>
+      <div class="read-hidden" id="rd-hidden" style="display:none">
+        🎧 Matn yopiq — avval tinglang, keyin savollarga javob bering.
+        <button class="read-reveal" onclick="readReveal()">Matnni ochish</button>
+      </div>
     </div>
 
     <div class="sec-lbl">Yangi so'zlar</div>

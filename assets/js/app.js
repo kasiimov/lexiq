@@ -157,22 +157,14 @@ let trainPool=[]; let trainIdx=0; let trainFlipped=false;
 
 // SCREEN MANAGEMENT
 function show(id) {
-  // Показываем оверлей загрузки
-  const overlay = document.getElementById('loadingOverlay');
-  overlay.classList.add('active');
-
-  // Через 2 секунды переключаем экран и убираем загрузку
-  setTimeout(function() {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if (id === 's-home') updateHomeStats();
-    if (id === 's-topics') renderTopics();
-    if (id === 's-stats') renderStats();
-    if (id === 's-tutor') tutorInit();
-    if (id === 's-ai') aiInit();
-    window.scrollTo(0,0);
-    overlay.classList.remove('active');
-  }, 1000); // 2000 мс = 2 секунды
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 's-home') updateHomeStats();
+  if (id === 's-topics') renderTopics();
+  if (id === 's-stats') renderStats();
+  if (id === 's-tutor') tutorInit();
+  if (id === 's-ai') aiInit();
+  window.scrollTo(0,0);
 }
 
 // ────────────────────────────────────────────────────────────────────

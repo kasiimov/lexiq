@@ -1,12 +1,13 @@
 // LexiQ — офлайн-режим.
 //
-// Стратегии разные, потому что данные разные:
-//   • страницы — сначала сеть, при обрыве отдаём копию из кэша (иначе после
-//     деплоя человек неделю сидел бы на старой версии);
-//   • стили, скрипты, словарь — сначала кэш, обновляем в фоне (быстрый старт);
-//   • /api/* — только сеть. Ответ ИИ кэшировать бессмысленно и вредно.
+// Всё своё берём сначала из сети, в кэш складываем копию и достаём её только
+// когда сети нет. Раньше стили и скрипты шли «сначала кэш», и после каждого
+// деплоя пользователь оставался на старом оформлении: HTML приезжал новый,
+// CSS — прежний, и интерфейс разваливался. Быстрый старт того не стоит.
+//
+// /api/* не кэшируется никогда: ответ ИИ одноразовый.
 
-const VERSION = 'lexiq-v1';
+const VERSION = 'lexiq-v2';
 const SHELL = [
   '/',
   '/app.html',
@@ -47,31 +48,17 @@ self.addEventListener('fetch', (event) => {
   const isPage = request.mode === 'navigate' ||
     (request.headers.get('accept') || '').includes('text/html');
 
-  if (isPage) {
-    event.respondWith(
-      fetch(request)
-        .then((res) => {
+  event.respondWith(
+    fetch(request)
+      .then((res) => {
+        if (res && res.status === 200) {
           const copy = res.clone();
           caches.open(VERSION).then((c) => c.put(request, copy));
-          return res;
-        })
-        .catch(() => caches.match(request).then((hit) => hit || caches.match('/app.html')))
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(request).then((hit) => {
-      const network = fetch(request)
-        .then((res) => {
-          if (res && res.status === 200) {
-            const copy = res.clone();
-            caches.open(VERSION).then((c) => c.put(request, copy));
-          }
-          return res;
-        })
-        .catch(() => hit);
-      return hit || network;
-    })
+        }
+        return res;
+      })
+      // Сети нет — отдаём последнюю сохранённую копию,
+      // для навигации в крайнем случае саму страницу приложения.
+      .catch(() => caches.match(request).then((hit) => hit || (isPage ? caches.match('/app.html') : undefined)))
   );
 });

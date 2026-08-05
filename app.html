@@ -190,6 +190,11 @@
       <span class="ac-title">Xarita</span>
       <span class="ac-sub">Yo'lingiz</span>
     </button>
+    <button class="action-card tutor-card" onclick="show('s-write')">
+      <span class="ac-ico">✍️</span>
+      <span class="ac-title">Yozish</span>
+      <span class="ac-sub">Matn va tekshiruv</span>
+    </button>
     <button class="action-card tutor-card" onclick="show('s-read')">
       <span class="ac-ico">📖</span>
       <span class="ac-title">O'qish</span>
@@ -400,14 +405,74 @@
     <div class="topic-stats-list" id="topic-stats-list"></div>
   </div>
   <div class="stats-card">
-    <h3>🎓 IELTS bashorat</h3>
-    <div style="text-align:center;padding:10px 0;">
-      <div style="font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:#ffe74d;" id="ielts-band">4.0</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px;">taxminiy band score</div>
-      <div style="font-size:11px;color:#ffe74d;margin-top:8px;" id="ielts-hint">Ko'proq so'z o'rganing</div>
+    <h3>🎯 Keyingi daraja</h3>
+    <div class="next-goal">
+      <div class="ng-level" id="next-level">A2</div>
+      <div class="ng-sub" id="next-need">A2 gacha: 500 so'z</div>
+      <div class="ng-bar"><i id="next-bar" style="width:0%"></i></div>
+      <div class="ng-hint" id="next-hint">Har kuni 10 daqiqa — eng ishonchli yo'l</div>
     </div>
   </div>
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
+</div>
+
+<!-- YOZISH -->
+<div id="s-write" class="screen">
+  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
+
+  <div id="write-setup">
+    <div class="tutor-head">
+      <div class="tutor-ava">✍️</div>
+      <div class="tutor-head-txt">
+        <div class="tutor-name">Yozish</div>
+        <div class="tutor-sub" id="write-level-label">Daraja: A1</div>
+      </div>
+    </div>
+
+    <div class="sec-lbl">Topshiriq</div>
+    <div class="chat-chips" id="write-tasks"></div>
+
+    <div class="write-task" id="write-task-text">—</div>
+
+    <textarea class="write-area" id="write-area" rows="8"
+              placeholder="Ingliz tilida yozing..." oninput="writeCount()"></textarea>
+    <div class="write-meter"><span id="write-words">0 so'z</span><span id="write-hint">kamida 10 ta so'z</span></div>
+
+    <button class="big-btn primary" onclick="writeCheck()" id="write-btn">✓ Tekshirish</button>
+    <div class="ai-note">Baho imtihon bali emas — bu 1 dan 5 gacha oddiy shkala, nimani yaxshilash kerakligini ko'rsatadi.</div>
+  </div>
+
+  <div id="write-loading" style="display:none">
+    <div class="ai-loading-box">
+      <span class="chat-typing"><i></i><i></i><i></i></span>
+      <div class="ai-loading-txt">Matningiz tekshirilmoqda...</div>
+    </div>
+  </div>
+
+  <div id="write-error" style="display:none">
+    <div class="chat-msg err" id="write-error-txt"></div>
+    <button class="big-btn secondary" onclick="writeBack()">← Qaytish</button>
+  </div>
+
+  <div id="write-result" style="display:none">
+    <div class="score-grid">
+      <div class="score-box"><div class="sc-v" id="sc-task">3</div><div class="sc-l">Topshiriq</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-grammar">3</div><div class="sc-l">Grammatika</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-vocab">3</div><div class="sc-l">So'z boyligi</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-coh">3</div><div class="sc-l">Bog'lanish</div></div>
+    </div>
+
+    <div class="write-comment" id="write-comment"></div>
+    <div class="write-level" id="write-level"></div>
+
+    <div class="sec-lbl">Tuzatilgan matn</div>
+    <div class="write-fixed" id="write-fixed"></div>
+
+    <div class="sec-lbl" id="notes-lbl">Xatolar ustida</div>
+    <div id="write-notes"></div>
+
+    <button class="big-btn primary" onclick="writeBack()">✍️ Yana yozish</button>
+  </div>
 </div>
 
 <!-- O'QISH -->

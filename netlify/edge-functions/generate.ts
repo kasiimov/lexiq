@@ -21,6 +21,8 @@ const GENERATION_ATTEMPTS = 2;
 const MAX_QUESTIONS = 8;
 const WORDS_TOKENS = 2600;
 const READING_TOKENS = 2600;
+const WRITING_TOKENS = 1800;
+const MAX_ESSAY_CHARS = 3000;
 const MIN_WORDS = 6;
 const MAX_WORDS = 30;
 
@@ -85,6 +87,30 @@ const GENRES: Record<string, string> = {
   dialog: "a dialogue between two people in a real situation",
   ilmiy: "a short popular-science text explaining one simple fact",
 };
+
+// Проверка письма. Оценка — не экзаменационный балл: платформа доводит до
+// уровня, а не выставляет отметку. Поэтому шкала 1-5 по понятным критериям
+// и словами, а не «band».
+function writingPrompt(level: string, task: string): string {
+  return [
+    `You are LexiQ, an English writing tutor for an Uzbek learner at CEFR level ${level}.`,
+    `The learner was asked to write: ${task}`,
+    "",
+    "Check their text and answer with JSON only:",
+    "- 'corrected': their text rewritten correctly, keeping their own ideas and length.",
+    "  Do not make it fancier than their level — fix mistakes, do not rewrite the style.",
+    "- 'notes': up to 6 items. Each: 'wrong' (their exact phrase), 'right' (fixed phrase),",
+    "  'why' (one short line in Uzbek explaining the rule).",
+    "- 'scores': integers 1-5 for 'task' (did they answer the task), 'grammar',",
+    "  'vocabulary', 'coherence'.",
+    "- 'comment': two sentences in Uzbek — what is already good, what to work on next.",
+    "- 'level_note': one short line in Uzbek saying which CEFR level this writing looks like.",
+    "- NEVER put a double quote inside a string value; use single quotes instead.",
+    "",
+    'Shape: {"corrected":"...","notes":[{"wrong":"...","right":"...","why":"..."}],' +
+      '"scores":{"task":3,"grammar":3,"vocabulary":3,"coherence":3},"comment":"...","level_note":"..."}',
+  ].join("\n");
+}
 
 function readingPrompt(level: string, genre: string, topic: string): string {
   const kind = GENRES[genre] || GENRES.hikoya;
@@ -184,6 +210,39 @@ interface Question {
   explanation: string;
 }
 
+function clampScore(v: unknown): number {
+  const n = typeof v === "number" ? Math.round(v) : Number.NaN;
+  if (!Number.isFinite(n)) return 3;
+  return Math.min(5, Math.max(1, n));
+}
+
+function normalizeWriting(data: Record<string, unknown>) {
+  const notesRaw = Array.isArray(data.notes) ? data.notes : [];
+  const notes = notesRaw
+    .filter((n) => !!n && typeof n === "object")
+    .map((n) => ({
+      wrong: str((n as Record<string, unknown>).wrong, 200),
+      right: str((n as Record<string, unknown>).right, 200),
+      why: str((n as Record<string, unknown>).why, 200),
+    }))
+    .filter((n) => n.wrong && n.right)
+    .slice(0, 6);
+
+  const sc = (data.scores && typeof data.scores === "object" ? data.scores : {}) as Record<string, unknown>;
+  return {
+    corrected: str(data.corrected, MAX_ESSAY_CHARS),
+    notes,
+    scores: {
+      task: clampScore(sc.task),
+      grammar: clampScore(sc.grammar),
+      vocabulary: clampScore(sc.vocabulary),
+      coherence: clampScore(sc.coherence),
+    },
+    comment: str(data.comment, 400),
+    level_note: str(data.level_note, 160),
+  };
+}
+
 function normalizeReading(data: Record<string, unknown>) {
   const glossaryRaw = Array.isArray(data.glossary) ? data.glossary : [];
   const glossary = glossaryRaw
@@ -263,14 +322,14 @@ export default async function handler(request: Request): Promise<Response> {
   }
   if (request.method !== "POST") return jsonError(405, "Faqat POST");
 
-  let body: { mode?: unknown; level?: unknown; topic?: unknown; count?: unknown; genre?: unknown };
+  let body: { mode?: unknown; level?: unknown; topic?: unknown; count?: unknown; genre?: unknown; text?: unknown; task?: unknown };
   try {
     body = await request.json();
   } catch {
     return jsonError(400, "Noto'g'ri JSON");
   }
 
-  const KNOWN = ["lesson", "words", "reading"];
+  const KNOWN = ["lesson", "words", "reading", "writing"];
   const mode = typeof body.mode === "string" && KNOWN.includes(body.mode) ? body.mode : "quiz";
   const level = normalizeLevel(body.level);
   const topic = str(body.topic, MAX_TOPIC_CHARS) || "kundalik ingliz tili";
@@ -282,14 +341,23 @@ export default async function handler(request: Request): Promise<Response> {
   if (configuredProviders().length === 0) return jsonError(503, "AI kaliti sozlanmagan", NO_KEY_HINT);
 
   const genre = typeof body.genre === "string" ? body.genre : "hikoya";
+  const essay = str(body.text, MAX_ESSAY_CHARS);
+  const task = str(body.task, 200) || "Write about your day";
+  if (mode === "writing" && essay.split(/\s+/).filter(Boolean).length < 10) {
+    return jsonError(400, "Matn juda qisqa", "kamida 10 ta so'z yozing");
+  }
   const prompt = mode === "lesson"
     ? lessonPrompt(level, topic)
     : mode === "words"
       ? wordsPrompt(level, topic, count)
       : mode === "reading"
         ? readingPrompt(level, genre, topic)
-        : quizPrompt(level, topic, count);
-  const ask = mode === "lesson"
+        : mode === "writing"
+          ? writingPrompt(level, task)
+          : quizPrompt(level, topic, count);
+  const ask = mode === "writing"
+    ? essay
+    : mode === "lesson"
     ? `Mavzu: ${topic}`
     : mode === "words"
       ? `Mavzu: ${topic}. ${count} ta so'z.`
@@ -309,6 +377,7 @@ export default async function handler(request: Request): Promise<Response> {
       maxTokens: mode === "lesson" ? LESSON_TOKENS
         : mode === "words" ? WORDS_TOKENS
         : mode === "reading" ? READING_TOKENS
+        : mode === "writing" ? WRITING_TOKENS
         : QUIZ_TOKENS,
       temperature: 0.3,
       stream: false,
@@ -322,6 +391,17 @@ export default async function handler(request: Request): Promise<Response> {
     if (!parsed) {
       lastProblem = "javob JSON emas: " + result.text.slice(0, 150);
       continue;
+    }
+
+    if (mode === "writing") {
+      const check = normalizeWriting(parsed);
+      if (!check.corrected) {
+        lastProblem = "tuzatilgan matn bo'sh";
+        continue;
+      }
+      return new Response(JSON.stringify({ mode, level, task, check }), {
+        headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+      });
     }
 
     if (mode === "reading") {

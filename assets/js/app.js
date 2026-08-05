@@ -127,17 +127,10 @@ function getCEFRLevel() {
   for (const lvl of CEFR_LEVELS) if (known >= CEFR_THRESHOLDS[lvl]) level = lvl;
   return level;
 }
-function getIELTSBand() {
-  const known = getKnownWordsCount();
-  if (known < 100) return 4.0;
-  if (known < 500) return 4.5;
-  if (known < 1000) return 5.0;
-  if (known < 1500) return 5.5;
-  if (known < 2000) return 6.0;
-  if (known < 2500) return 6.5;
-  if (known < 3000) return 7.0;
-  return 7.5;
-}
+// Раньше здесь считался «примерный band IELTS» по числу выученных слов.
+// Это обещание, которого платформа не выполняет: балл на экзамене зависит от
+// письма, речи и аудирования, а не от размера словаря. Показываем то, что
+// действительно измеряем, — путь до следующего уровня CEFR.
 
 // STATE
 let direction = 'en-uz';
@@ -168,6 +161,7 @@ function show(id) {
   if (id === 's-map') renderMap();
   if (id === 's-profile') renderProfile();
   if (id === 's-read') readInit();
+  if (id === 's-write') writeInit();
   window.scrollTo(0,0);
 }
 
@@ -922,15 +916,23 @@ function renderStats() {
     listEl.appendChild(row);
   }
 
-  const band = getIELTSBand();
-  document.getElementById('ielts-band').textContent = band.toFixed(1);
-  let hint = '';
-  if (band < 5.0) hint = "Asoslarni o'rganing — 500 so'zga yetib boring";
-  else if (band < 6.0) hint = "Yaxshi boshlanish! 1000 so'zga harakat qiling";
-  else if (band < 7.0) hint = "B2 darajaga yaqinsiz! Davom eting";
-  else if (band < 7.5) hint = "Ajoyib! IELTS-ga tayyor bo'lyapsiz";
-  else hint = "Mukammal!";
-  document.getElementById('ielts-hint').textContent = hint;
+  const goalKnown = getKnownWordsCount();
+  const goalCur = getCEFRLevel();
+  const goalNext = CEFR_LEVELS[Math.min(CEFR_LEVELS.indexOf(goalCur) + 1, CEFR_LEVELS.length - 1)];
+  const goalFrom = CEFR_THRESHOLDS[goalCur];
+  const goalTo = CEFR_THRESHOLDS[goalNext];
+  const goalPct = goalNext === goalCur ? 100
+    : Math.max(0, Math.min(100, Math.round(((goalKnown - goalFrom) / (goalTo - goalFrom)) * 100)));
+
+  document.getElementById('next-level').textContent = goalNext === goalCur ? goalCur : goalNext;
+  document.getElementById('next-need').textContent = goalNext === goalCur
+    ? 'Eng yuqori darajadasiz'
+    : goalNext + ' gacha: ' + Math.max(0, goalTo - goalKnown) + " so'z";
+  document.getElementById('next-bar').style.width = goalPct + '%';
+  document.getElementById('next-hint').textContent =
+    goalPct >= 80 ? "Keyingi daraja juda yaqin — bir necha kun qoldi"
+      : goalPct >= 40 ? "Yarim yo'lni bosib o'tdingiz"
+      : "Har kuni 10 daqiqa — eng ishonchli yo'l";
 }
 
 function logoTap() { /* removed admin — admin is now separate file */ }
@@ -1408,7 +1410,7 @@ const AI_TOPICS = [
   { label: '💼 Ish', topic: 'ish va ofis so\'zlari' },
   { label: '🍽 Ovqat', topic: 'ovqat va restoran so\'zlari' },
   { label: '📱 Texnologiya', topic: 'texnologiya va internet so\'zlari' },
-  { label: '🎓 IELTS', topic: 'IELTS uchun akademik so\'zlar' },
+  { label: '🎓 Akademik', topic: "akademik va rasmiy so'zlar" },
 ];
 
 const AI_VIEWS = ['ai-setup', 'ai-loading', 'ai-error', 'ai-lesson', 'ai-quiz', 'ai-result'];
@@ -2485,4 +2487,116 @@ function readNext() {
     readShowView('read-done');
     window.scrollTo(0, 0);
   }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// YOZISH — письмо с разбором.
+// Оценка 1-5 по четырём понятным критериям, а не экзаменационный балл:
+// платформа доводит до уровня, а не выставляет отметку.
+// ────────────────────────────────────────────────────────────────────
+const WRITE_VIEWS = ['write-setup', 'write-loading', 'write-error', 'write-result'];
+const WRITE_TASKS = [
+  { id: 'kun',     label: '📅 Kunim',       text: "Bugungi kuningiz haqida yozing: nima qildingiz, kim bilan uchrashdingiz." },
+  { id: 'dost',    label: '✉️ Do\'stga xat', text: "Do'stingizga xat yozing: qanday yashayotganingizni va yaqin rejalaringizni ayting." },
+  { id: 'shahar',  label: '🏙 Mening shahrim', text: "O'z shahringizni tasvirlang: nimasi yoqadi, nimasini o'zgartirgan bo'lardingiz." },
+  { id: 'orzu',    label: '🌟 Orzuim',      text: "Kelajakdagi orzuingiz haqida yozing va unga qanday erishmoqchisiz." },
+  { id: 'fikr',    label: '💭 Fikrim',      text: "Telefon bolalarga foydali yoki zararli? O'z fikringizni asoslab yozing." },
+];
+
+let writeTask = WRITE_TASKS[0];
+let writeBusy = false;
+
+function writeShowView(id) {
+  WRITE_VIEWS.forEach(v => {
+    const el = document.getElementById(v);
+    if (el) el.style.display = (v === id) ? '' : 'none';
+  });
+}
+
+function writeBack() {
+  writeShowView('write-setup');
+}
+
+function writeInit() {
+  document.getElementById('write-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  const box = document.getElementById('write-tasks');
+  box.innerHTML = '';
+  WRITE_TASKS.forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip' + (t.id === writeTask.id ? ' on' : '');
+    b.textContent = t.label;
+    b.onclick = () => { writeTask = t; writeInit(); };
+    box.appendChild(b);
+  });
+  document.getElementById('write-task-text').textContent = writeTask.text;
+  writeCount();
+  writeShowView('write-setup');
+}
+
+function writeCount() {
+  const words = document.getElementById('write-area').value.split(/\s+/).filter(Boolean).length;
+  document.getElementById('write-words').textContent = words + " so'z";
+  const hint = document.getElementById('write-hint');
+  hint.textContent = words < 10 ? "kamida 10 ta so'z" : words < 40 ? 'yaxshi, davom eting' : 'yetarli';
+}
+
+async function writeCheck() {
+  if (writeBusy) return;
+  const text = document.getElementById('write-area').value.trim();
+  if (text.split(/\s+/).filter(Boolean).length < 10) {
+    document.getElementById('write-hint').textContent = "kamida 10 ta so'z kerak";
+    return;
+  }
+
+  writeBusy = true;
+  writeShowView('write-loading');
+  try {
+    const res = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ mode: 'writing', level: getCEFRLevel(), task: writeTask.text, text }),
+    });
+    if (!res.ok) {
+      const info = await res.json().catch(() => ({}));
+      writeShowView('write-error');
+      document.getElementById('write-error-txt').innerHTML =
+        tutorEscape(info.error || ('Xatolik ' + res.status)) +
+        (info.hint ? '<span class="cm-hint">' + tutorEscape(info.hint) + '</span>' : '');
+      return;
+    }
+    const data = await res.json();
+    writeRender(data.check);
+    recordDayActivity();
+  } catch (e) {
+    writeShowView('write-error');
+    document.getElementById('write-error-txt').textContent = 'Aloqa xatosi: ' + e.message;
+  } finally {
+    writeBusy = false;
+  }
+}
+
+function writeRender(check) {
+  document.getElementById('sc-task').textContent = check.scores.task;
+  document.getElementById('sc-grammar').textContent = check.scores.grammar;
+  document.getElementById('sc-vocab').textContent = check.scores.vocabulary;
+  document.getElementById('sc-coh').textContent = check.scores.coherence;
+  document.getElementById('write-comment').textContent = check.comment || '';
+  document.getElementById('write-level').textContent = check.level_note || '';
+  document.getElementById('write-fixed').textContent = check.corrected || '';
+
+  const box = document.getElementById('write-notes');
+  box.innerHTML = '';
+  document.getElementById('notes-lbl').style.display = check.notes.length ? '' : 'none';
+  check.notes.forEach(n => {
+    const item = document.createElement('div');
+    item.className = 'note-item';
+    item.innerHTML = '<div class="note-wrong"></div><div class="note-right"></div><div class="note-why"></div>';
+    item.querySelector('.note-wrong').textContent = n.wrong;
+    item.querySelector('.note-right').textContent = '→ ' + n.right;
+    item.querySelector('.note-why').textContent = n.why;
+    box.appendChild(item);
+  });
+
+  writeShowView('write-result');
+  window.scrollTo(0, 0);
 }

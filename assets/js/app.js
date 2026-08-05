@@ -169,6 +169,7 @@ function show(id) {
     if (id === 's-topics') renderTopics();
     if (id === 's-stats') renderStats();
     if (id === 's-tutor') tutorInit();
+    if (id === 's-ai') aiInit();
     window.scrollTo(0,0);
     overlay.classList.remove('active');
   }, 1000); // 2000 мс = 2 секунды
@@ -900,6 +901,7 @@ const TUTOR_CHIPS = [
 let tutorHistory = [];
 let tutorBusy = false;
 let tutorWired = false;
+let tutorPending = null;   // вопрос, заданный с другого экрана
 
 function tutorLoadHistory() {
   try {
@@ -994,6 +996,21 @@ function tutorInit() {
     tutorWired = true;
   }
   tutorRenderLog();
+
+  if (tutorPending) {
+    const text = tutorPending;
+    tutorPending = null;
+    const input = document.getElementById('chat-input');
+    input.value = text;
+    tutorAutoGrow(input);
+    tutorSend();
+  }
+}
+
+// Открывает чат и сразу отправляет вопрос — используется разбором ошибок теста.
+function tutorAsk(text) {
+  tutorPending = text;
+  show('s-tutor');
 }
 
 function tutorReset() {
@@ -1072,4 +1089,300 @@ async function tutorSend() {
   } finally {
     tutorSetBusy(false);
   }
+}
+
+// ────────────────────────────────────────────────────────────────────
+// AI MASHQ — урок и тест, сгенерированные под уровень ученика.
+// Сервер (/api/generate) отдаёт уже нормализованный JSON, поэтому здесь
+// только отрисовка и логика прохождения.
+// ────────────────────────────────────────────────────────────────────
+const AI_ENDPOINT = '/api/generate';
+const AI_QUIZ_SIZE = 5;
+
+const AI_TOPICS = [
+  { label: '🗣 Kundalik suhbat', topic: 'kundalik suhbat iboralari' },
+  { label: '⏰ Present Simple', topic: 'Present Simple grammatikasi' },
+  { label: '🕓 Past Simple', topic: 'Past Simple grammatikasi' },
+  { label: '✈️ Sayohat', topic: 'sayohat va aeroport so\'zlari' },
+  { label: '💼 Ish', topic: 'ish va ofis so\'zlari' },
+  { label: '🍽 Ovqat', topic: 'ovqat va restoran so\'zlari' },
+  { label: '📱 Texnologiya', topic: 'texnologiya va internet so\'zlari' },
+  { label: '🎓 IELTS', topic: 'IELTS uchun akademik so\'zlar' },
+];
+
+const AI_VIEWS = ['ai-setup', 'ai-loading', 'ai-error', 'ai-lesson', 'ai-quiz', 'ai-result'];
+
+let aiTopic = '';
+let aiQuestions = [];
+let aiIdx = 0;
+let aiAnswers = [];
+let aiBusy = false;
+let aiWired = false;
+
+function aiShowView(id) {
+  AI_VIEWS.forEach(v => {
+    const el = document.getElementById(v);
+    if (el) el.style.display = (v === id) ? '' : 'none';
+  });
+}
+
+function aiRenderTopics() {
+  const box = document.getElementById('ai-topics');
+  box.innerHTML = '';
+  AI_TOPICS.forEach(t => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip';
+    b.textContent = t.label;
+    b.onclick = () => {
+      aiTopic = t.topic;
+      document.getElementById('ai-topic').value = t.topic;
+      box.querySelectorAll('.chat-chip').forEach(c => c.classList.remove('on'));
+      b.classList.add('on');
+    };
+    box.appendChild(b);
+  });
+}
+
+function aiInit() {
+  document.getElementById('ai-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  if (!aiWired) {
+    aiRenderTopics();
+    aiWired = true;
+  }
+  aiShowView('ai-setup');
+}
+
+function aiBackToSetup() {
+  aiShowView('ai-setup');
+}
+
+function aiCurrentTopic() {
+  const typed = document.getElementById('ai-topic').value.trim();
+  return typed || aiTopic || 'kundalik ingliz tili';
+}
+
+function aiFail(info, status) {
+  aiShowView('ai-error');
+  const box = document.getElementById('ai-error-txt');
+  const msg = (info && info.error) ? info.error : ('Xatolik: ' + status);
+  box.innerHTML = tutorEscape(msg) +
+    (info && info.hint ? '<span class="cm-hint">' + tutorEscape(info.hint) + '</span>' : '');
+}
+
+async function aiGenerate(mode) {
+  if (aiBusy) return;
+  aiBusy = true;
+
+  const topic = aiCurrentTopic();
+  const level = getCEFRLevel();
+  aiShowView('ai-loading');
+  document.getElementById('ai-loading-txt').textContent =
+    mode === 'lesson' ? 'Dars tayyorlanmoqda...' : 'Test tuzilmoqda...';
+
+  try {
+    const res = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ mode, level, topic, count: AI_QUIZ_SIZE }),
+    });
+
+    if (!res.ok) {
+      const info = await res.json().catch(() => ({}));
+      aiFail(info, res.status);
+      return;
+    }
+
+    const data = await res.json();
+    if (mode === 'lesson') aiRenderLesson(data);
+    else aiStartQuiz(data);
+  } catch (e) {
+    aiFail({ error: 'Aloqa xatosi: ' + e.message }, 0);
+  } finally {
+    aiBusy = false;
+  }
+}
+
+function aiSpeak(text) {
+  if (!('speechSynthesis' in window)) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+function aiRenderLesson(data) {
+  const lesson = data.lesson || {};
+  document.getElementById('lesson-title').textContent = lesson.title || data.topic || 'Dars';
+  document.getElementById('lesson-intro').textContent = lesson.intro || '';
+
+  const box = document.getElementById('lesson-points');
+  box.innerHTML = '';
+  (lesson.points || []).forEach((p, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'lesson-point';
+
+    const rule = document.createElement('div');
+    rule.className = 'lp-rule';
+    rule.innerHTML = '<span class="lp-num">' + (i + 1) + '</span>' + tutorFormat(p.rule || '');
+    wrap.appendChild(rule);
+
+    if (p.example_en) {
+      const ex = document.createElement('div');
+      ex.className = 'lp-ex';
+
+      const en = document.createElement('div');
+      en.className = 'lp-en';
+      en.textContent = p.example_en;
+      const speak = document.createElement('button');
+      speak.className = 'lp-speak';
+      speak.textContent = '🔊';
+      speak.onclick = () => aiSpeak(p.example_en);
+      en.appendChild(speak);
+      ex.appendChild(en);
+
+      if (p.example_uz) {
+        const uz = document.createElement('div');
+        uz.className = 'lp-uz';
+        uz.textContent = p.example_uz;
+        ex.appendChild(uz);
+      }
+      wrap.appendChild(ex);
+    }
+    box.appendChild(wrap);
+  });
+
+  const sum = document.getElementById('lesson-summary');
+  sum.textContent = lesson.summary || '';
+  sum.style.display = lesson.summary ? '' : 'none';
+
+  aiTopic = data.topic || aiTopic;
+  aiShowView('ai-lesson');
+  window.scrollTo(0, 0);
+}
+
+function aiStartQuiz(data) {
+  aiQuestions = data.questions || [];
+  aiIdx = 0;
+  aiAnswers = [];
+  aiTopic = data.topic || aiTopic;
+  document.getElementById('ai-q-topic').textContent = aiTopic;
+  aiShowView('ai-quiz');
+  aiRenderQuestion();
+}
+
+function aiRenderQuestion() {
+  const q = aiQuestions[aiIdx];
+  document.getElementById('ai-q-counter').textContent = (aiIdx + 1) + ' / ' + aiQuestions.length;
+  document.getElementById('ai-q-text').textContent = q.q;
+  document.getElementById('ai-explain').style.display = 'none';
+  document.getElementById('ai-next-btn').style.display = 'none';
+
+  const grid = document.getElementById('ai-options');
+  grid.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.className = 'mc-opt';
+    b.textContent = opt;
+    b.onclick = () => aiAnswer(i);
+    grid.appendChild(b);
+  });
+  window.scrollTo(0, 0);
+}
+
+function aiAnswer(picked) {
+  const q = aiQuestions[aiIdx];
+  if (aiAnswers.length > aiIdx) return;   // на вопрос уже ответили
+
+  aiAnswers.push(picked);
+  const buttons = document.getElementById('ai-options').querySelectorAll('.mc-opt');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.correct) b.classList.add('correct');
+    else if (i === picked) b.classList.add('wrong');
+  });
+
+  const exp = document.getElementById('ai-explain');
+  const ok = picked === q.correct;
+  exp.className = 'ai-explain' + (ok ? '' : ' wrong');
+  exp.innerHTML = (ok ? '✅ ' : '❌ ') + tutorFormat(q.explanation || (ok ? "To'g'ri!" : "To'g'ri javob: " + q.options[q.correct]));
+  exp.style.display = '';
+
+  const next = document.getElementById('ai-next-btn');
+  next.textContent = (aiIdx + 1 < aiQuestions.length) ? 'Keyingi →' : 'Natijani ko\'rish';
+  next.style.display = '';
+}
+
+function aiNext() {
+  if (aiIdx + 1 < aiQuestions.length) {
+    aiIdx++;
+    aiRenderQuestion();
+  } else {
+    aiRenderResult();
+  }
+}
+
+function aiRenderResult() {
+  let correct = 0;
+  aiQuestions.forEach((q, i) => { if (aiAnswers[i] === q.correct) correct++; });
+  const wrong = aiQuestions.length - correct;
+  const pct = Math.round((correct / aiQuestions.length) * 100);
+
+  document.getElementById('ai-rc-correct').textContent = correct;
+  document.getElementById('ai-rc-wrong').textContent = wrong;
+  document.getElementById('ai-rc-emoji').textContent = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪';
+  document.getElementById('ai-rc-title').textContent = pct >= 80 ? 'Ajoyib!' : pct >= 50 ? 'Yaxshi!' : 'Yana mashq qiling';
+  document.getElementById('ai-rc-sub').textContent = pct + '% to\'g\'ri — ' + aiTopic;
+
+  const box = document.getElementById('ai-review');
+  box.innerHTML = '';
+  const lbl = document.getElementById('ai-review-lbl');
+
+  const mistakes = aiQuestions
+    .map((q, i) => ({ q, i }))
+    .filter(({ q, i }) => aiAnswers[i] !== q.correct);
+
+  lbl.style.display = mistakes.length ? '' : 'none';
+
+  mistakes.forEach(({ q, i }) => {
+    const item = document.createElement('div');
+    item.className = 'ai-rev-item';
+
+    const qt = document.createElement('div');
+    qt.className = 'ai-rev-q';
+    qt.textContent = q.q;
+    item.appendChild(qt);
+
+    const bad = document.createElement('div');
+    bad.className = 'ai-rev-line ai-rev-bad';
+    bad.textContent = '❌ Sizning javobingiz: ' + (q.options[aiAnswers[i]] ?? '—');
+    item.appendChild(bad);
+
+    const good = document.createElement('div');
+    good.className = 'ai-rev-line ai-rev-good';
+    good.textContent = '✅ To\'g\'ri javob: ' + q.options[q.correct];
+    item.appendChild(good);
+
+    if (q.explanation) {
+      const exp = document.createElement('div');
+      exp.className = 'ai-rev-exp';
+      exp.textContent = q.explanation;
+      item.appendChild(exp);
+    }
+
+    const btn = document.createElement('button');
+    btn.className = 'ai-rev-btn';
+    btn.textContent = '🤖 Batafsil tushuntirish';
+    btn.onclick = () => tutorAsk(
+      'Savol: "' + q.q + '". Men "' + (q.options[aiAnswers[i]] ?? '—') +
+      '" deb javob berdim, lekin to\'g\'risi "' + q.options[q.correct] +
+      '" ekan. Nima uchun ekanini batafsil tushuntiring va shunga o\'xshash 2 ta misol bering.'
+    );
+    item.appendChild(btn);
+
+    box.appendChild(item);
+  });
+
+  aiShowView('ai-result');
+  window.scrollTo(0, 0);
 }

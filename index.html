@@ -123,6 +123,11 @@
       <span class="ac-title">AI Ustoz</span>
       <span class="ac-sub">Savol bering</span>
     </button>
+    <button class="action-card tutor-card" onclick="show('s-ai')">
+      <span class="ac-ico">🧠</span>
+      <span class="ac-title">AI mashq</span>
+      <span class="ac-sub">Dars va test</span>
+    </button>
   </div>
 </div>
 
@@ -326,6 +331,92 @@
     </div>
   </div>
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
+</div>
+
+<!-- AI MASHQ: dars va test -->
+<div id="s-ai" class="screen">
+  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
+
+  <!-- 1. Выбор темы -->
+  <div id="ai-setup">
+    <div class="tutor-head">
+      <div class="tutor-ava">🧠</div>
+      <div class="tutor-head-txt">
+        <div class="tutor-name">AI mashq</div>
+        <div class="tutor-sub" id="ai-level-label">Daraja: A1</div>
+      </div>
+    </div>
+
+    <div class="sec-lbl">Mavzu tanlang</div>
+    <div class="chat-chips" id="ai-topics"></div>
+
+    <div class="ai-topic-wrap">
+      <input class="ai-topic-input" id="ai-topic" type="text" autocomplete="off"
+             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80">
+    </div>
+
+    <div class="ai-btn-row">
+      <button class="big-btn secondary" onclick="aiGenerate('lesson')">📘 Dars</button>
+      <button class="big-btn primary" onclick="aiGenerate('quiz')">📝 Test</button>
+    </div>
+
+    <div class="ai-note">Materialni sun'iy intellekt sizning darajangiz uchun tayyorlaydi.</div>
+  </div>
+
+  <!-- 2. Загрузка -->
+  <div id="ai-loading" style="display:none">
+    <div class="ai-loading-box">
+      <span class="chat-typing"><i></i><i></i><i></i></span>
+      <div class="ai-loading-txt" id="ai-loading-txt">Tayyorlanmoqda...</div>
+    </div>
+  </div>
+
+  <!-- 3. Ошибка -->
+  <div id="ai-error" style="display:none">
+    <div class="chat-msg err" id="ai-error-txt"></div>
+    <button class="big-btn secondary" onclick="aiBackToSetup()">← Qaytish</button>
+  </div>
+
+  <!-- 4. Урок -->
+  <div id="ai-lesson" style="display:none">
+    <div class="lesson-card">
+      <div class="lesson-title" id="lesson-title">—</div>
+      <div class="lesson-intro" id="lesson-intro"></div>
+    </div>
+    <div id="lesson-points"></div>
+    <div class="lesson-summary" id="lesson-summary"></div>
+    <button class="big-btn primary" onclick="aiGenerate('quiz')">📝 Shu mavzuda test</button>
+    <button class="big-btn secondary" onclick="aiBackToSetup()">← Boshqa mavzu</button>
+  </div>
+
+  <!-- 5. Тест -->
+  <div id="ai-quiz" style="display:none">
+    <div class="ai-quiz-top">
+      <div class="ai-q-counter" id="ai-q-counter">1 / 5</div>
+      <div class="ai-q-topic" id="ai-q-topic">—</div>
+    </div>
+    <div class="ai-q-card" id="ai-q-text">—</div>
+    <div class="mc-grid" id="ai-options"></div>
+    <div class="ai-explain" id="ai-explain" style="display:none"></div>
+    <button class="big-btn primary" id="ai-next-btn" onclick="aiNext()" style="display:none">Keyingi →</button>
+  </div>
+
+  <!-- 6. Результат теста -->
+  <div id="ai-result" style="display:none">
+    <div class="result-card">
+      <div class="rc-emoji" id="ai-rc-emoji">🎯</div>
+      <div class="rc-title" id="ai-rc-title">Test tugadi!</div>
+      <div class="rc-sub" id="ai-rc-sub"></div>
+      <div class="rc-stats">
+        <div class="rc-stat"><div class="rc-sv" id="ai-rc-correct" style="color:#ffe74d">0</div><div class="rc-sl">To'g'ri</div></div>
+        <div class="rc-stat"><div class="rc-sv" id="ai-rc-wrong" style="color:#ff8b80">0</div><div class="rc-sl">Xato</div></div>
+      </div>
+    </div>
+    <div class="sec-lbl" id="ai-review-lbl" style="display:none">Xatolar ustida ishlash</div>
+    <div id="ai-review"></div>
+    <button class="big-btn primary" onclick="aiGenerate('quiz')">🔄 Yana test</button>
+    <button class="big-btn secondary" onclick="aiBackToSetup()">← Boshqa mavzu</button>
+  </div>
 </div>
 
 <!-- AI USTOZ -->

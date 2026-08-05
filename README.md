@@ -38,7 +38,10 @@ lexiq/
 │   └── vocabulary.json   # Vocabulary database (558 words)
 ├── netlify/
 │   └── edge-functions/
-│       └── tutor.ts      # AI tutor proxy (/api/tutor), provider keys stay server-side
+│       ├── lib/
+│       │   └── llm.ts    # Shared provider list, LLM call, stream and JSON helpers
+│       ├── tutor.ts      # Streaming AI chat (/api/tutor)
+│       └── generate.ts   # Lesson and quiz generation (/api/generate)
 ├── netlify.toml          # Netlify build/redirect/header/edge-function config
 ├── README.md
 └── .gitignore
@@ -150,6 +153,24 @@ without the learner noticing.
 Set them in Netlify → Site configuration → Environment variables, or locally in a
 `.env` file for `netlify dev`. Without a key the endpoint answers `503` with a hint
 instead of failing silently.
+
+## 🧠 AI Practice
+
+The **AI mashq** screen calls `/api/generate`, which returns structured JSON rather than
+a stream — the front-end needs a shape it can render, not prose.
+
+| Mode | Request | Response |
+|------|---------|----------|
+| `lesson` | `{mode, level, topic}` | `{title, intro, points[{rule, example_en, example_uz}], summary}` |
+| `quiz` | `{mode, level, topic, count}` | `{questions[{q, options[4], correct, explanation}]}` |
+
+The edge function normalizes and validates the model's output before answering: questions
+with a wrong option count, a bad `correct` index, duplicate options or duplicate stems are
+dropped, so the client never parses raw model output. A quiz with fewer than 3 valid
+questions is reported as an error instead of being shown.
+
+After a quiz, every mistake gets a **"Batafsil tushuntirish"** button that opens the AI
+tutor with the question, the learner's answer and the correct one already filled in.
 
 ## 🌐 Deployment
 

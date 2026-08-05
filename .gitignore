@@ -1,6 +1,11 @@
 # Netlify local state
 .netlify
 
+# Секреты для локальной разработки (netlify dev читает этот файл автоматически)
+.env
+.env.*
+!.env.example
+
 # macOS
 .DS_Store
 

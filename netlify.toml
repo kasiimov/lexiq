@@ -7,6 +7,11 @@
   path = "/api/tutor"
   function = "tutor"
 
+# Генерация урока и теста: ответ приходит цельным JSON, не потоком.
+[[edge_functions]]
+  path = "/api/generate"
+  function = "generate"
+
 # Старый путь к словарю (до переезда в data/) — чтобы не ломать закладки и кэш
 [[redirects]]
   from = "/vocabulary.json"

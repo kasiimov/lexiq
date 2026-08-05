@@ -662,3 +662,106 @@ body::after { width:300px; height:300px; background: var(--eng); bottom:-80px; r
 }
 .chat-send:active { transform:scale(.92); }
 .chat-send:disabled { opacity:.4; cursor:default; transform:none; }
+
+/* ────────────────────────────────────────────────────────────────────
+   AI MASHQ — сгенерированные урок и тест
+   ──────────────────────────────────────────────────────────────────── */
+
+.ai-topic-wrap { margin-top:4px; }
+.ai-topic-input {
+  width:100%; outline:none; border:1.5px solid #ffffff12;
+  background:var(--s2); color:var(--txt);
+  border-radius:14px; padding:14px 16px;
+  font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600;
+}
+.ai-topic-input::placeholder { color:var(--muted); font-weight:500; }
+.ai-topic-input:focus { border-color:var(--accent); }
+
+.ai-btn-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ai-note { font-size:11px; color:var(--muted); text-align:center; line-height:1.5; }
+
+.chat-chip.on { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+
+.ai-loading-box {
+  background:var(--s1); border:1px solid #ffffff0d; border-radius:20px;
+  padding:36px 20px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:14px; min-height:200px;
+}
+.ai-loading-txt { font-size:13px; color:var(--muted); font-weight:600; }
+
+/* Урок */
+.lesson-card {
+  background:linear-gradient(135deg, var(--s1), #2b2718);
+  border:1px solid #ffdb0026; border-radius:20px; padding:18px;
+}
+.lesson-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--accent2); line-height:1.25; }
+.lesson-intro { font-size:13px; color:var(--txt); margin-top:8px; line-height:1.6; }
+
+/* Внешний радиус 20 = внутренний 14 + padding 6 */
+.lesson-point {
+  background:var(--s1); border:1px solid #ffffff0d;
+  border-radius:20px; padding:6px; margin-bottom:10px;
+}
+.lp-rule {
+  background:var(--s2); border-radius:14px; padding:14px;
+  font-size:14px; line-height:1.55; color:var(--txt);
+}
+.lp-num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; border-radius:8px; margin-right:8px;
+  background:var(--accent); color:var(--on-accent);
+  font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
+}
+.lp-ex { padding:12px 14px 4px; }
+.lp-en { font-size:14px; font-weight:700; color:var(--accent2); }
+.lp-uz { font-size:13px; color:var(--uzb); margin-top:3px; }
+.lp-speak {
+  border:none; cursor:pointer; background:transparent;
+  color:var(--muted); font-size:14px; padding:4px 6px; margin-left:2px;
+}
+.lp-speak:active { transform:scale(.9); }
+
+.lesson-summary {
+  background:#2b2718; border-left:4px solid var(--accent);
+  border-radius:0 14px 14px 0; padding:14px 16px;
+  font-size:13px; line-height:1.6; color:var(--txt);
+}
+
+/* Тест */
+.ai-quiz-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.ai-q-counter {
+  background:var(--accent); color:var(--on-accent);
+  padding:6px 12px; border-radius:99px;
+  font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
+}
+.ai-q-topic { font-size:11px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:0.5px; text-align:right; }
+.ai-q-card {
+  background:var(--s1); border:1px solid #ffffff0d;
+  border-radius:20px; padding:22px 18px;
+  font-size:17px; font-weight:700; line-height:1.5; color:var(--txt); text-align:center;
+}
+
+.ai-explain {
+  background:var(--s1); border-left:4px solid var(--accent);
+  border-radius:0 14px 14px 0; padding:14px 16px;
+  font-size:13px; line-height:1.6; color:var(--txt);
+}
+.ai-explain.wrong { border-left-color:var(--danger); }
+
+/* Разбор ошибок на экране результата */
+.ai-rev-item {
+  background:var(--s1); border:1px solid #ffffff0d;
+  border-radius:18px; padding:14px 16px; margin-bottom:10px;
+}
+.ai-rev-q { font-size:14px; font-weight:700; color:var(--txt); line-height:1.5; }
+.ai-rev-line { font-size:13px; margin-top:8px; line-height:1.5; }
+.ai-rev-bad { color:#ff8b80; }
+.ai-rev-good { color:var(--accent2); }
+.ai-rev-exp { font-size:12px; color:var(--muted); margin-top:8px; line-height:1.55; }
+.ai-rev-btn {
+  border:1px solid #ffdb0033; cursor:pointer; margin-top:10px;
+  background:#ffdb0014; color:var(--accent2);
+  padding:8px 12px; border-radius:10px;
+  font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+}
+.ai-rev-btn:active { transform:scale(.95); }

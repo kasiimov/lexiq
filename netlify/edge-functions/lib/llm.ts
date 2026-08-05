@@ -29,6 +29,7 @@ export interface Provider {
 // и thinking-токены расходуют тот же max_tokens — при 700 ответ обрывался на
 // первом предложении с finish_reason: "length".
 const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 export const PROVIDERS: Provider[] = [
   {
@@ -45,9 +46,14 @@ export const PROVIDERS: Provider[] = [
     model: "gemini-2.5-flash",
     extra: { reasoning_effort: "none" },
   },
-  { name: "groq",  url: "https://api.groq.com/openai/v1/chat/completions", keyEnv: "GROQ_API_KEY",   model: "llama-3.3-70b-versatile" },
-  { name: "groq2", url: "https://api.groq.com/openai/v1/chat/completions", keyEnv: "GROQ_API_KEY_2", model: "llama-3.3-70b-versatile" },
-  { name: "groq3", url: "https://api.groq.com/openai/v1/chat/completions", keyEnv: "GROQ_API_KEY_3", model: "llama-3.3-70b-versatile" },
+  // На Groq берём gpt-oss-120b, а не llama-3.3-70b: на том же промпте Llama
+  // выдавала прямо неверные вопросы («'Hello' ma'nosi → Good morning») и ломала
+  // JSON неэкранированными кавычками. gpt-oss держит и формат, и смысл.
+  // Llama остаётся последней ступенью — лучше слабый ответ, чем никакого.
+  { name: "groq",  url: GROQ_URL, keyEnv: "GROQ_API_KEY",   model: "openai/gpt-oss-120b" },
+  { name: "groq2", url: GROQ_URL, keyEnv: "GROQ_API_KEY_2", model: "openai/gpt-oss-120b" },
+  { name: "groq3", url: GROQ_URL, keyEnv: "GROQ_API_KEY_3", model: "openai/gpt-oss-120b" },
+  { name: "groq-llama", url: GROQ_URL, keyEnv: "GROQ_API_KEY", model: "llama-3.3-70b-versatile" },
 ];
 
 export const LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"];
@@ -160,6 +166,13 @@ export async function callLLM(opts: CallOptions): Promise<CallResult> {
         }
         if (!upstream.ok) {
           const detail = (await upstream.text()).slice(0, 300);
+          // Groq возвращает 400 json_validate_failed, когда модель сама не смогла
+          // собрать валидный JSON. Это не наша ошибка запроса — у другой модели
+          // тот же промпт обычно проходит, поэтому передаём ход дальше по цепочке.
+          if (detail.includes("json_validate_failed")) {
+            failures.push(`${provider.name}: json_validate_failed`);
+            break;
+          }
           failures.push(`${provider.name}: ${upstream.status}`);
           return { failures, fatal: jsonError(upstream.status, "AI xatosi", detail) };
         }

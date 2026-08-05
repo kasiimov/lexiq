@@ -17,6 +17,7 @@ const MAX_TOPIC_CHARS = 80;
 const QUIZ_TOKENS = 1600;
 const LESSON_TOKENS = 1400;
 const MIN_QUESTIONS = 3;
+const GENERATION_ATTEMPTS = 2;
 const MAX_QUESTIONS = 8;
 
 function str(value: unknown, limit = 400): string {
@@ -39,6 +40,8 @@ function quizPrompt(level: string, topic: string, count: number): string {
     "  3) grammar: which English sentence is correct.",
     "- 'explanation' is in Uzbek, one or two sentences, says why the correct option is right.",
     "- Do not repeat a question or reuse the same correct answer twice.",
+    "- NEVER put a double quote inside a string value. To quote an English word write it",
+    "  with single quotes: 'Good morning' — a raw \" breaks the JSON.",
     "",
     "Example of one good question:",
     '{"q":"Bo\'sh joyni to\'ldiring: She _____ to school every day.","options":["go","goes","going","gone"],"correct":1,"explanation":"\'She\' uchun Present Simple\'da fe\'lga -es qo\'shiladi."}',
@@ -60,6 +63,8 @@ function lessonPrompt(level: string, topic: string): string {
     "- 'intro' is one sentence on what the learner will be able to do after the lesson.",
     "- 'summary' is one sentence with the main thing to remember.",
     "- No markdown, no headings, plain sentences.",
+    "- NEVER put a double quote inside a string value; use single quotes instead.",
+    "- Every value must be a quoted string. Output valid JSON and nothing else.",
     "",
     "Answer with JSON only, exactly this shape:",
     '{"title":"...","intro":"...","points":[{"rule":"...","example_en":"...","example_uz":"..."}],"summary":"..."}',
@@ -149,40 +154,56 @@ export default async function handler(request: Request): Promise<Response> {
   if (configuredProviders().length === 0) return jsonError(503, "AI kaliti sozlanmagan", NO_KEY_HINT);
 
   const prompt = mode === "lesson" ? lessonPrompt(level, topic) : quizPrompt(level, topic, count);
+  const ask = mode === "lesson" ? `Mavzu: ${topic}` : `Mavzu: ${topic}. ${count} ta savol.`;
 
-  const result = await callLLM({
-    messages: [
-      { role: "system", content: prompt },
-      { role: "user", content: mode === "lesson" ? `Mavzu: ${topic}` : `Mavzu: ${topic}. ${count} ta savol.` },
-    ],
-    maxTokens: mode === "lesson" ? LESSON_TOKENS : QUIZ_TOKENS,
-    temperature: 0.7,
-    stream: false,
-    json: true,
-  });
+  // Модель может вернуть синтаксически битый JSON или материал, не прошедший
+  // нормализацию. Это лечится не разбором мусора, а повторной генерацией:
+  // вторая попытка почти всегда даёт годный результат.
+  let lastProblem = "";
 
-  if (result.fatal) return result.fatal;
-  if (!result.text) return failureResponse(result.failures);
+  for (let attempt = 0; attempt < GENERATION_ATTEMPTS; attempt++) {
+    const result = await callLLM({
+      messages: [
+        { role: "system", content: prompt },
+        { role: "user", content: ask },
+      ],
+      maxTokens: mode === "lesson" ? LESSON_TOKENS : QUIZ_TOKENS,
+      temperature: 0.3,
+      stream: false,
+      json: true,
+    });
 
-  const parsed = parseJsonObject(result.text);
-  if (!parsed) return jsonError(502, "AI javobini o'qib bo'lmadi", result.text.slice(0, 200));
+    if (result.fatal) return result.fatal;
+    if (!result.text) return failureResponse(result.failures);
 
-  if (mode === "lesson") {
-    const lesson = normalizeLesson(parsed);
-    if (lesson.points.length === 0) return jsonError(502, "Dars bo'sh keldi", "modelning javobi shaklga tushmadi");
-    return new Response(JSON.stringify({ mode, level, topic, lesson }), {
+    const parsed = parseJsonObject(result.text);
+    if (!parsed) {
+      lastProblem = "javob JSON emas: " + result.text.slice(0, 150);
+      continue;
+    }
+
+    if (mode === "lesson") {
+      const lesson = normalizeLesson(parsed);
+      if (lesson.points.length === 0) {
+        lastProblem = "darsda birorta ham punkt yo'q";
+        continue;
+      }
+      return new Response(JSON.stringify({ mode, level, topic, lesson }), {
+        headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+      });
+    }
+
+    const questions = normalizeQuiz(parsed);
+    if (questions.length < MIN_QUESTIONS) {
+      lastProblem = `yaroqli savollar: ${questions.length}`;
+      continue;
+    }
+    return new Response(JSON.stringify({ mode, level, topic, questions }), {
       headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
     });
   }
 
-  const questions = normalizeQuiz(parsed);
-  if (questions.length < MIN_QUESTIONS) {
-    return jsonError(502, "Test to'liq chiqmadi", `yaroqli savollar: ${questions.length}`);
-  }
-
-  return new Response(JSON.stringify({ mode, level, topic, questions }), {
-    headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
-  });
+  return jsonError(502, "Material tayyorlanmadi, qayta urinib ko'ring", lastProblem);
 }
 
 export const config = { path: "/api/generate" };

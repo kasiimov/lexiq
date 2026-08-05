@@ -143,7 +143,7 @@ variables. Configure at least one:
 | Variable | Purpose |
 |----------|---------|
 | `GEMINI_API_KEY` | primary key — holds Uzbek grammar noticeably better than Llama |
-| `GROQ_API_KEY` | fallback (Groq, `llama-3.3-70b-versatile`), used on 429/5xx |
+| `GROQ_API_KEY` | fallback (Groq, `openai/gpt-oss-120b`), used on 429/5xx |
 | `GROQ_API_KEY_2` | optional second fallback |
 | `GROQ_API_KEY_3` | optional third fallback |
 

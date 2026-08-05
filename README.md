@@ -40,8 +40,6 @@ lexiq/
 │   │   └── admin.js      # Admin panel logic
 │   ├── favicon.svg
 │   └── og-image.png      # Social preview, 1200x630
-├── data/
-│   └── vocabulary.json   # Vocabulary database (558 words)
 ├── netlify/
 │   └── edge-functions/
 │       ├── lib/
@@ -87,35 +85,36 @@ There is no build system: every file in the repository root is published as-is.
 - Word properties: level, topic, part of speech, examples, status
 - Export back to `vocabulary.json` for committing to the repo
 
-## 📊 Vocabulary Database
+## 📊 Vocabulary
 
-`data/vocabulary.json` (169 KB) holds `meta` plus a `words` array of **558 entries**.
+The bundled dictionary was removed on request — the repository no longer ships
+`data/vocabulary.json`. The app looks for it at `./data/vocabulary.json`, falls
+back to whatever is cached in `localStorage`, and otherwise opens on the
+"dictionary not loaded" screen with a manual JSON upload.
 
-Entry format:
+Expected shape, if you put a file back:
 
 ```json
 {
-  "id": "a001",
-  "en": "a",
-  "uz": ["bir"],
-  "level": "A1",
-  "topic": "grammar",
-  "pos": "article",
-  "example_en": "I have a book.",
-  "example_uz": "Menda bir kitob bor.",
-  "status": "ok"
+  "meta": { "version": "1.0", "total_words": 0 },
+  "words": [
+    {
+      "id": "a001",
+      "en": "a",
+      "uz": ["bir"],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "article",
+      "example_en": "I have a book.",
+      "example_uz": "Menda bir kitob bor.",
+      "status": "ok"
+    }
+  ]
 }
 ```
 
-Distribution by CEFR level:
-
-| Level | Words |
-|-------|-------|
-| A1    | 289   |
-| A2    | 37    |
-| B1    | 64    |
-| B2    | 82    |
-| C1    | 86    |
+Word games, training, the daily challenge and the progress map all read this
+list; the AI tutor, lessons and quizzes do not depend on it.
 
 ## 👤 Accounts
 
@@ -137,7 +136,7 @@ moving them into the account is the next step.
 
 ### Run locally
 
-The app fetches `data/vocabulary.json`, so it needs an HTTP server — opening the file over `file://` will block the request:
+The app fetches `data/vocabulary.json` when present, so it needs an HTTP server — opening the file over `file://` would block the request:
 
 ```bash
 python3 -m http.server 8000
@@ -208,7 +207,7 @@ tutor with the question, the learner's answer and the correct one already filled
 
 Hosted on Netlify as project `lexiq-uz`, connected to this repository. Every push to `main` triggers an automatic deploy — there is no build command, the repository root is published directly.
 
-`netlify.toml` also keeps two legacy paths alive: `/vocabulary.json` redirects to `/data/vocabulary.json`, and `/ang.html` (the old entry point) redirects to `/`.
+`netlify.toml` also keeps one legacy path alive: `/ang.html`, the old entry point, redirects to the app.
 
 ## 🔧 Browser Support
 

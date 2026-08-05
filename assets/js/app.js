@@ -166,6 +166,7 @@ function show(id) {
   if (id === 's-tutor') tutorInit();
   if (id === 's-ai') aiInit();
   if (id === 's-map') renderMap();
+  if (id === 's-profile') renderProfile();
   window.scrollTo(0,0);
 }
 
@@ -192,7 +193,7 @@ async function loadVocab() {
     }
   } catch(e) { console.warn('Cache load fail', e); }
 
-  // Try fetching vocabulary.json from same folder
+  // Файл словаря может лежать рядом — если его положили вручную.
   try {
     const res = await fetch('./data/vocabulary.json');
     if (res.ok) {
@@ -202,9 +203,83 @@ async function loadVocab() {
       console.log('Loaded ' + VOCAB.length + ' words from vocabulary.json');
       return true;
     }
-  } catch(e) { console.warn('Fetch vocabulary.json fail', e); }
+  } catch(e) { console.info('vocabulary.json yo\'q — so\'zlarni AI tayyorlaydi'); }
 
-  return false;
+  // Файла нет — словарь собирает ИИ. Это основной путь: готового списка
+  // в проекте больше не хранится.
+  return await vocabGenerateStarter();
+}
+
+// ────────────────────────────────────────────────────────────────────
+// SO'ZLARNI AI TAYYORLAYDI — генерация словаря вместо файла.
+// Слова копятся в localStorage: один раз сгенерировали — дальше играем
+// офлайн, а докупать новые можно кнопкой.
+// ────────────────────────────────────────────────────────────────────
+const STARTER_TOPICS = ['kundalik hayot', 'oila va uy', 'ovqat', 'sayohat'];
+const WORDS_PER_BATCH = 20;
+
+async function vocabFetchWords(level, topic, count) {
+  const res = await fetch(AI_ENDPOINT, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ mode: 'words', level, topic, count: count || WORDS_PER_BATCH }),
+  });
+  if (!res.ok) {
+    const info = await res.json().catch(() => ({}));
+    throw new Error(info.error || ('Xatolik ' + res.status));
+  }
+  const data = await res.json();
+  return data.words || [];
+}
+
+// Стартовый набор: две темы уровня A1, чтобы играть было чем сразу.
+async function vocabGenerateStarter() {
+  const note = document.getElementById('ls-sub');
+  if (note) note.textContent = "AI so'zlarni tayyorlamoqda...";
+
+  try {
+    const batches = await Promise.all([
+      vocabFetchWords('A1', STARTER_TOPICS[0], WORDS_PER_BATCH),
+      vocabFetchWords('A1', STARTER_TOPICS[1], WORDS_PER_BATCH),
+    ]);
+    const merged = [].concat.apply([], batches);
+    if (merged.length === 0) return false;
+    VOCAB = merged;
+    saveVocab();
+    return true;
+  } catch (e) {
+    console.warn('so\'zlar tayyorlanmadi', e);
+    const msg = document.getElementById('error-msg');
+    if (msg) msg.textContent = "So'zlarni tayyorlab bo'lmadi: " + e.message;
+    return false;
+  }
+}
+
+// Докинуть слов по текущему уровню и выбранной теме.
+async function vocabAddMore() {
+  const btn = document.getElementById('more-words-btn');
+  if (btn) { btn.disabled = true; btn.textContent = "⏳ Tayyorlanmoqda..."; }
+
+  const level = getCEFRLevel();
+  const topic = topicFilter !== 'all'
+    ? (TOPIC_NAMES[topicFilter] || topicFilter)
+    : STARTER_TOPICS[Math.floor(Math.random() * STARTER_TOPICS.length)];
+
+  try {
+    const words = await vocabFetchWords(level, topic, WORDS_PER_BATCH);
+    const have = new Set(VOCAB.map(w => w.id));
+    const fresh = words.filter(w => !have.has(w.id));
+    VOCAB = VOCAB.concat(fresh);
+    saveVocab();
+    renderTopics();
+    if (btn) btn.textContent = '✓ ' + fresh.length + " ta yangi so'z qo'shildi";
+  } catch (e) {
+    if (btn) btn.textContent = '⚠️ ' + e.message;
+  } finally {
+    setTimeout(() => {
+      if (btn) { btn.disabled = false; btn.textContent = "🤖 Yangi so'zlar qo'shish"; }
+    }, 2500);
+  }
 }
 
 function loadVocabFromFile(event) {
@@ -937,11 +1012,50 @@ function authGuest() {
   LexiQAuth.continueAsGuest(name);
 }
 
-async function authSignOut() {
-  if (!confirm('Chiqishni xohlaysizmi?')) return;
+function logoutAsk() {
+  const guest = LexiQAuth.current() && LexiQAuth.current().guest;
+  document.getElementById('logout-text').textContent = guest
+    ? "Mehmon rejimidan chiqasiz. Natijalar shu brauzerda qoladi, lekin ularni faqat shu qurilmada ko'rasiz."
+    : "Hisobingizdan chiqasiz. Progress hisobingizda saqlanib qoladi.";
+  document.getElementById('logout-modal').classList.add('open');
+}
+
+// Клик по затемнению закрывает окно, клик внутри — нет.
+function logoutClose(event) {
+  if (event && event.target !== event.currentTarget) return;
+  document.getElementById('logout-modal').classList.remove('open');
+}
+
+async function logoutConfirm() {
+  document.getElementById('logout-modal').classList.remove('open');
   await LexiQAuth.signOut();
   appStarted = false;
   show('s-auth');
+}
+
+function renderProfile() {
+  const user = LexiQAuth.current();
+  if (!user) return;
+  const name = user.name || 'Mehmon';
+  const stats = getStats();
+  const st = streakState(stats);
+
+  document.getElementById('pf-ava').textContent = name.charAt(0).toUpperCase();
+  document.getElementById('pf-name').textContent = name;
+  document.getElementById('pf-mail').textContent = user.email || '';
+
+  const kind = document.getElementById('pf-kind');
+  kind.textContent = user.guest ? 'Mehmon rejimi' : 'Hisob faol';
+  kind.classList.toggle('online', !user.guest);
+
+  document.getElementById('pf-level').textContent = getCEFRLevel();
+  document.getElementById('pf-known').textContent = getKnownWordsCount();
+  document.getElementById('pf-streak').textContent = st.days;
+  document.getElementById('pf-record').textContent = streakBest(st.days);
+
+  document.getElementById('pf-note').textContent = user.guest
+    ? "Ro'yxatdan o'tsangiz, progress hisobingizda saqlanadi va boshqa qurilmada ham ochiladi. Reytingda ham qatnasha olasiz."
+    : "Progress hisobingizga saqlanmoqda — istalgan qurilmadan kirsangiz, davom ettirasiz.";
 }
 
 // Без настроенного Firebase регистрация невозможна — показываем только вход гостем,
@@ -1308,7 +1422,10 @@ let aiWired = false;
 function aiShowView(id) {
   AI_VIEWS.forEach(v => {
     const el = document.getElementById(v);
-    if (el) el.style.display = (v === id) ? '' : 'none';
+    if (!el) return;
+    // Пустая строка возвращает элемент к display из таблицы стилей (flex),
+    // а не к inline-значению — иначе внутренние отступы пропадают.
+    el.style.display = (v === id) ? '' : 'none';
   });
 }
 

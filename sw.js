@@ -15,7 +15,6 @@ const SHELL = [
   '/assets/js/app.js',
   '/assets/js/auth.js',
   '/assets/favicon.svg',
-  '/data/vocabulary.json',
   '/manifest.webmanifest',
 ];
 

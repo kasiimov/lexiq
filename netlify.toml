@@ -18,13 +18,6 @@
   to = "/app.html"
   status = 301
 
-# Старый путь к словарю (до переезда в data/) — чтобы не ломать закладки и кэш
-[[redirects]]
-  from = "/vocabulary.json"
-  to = "/data/vocabulary.json"
-  status = 301
-  force = true
-
 # Старая версия приложения жила по /ang.html, а само приложение — на «/»,
 # пока его место не занял лендинг.
 [[redirects]]
@@ -58,7 +51,3 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
-[[headers]]
-  for = "/data/vocabulary.json"
-  [headers.values]
-    Cache-Control = "public, max-age=3600"

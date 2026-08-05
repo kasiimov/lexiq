@@ -19,6 +19,9 @@ const LESSON_TOKENS = 1400;
 const MIN_QUESTIONS = 3;
 const GENERATION_ATTEMPTS = 2;
 const MAX_QUESTIONS = 8;
+const WORDS_TOKENS = 2600;
+const MIN_WORDS = 6;
+const MAX_WORDS = 30;
 
 function str(value: unknown, limit = 400): string {
   return typeof value === "string" ? value.trim().slice(0, limit) : "";
@@ -69,6 +72,77 @@ function lessonPrompt(level: string, topic: string): string {
     "Answer with JSON only, exactly this shape:",
     '{"title":"...","intro":"...","points":[{"rule":"...","example_en":"...","example_uz":"..."}],"summary":"..."}',
   ].join("\n");
+}
+
+// Словарь теперь не лежит файлом, его собирает модель. Требования жёстче,
+// чем к тесту: это данные, на которых потом строятся все игры.
+function wordsPrompt(level: string, topic: string, count: number): string {
+  return [
+    "You are LexiQ, building a vocabulary list for Uzbek speakers learning English.",
+    `Give exactly ${count} useful English words at CEFR level ${level} on the topic: ${topic}.`,
+    "",
+    "Requirements:",
+    "- 'en' is a single English word or a short common phrase, lowercase.",
+    "- 'uz' is an array of 1-3 Uzbek translations (Latin script), most common first.",
+    "- 'example_en' is one short natural sentence using the word.",
+    "- 'example_uz' is the Uzbek translation of that exact sentence.",
+    "- 'pos' is one of: noun, verb, adj, adv, prep, pron, conj, phrase.",
+    "- Words must be genuinely useful at this level, no rare or archaic ones.",
+    "- No duplicates, no two words with the same meaning.",
+    "- NEVER put a double quote inside a string value; use single quotes instead.",
+    "",
+    "Answer with JSON only, exactly this shape:",
+    '{"words":[{"en":"...","uz":["..."],"pos":"noun","example_en":"...","example_uz":"..."}]}',
+  ].join("\n");
+}
+
+interface Word {
+  id: string;
+  en: string;
+  uz: string[];
+  level: string;
+  topic: string;
+  pos: string;
+  example_en: string;
+  example_uz: string;
+  status: string;
+}
+
+// Приводим ответ модели к той же форме, что была у файла словаря:
+// весь остальной код приложения рассчитан именно на неё.
+function normalizeWords(data: Record<string, unknown>, level: string, topic: string): Word[] {
+  const raw = Array.isArray(data.words) ? data.words : [];
+  const seen = new Set<string>();
+  const out: Word[] = [];
+
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const rec = item as Record<string, unknown>;
+    const en = str(rec.en, 60).toLowerCase();
+    if (!en || seen.has(en)) continue;
+
+    const uzRaw = rec.uz;
+    const uz = Array.isArray(uzRaw)
+      ? uzRaw.map((u) => str(u, 60)).filter((u) => u.length > 0).slice(0, 3)
+      : [str(uzRaw, 60)].filter((u) => u.length > 0);
+    if (uz.length === 0) continue;
+
+    seen.add(en);
+    out.push({
+      // Идентификатор должен быть устойчивым: по нему хранится прогресс
+      // в коробках Лейтнера, поэтому берём само слово, а не случайное число.
+      id: "ai-" + en.replace(/[^a-z0-9]+/g, "-"),
+      en,
+      uz,
+      level,
+      topic,
+      pos: str(rec.pos, 20) || "phrase",
+      example_en: str(rec.example_en, 200),
+      example_uz: str(rec.example_uz, 200),
+      status: "ok",
+    });
+  }
+  return out.slice(0, MAX_WORDS);
 }
 
 interface Question {
@@ -145,16 +219,26 @@ export default async function handler(request: Request): Promise<Response> {
     return jsonError(400, "Noto'g'ri JSON");
   }
 
-  const mode = body.mode === "lesson" ? "lesson" : "quiz";
+  const mode = body.mode === "lesson" || body.mode === "words" ? body.mode : "quiz";
   const level = normalizeLevel(body.level);
   const topic = str(body.topic, MAX_TOPIC_CHARS) || "kundalik ingliz tili";
-  const countRaw = typeof body.count === "number" ? Math.trunc(body.count) : 5;
-  const count = Math.min(MAX_QUESTIONS, Math.max(MIN_QUESTIONS, countRaw));
+  const countRaw = typeof body.count === "number" ? Math.trunc(body.count) : (mode === "words" ? 20 : 5);
+  const count = mode === "words"
+    ? Math.min(MAX_WORDS, Math.max(MIN_WORDS, countRaw))
+    : Math.min(MAX_QUESTIONS, Math.max(MIN_QUESTIONS, countRaw));
 
   if (configuredProviders().length === 0) return jsonError(503, "AI kaliti sozlanmagan", NO_KEY_HINT);
 
-  const prompt = mode === "lesson" ? lessonPrompt(level, topic) : quizPrompt(level, topic, count);
-  const ask = mode === "lesson" ? `Mavzu: ${topic}` : `Mavzu: ${topic}. ${count} ta savol.`;
+  const prompt = mode === "lesson"
+    ? lessonPrompt(level, topic)
+    : mode === "words"
+      ? wordsPrompt(level, topic, count)
+      : quizPrompt(level, topic, count);
+  const ask = mode === "lesson"
+    ? `Mavzu: ${topic}`
+    : mode === "words"
+      ? `Mavzu: ${topic}. ${count} ta so'z.`
+      : `Mavzu: ${topic}. ${count} ta savol.`;
 
   // Модель может вернуть синтаксически битый JSON или материал, не прошедший
   // нормализацию. Это лечится не разбором мусора, а повторной генерацией:
@@ -167,7 +251,7 @@ export default async function handler(request: Request): Promise<Response> {
         { role: "system", content: prompt },
         { role: "user", content: ask },
       ],
-      maxTokens: mode === "lesson" ? LESSON_TOKENS : QUIZ_TOKENS,
+      maxTokens: mode === "lesson" ? LESSON_TOKENS : mode === "words" ? WORDS_TOKENS : QUIZ_TOKENS,
       temperature: 0.3,
       stream: false,
       json: true,
@@ -180,6 +264,17 @@ export default async function handler(request: Request): Promise<Response> {
     if (!parsed) {
       lastProblem = "javob JSON emas: " + result.text.slice(0, 150);
       continue;
+    }
+
+    if (mode === "words") {
+      const words = normalizeWords(parsed, level, topic);
+      if (words.length < MIN_WORDS) {
+        lastProblem = `yaroqli so'zlar: ${words.length}`;
+        continue;
+      }
+      return new Response(JSON.stringify({ mode, level, topic, words }), {
+        headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+      });
     }
 
     if (mode === "lesson") {

@@ -46,7 +46,7 @@ body::before { width:400px; height:400px; background: var(--paper); top:-100px; 
 body::after { width:300px; height:300px; background: var(--paper); bottom:-80px; right:-80px; animation-delay: -4s; }
 @keyframes blobMove { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(30px,20px) scale(1.1)} }
 
-.app { width:100%; max-width:420px; position:relative; z-index:1; display:flex; flex-direction:column; gap:0; }
+.app { width:100%; max-width:1120px; position:relative; z-index:1; display:flex; flex-direction:column; gap:0; }
 
 .sec-lbl { font-size:11px; color:var(--muted); font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; }
 .screen { display:none; flex-direction:column; gap:16px; padding-bottom:30px; }
@@ -117,6 +117,9 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
 /* BUTTONS */
 .big-btn {
   border:none; cursor:pointer;
+  /* Кнопка всегда во всю ширину контейнера: в колонке экрана она была
+     то широкой, то по содержимому — зависело от того, чем её обернули. */
+  width:100%;
   border-radius:18px; padding:18px;
   font-family:'Syne',sans-serif; font-size:16px; font-weight:800;
   color:var(--paper); letter-spacing:0.3px;
@@ -779,15 +782,24 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
 
 /* Профиль на главной */
 .home-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+/* Чип аккаунта — две отдельные кнопки: круг ведёт в профиль,
+   значок питания открывает окно выхода. */
 .user-chip {
-  border:1px solid #ffffff12; cursor:pointer; flex-shrink:0;
+  border:1px solid #ffffff12; flex-shrink:0;
   background:var(--s1); color:var(--txt);
-  display:flex; align-items:center; gap:8px;
-  padding:6px 10px 6px 6px; border-radius:99px;
-  font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
-  transition:all .15s; max-width:170px;
+  display:flex; align-items:center; gap:4px;
+  padding:4px 6px 4px 4px; border-radius:99px;
+  max-width:200px;
 }
-.user-chip:active { transform:scale(.96); }
+.uc-open {
+  border:none; cursor:pointer; background:transparent; color:inherit;
+  display:flex; align-items:center; gap:8px; min-width:0;
+  padding:2px 4px; border-radius:99px;
+  font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+  transition:opacity .15s;
+}
+.uc-open:active { transform:scale(.96); }
+.uc-open:hover { opacity:.85; }
 .uc-ava {
   width:26px; height:26px; border-radius:50%; flex-shrink:0;
   background:var(--paper); color:var(--on-accent);
@@ -795,7 +807,14 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
   font-family:'Syne',sans-serif; font-weight:800; font-size:12px;
 }
 .uc-name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.uc-out { color:var(--muted); font-size:13px; }
+.uc-out {
+  border:none; cursor:pointer; flex-shrink:0;
+  background:transparent; color:var(--muted);
+  width:28px; height:28px; border-radius:50%; font-size:13px;
+  transition:all .15s;
+}
+.uc-out:hover { background:var(--s3); color:var(--danger); }
+.uc-out:active { transform:scale(.9); }
 
 /* Режимы чата: наставник и разговорный партнёр */
 .tutor-modes { display:grid; grid-template-columns:1fr 1fr; gap:6px; background:var(--s2); border-radius:14px; padding:4px; }
@@ -950,3 +969,131 @@ body::after { width:300px; height:300px; background: var(--paper); bottom:-80px;
 .lb-name { flex:1; min-width:0; font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .lb-score { font-family:'Syne',sans-serif; font-size:14px; font-weight:800; }
 .lb-empty { font-size:12px; color:var(--muted); text-align:center; padding:14px; line-height:1.5; }
+
+/* ────────────────────────────────────────────────────────────────────
+   ШИРОКИЙ ЭКРАН
+   На телефоне всё остаётся колонкой. Начиная с планшета приложение
+   занимает ширину, а не жмётся в узкую полосу по центру: главная
+   раскладывается в две колонки, игровые экраны держат читаемую ширину
+   строки — длинные строки текста читать тяжелее, чем короткие.
+   ──────────────────────────────────────────────────────────────────── */
+@media (min-width: 900px) {
+
+  body { padding:28px; }
+
+  /* Главная: карточки идут сеткой */
+  #s-home.active {
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:16px;
+    align-items:start;
+  }
+  #s-home .home-top,
+  #s-home .level-card,
+  #s-home .big-btn.primary { grid-column:1 / -1; }
+  #s-home .action-grid { grid-column:1 / -1; grid-template-columns:repeat(4, minmax(0,1fr)); }
+
+  /* Экраны с чтением и вводом: ограничиваем длину строки */
+  #s-auth.active,
+  #s-game.active,
+  #s-train.active,
+  #s-result.active,
+  #s-daily.active { max-width:720px; margin:0 auto; width:100%; }
+
+  /* Чат: лог выше, поле ввода на всю ширину */
+  #s-tutor.active { max-width:860px; margin:0 auto; width:100%; }
+  .chat-log { max-height:62vh; min-height:420px; }
+
+  /* Темы, режимы и уровни свободнее дышат */
+  .topics-grid { grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); }
+  .gm-grid { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .mc-grid { grid-template-columns:repeat(2, minmax(0,1fr)); }
+
+  /* Карта и AI-упражнения: две колонки карточек */
+  #s-map.active { max-width:820px; margin:0 auto; width:100%; }
+  #s-ai.active { max-width:860px; margin:0 auto; width:100%; }
+  #s-stats.active { max-width:900px; margin:0 auto; width:100%; }
+}
+
+@media (min-width: 1300px) {
+  /* На большом мониторе главная растягивается в три колонки */
+  #s-home.active { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   PROFIL и окно выхода
+   ──────────────────────────────────────────────────────────────────── */
+
+.profile-card {
+  background:var(--s1); border:1px solid #ffffff12;
+  border-radius:22px; padding:26px 20px; text-align:center;
+}
+.pf-ava {
+  width:72px; height:72px; margin:0 auto 14px; border-radius:50%;
+  background:var(--paper); color:var(--on-accent);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:30px; font-weight:800;
+}
+.pf-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; }
+.pf-mail { font-size:13px; color:var(--muted); margin-top:4px; }
+.pf-kind {
+  display:inline-block; margin-top:12px;
+  background:var(--s3); color:#c9c6bb;
+  padding:5px 12px; border-radius:99px;
+  font-size:11px; font-weight:700; letter-spacing:0.6px; text-transform:uppercase;
+}
+.pf-kind.online { background:#2f3a31; color:#cfe4d4; }
+
+.pf-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; }
+.pf-box { background:var(--s1); border:1px solid #ffffff0d; border-radius:16px; padding:16px; text-align:center; }
+.pf-v { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; }
+.pf-l { font-size:11px; color:var(--muted); margin-top:4px; font-weight:600; }
+.pf-note { font-size:12px; color:var(--muted); text-align:center; line-height:1.55; padding:0 8px; }
+
+.big-btn.danger { background:var(--danger); color:var(--paper); }
+
+/* Модальное окно */
+.modal-back {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:#1a1917cc; backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; padding:20px;
+}
+.modal-back.open { display:flex; }
+.modal {
+  background:var(--s1); border:1px solid #ffffff14;
+  border-radius:24px; padding:26px 22px;
+  width:100%; max-width:400px; text-align:center;
+  animation:modalIn .18s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:translateY(10px) scale(.98) } to { opacity:1; transform:none } }
+.modal-ico { font-size:32px; }
+.modal-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; margin-top:10px; }
+.modal-text { font-size:13px; color:var(--muted); margin-top:8px; line-height:1.55; }
+.modal-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.modal-actions .big-btn { margin:0; }
+
+/* ────────────────────────────────────────────────────────────────────
+   ОТСТУПЫ ВНУТРИ СОСТАВНЫХ ЭКРАНОВ
+   .screen раздаёт gap только прямым детям, а эти блоки — обёртки,
+   поэтому их содержимое слипалось: счётчик лежал на карточке слова.
+   ──────────────────────────────────────────────────────────────────── */
+#daily-play, #daily-done,
+#ai-setup, #ai-quiz, #ai-lesson, #ai-result, #ai-error, #ai-loading {
+  display:flex; flex-direction:column; gap:14px;
+}
+
+/* Шапка задания дня отделена от игровой части */
+.daily-head { padding:10px 0 4px; }
+
+/* Строка «1 / 10 — 0 ball» — это подпись к карточке, а не её часть */
+.ai-quiz-top { padding:0 2px; }
+
+/* Кнопка «назад» не должна прижиматься к заголовку */
+.back-btn { align-self:flex-start; margin-bottom:2px; }
+
+/* Кнопка «назад» — исключение: она по содержимому, а не во всю строку */
+.back-btn { width:auto; }
+
+/* Итоговый экран: рейтинг и подпись под ним не должны липнуть к кнопке */
+#daily-done .daily-note { margin-bottom:2px; }
+.leaderboard { margin-top:2px; }

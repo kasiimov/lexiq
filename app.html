@@ -112,11 +112,13 @@
         <div class="t2">Bepul ingliz tili o'rganish</div>
       </div>
     </div>
-    <button class="user-chip" id="user-chip" onclick="authSignOut()" title="Chiqish">
-      <span class="uc-ava" id="uc-ava">M</span>
-      <span class="uc-name" id="uc-name">Mehmon</span>
-      <span class="uc-out">⏻</span>
-    </button>
+    <div class="user-chip" id="user-chip">
+      <button class="uc-open" onclick="show('s-profile')" title="Profil">
+        <span class="uc-ava" id="uc-ava">M</span>
+        <span class="uc-name" id="uc-name">Mehmon</span>
+      </button>
+      <button class="uc-out" onclick="logoutAsk()" title="Chiqish" aria-label="Chiqish">⏻</button>
+    </div>
   </div>
 
   <div class="level-card">
@@ -215,6 +217,7 @@
     <div class="topics-grid" id="topics-grid"></div>
   </div>
   <button class="big-btn primary" onclick="show('s-modes')">Davom etish →</button>
+  <button class="big-btn secondary" id="more-words-btn" onclick="vocabAddMore()">🤖 Yangi so'zlar qo'shish</button>
 </div>
 
 <!-- MODES -->
@@ -402,6 +405,30 @@
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
 </div>
 
+<!-- PROFIL -->
+<div id="s-profile" class="screen">
+  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
+
+  <div class="profile-card">
+    <div class="pf-ava" id="pf-ava">M</div>
+    <div class="pf-name" id="pf-name">Mehmon</div>
+    <div class="pf-mail" id="pf-mail"></div>
+    <div class="pf-kind" id="pf-kind">Mehmon rejimi</div>
+  </div>
+
+  <div class="pf-grid">
+    <div class="pf-box"><div class="pf-v" id="pf-level">A1</div><div class="pf-l">Daraja</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-known">0</div><div class="pf-l">O'rganilgan so'z</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-streak">0</div><div class="pf-l">Seriya</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-record">0</div><div class="pf-l">Rekord seriya</div></div>
+  </div>
+
+  <div class="pf-note" id="pf-note"></div>
+
+  <button class="big-btn secondary" onclick="show('s-stats')">📊 Batafsil statistika</button>
+  <button class="big-btn danger" onclick="logoutAsk()">⏻ Chiqish</button>
+</div>
+
 <!-- XARITA -->
 <div id="s-map" class="screen">
   <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
@@ -571,6 +598,19 @@
   </div>
 </div>
 
+</div>
+
+<!-- CHIQISH -->
+<div class="modal-back" id="logout-modal" onclick="logoutClose(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="logout-title">
+    <div class="modal-ico">⏻</div>
+    <div class="modal-title" id="logout-title">Chiqasizmi?</div>
+    <div class="modal-text" id="logout-text">Hisobingizdan chiqasiz. Progress hisobingizda saqlanib qoladi.</div>
+    <div class="modal-actions">
+      <button class="big-btn secondary" onclick="logoutClose()">Bekor qilish</button>
+      <button class="big-btn danger" onclick="logoutConfirm()">Ha, chiqish</button>
+    </div>
+  </div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>

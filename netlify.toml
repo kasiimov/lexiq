@@ -12,6 +12,12 @@
   path = "/api/generate"
   function = "generate"
 
+# Короткий адрес приложения
+[[redirects]]
+  from = "/app"
+  to = "/app.html"
+  status = 301
+
 # Старый путь к словарю (до переезда в data/) — чтобы не ломать закладки и кэш
 [[redirects]]
   from = "/vocabulary.json"
@@ -19,12 +25,33 @@
   status = 301
   force = true
 
-# Старая версия приложения жила по /ang.html
+# Старая версия приложения жила по /ang.html, а само приложение — на «/»,
+# пока его место не занял лендинг.
 [[redirects]]
   from = "/ang.html"
-  to = "/"
+  to = "/app.html"
   status = 301
   force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+# Шрифты и SDK тянутся с внешних доменов, поэтому список источников явный.
+# Firebase нужен для входа, gstatic — сам SDK, googleapis — токены и шрифты.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://securetoken.googleapis.com; frame-src https://*.firebaseapp.com; base-uri 'self'; form-action 'self'"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 [[headers]]
   for = "/data/vocabulary.json"

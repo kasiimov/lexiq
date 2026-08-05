@@ -25,15 +25,21 @@ LexiQ is a free educational platform that makes learning English engaging and ef
 
 ```
 lexiq/
-├── index.html            # Main learning application (markup only)
+├── index.html            # Landing page — the public site
+├── app.html              # The application itself, behind the sign-in screen
 ├── admin.html            # Admin panel for vocabulary management
+├── 404.html
 ├── assets/
 │   ├── css/
-│   │   ├── app.css       # Styles for index.html
-│   │   └── admin.css     # Styles for admin.html
-│   └── js/
-│       ├── app.js        # Application logic
-│       └── admin.js      # Admin panel logic
+│   │   ├── site.css      # Landing styles
+│   │   ├── app.css       # Application styles
+│   │   └── admin.css     # Admin panel styles
+│   ├── js/
+│   │   ├── auth.js       # Sign-in layer: Firebase or guest mode
+│   │   ├── app.js        # Application logic
+│   │   └── admin.js      # Admin panel logic
+│   ├── favicon.svg
+│   └── og-image.png      # Social preview, 1200x630
 ├── data/
 │   └── vocabulary.json   # Vocabulary database (558 words)
 ├── netlify/
@@ -42,7 +48,10 @@ lexiq/
 │       │   └── llm.ts    # Shared provider list, LLM call, stream and JSON helpers
 │       ├── tutor.ts      # Streaming AI chat (/api/tutor)
 │       └── generate.ts   # Lesson and quiz generation (/api/generate)
-├── netlify.toml          # Netlify build/redirect/header/edge-function config
+├── manifest.webmanifest
+├── netlify.toml          # Redirects, security headers, edge-function routes
+├── robots.txt
+├── sitemap.xml
 ├── README.md
 └── .gitignore
 ```
@@ -107,6 +116,22 @@ Distribution by CEFR level:
 | B1    | 64    |
 | B2    | 82    |
 | C1    | 86    |
+
+## 👤 Accounts
+
+`index.html` is the landing page; the application lives at `app.html` and opens on a
+sign-in screen. Two modes, picked automatically:
+
+- **Firebase** — email/password and Google sign-in, the account works on any device.
+  Enabled as soon as `assets/js/firebase-config.js` exists with real keys
+  (copy `firebase-config.example.js`, follow the steps written in it). That file is
+  gitignored, so project keys never land in the repository.
+- **Guest** — the fallback when no config is present. The profile lives in
+  `localStorage`, the app is fully usable, and registration controls stay hidden
+  instead of failing on click.
+
+Progress, statistics and the Leitner boxes are stored per browser in both modes;
+moving them into the account is the next step.
 
 ## 🚀 Getting Started
 

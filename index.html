@@ -2,429 +2,216 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LexiQ — Ingliz tili o'rganish</title>
-<link rel="stylesheet" href="assets/css/app.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexiQ — ingliz tilini o'yin bilan o'rganing</title>
+<meta name="description" content="LexiQ — o'zbek tilida so'zlashuvchilar uchun bepul ingliz tili platformasi: 6 ta o'yin rejimi, sun'iy intellekt ustozi, CEFR darajalari va takrorlash tizimi.">
+<meta name="theme-color" content="#262523">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
+<link rel="canonical" href="https://lexiq-uz.netlify.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lexiq-uz.netlify.app/">
+<meta property="og:title" content="LexiQ — ingliz tilini o'yin bilan o'rganing">
+<meta property="og:description" content="Bepul ingliz tili platformasi: o'yinlar, AI ustoz va CEFR darajalari. O'zbek tilida.">
+<meta property="og:image" content="https://lexiq-uz.netlify.app/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lexiq-uz.netlify.app/assets/og-image.png">
+
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
 
-<div class="app">
-
-<!-- LOADING -->
-<div id="s-loading" class="screen active">
-  <div class="loading-screen">
-    <div class="spinner"></div>
-    <div class="ls-title">LexiQ</div>
-    <div class="ls-sub">Lug'at yuklanmoqda...</div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">L</span>
+      <span class="brand-name">LexiQ</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#imkoniyatlar">Imkoniyatlar</a>
+      <a href="#qanday">Qanday ishlaydi</a>
+      <a href="#darajalar">Darajalar</a>
+    </nav>
+    <a class="btn btn-primary" href="app.html">Bepul boshlash</a>
   </div>
-</div>
+</header>
 
-<!-- ERROR / FIRST RUN -->
-<div id="s-error" class="screen">
-  <div class="logo-row">
-    <div class="logo-box">🧠</div>
-    <div class="logo-text">
-      <div class="t1">LexiQ</div>
-      <div class="t2">Bepul ingliz tili o'rganish</div>
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-badge">🇺🇿 O'zbek tilida · Bepul</span>
+    <h1>Ingliz tilini o'yin bilan o'rganing,<br><em>zerikarli darslarsiz</em></h1>
+    <p>
+      LexiQ — o'zbek tilida so'zlashuvchilar uchun ingliz tili platformasi.
+      Oltita o'yin rejimi, sun'iy intellekt ustozi va ilmiy asoslangan takrorlash tizimi.
+      Ro'yxatdan o'tish bir daqiqa, to'lov yo'q.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="app.html">Hoziroq boshlash →</a>
+      <a class="btn btn-ghost btn-lg" href="#imkoniyatlar">Imkoniyatlarni ko'rish</a>
+    </div>
+    <div class="hero-note">Karta ham, obuna ham kerak emas. Brauzerda ishlaydi.</div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-v">558</div><div class="stat-l">tanlangan so'z</div></div>
+      <div class="stat"><div class="stat-v">6</div><div class="stat-l">o'yin rejimi</div></div>
+      <div class="stat"><div class="stat-v">A1–C1</div><div class="stat-l">CEFR darajalari</div></div>
+      <div class="stat"><div class="stat-v">24/7</div><div class="stat-l">AI ustoz</div></div>
     </div>
   </div>
-  <div class="error-screen">
-    <div class="es-icon">📚</div>
-    <div class="es-title">Lug'at yuklanmagan</div>
-    <div class="es-sub" id="error-msg">vocabulary.json fayl topilmadi.<br>So'zlar lug'atini yuklash kerak.</div>
+</section>
 
-    <div class="file-input-wrap">
-      <button class="big-btn primary">📥 vocabulary.json yuklash</button>
-      <input type="file" accept=".json,application/json" onchange="loadVocabFromFile(event)">
+<section id="imkoniyatlar">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Imkoniyatlar</span>
+      <h2>O'rganish uchun kerak bo'lgan hamma narsa</h2>
+      <p>Har bir vosita bitta maqsad uchun: so'zlarni tez yodlash va uzoq esda saqlash.</p>
     </div>
+    <div class="cards">
 
-    <div class="es-help">
-      <b>💡 Qanday qilish kerak:</b><br><br>
-      1. <code>admin.html</code> faylini oching (kompyuterda)<br>
-      2. So'zlarni qo'shing yoki tahrirlang<br>
-      3. <b>"💾 JSON eksport"</b> tugmasini bosing<br>
-      4. Yuklab olingan <code>vocabulary-...json</code> faylni shu yerda yuklang<br><br>
-      Yoki <code>vocabulary.json</code> faylni <code>data/</code> papkasiga qo'ying — avtomatik yuklanadi.
+      <div class="card reveal"><div class="card-inner">
+        <div class="card-ico">🤖</div>
+        <h3>AI ustoz</h3>
+        <p>Istalgan savolni bering — yozgan gapingizni tekshiradi, xatoni tushuntiradi va misol beradi. Javoblar o'zbek tilida.</p>
+      </div></div>
+
+      <div class="card reveal"><div class="card-inner">
+        <div class="card-ico">🧠</div>
+        <h3>AI dars va test</h3>
+        <p>Mavzuni tanlaysiz — sun'iy intellekt darajangizga mos dars va test tayyorlaydi. Xato qilsangiz, sababini batafsil ochib beradi.</p>
+      </div></div>
+
+      <div class="card reveal"><div class="card-inner">
+        <div class="card-ico">🎮</div>
+        <h3>Oltita o'yin rejimi</h3>
+        <p>Classic, 4 variant, Time Attack, Survival, gapdagi bo'sh joy va gap qurish. Bir xil so'z har safar boshqacha so'raladi.</p>
+      </div></div>
+
+      <div class="card reveal"><div class="card-inner">
+        <div class="card-ico">🔁</div>
+        <h3>Leitner takrorlash</h3>
+        <p>Bilgan so'zingiz kamroq, qiyini tez-tez so'raladi. Ilmiy tasdiqlangan usul — yodlash uchun eng samarali.</p>
+      </div></div>
+
+      <div class="card reveal"><div class="card-inner">
+        <div class="card-ico">📊</div>
+        <h3>Daraja va statistika</h3>
+        <p>Necha so'z bilishingiz, kunlik seriya va CEFR darajangiz — hammasi bir ekranda ko'rinadi.</p>
+      </div></div>
+
+      <div class="card reveal"><div class="card-inner">
+        <div class="card-ico">📴</div>
+        <h3>Internetsiz ham</h3>
+        <p>So'zlar va natijalar brauzerda saqlanadi. Internet faqat sun'iy intellekt bilan suhbat uchun kerak.</p>
+      </div></div>
+
     </div>
   </div>
-</div>
+</section>
 
-<!-- HOME -->
-<div id="s-home" class="screen">
-  <div class="logo-row" onclick="logoTap()">
-    <div class="logo-box">🧠</div>
-    <div class="logo-text">
-      <div class="t1">LexiQ</div>
-      <div class="t2">Bepul ingliz tili o'rganish</div>
+<section id="qanday">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Qanday ishlaydi</span>
+      <h2>Uch qadamda boshlaysiz</h2>
     </div>
-  </div>
-
-  <div class="level-card">
-    <div class="lc-row">
-      <div>
-        <div class="lc-label">Sizning darajangiz</div>
-        <div class="lc-level" id="user-level">A1</div>
-        <div class="lc-sub" id="user-level-name">Beginner</div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>Ro'yxatdan o'ting</h3>
+        <p>Bir daqiqa vaqt oladi. Yoki mehmon sifatida kiring — natijalar shu qurilmada saqlanadi.</p>
       </div>
-      <div class="lc-icon" id="user-level-icon">🌱</div>
-    </div>
-    <div class="lc-bar-wrap"><div class="lc-bar" id="lc-bar" style="width:0%"></div></div>
-    <div class="lc-bar-label">
-      <span id="lc-bar-current">0 so'z</span>
-      <span id="lc-bar-next">A2 gacha: 500 so'z</span>
-    </div>
-  </div>
-
-  <div class="mini-stats">
-    <div class="ms-box"><div class="ms-v streak" id="ms-streak">0</div><div class="ms-l">🔥 Kun</div></div>
-    <div class="ms-box"><div class="ms-v known" id="ms-known">0</div><div class="ms-l">✓ So'z</div></div>
-    <div class="ms-box"><div class="ms-v daily" id="ms-today">0</div><div class="ms-l">Bugun</div></div>
-  </div>
-
-  <div class="daily-goal">
-    <div class="dg-row">
-      <div class="dg-title">🎯 Kunlik maqsad</div>
-      <div class="dg-count" id="dg-count">0 / 10</div>
-    </div>
-    <div class="dg-bar-wrap"><div class="dg-bar" id="dg-bar"></div></div>
-  </div>
-
-  <button class="big-btn primary" onclick="show('s-topics')">
-    <span>▶</span> Boshlash
-  </button>
-
-  <div class="action-grid">
-    <button class="action-card" onclick="show('s-stats')">
-      <span class="ac-ico">📊</span>
-      <span class="ac-title">Statistika</span>
-      <span class="ac-sub">Batafsil natijalar</span>
-    </button>
-    <button class="action-card tutor-card" onclick="show('s-tutor')">
-      <span class="ac-ico">🤖</span>
-      <span class="ac-title">AI Ustoz</span>
-      <span class="ac-sub">Savol bering</span>
-    </button>
-    <button class="action-card tutor-card" onclick="show('s-ai')">
-      <span class="ac-ico">🧠</span>
-      <span class="ac-title">AI mashq</span>
-      <span class="ac-sub">Dars va test</span>
-    </button>
-  </div>
-</div>
-
-<!-- TOPICS -->
-<div id="s-topics" class="screen">
-  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
-  <div>
-    <div class="sec-lbl">Daraja</div>
-    <div class="level-pills" id="level-pills">
-      <button class="lvl-pill active" data-lvl="all" onclick="setLevelFilter('all')">Hammasi</button>
-      <button class="lvl-pill" data-lvl="A1" onclick="setLevelFilter('A1')">A1</button>
-      <button class="lvl-pill" data-lvl="A2" onclick="setLevelFilter('A2')">A2</button>
-      <button class="lvl-pill" data-lvl="B1" onclick="setLevelFilter('B1')">B1</button>
-      <button class="lvl-pill" data-lvl="B2" onclick="setLevelFilter('B2')">B2</button>
-      <button class="lvl-pill" data-lvl="C1" onclick="setLevelFilter('C1')">C1</button>
-    </div>
-  </div>
-  <div>
-    <div class="sec-lbl">Mavzu tanlang</div>
-    <div class="topics-grid" id="topics-grid"></div>
-  </div>
-  <button class="big-btn primary" onclick="show('s-modes')">Davom etish →</button>
-</div>
-
-<!-- MODES -->
-<div id="s-modes" class="screen">
-  <button class="back-btn" onclick="show('s-topics')">← Orqaga</button>
-  <div>
-    <div class="sec-lbl">Tarjima yo'nalishi</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-      <button class="gm-card selected" id="dir-eu" onclick="setDir('en-uz')">
-        <span class="gm-ico">🇬🇧 → 🇺🇿</span>
-        <span class="gm-name">EN → UZ</span>
-      </button>
-      <button class="gm-card" id="dir-ue" onclick="setDir('uz-en')">
-        <span class="gm-ico">🇺🇿 → 🇬🇧</span>
-        <span class="gm-name">UZ → EN</span>
-      </button>
-    </div>
-  </div>
-  <div>
-    <div class="sec-lbl">O'yin rejimi</div>
-    <div class="gm-grid">
-      <button class="gm-card selected" data-gm="classic" onclick="setGameMode('classic')">
-        <span class="gm-ico">📚</span><span class="gm-name">Classic</span><span class="gm-desc">Oddiy rejim</span>
-      </button>
-      <button class="gm-card" data-gm="multi" onclick="setGameMode('multi')">
-        <span class="gm-ico">🎯</span><span class="gm-name">4 variant</span><span class="gm-desc">Eng oson rejim</span>
-      </button>
-      <button class="gm-card" data-gm="time" onclick="setGameMode('time')">
-        <span class="gm-ico">⏱️</span><span class="gm-name">Time Attack</span><span class="gm-desc">60 soniya</span>
-      </button>
-      <button class="gm-card" data-gm="survival" onclick="setGameMode('survival')">
-        <span class="gm-ico">❤️</span><span class="gm-name">Survival</span><span class="gm-desc">3 jon</span>
-      </button>
-      <button class="gm-card" data-gm="fill" onclick="setGameMode('fill')">
-        <span class="gm-ico">📝</span><span class="gm-name">Fill gap</span><span class="gm-desc">Gapdagi bo'sh joy</span>
-      </button>
-      <button class="gm-card" data-gm="build" onclick="setGameMode('build')">
-        <span class="gm-ico">🏗️</span><span class="gm-name">Sentence</span><span class="gm-desc">Gap qurish</span>
-      </button>
-    </div>
-  </div>
-  <div class="train-opt-box">
-    <div class="train-toggle-row">
-      <div>
-        <div class="tt-t1">🎓 Avval o'rganish</div>
-        <div class="tt-t2">Testdan oldin so'zlarni ko'rib chiqing</div>
+      <div class="step reveal">
+        <h3>Daraja va mavzuni tanlang</h3>
+        <p>A1 dan C1 gacha, 40 dan ortiq mavzu: sayohat, ish, texnologiya, IELTS uchun akademik so'zlar.</p>
       </div>
-      <div class="toggle-sw on" id="train-sw" onclick="toggleTrain()"></div>
-    </div>
-    <div class="train-count-row show" id="train-count-row">
-      <button class="tc-btn" data-tc="10" onclick="setTrainCount(10)">10 so'z</button>
-      <button class="tc-btn sel" data-tc="15" onclick="setTrainCount(15)">15 so'z</button>
-      <button class="tc-btn" data-tc="20" onclick="setTrainCount(20)">20 so'z</button>
-    </div>
-  </div>
-  <button class="big-btn primary" onclick="beginFlow()"><span>▶</span> Boshlash</button>
-</div>
-
-<!-- TRAINING -->
-<div id="s-train" class="screen">
-  <div class="train-topbar">
-    <button class="back-btn" onclick="exitTraining()">← Orqaga</button>
-    <div class="train-progress-wrap"><div class="train-progress-bar" id="train-bar"></div></div>
-    <div class="train-counter" id="train-counter">0 / 0</div>
-  </div>
-  <div class="flashcard">
-    <div class="fc-badge" id="fc-badge">INGLIZCHA</div>
-    <div class="fc-word" id="fc-word">...</div>
-    <div class="fc-phon" id="fc-phon"></div>
-    <button class="fc-speak" id="fc-speak" onclick="speakCurrentTrain()">🔊 Eshitish</button>
-    <div class="fc-divider" id="fc-divider" style="display:none"></div>
-    <div class="fc-translation" id="fc-translation" style="display:none"></div>
-    <div class="fc-example" id="fc-example" style="display:none"></div>
-  </div>
-  <div class="fc-nav">
-    <button class="fc-arrow" id="fc-prev" onclick="trainPrev()">←</button>
-    <button class="fc-flip" id="fc-flip" onclick="flipCard()">👁 Tarjimani ko'rsatish</button>
-    <button class="fc-arrow" id="fc-next" onclick="trainNext()">→</button>
-  </div>
-  <button class="big-btn success" onclick="startGameAfterTrain()">✓ Testga o'tish</button>
-</div>
-
-<!-- GAME -->
-<div id="s-game" class="screen">
-  <div class="g-topbar">
-    <button class="back-btn" onclick="exitGame()">← Orqaga</button>
-    <div class="g-pills">
-      <div class="g-score-pill">⭐ <span id="g-score">0</span></div>
-      <div class="g-timer-pill" id="g-timer-pill" style="display:none">⏱ <span id="g-timer">60</span></div>
-      <div class="g-lives-pill" id="g-lives-pill" style="display:none">❤️❤️❤️</div>
-      <div class="g-mode-pill" id="g-mode-pill">EN→UZ</div>
-    </div>
-  </div>
-  <div class="stats-row">
-    <div class="st-box"><div class="st-v c" id="g-correct">0</div><div class="st-l">To'g'ri</div></div>
-    <div class="st-box"><div class="st-v w" id="g-wrong">0</div><div class="st-l">Xato</div></div>
-    <div class="st-box"><div class="st-v t" id="g-total">0</div><div class="st-l">Jami</div></div>
-  </div>
-  <div class="word-card eng-card" id="word-card">
-    <div class="wc-badge" id="wc-badge">INGLIZCHA SO'Z</div>
-    <div class="wc-word" id="wc-word">—</div>
-    <div class="wc-hint" id="wc-hint"></div>
-    <button class="wc-speak-mini" id="wc-speak-mini" onclick="speakCurrentGame()" style="display:none">🔊</button>
-  </div>
-  <div class="input-wrap uzb-in" id="input-wrap">
-    <div class="input-inner">
-      <span class="in-flag" id="in-flag">🇺🇿</span>
-      <input class="in-field" id="in-field" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="O'zbekcha tarjima..." onkeydown="handleKey(event)">
-      <button class="in-clear" onclick="clearIn()">✕</button>
-    </div>
-  </div>
-  <div class="mc-grid" id="mc-grid" style="display:none"></div>
-  <div id="sb-area" style="display:none;flex-direction:column;gap:10px;">
-    <div class="sb-target empty" id="sb-target"></div>
-    <div class="sb-pool" id="sb-pool"></div>
-  </div>
-  <div class="indicator idle" id="indicator">
-    <span class="ind-ico">💭</span>
-    <div class="ind-body">
-      <div class="ind-title">Tayyor bo'ling</div>
-      <div class="ind-msg" id="ind-msg">Javobingizni tanlang yoki yozing</div>
-    </div>
-  </div>
-  <div class="btn-row single" id="btn-row">
-    <button class="check-btn" id="check-btn" onclick="checkAnswer()">✓ Tekshirish</button>
-  </div>
-  <div class="word-counter" id="word-counter">So'z #1</div>
-</div>
-
-<!-- RESULT -->
-<div id="s-result" class="screen">
-  <div class="result-card">
-    <div class="rc-emoji" id="rc-emoji">🎉</div>
-    <div class="rc-title" id="rc-title">O'yin tugadi!</div>
-    <div class="rc-sub" id="rc-sub">Natijangiz ajoyib</div>
-    <div class="rc-stats">
-      <div class="rc-stat"><div class="rc-sv" id="rc-correct" style="color:#ffe74d">0</div><div class="rc-sl">To'g'ri</div></div>
-      <div class="rc-stat"><div class="rc-sv" id="rc-wrong" style="color:#ff8b80">0</div><div class="rc-sl">Xato</div></div>
-      <div class="rc-stat"><div class="rc-sv" id="rc-score" style="color:#ffe74d">0</div><div class="rc-sl">Ball</div></div>
-    </div>
-    <div class="rc-new" id="rc-new" style="display:none">+ N ta yangi so'z o'rgandingiz!</div>
-  </div>
-  <button class="big-btn primary" onclick="show('s-modes')"><span>▶</span> Yana o'ynash</button>
-  <button class="big-btn secondary" onclick="show('s-home')">🏠 Bosh sahifa</button>
-</div>
-
-<!-- STATS -->
-<div id="s-stats" class="screen">
-  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
-  <div class="level-card">
-    <div class="lc-row">
-      <div>
-        <div class="lc-label">Joriy daraja</div>
-        <div class="lc-level" id="stats-level">A1</div>
-        <div class="lc-sub" id="stats-level-name">Beginner</div>
-      </div>
-      <div class="lc-icon" id="stats-level-icon">🌱</div>
-    </div>
-    <div class="lc-bar-wrap"><div class="lc-bar" id="stats-bar"></div></div>
-    <div class="lc-bar-label">
-      <span id="stats-bar-current">0 so'z</span>
-      <span id="stats-bar-next">A2 gacha: 500 so'z</span>
-    </div>
-  </div>
-  <div class="stats-card">
-    <h3>📊 Darajalar bo'yicha</h3>
-    <div class="cefr-bars" id="cefr-bars"></div>
-  </div>
-  <div class="stats-card">
-    <h3>📚 Mavzular bo'yicha</h3>
-    <div class="topic-stats-list" id="topic-stats-list"></div>
-  </div>
-  <div class="stats-card">
-    <h3>🎓 IELTS bashorat</h3>
-    <div style="text-align:center;padding:10px 0;">
-      <div style="font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:#ffe74d;" id="ielts-band">4.0</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:4px;">taxminiy band score</div>
-      <div style="font-size:11px;color:#ffe74d;margin-top:8px;" id="ielts-hint">Ko'proq so'z o'rganing</div>
-    </div>
-  </div>
-  <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
-</div>
-
-<!-- AI MASHQ: dars va test -->
-<div id="s-ai" class="screen">
-  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
-
-  <!-- 1. Выбор темы -->
-  <div id="ai-setup">
-    <div class="tutor-head">
-      <div class="tutor-ava">🧠</div>
-      <div class="tutor-head-txt">
-        <div class="tutor-name">AI mashq</div>
-        <div class="tutor-sub" id="ai-level-label">Daraja: A1</div>
+      <div class="step reveal">
+        <h3>Har kuni 10 daqiqa o'ynang</h3>
+        <p>Kunlik maqsad va seriya sizni ushlab turadi. Qiyin so'zlar o'zi qaytib keladi.</p>
       </div>
     </div>
-
-    <div class="sec-lbl">Mavzu tanlang</div>
-    <div class="chat-chips" id="ai-topics"></div>
-
-    <div class="ai-topic-wrap">
-      <input class="ai-topic-input" id="ai-topic" type="text" autocomplete="off"
-             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80">
-    </div>
-
-    <div class="ai-btn-row">
-      <button class="big-btn secondary" onclick="aiGenerate('lesson')">📘 Dars</button>
-      <button class="big-btn primary" onclick="aiGenerate('quiz')">📝 Test</button>
-    </div>
-
-    <div class="ai-note">Materialni sun'iy intellekt sizning darajangiz uchun tayyorlaydi.</div>
   </div>
+</section>
 
-  <!-- 2. Загрузка -->
-  <div id="ai-loading" style="display:none">
-    <div class="ai-loading-box">
-      <span class="chat-typing"><i></i><i></i><i></i></span>
-      <div class="ai-loading-txt" id="ai-loading-txt">Tayyorlanmoqda...</div>
+<section id="darajalar">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Darajalar</span>
+      <h2>Noldan boshlab IELTS gacha</h2>
+      <p>Lug'at CEFR bo'yicha taqsimlangan — o'z darajangizdan boshlaysiz, keyingisiga o'zingiz o'sasiz.</p>
     </div>
-  </div>
-
-  <!-- 3. Ошибка -->
-  <div id="ai-error" style="display:none">
-    <div class="chat-msg err" id="ai-error-txt"></div>
-    <button class="big-btn secondary" onclick="aiBackToSetup()">← Qaytish</button>
-  </div>
-
-  <!-- 4. Урок -->
-  <div id="ai-lesson" style="display:none">
-    <div class="lesson-card">
-      <div class="lesson-title" id="lesson-title">—</div>
-      <div class="lesson-intro" id="lesson-intro"></div>
-    </div>
-    <div id="lesson-points"></div>
-    <div class="lesson-summary" id="lesson-summary"></div>
-    <button class="big-btn primary" onclick="aiGenerate('quiz')">📝 Shu mavzuda test</button>
-    <button class="big-btn secondary" onclick="aiBackToSetup()">← Boshqa mavzu</button>
-  </div>
-
-  <!-- 5. Тест -->
-  <div id="ai-quiz" style="display:none">
-    <div class="ai-quiz-top">
-      <div class="ai-q-counter" id="ai-q-counter">1 / 5</div>
-      <div class="ai-q-topic" id="ai-q-topic">—</div>
-    </div>
-    <div class="ai-q-card" id="ai-q-text">—</div>
-    <div class="mc-grid" id="ai-options"></div>
-    <div class="ai-explain" id="ai-explain" style="display:none"></div>
-    <button class="big-btn primary" id="ai-next-btn" onclick="aiNext()" style="display:none">Keyingi →</button>
-  </div>
-
-  <!-- 6. Результат теста -->
-  <div id="ai-result" style="display:none">
-    <div class="result-card">
-      <div class="rc-emoji" id="ai-rc-emoji">🎯</div>
-      <div class="rc-title" id="ai-rc-title">Test tugadi!</div>
-      <div class="rc-sub" id="ai-rc-sub"></div>
-      <div class="rc-stats">
-        <div class="rc-stat"><div class="rc-sv" id="ai-rc-correct" style="color:#ffe74d">0</div><div class="rc-sl">To'g'ri</div></div>
-        <div class="rc-stat"><div class="rc-sv" id="ai-rc-wrong" style="color:#ff8b80">0</div><div class="rc-sl">Xato</div></div>
+    <div class="levels">
+      <div class="level reveal">
+        <div class="level-code">A1</div><div class="level-name">Beginner</div>
+        <div class="level-bar"><i style="width:100%"></i></div>
+        <div class="level-count">289 ta so'z</div>
+      </div>
+      <div class="level reveal">
+        <div class="level-code">A2</div><div class="level-name">Elementary</div>
+        <div class="level-bar"><i style="width:13%"></i></div>
+        <div class="level-count">37 ta so'z</div>
+      </div>
+      <div class="level reveal">
+        <div class="level-code">B1</div><div class="level-name">Intermediate</div>
+        <div class="level-bar"><i style="width:22%"></i></div>
+        <div class="level-count">64 ta so'z</div>
+      </div>
+      <div class="level reveal">
+        <div class="level-code">B2</div><div class="level-name">Upper-Int.</div>
+        <div class="level-bar"><i style="width:28%"></i></div>
+        <div class="level-count">82 ta so'z</div>
+      </div>
+      <div class="level reveal">
+        <div class="level-code">C1</div><div class="level-name">Advanced</div>
+        <div class="level-bar"><i style="width:30%"></i></div>
+        <div class="level-count">86 ta so'z</div>
       </div>
     </div>
-    <div class="sec-lbl" id="ai-review-lbl" style="display:none">Xatolar ustida ishlash</div>
-    <div id="ai-review"></div>
-    <button class="big-btn primary" onclick="aiGenerate('quiz')">🔄 Yana test</button>
-    <button class="big-btn secondary" onclick="aiBackToSetup()">← Boshqa mavzu</button>
   </div>
-</div>
+</section>
 
-<!-- AI USTOZ -->
-<div id="s-tutor" class="screen">
-  <button class="back-btn" onclick="show('s-home')">← Orqaga</button>
-
-  <div class="tutor-head">
-    <div class="tutor-ava">🤖</div>
-    <div class="tutor-head-txt">
-      <div class="tutor-name">AI Ustoz</div>
-      <div class="tutor-sub" id="tutor-level-label">Daraja: A1</div>
+<section>
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <h2>Bugun boshlang</h2>
+      <p>Birinchi darsgacha bir bosish qoldi. To'lov ham, reklama ham yo'q.</p>
+      <a class="btn btn-primary btn-lg" href="app.html">Bepul boshlash →</a>
     </div>
-    <button class="tutor-clear" onclick="tutorReset()" title="Suhbatni tozalash">🗑</button>
   </div>
+</section>
 
-  <div class="chat-log" id="chat-log"></div>
+</main>
 
-  <div class="chat-chips" id="chat-chips"></div>
-
-  <div class="chat-input-row">
-    <textarea id="chat-input" class="chat-input" rows="1" placeholder="Savolingizni yozing..." oninput="tutorAutoGrow(this)"></textarea>
-    <button class="chat-send" id="chat-send" onclick="tutorSend()" aria-label="Yuborish">➤</button>
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <p>© 2026 LexiQ · Toshkent</p>
+    <nav class="foot-links">
+      <a href="app.html">Ilova</a>
+      <a href="#imkoniyatlar">Imkoniyatlar</a>
+      <a href="https://github.com/kasiimov/lexiq" target="_blank" rel="noopener">GitHub</a>
+    </nav>
   </div>
-</div>
+</footer>
 
-</div>
+<script>
+// Плавное появление секций. Если IntersectionObserver недоступен —
+// просто показываем всё сразу, контент не должен зависеть от анимации.
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
+</script>
 
-<script src="assets/js/app.js"></script>
 </body>
 </html>

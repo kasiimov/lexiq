@@ -862,17 +862,134 @@ function resetProgress() {
   show('s-home');
 }
 
-// INIT
-async function init() {
-  const loaded = await loadVocab();
-  if (loaded && VOCAB.length > 0) {
-    show('s-home');
-  } else {
-    show('s-error');
+// ────────────────────────────────────────────────────────────────────
+// KIRISH — экран входа и переход в приложение.
+// Пока пользователь не вошёл (или не выбрал режим гостя), словарь не
+// грузится и приложение не показывается.
+// ────────────────────────────────────────────────────────────────────
+let authMode = 'in';        // 'in' — вход, 'up' — регистрация
+let authBusy = false;
+let appStarted = false;
+
+function authTab(mode) {
+  authMode = mode;
+  document.getElementById('auth-tab-in').classList.toggle('active', mode === 'in');
+  document.getElementById('auth-tab-up').classList.toggle('active', mode === 'up');
+  document.getElementById('auth-name-row').style.display = mode === 'up' ? '' : 'none';
+  document.getElementById('auth-submit').textContent = mode === 'up' ? "Ro'yxatdan o'tish" : 'Kirish';
+  document.getElementById('auth-pass').setAttribute('autocomplete', mode === 'up' ? 'new-password' : 'current-password');
+  authError('');
+}
+
+function authError(msg) {
+  const box = document.getElementById('auth-err');
+  box.textContent = msg || '';
+  box.style.display = msg ? '' : 'none';
+}
+
+function authSetBusy(state) {
+  authBusy = state;
+  document.getElementById('auth-submit').disabled = state;
+  document.getElementById('auth-google').disabled = state;
+}
+
+async function authSubmit() {
+  if (authBusy) return;
+  const name = document.getElementById('auth-name').value.trim();
+  const email = document.getElementById('auth-email').value.trim();
+  const pass = document.getElementById('auth-pass').value;
+
+  if (!email || !pass) { authError("Email va parolni to'ldiring"); return; }
+  if (authMode === 'up' && pass.length < 6) { authError('Parol kamida 6 ta belgidan iborat bo\'lsin'); return; }
+
+  authError('');
+  authSetBusy(true);
+  try {
+    if (authMode === 'up') await LexiQAuth.signUp(name, email, pass);
+    else await LexiQAuth.signIn(email, pass);
+  } catch (e) {
+    authError(e.message);
+  } finally {
+    authSetBusy(false);
   }
 }
 
-init();
+async function authGoogle() {
+  if (authBusy) return;
+  authError('');
+  authSetBusy(true);
+  try {
+    await LexiQAuth.signInGoogle();
+  } catch (e) {
+    authError(e.message);
+  } finally {
+    authSetBusy(false);
+  }
+}
+
+function authGuest() {
+  const name = document.getElementById('auth-name').value.trim();
+  LexiQAuth.continueAsGuest(name);
+}
+
+async function authSignOut() {
+  if (!confirm('Chiqishni xohlaysizmi?')) return;
+  await LexiQAuth.signOut();
+  appStarted = false;
+  show('s-auth');
+}
+
+// Без настроенного Firebase регистрация невозможна — показываем только вход гостем,
+// чтобы человек не тыкал в поля, которые всё равно не сработают.
+function authApplyMode() {
+  const online = LexiQAuth.isFirebase();
+  ['auth-tabs', 'auth-submit', 'auth-google'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = online ? '' : 'none';
+  });
+  document.querySelector('.auth-fields').style.display = online ? '' : 'none';
+  document.querySelector('.auth-sep').style.display = online ? '' : 'none';
+  if (!online) {
+    document.getElementById('auth-note').textContent =
+      "Hozircha mehmon rejimi ishlaydi: natijalar shu qurilmada saqlanadi.";
+  }
+}
+
+function renderUser(user) {
+  const chip = document.getElementById('user-chip');
+  if (!chip) return;
+  const name = user.name || 'Mehmon';
+  document.getElementById('uc-name').textContent = name;
+  document.getElementById('uc-ava').textContent = name.charAt(0).toUpperCase();
+}
+
+async function startApp() {
+  if (appStarted) return;
+  appStarted = true;
+  show('s-loading');
+  const loaded = await loadVocab();
+  show(loaded && VOCAB.length > 0 ? 's-home' : 's-error');
+}
+
+function onAuthChange(user) {
+  if (user) {
+    renderUser(user);
+    startApp();
+  } else {
+    appStarted = false;
+    authApplyMode();
+    show('s-auth');
+  }
+}
+
+LexiQAuth.onChange(onAuthChange);
+LexiQAuth.init();
+
+// Enter в любом поле формы — отправка
+['auth-name', 'auth-email', 'auth-pass'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') authSubmit(); });
+});
 
 // ────────────────────────────────────────────────────────────────────
 // AI USTOZ — чат с ИИ-репетитором.

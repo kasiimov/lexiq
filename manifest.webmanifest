@@ -1,0 +1,14 @@
+{
+  "name": "LexiQ — Ingliz tili o'rganish",
+  "short_name": "LexiQ",
+  "description": "O'zbek tilida so'zlashuvchilar uchun bepul ingliz tili platformasi.",
+  "lang": "uz",
+  "start_url": "/app.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#262523",
+  "theme_color": "#262523",
+  "icons": [
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

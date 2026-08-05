@@ -19,3 +19,6 @@ skills-lock.json
 
 # Local env for netlify dev (ключи ИИ)
 .env
+
+# Ключи Firebase конкретного проекта
+assets/js/firebase-config.js

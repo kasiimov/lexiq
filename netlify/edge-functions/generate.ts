@@ -134,7 +134,7 @@ function readingPrompt(level: string, genre: string, topic: string): string {
   ].join("\n");
 }
 
-function wordsPrompt(level: string, topic: string, count: number): string {
+function wordsPrompt(level: string, topic: string, count: number, exclude: string[]): string {
   return [
     "You are LexiQ, building a vocabulary list for Uzbek speakers learning English.",
     `Give exactly ${count} useful English words at CEFR level ${level} on the topic: ${topic}.`,
@@ -147,6 +147,11 @@ function wordsPrompt(level: string, topic: string, count: number): string {
     "- 'pos' is one of: noun, verb, adj, adv, prep, pron, conj, phrase.",
     "- Words must be genuinely useful at this level, no rare or archaic ones.",
     "- No duplicates, no two words with the same meaning.",
+    // Без этого модель раз за разом выдаёт один и тот же список, и после
+    // отсева дублей до ученика доходит одно-два новых слова.
+    exclude.length
+      ? "- The learner already knows these words, do not use any of them: " + exclude.join(", ")
+      : "",
     "- NEVER put a double quote inside a string value; use single quotes instead.",
     "",
     "Answer with JSON only, exactly this shape:",
@@ -322,7 +327,7 @@ export default async function handler(request: Request): Promise<Response> {
   }
   if (request.method !== "POST") return jsonError(405, "Faqat POST");
 
-  let body: { mode?: unknown; level?: unknown; topic?: unknown; count?: unknown; genre?: unknown; text?: unknown; task?: unknown };
+  let body: { mode?: unknown; level?: unknown; topic?: unknown; count?: unknown; genre?: unknown; text?: unknown; task?: unknown; exclude?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -330,6 +335,7 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   const KNOWN = ["lesson", "words", "reading", "writing"];
+  const MAX_EXCLUDE = 60;
   const mode = typeof body.mode === "string" && KNOWN.includes(body.mode) ? body.mode : "quiz";
   const level = normalizeLevel(body.level);
   const topic = str(body.topic, MAX_TOPIC_CHARS) || "kundalik ingliz tili";
@@ -342,6 +348,11 @@ export default async function handler(request: Request): Promise<Response> {
 
   const genre = typeof body.genre === "string" ? body.genre : "hikoya";
   const essay = str(body.text, MAX_ESSAY_CHARS);
+  // Список уже известных слов: длинный список раздувает запрос, поэтому
+  // берём последние — свежие повторы мешают сильнее старых.
+  const exclude = Array.isArray(body.exclude)
+    ? body.exclude.map((w) => str(w, 40)).filter(Boolean).slice(-MAX_EXCLUDE)
+    : [];
   const task = str(body.task, 200) || "Write about your day";
   if (mode === "writing" && essay.split(/\s+/).filter(Boolean).length < 10) {
     return jsonError(400, "Matn juda qisqa", "kamida 10 ta so'z yozing");
@@ -349,7 +360,7 @@ export default async function handler(request: Request): Promise<Response> {
   const prompt = mode === "lesson"
     ? lessonPrompt(level, topic)
     : mode === "words"
-      ? wordsPrompt(level, topic, count)
+      ? wordsPrompt(level, topic, count, exclude)
       : mode === "reading"
         ? readingPrompt(level, genre, topic)
         : mode === "writing"

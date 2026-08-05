@@ -227,7 +227,7 @@
     <div class="topics-grid" id="topics-grid"></div>
   </div>
   <button class="big-btn primary" onclick="show('s-modes')">Davom etish →</button>
-  <button class="big-btn secondary" id="more-words-btn" onclick="vocabAddMore()">🤖 Yangi so'zlar qo'shish</button>
+  <button class="big-btn secondary" onclick="show('s-words')">🤖 Yangi so'zlar qo'shish</button>
 </div>
 
 <!-- MODES -->
@@ -414,6 +414,58 @@
     </div>
   </div>
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;">🔄 Statistikani tozalash</button>
+</div>
+
+<!-- YANGI SO'ZLAR -->
+<div id="s-words" class="screen">
+  <button class="back-btn" onclick="show('s-topics')">← Orqaga</button>
+
+  <div id="words-setup">
+    <div class="tutor-head">
+      <div class="tutor-ava">🤖</div>
+      <div class="tutor-head-txt">
+        <div class="tutor-name">Yangi so'zlar</div>
+        <div class="tutor-sub" id="words-level-label">Daraja: A1</div>
+      </div>
+    </div>
+
+    <div class="sec-lbl">Kategoriya</div>
+    <div class="chat-chips" id="words-topics"></div>
+
+    <div class="ai-topic-wrap">
+      <input class="ai-topic-input" id="words-topic" type="text" autocomplete="off"
+             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80" oninput="wordsSummary()">
+    </div>
+
+    <div class="sec-lbl">Nechta so'z</div>
+    <div class="chat-chips" id="words-counts"></div>
+
+    <div class="words-summary" id="words-summary">—</div>
+    <button class="big-btn primary" onclick="wordsGenerate()">Davom etish →</button>
+  </div>
+
+  <div id="words-loading" style="display:none">
+    <div class="ai-loading-box">
+      <span class="chat-typing"><i></i><i></i><i></i></span>
+      <div class="ai-loading-txt" id="words-loading-txt">So'zlar tayyorlanmoqda...</div>
+    </div>
+  </div>
+
+  <div id="words-error" style="display:none">
+    <div class="chat-msg err" id="words-error-txt"></div>
+    <button class="big-btn secondary" onclick="wordsBack()">← Qaytish</button>
+  </div>
+
+  <div id="words-done" style="display:none">
+    <div class="result-card">
+      <div class="rc-emoji">📚</div>
+      <div class="rc-title" id="words-done-title">Qo'shildi</div>
+      <div class="rc-sub" id="words-done-sub"></div>
+    </div>
+    <div class="read-gloss" id="words-list"></div>
+    <button class="big-btn primary" onclick="show('s-topics')">✓ Mavzularga qaytish</button>
+    <button class="big-btn secondary" onclick="wordsBack()">🤖 Yana qo'shish</button>
+  </div>
 </div>
 
 <!-- YOZISH -->

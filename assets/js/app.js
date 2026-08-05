@@ -162,6 +162,7 @@ function show(id) {
   if (id === 's-profile') renderProfile();
   if (id === 's-read') readInit();
   if (id === 's-write') writeInit();
+  if (id === 's-words') wordsInit();
   window.scrollTo(0,0);
 }
 
@@ -217,7 +218,12 @@ async function vocabFetchWords(level, topic, count) {
   const res = await fetch(AI_ENDPOINT, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ mode: 'words', level, topic, count: count || WORDS_PER_BATCH }),
+    body: JSON.stringify({
+      mode: 'words', level, topic, count: count || WORDS_PER_BATCH,
+      // Без этого модель повторяет тот же список, и после отсева дублей
+      // до ученика доходит одно-два новых слова.
+      exclude: VOCAB.slice(-60).map(w => w.en),
+    }),
   });
   if (!res.ok) {
     const info = await res.json().catch(() => ({}));
@@ -250,32 +256,6 @@ async function vocabGenerateStarter() {
   }
 }
 
-// Докинуть слов по текущему уровню и выбранной теме.
-async function vocabAddMore() {
-  const btn = document.getElementById('more-words-btn');
-  if (btn) { btn.disabled = true; btn.textContent = "⏳ Tayyorlanmoqda..."; }
-
-  const level = getCEFRLevel();
-  const topic = topicFilter !== 'all'
-    ? (TOPIC_NAMES[topicFilter] || topicFilter)
-    : STARTER_TOPICS[Math.floor(Math.random() * STARTER_TOPICS.length)];
-
-  try {
-    const words = await vocabFetchWords(level, topic, WORDS_PER_BATCH);
-    const have = new Set(VOCAB.map(w => w.id));
-    const fresh = words.filter(w => !have.has(w.id));
-    VOCAB = VOCAB.concat(fresh);
-    saveVocab();
-    renderTopics();
-    if (btn) btn.textContent = '✓ ' + fresh.length + " ta yangi so'z qo'shildi";
-  } catch (e) {
-    if (btn) btn.textContent = '⚠️ ' + e.message;
-  } finally {
-    setTimeout(() => {
-      if (btn) { btn.disabled = false; btn.textContent = "🤖 Yangi so'zlar qo'shish"; }
-    }, 2500);
-  }
-}
 
 function loadVocabFromFile(event) {
   const file = event.target.files[0];
@@ -2624,4 +2604,126 @@ function readReveal() {
   document.getElementById('rd-hidden').style.display = 'none';
   document.getElementById('rd-gloss').style.display = '';
   document.getElementById('rd-listen').classList.remove('on');
+}
+
+// ────────────────────────────────────────────────────────────────────
+// YANGI SO'ZLAR — ученик сам выбирает категорию и количество.
+// Раньше кнопка молча просила 20 слов на случайную тему, а после отсева
+// дублей доходило одно-два: модель выдавала тот же список. Теперь список
+// уже известных слов уходит на сервер, и он просит модель их не повторять.
+// ────────────────────────────────────────────────────────────────────
+const WORDS_VIEWS = ['words-setup', 'words-loading', 'words-error', 'words-done'];
+const WORDS_CATEGORIES = [
+  { id: 'kundalik',   label: '🏠 Kundalik hayot' },
+  { id: 'oila',       label: '👨‍👩‍👧 Oila' },
+  { id: 'ovqat',      label: '🍽 Ovqat' },
+  { id: 'sayohat',    label: '✈️ Sayohat' },
+  { id: 'ish',        label: '💼 Ish' },
+  { id: 'talim',      label: "🎓 Ta'lim" },
+  { id: 'texnologiya',label: '📱 Texnologiya' },
+  { id: 'sogliq',     label: "🩺 Sog'liq" },
+  { id: 'tabiat',     label: '🌳 Tabiat' },
+  { id: 'sport',      label: '⚽️ Sport' },
+  { id: 'hissiyot',   label: "💭 His-tuyg'ular" },
+  { id: 'akademik',   label: '📚 Akademik' },
+];
+const WORDS_COUNTS = [10, 15, 20, 30];
+
+let wordsCategory = WORDS_CATEGORIES[0];
+let wordsCount = 10;
+let wordsBusy = false;
+
+function wordsShowView(id) {
+  WORDS_VIEWS.forEach(v => {
+    const el = document.getElementById(v);
+    if (el) el.style.display = (v === id) ? '' : 'none';
+  });
+}
+
+function wordsBack() { wordsShowView('words-setup'); }
+
+function wordsInit() {
+  document.getElementById('words-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+
+  const cats = document.getElementById('words-topics');
+  cats.innerHTML = '';
+  WORDS_CATEGORIES.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip' + (c.id === wordsCategory.id ? ' on' : '');
+    b.textContent = c.label;
+    b.onclick = () => {
+      wordsCategory = c;
+      document.getElementById('words-topic').value = '';
+      wordsInit();
+    };
+    cats.appendChild(b);
+  });
+
+  const counts = document.getElementById('words-counts');
+  counts.innerHTML = '';
+  WORDS_COUNTS.forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'chat-chip' + (n === wordsCount ? ' on' : '');
+    b.textContent = n + ' ta';
+    b.onclick = () => { wordsCount = n; wordsInit(); };
+    counts.appendChild(b);
+  });
+
+  wordsSummary();
+  wordsShowView('words-setup');
+}
+
+// Из подписи вида «🏠 Kundalik hayot» для запроса берём только текст темы.
+function wordsPickedTopic() {
+  const typed = document.getElementById('words-topic').value.trim();
+  return typed || wordsCategory.label.replace(/^\S+\s/, '');
+}
+
+function wordsSummary() {
+  document.getElementById('words-summary').textContent =
+    getCEFRLevel() + ' darajasi · ' + wordsPickedTopic() + ' · ' + wordsCount + " ta so'z";
+}
+
+async function wordsGenerate() {
+  if (wordsBusy) return;
+  wordsBusy = true;
+  const topic = wordsPickedTopic();
+  const level = getCEFRLevel();
+
+  wordsShowView('words-loading');
+  document.getElementById('words-loading-txt').textContent = wordsCount + " ta so'z tayyorlanmoqda...";
+
+  try {
+    const words = await vocabFetchWords(level, topic, wordsCount);
+    const have = new Set(VOCAB.map(w => w.id));
+    const fresh = words.filter(w => !have.has(w.id));
+    VOCAB = VOCAB.concat(fresh);
+    saveVocab();
+
+    document.getElementById('words-done-title').textContent =
+      fresh.length ? fresh.length + " ta yangi so'z" : "Yangi so'z chiqmadi";
+    document.getElementById('words-done-sub').textContent = fresh.length
+      ? topic + " · lug'atda jami " + VOCAB.length + " ta so'z"
+      : "Bu mavzudagi so'zlar allaqachon lug'atingizda. Boshqa mavzuni tanlang.";
+
+    const list = document.getElementById('words-list');
+    list.innerHTML = '';
+    fresh.forEach(w => {
+      const row = document.createElement('div');
+      row.className = 'gloss-row';
+      row.innerHTML = '<span class="gloss-en"></span><span class="gloss-uz"></span><button class="gloss-say">🔊</button>';
+      row.querySelector('.gloss-en').textContent = w.en;
+      row.querySelector('.gloss-uz').textContent = Array.isArray(w.uz) ? w.uz.join(', ') : w.uz;
+      row.querySelector('.gloss-say').onclick = () => aiSpeak(w.en);
+      list.appendChild(row);
+    });
+
+    wordsShowView('words-done');
+  } catch (e) {
+    wordsShowView('words-error');
+    document.getElementById('words-error-txt').textContent = e.message;
+  } finally {
+    wordsBusy = false;
+    window.scrollTo(0, 0);
+  }
 }

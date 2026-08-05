@@ -146,6 +146,9 @@ let currentWord = null;
 let newWordsThisSession = 0;
 let checked=false, loading=false;
 let timerId=null, timeLeft=60;
+// Часы сессии идут во всех режимах: в Time Attack они рядом с обратным
+// отсчётом и показывают, сколько занятие длится на самом деле.
+let clockId=null, clockStart=0, clockElapsed=0;
 let lives=3;
 let trainPool=[]; let trainIdx=0; let trainFlipped=false;
 
@@ -507,6 +510,7 @@ function startGame() {
 
   sScore=0; sCorrect=0; sWrong=0; sTotal=0; wordNum=1;
   lives=3; timeLeft=60;
+  clockStartRun();
   newWordsThisSession = 0;
   if (timerId) { clearInterval(timerId); timerId=null; }
 
@@ -538,8 +542,39 @@ function configureGameUI() {
   else inputWrap.style.display = 'block';
 }
 
+// Досрочное завершение: сессия закрывается и показывает результат,
+// а не просто выкидывает назад без счёта.
+function fmtClock(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function clockStartRun() {
+  clockStop();
+  clockStart = Date.now();
+  clockElapsed = 0;
+  document.getElementById('g-clock').textContent = '0:00';
+  clockId = setInterval(() => {
+    clockElapsed = Math.floor((Date.now() - clockStart) / 1000);
+    document.getElementById('g-clock').textContent = fmtClock(clockElapsed);
+  }, 1000);
+}
+
+function clockStop() {
+  if (clockId) { clearInterval(clockId); clockId = null; }
+}
+
+function finishGame() {
+  if (sTotal === 0) {
+    if (!confirm("Hali birorta javob yo'q. Baribir yakunlaymizmi?")) return;
+  }
+  endGame('manual');
+}
+
 function exitGame() {
   if (timerId) { clearInterval(timerId); timerId=null; }
+  clockStop();
   show('s-modes');
 }
 
@@ -768,6 +803,7 @@ function nextWord() { wordNum++; loadWord(); }
 
 function endGame(reason) {
   if (timerId) { clearInterval(timerId); timerId=null; }
+  clockStop();
   const emoji = reason==='time' ? '⏱️' : (reason==='survival' ? '💔' : '🎉');
   const title = reason==='time' ? 'Vaqt tugadi!' : (reason==='survival' ? 'Jonlar tugadi!' : 'Tugadi!');
   let sub = '';
@@ -785,6 +821,7 @@ function endGame(reason) {
   document.getElementById('rc-correct').textContent = sCorrect;
   document.getElementById('rc-wrong').textContent = sWrong;
   document.getElementById('rc-score').textContent = sScore;
+  document.getElementById('rc-time').textContent = fmtClock(clockElapsed);
   if (newWordsThisSession > 0) {
     document.getElementById('rc-new').style.display = 'block';
     document.getElementById('rc-new').textContent = '+ ' + newWordsThisSession + " ta yangi so'z ko'rdingiz!";

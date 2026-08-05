@@ -312,15 +312,18 @@
     <button class="fc-arrow" id="fc-next" onclick="trainNext()">→</button>
   </div>
   <button class="big-btn success" onclick="startGameAfterTrain()">✓ Testga o'tish</button>
+  <button class="big-btn secondary" onclick="exitTraining()">⏹ Yakunlash</button>
 </div>
 
 <!-- GAME -->
 <div id="s-game" class="screen">
   <div class="g-topbar">
     <button class="back-btn" onclick="exitGame()">← Orqaga</button>
+    <button class="finish-btn" onclick="finishGame()">⏹ Yakunlash</button>
     <div class="g-pills">
       <div class="g-score-pill">⭐ <span id="g-score">0</span></div>
       <div class="g-timer-pill" id="g-timer-pill" style="display:none">⏱ <span id="g-timer">60</span></div>
+      <div class="g-clock-pill" id="g-clock-pill">🕐 <span id="g-clock">0:00</span></div>
       <div class="g-lives-pill" id="g-lives-pill" style="display:none">❤️❤️❤️</div>
       <div class="g-mode-pill" id="g-mode-pill">EN→UZ</div>
     </div>
@@ -371,6 +374,7 @@
       <div class="rc-stat"><div class="rc-sv" id="rc-correct" style="color:#ffe74d">0</div><div class="rc-sl">To'g'ri</div></div>
       <div class="rc-stat"><div class="rc-sv" id="rc-wrong" style="color:#ff8b80">0</div><div class="rc-sl">Xato</div></div>
       <div class="rc-stat"><div class="rc-sv" id="rc-score" style="color:#ffe74d">0</div><div class="rc-sl">Ball</div></div>
+      <div class="rc-stat"><div class="rc-sv" id="rc-time">0:00</div><div class="rc-sl">Vaqt</div></div>
     </div>
     <div class="rc-new" id="rc-new" style="display:none">+ N ta yangi so'z o'rgandingiz!</div>
   </div>

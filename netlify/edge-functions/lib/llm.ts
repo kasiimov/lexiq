@@ -106,10 +106,14 @@ export interface CallResult {
   fatal?: Response;      // ошибка, которую нет смысла ретраить
 }
 
-// 503 у Gemini — это «модель сейчас перегружена», состояние секундное. Уходить
-// с неё сразу по цепочке расточительно: одна короткая пауза чаще всего решает.
-// 429 (кончилась квота) так не лечится — по нему сразу идём дальше.
-const RETRY_DELAY_MS = 1200;
+// 503 у Gemini — это «модель сейчас перегружена», состояние секундное, и
+// прилетает оно часто: в замерах примерно каждый третий запрос. С одним
+// повтором до ученика всё равно доходило бы ~11% отказов, поэтому пробуем
+// трижды с нарастающей паузой — остаётся около процента.
+// 429 (кончилась квота) так не лечится, по нему сразу уходим к следующему провайдеру.
+const OVERLOAD_STATUSES = new Set([500, 502, 503, 504]);
+const MAX_OVERLOAD_RETRIES = 3;
+const RETRY_STEP_MS = 800;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -130,9 +134,9 @@ export async function callLLM(opts: CallOptions): Promise<CallResult> {
     };
     if (opts.json) body.response_format = { type: "json_object" };
 
-    let overloadRetried = false;
+    let overloadRetries = 0;
 
-    // Внутренний цикл — только ради одного повтора по 503. Любой другой исход
+    // Внутренний цикл — только ради повторов по перегрузке. Любой другой исход
     // либо возвращает результат, либо ломает цикл и передаёт ход следующему провайдеру.
     while (true) {
       try {
@@ -145,9 +149,9 @@ export async function callLLM(opts: CallOptions): Promise<CallResult> {
           body: JSON.stringify(body),
         });
 
-        if (upstream.status === 503 && !overloadRetried) {
-          overloadRetried = true;
-          await sleep(RETRY_DELAY_MS);
+        if (OVERLOAD_STATUSES.has(upstream.status) && overloadRetries < MAX_OVERLOAD_RETRIES) {
+          overloadRetries++;
+          await sleep(RETRY_STEP_MS * overloadRetries);
           continue;
         }
         if (upstream.status === 429 || upstream.status >= 500) {

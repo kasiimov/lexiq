@@ -21,6 +21,11 @@ Congix English is a free educational platform that makes learning English engagi
 - **Backend:** none — fully client-side
 - **Hosting:** Netlify, continuous deploy from `main`
 
+## 📁 Documents
+
+Plans and decisions live in [docs/](docs/): [the course plan](docs/kurs.md) is
+the current direction, [the roadmap](docs/roadmap.md) tracks the rest.
+
 ## 📁 Project Structure
 
 ```
@@ -40,6 +45,7 @@ lexiq/
 │   │   └── admin.js      # Admin panel logic
 │   ├── favicon.svg
 │   └── og-image.png      # Social preview, 1200x630
+├── docs/                 # Plans and decisions
 ├── netlify/
 │   └── edge-functions/
 │       ├── lib/

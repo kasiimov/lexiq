@@ -1,4 +1,4 @@
-# LexiQ — English Learning Platform for Uzbek Speakers
+# Congix English — English Learning Platform for Uzbek Speakers
 
 An interactive web-based English learning application designed for Uzbek speakers, featuring game-based vocabulary practice, spaced repetition (Leitner algorithm) and CEFR-aligned word levels.
 
@@ -6,7 +6,7 @@ An interactive web-based English learning application designed for Uzbek speaker
 
 ## 🎯 Project Overview
 
-LexiQ is a free educational platform that makes learning English engaging and effective. It uses proven techniques — spaced repetition and game mechanics — to help learners build vocabulary faster and retain it longer.
+Congix English is a free educational platform that makes learning English engaging and effective. It uses proven techniques — spaced repetition and game mechanics — to help learners build vocabulary faster and retain it longer.
 
 **Target audience:** Uzbek speakers (A1–C1)
 **Focus:** Vocabulary building with CEFR alignment

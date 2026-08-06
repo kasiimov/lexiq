@@ -1005,8 +1005,8 @@ async function authSubmit() {
   authError('');
   authSetBusy(true);
   try {
-    if (authMode === 'up') await LexiQAuth.signUp(name, email, pass);
-    else await LexiQAuth.signIn(email, pass);
+    if (authMode === 'up') await CongixAuth.signUp(name, email, pass);
+    else await CongixAuth.signIn(email, pass);
   } catch (e) {
     authError(e.message);
   } finally {
@@ -1019,7 +1019,7 @@ async function authGoogle() {
   authError('');
   authSetBusy(true);
   try {
-    await LexiQAuth.signInGoogle();
+    await CongixAuth.signInGoogle();
   } catch (e) {
     authError(e.message);
   } finally {
@@ -1029,11 +1029,11 @@ async function authGoogle() {
 
 function authGuest() {
   const name = document.getElementById('auth-name').value.trim();
-  LexiQAuth.continueAsGuest(name);
+  CongixAuth.continueAsGuest(name);
 }
 
 function logoutAsk() {
-  const guest = LexiQAuth.current() && LexiQAuth.current().guest;
+  const guest = CongixAuth.current() && CongixAuth.current().guest;
   document.getElementById('logout-text').textContent = guest
     ? "Mehmon rejimidan chiqasiz. Natijalar shu brauzerda qoladi, lekin ularni faqat shu qurilmada ko'rasiz."
     : "Hisobingizdan chiqasiz. Progress hisobingizda saqlanib qoladi.";
@@ -1048,13 +1048,13 @@ function logoutClose(event) {
 
 async function logoutConfirm() {
   document.getElementById('logout-modal').classList.remove('open');
-  await LexiQAuth.signOut();
+  await CongixAuth.signOut();
   appStarted = false;
   show('s-auth');
 }
 
 function renderProfile() {
-  const user = LexiQAuth.current();
+  const user = CongixAuth.current();
   if (!user) return;
   const name = user.name || 'Mehmon';
   const stats = getStats();
@@ -1081,7 +1081,7 @@ function renderProfile() {
 // Без настроенного Firebase регистрация невозможна — показываем только вход гостем,
 // чтобы человек не тыкал в поля, которые всё равно не сработают.
 function authApplyMode() {
-  const online = LexiQAuth.isFirebase();
+  const online = CongixAuth.isFirebase();
   ['auth-tabs', 'auth-submit', 'auth-google'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.style.display = online ? '' : 'none';
@@ -1122,8 +1122,8 @@ function onAuthChange(user) {
   }
 }
 
-LexiQAuth.onChange(onAuthChange);
-LexiQAuth.init();
+CongixAuth.onChange(onAuthChange);
+CongixAuth.init();
 
 // Enter в любом поле формы — отправка
 ['auth-name', 'auth-email', 'auth-pass'].forEach(id => {
@@ -1250,7 +1250,7 @@ function tutorRenderLog() {
     tutorBubble('bot', tutorFormat(
       tutorMode === 'suhbat'
         ? "Keling, ingliz tilida gaplashamiz 💬\n\nVaziyatni tanlang va inglizcha yozing. Xato qilsangiz, avval to'g'ri variantni ko'rsataman, keyin suhbatni davom ettiraman."
-        : "Salom! Men LexiQ Ustozman 👋\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
+        : "Salom! Men Congix Ustozman 👋\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
     ));
     return;
   }
@@ -2134,12 +2134,12 @@ function lbReady() {
   return typeof firebase !== 'undefined' &&
     firebase.apps && firebase.apps.length > 0 &&
     typeof firebase.firestore === 'function' &&
-    LexiQAuth.current() && !LexiQAuth.current().guest;
+    CongixAuth.current() && !CongixAuth.current().guest;
 }
 
 async function lbSubmit(score) {
   if (!lbReady()) return;
-  const user = LexiQAuth.current();
+  const user = CongixAuth.current();
   try {
     await firebase.firestore()
       .collection('daily').doc(todayStr())
@@ -2175,7 +2175,7 @@ async function lbRender() {
       .limit(LB_LIMIT)
       .get();
 
-    const me = LexiQAuth.current().uid;
+    const me = CongixAuth.current().uid;
     if (snap.empty) {
       sub.textContent = '';
       box.innerHTML = '<div class="lb-empty">Bugun hali hech kim topshiriqni bajarmagan. Siz birinchisiz!</div>';
@@ -2216,7 +2216,7 @@ function syncReady() {
 
 async function syncPush() {
   if (!syncReady()) return;
-  const user = LexiQAuth.current();
+  const user = CongixAuth.current();
   try {
     await firebase.firestore().collection('users').doc(user.uid).set({
       stats: getStats(),
@@ -2238,7 +2238,7 @@ function syncSoon() {
 
 async function syncPull() {
   if (!syncReady()) return;
-  const user = LexiQAuth.current();
+  const user = CongixAuth.current();
   try {
     const doc = await firebase.firestore().collection('users').doc(user.uid).get();
     if (!doc.exists) return;

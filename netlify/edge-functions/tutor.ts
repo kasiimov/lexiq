@@ -1,4 +1,4 @@
-// LexiQ — потоковый чат с ИИ-репетитором. Ключи провайдеров живут в lib/llm.ts
+// Congix English — потоковый чат с ИИ-репетитором. Ключи провайдеров живут в lib/llm.ts
 // (переменные окружения Netlify) и никогда не уезжают в браузер.
 
 import {
@@ -52,7 +52,7 @@ function talkPrompt(level: string, scenario: string): string {
 
 function systemPrompt(level: string): string {
   return [
-    "You are LexiQ Ustoz, a friendly English tutor for Uzbek speakers.",
+    "You are Congix Ustoz, a friendly English tutor for Uzbek speakers.",
     `The learner's CEFR level is ${level}. Match your English to that level.`,
     "",
     "Rules:",

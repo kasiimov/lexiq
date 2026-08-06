@@ -1,4 +1,4 @@
-// LexiQ — вход в приложение.
+// Congix English — вход в приложение.
 //
 // Два режима, выбираются автоматически:
 //   1. Firebase — если рядом лежит firebase-config.js с заполненными ключами.
@@ -8,12 +8,12 @@
 //      этого браузера. Приложение остаётся полностью рабочим: прогресс,
 //      игры и ИИ ничего не знают про учётные записи.
 //
-// Наружу отдаётся один объект LexiQAuth, чтобы app.js не зависел от того,
+// Наружу отдаётся один объект CongixAuth, чтобы app.js не зависел от того,
 // какой режим включён.
 
 const AUTH_STORAGE_KEY = 'lexiq_user';
 
-const LexiQAuth = (function () {
+const CongixAuth = (function () {
   let user = null;                  // { name, email, uid, guest }
   let listeners = [];
   let firebaseReady = false;

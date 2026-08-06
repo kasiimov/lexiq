@@ -1,4 +1,4 @@
-// LexiQ — генерация учебного материала: мини-урок и тест по теме и уровню.
+// Congix English — генерация учебного материала: мини-урок и тест по теме и уровню.
 // В отличие от чата ответ приходит цельным JSON: фронту нужна структура, а не
 // поток текста. Форма ответа нормализуется здесь, чтобы клиент никогда не
 // разбирал сырой вывод модели.
@@ -32,7 +32,7 @@ function str(value: unknown, limit = 400): string {
 
 function quizPrompt(level: string, topic: string, count: number): string {
   return [
-    "You are LexiQ, an English test generator for Uzbek speakers.",
+    "You are Congix English, an English test generator for Uzbek speakers.",
     `Create exactly ${count} multiple-choice questions at CEFR level ${level} about: ${topic}.`,
     "",
     "Requirements:",
@@ -60,7 +60,7 @@ function quizPrompt(level: string, topic: string, count: number): string {
 
 function lessonPrompt(level: string, topic: string): string {
   return [
-    "You are LexiQ, an English teacher for Uzbek speakers.",
+    "You are Congix English, an English teacher for Uzbek speakers.",
     `Write a compact lesson at CEFR level ${level} about: ${topic}.`,
     "",
     "Requirements:",
@@ -93,7 +93,7 @@ const GENRES: Record<string, string> = {
 // и словами, а не «band».
 function writingPrompt(level: string, task: string): string {
   return [
-    `You are LexiQ, an English writing tutor for an Uzbek learner at CEFR level ${level}.`,
+    `You are Congix English, an English writing tutor for an Uzbek learner at CEFR level ${level}.`,
     `The learner was asked to write: ${task}`,
     "",
     "Check their text and answer with JSON only:",
@@ -116,7 +116,7 @@ function readingPrompt(level: string, genre: string, topic: string): string {
   const kind = GENRES[genre] || GENRES.hikoya;
   const length = level === "A1" || level === "A2" ? "90-130" : level === "B1" ? "130-180" : "180-240";
   return [
-    `You are LexiQ, writing reading practice for Uzbek learners of English at CEFR level ${level}.`,
+    `You are Congix English, writing reading practice for Uzbek learners of English at CEFR level ${level}.`,
     `Write ${kind} about: ${topic}. Length: ${length} words.`,
     "",
     "Requirements:",
@@ -136,7 +136,7 @@ function readingPrompt(level: string, genre: string, topic: string): string {
 
 function wordsPrompt(level: string, topic: string, count: number, exclude: string[]): string {
   return [
-    "You are LexiQ, building a vocabulary list for Uzbek speakers learning English.",
+    "You are Congix English, building a vocabulary list for Uzbek speakers learning English.",
     `Give exactly ${count} useful English words at CEFR level ${level} on the topic: ${topic}.`,
     "",
     "Requirements:",

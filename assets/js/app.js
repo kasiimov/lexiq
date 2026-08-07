@@ -179,7 +179,7 @@ function show(id) {
 const SHELL_TITLES = {
   's-home':    { title: 'Bosh sahifa', meta: 'Kunlik maqsad va tez boshlash' },
   's-topics':  { title: 'Mavzu tanlang', meta: 'Daraja va mavzu bo\'yicha lug\'at' },
-  's-modes':   { title: "O'yin rejimi", meta: 'Tarjima yo\'nalishi va rejim' },
+  's-modes':   { title: "Mashq rejimi", meta: 'Tarjima yo\'nalishi va rejim' },
   's-train':   { title: "So'zlarni o'rganish", meta: 'Testdan oldingi ko\'rib chiqish' },
   's-game':    { title: 'Mashq', meta: '' },
   's-result':  { title: 'Natija', meta: 'Sessiya yakuni' },
@@ -196,7 +196,7 @@ const SHELL_TITLES = {
 };
 
 // Пункт меню, который остаётся подсвеченным на вложенных экранах:
-// выбор режима и сама игра — это всё ещё раздел «O'yin».
+// выбор режима и сама игра — это всё ещё раздел «Mashq».
 const SHELL_NAV_OF = {
   's-modes': 's-topics', 's-train': 's-topics', 's-game': 's-topics', 's-result': 's-topics',
 };

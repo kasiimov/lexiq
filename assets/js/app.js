@@ -166,7 +166,73 @@ function show(id) {
   if (id === 's-read') readInit();
   if (id === 's-write') writeInit();
   if (id === 's-words') wordsInit();
+  renderShell(id);
   window.scrollTo(0,0);
+}
+
+// ────────────────────────────────────────────────────────────────────
+// ОБОЛОЧКА: меню слева и шапка с названием экрана
+// Экран сам по себе не говорит, где человек находится, — это делают
+// подсвеченный пункт меню и заголовок. Плюс шапка забирает у экранов
+// обязанность показывать логотип и профиль на каждом из них.
+// ────────────────────────────────────────────────────────────────────
+const SHELL_TITLES = {
+  's-home':    { title: 'Bosh sahifa', meta: 'Kunlik maqsad va tez boshlash' },
+  's-topics':  { title: 'Mavzu tanlang', meta: 'Daraja va mavzu bo\'yicha lug\'at' },
+  's-modes':   { title: "O'yin rejimi", meta: 'Tarjima yo\'nalishi va rejim' },
+  's-train':   { title: "So'zlarni o'rganish", meta: 'Testdan oldingi ko\'rib chiqish' },
+  's-game':    { title: 'Mashq', meta: '' },
+  's-result':  { title: 'Natija', meta: 'Sessiya yakuni' },
+  's-daily':   { title: "Kun topshirig'i", meta: '10 ta so\'z · hamma uchun bir xil' },
+  's-map':     { title: "Sizning yo'lingiz", meta: 'A1 dan C1 gacha darajalar' },
+  's-ai':      { title: 'AI dars va test', meta: 'Darajangizga moslangan material' },
+  's-tutor':   { title: 'AI ustoz', meta: 'Savol bering — javob o\'zbek tilida' },
+  's-write':   { title: 'Yozish', meta: 'Matn va tekshiruv' },
+  's-read':    { title: "O'qish", meta: 'Matn va tushunish savollari' },
+  's-words':   { title: "Yangi so'zlar", meta: 'Sun\'iy intellekt lug\'atga qo\'shadi' },
+  's-stats':   { title: 'Statistika', meta: 'Daraja, mavzular va progress' },
+  's-profile': { title: 'Profil', meta: 'Hisob va natijalar' },
+  's-error':   { title: "Lug'at yuklanmagan", meta: 'Fayl yuklang yoki so\'zlarni AI tayyorlasin' },
+};
+
+// Пункт меню, который остаётся подсвеченным на вложенных экранах:
+// выбор режима и сама игра — это всё ещё раздел «O'yin».
+const SHELL_NAV_OF = {
+  's-modes': 's-topics', 's-train': 's-topics', 's-game': 's-topics', 's-result': 's-topics',
+};
+
+function renderShell(id) {
+  // На экране «словарь не загружен» меню остаётся: оттуда человек уходит
+  // в «Yangi so'zlar» и собирает словарь заново, а без меню он бы застрял.
+  const bare = id === 's-auth' || id === 's-loading';
+  document.body.classList.toggle('no-chrome', bare);
+  document.body.classList.toggle('flush', id === 's-auth');
+  if (bare) return;
+
+  const info = SHELL_TITLES[id];
+  if (info) {
+    document.getElementById('top-title').textContent = info.title;
+    document.getElementById('top-meta').textContent = info.meta;
+  }
+
+  const navId = SHELL_NAV_OF[id] || id;
+  document.querySelectorAll('.side-link').forEach(link => {
+    link.classList.toggle('on', link.dataset.screen === navId);
+  });
+
+  // Серия и уровень живут в меню, поэтому обновляются на каждом экране.
+  // Пока словарь не загружен, считать нечего — молча пропускаем.
+  try {
+    const st = streakState(getStats());
+    const days = st.days;
+    document.getElementById('side-streak-days').textContent = days + ' kun ketma-ket';
+    document.getElementById('top-streak-days').textContent = days;
+    document.getElementById('side-streak-sub').textContent = st.playedToday
+      ? 'Bugungi mashq bajarildi — seriya saqlanib qoldi.'
+      : 'Bugun mashq qiling — seriya uzilmaydi.';
+    document.getElementById('side-meta').textContent =
+      'CEFR ' + getCEFRLevel() + ' · ' + getKnownWordsCount() + " so'z";
+  } catch (e) { /* статистика ещё не готова */ }
 }
 
 // ────────────────────────────────────────────────────────────────────
@@ -1107,6 +1173,8 @@ function renderUser(user) {
   const name = user.name || 'Mehmon';
   document.getElementById('uc-name').textContent = name;
   document.getElementById('uc-ava').textContent = name.charAt(0).toUpperCase();
+  document.getElementById('side-name').textContent = name;
+  document.getElementById('side-ava').textContent = name.charAt(0).toUpperCase();
 }
 
 async function startApp() {

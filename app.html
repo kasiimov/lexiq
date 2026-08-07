@@ -12,8 +12,107 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="assets/css/app.css">
 </head>
-<body>
+<!-- Приложение открывается на экране входа: меню и шапка там ни к чему,
+     поэтому классы стоят сразу в разметке — иначе они мигнут до первого show() -->
+<body class="no-chrome flush">
 
+<div class="shell">
+
+<aside class="side">
+  <a class="side-logo" href="/">
+    <span class="side-mark">C</span>
+    <span class="side-name">Congix</span>
+  </a>
+
+  <nav class="side-nav">
+    <div class="side-group">
+      <button class="side-link" data-screen="s-home" onclick="show('s-home')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        Bosh sahifa
+      </button>
+      <button class="side-link" data-screen="s-topics" onclick="show('s-topics')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.544-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+        O'yin
+      </button>
+      <button class="side-link" data-screen="s-daily" onclick="dailyStart()">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        Kun topshirig'i
+      </button>
+      <button class="side-link" data-screen="s-map" onclick="show('s-map')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
+        Xarita
+      </button>
+    </div>
+
+    <div class="side-group">
+      <p class="side-group-title">Sun'iy intellekt</p>
+      <button class="side-link" data-screen="s-ai" onclick="show('s-ai')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+        AI dars va test
+      </button>
+      <button class="side-link" data-screen="s-tutor" onclick="show('s-tutor')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+        AI ustoz
+      </button>
+      <button class="side-link" data-screen="s-write" onclick="show('s-write')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Yozish
+      </button>
+      <button class="side-link" data-screen="s-read" onclick="show('s-read')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+        O'qish
+      </button>
+      <button class="side-link" data-screen="s-words" onclick="show('s-words')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg>
+        Yangi so'zlar
+      </button>
+    </div>
+
+    <div class="side-group">
+      <p class="side-group-title">Natijalar</p>
+      <button class="side-link" data-screen="s-stats" onclick="show('s-stats')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+        Statistika
+      </button>
+      <button class="side-link" data-screen="s-profile" onclick="show('s-profile')">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profil
+      </button>
+    </div>
+  </nav>
+
+  <div class="side-foot">
+    <div class="side-streak" id="side-streak">
+      <div class="ss-top">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+        <span id="side-streak-days">0 kun ketma-ket</span>
+      </div>
+      <p class="ss-sub" id="side-streak-sub">Bugun mashq qiling — seriya boshlanadi.</p>
+    </div>
+    <button class="side-user" onclick="show('s-profile')">
+      <span class="su-ava" id="side-ava">M</span>
+      <span class="su-txt">
+        <span class="su-name" id="side-name">Mehmon</span>
+        <span class="su-meta" id="side-meta">CEFR A1</span>
+      </span>
+    </button>
+  </div>
+</aside>
+
+<div class="main">
+
+<header class="topbar">
+  <div class="topbar-txt">
+    <h1 class="topbar-title" id="top-title">Bosh sahifa</h1>
+    <p class="topbar-meta" id="top-meta"></p>
+  </div>
+  <div class="topbar-actions">
+    <span class="top-pill" id="top-streak">🔥 <b id="top-streak-days">0</b> kun</span>
+    <button class="top-out" onclick="logoutAsk()" title="Chiqish" aria-label="Chiqish">⏻</button>
+  </div>
+</header>
+
+<main class="content">
 <div class="app">
 
 <!-- KIRISH -->
@@ -848,6 +947,10 @@
   </div>
 </div>
 
+</div>
+</main>
+
+</div>
 </div>
 
 <!-- CHIQISH -->

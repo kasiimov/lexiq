@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Congix English — Ingliz tili o'rganish</title>
 <meta name="description" content="Congix English ilovasi: o'yinlar, AI ustoz va CEFR darajalari bilan ingliz tilini o'rganing.">
-<meta name="theme-color" content="#262523">
+<meta name="theme-color" content="#2A2724">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
@@ -18,47 +18,80 @@
 
 <!-- KIRISH -->
 <div id="s-auth" class="screen active">
-  <div class="auth-box">
-    <a class="auth-back" href="/">← Bosh sahifa</a>
 
-    <div class="auth-brand">
-      <div class="logo-box">🧠</div>
-      <div class="logo-text">
-        <div class="t1">Congix English</div>
-        <div class="t2">Ingliz tilini o'rganish</div>
-      </div>
+  <aside class="auth-aside">
+    <a class="auth-aside-logo" href="/">
+      <span class="auth-aside-mark">C</span>
+      <span class="auth-aside-name">Congix English</span>
+    </a>
+
+    <div>
+      <h2>Kuniga 10 daqiqa — va so'zlar esda qoladi</h2>
+      <ul class="auth-points">
+        <li class="auth-point">
+          <i aria-hidden="true">✓</i>
+          <span>Oltita o'yin rejimi — bir so'z har safar boshqacha so'raladi</span>
+        </li>
+        <li class="auth-point">
+          <i aria-hidden="true">✓</i>
+          <span>Leitner takrorlash: qiyin so'zlar o'zi qaytib keladi</span>
+        </li>
+        <li class="auth-point">
+          <i aria-hidden="true">✓</i>
+          <span>AI ustoz xatoni o'zbek tilida tushuntiradi</span>
+        </li>
+      </ul>
     </div>
 
-    <div class="auth-tabs" id="auth-tabs">
-      <button class="auth-tab active" id="auth-tab-in" onclick="authTab('in')">Kirish</button>
-      <button class="auth-tab" id="auth-tab-up" onclick="authTab('up')">Ro'yxatdan o'tish</button>
+    <p class="auth-aside-note">2 400+ o'quvchi haftada 4 kun mashq qiladi</p>
+  </aside>
+
+  <div class="auth-main">
+    <div class="auth-topbar">
+      <div class="auth-brand">
+        <div class="logo-box">C</div>
+        <div class="logo-text">
+          <div class="t1">Congix</div>
+        </div>
+      </div>
+      <a class="auth-back" href="/">← Bosh sahifa</a>
     </div>
 
-    <div class="auth-fields">
-      <div class="auth-field" id="auth-name-row" style="display:none">
-        <label for="auth-name">Ismingiz</label>
-        <input id="auth-name" type="text" autocomplete="name" placeholder="Masalan: Dilnoza">
+    <div class="auth-box">
+      <h1 class="auth-title" id="auth-title">Qaytganingizdan xursandmiz</h1>
+      <p class="auth-sub" id="auth-sub">Seriyangiz sizni kutib turadi — kirib, bugungi 10 daqiqani yopamiz.</p>
+
+      <div class="auth-tabs" id="auth-tabs">
+        <button class="auth-tab active" id="auth-tab-in" onclick="authTab('in')">Kirish</button>
+        <button class="auth-tab" id="auth-tab-up" onclick="authTab('up')">Ro'yxatdan o'tish</button>
       </div>
-      <div class="auth-field">
-        <label for="auth-email">Email</label>
-        <input id="auth-email" type="email" autocomplete="email" placeholder="siz@example.com">
+
+      <div class="auth-fields">
+        <div class="auth-field" id="auth-name-row" style="display:none">
+          <label for="auth-name">Ismingiz</label>
+          <input id="auth-name" type="text" autocomplete="name" placeholder="Masalan: Dilnoza">
+        </div>
+        <div class="auth-field">
+          <label for="auth-email">Email</label>
+          <input id="auth-email" type="email" autocomplete="email" placeholder="siz@example.com">
+        </div>
+        <div class="auth-field">
+          <label for="auth-pass">Parol</label>
+          <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Kamida 6 ta belgi">
+        </div>
       </div>
-      <div class="auth-field">
-        <label for="auth-pass">Parol</label>
-        <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Kamida 6 ta belgi">
+
+      <div class="auth-err" id="auth-err" style="display:none"></div>
+
+      <button class="big-btn primary" id="auth-submit" onclick="authSubmit()">Kirish</button>
+      <button class="big-btn secondary" id="auth-google" onclick="authGoogle()">Google bilan kirish</button>
+
+      <div class="auth-sep"><span>yoki</span></div>
+
+      <button class="big-btn secondary" onclick="authGuest()">Mehmon sifatida davom etish</button>
+      <div class="auth-note" id="auth-note">
+        Mehmon rejimida natijalar faqat shu qurilmada saqlanadi.
       </div>
-    </div>
-
-    <div class="auth-err" id="auth-err" style="display:none"></div>
-
-    <button class="big-btn primary" id="auth-submit" onclick="authSubmit()">Kirish</button>
-    <button class="big-btn secondary" id="auth-google" onclick="authGoogle()">Google bilan kirish</button>
-
-    <div class="auth-sep"><span>yoki</span></div>
-
-    <button class="big-btn secondary" onclick="authGuest()">Mehmon sifatida davom etish</button>
-    <div class="auth-note" id="auth-note">
-      Mehmon rejimida natijalar faqat shu qurilmada saqlanadi.
     </div>
   </div>
 </div>
@@ -75,7 +108,7 @@
 <!-- ERROR / FIRST RUN -->
 <div id="s-error" class="screen">
   <div class="logo-row">
-    <div class="logo-box">🧠</div>
+    <div class="logo-box">C</div>
     <div class="logo-text">
       <div class="t1">Congix English</div>
       <div class="t2">Ingliz tilini o'rganish</div>
@@ -106,7 +139,7 @@
 <div id="s-home" class="screen">
   <div class="home-top">
     <div class="logo-row" onclick="logoTap()">
-      <div class="logo-box">🧠</div>
+      <div class="logo-box">C</div>
       <div class="logo-text">
         <div class="t1">Congix English</div>
         <div class="t2">Ingliz tilini o'rganish</div>
@@ -371,9 +404,9 @@
     <div class="rc-title" id="rc-title">O'yin tugadi!</div>
     <div class="rc-sub" id="rc-sub">Natijangiz ajoyib</div>
     <div class="rc-stats">
-      <div class="rc-stat"><div class="rc-sv" id="rc-correct" style="color:#ffe74d">0</div><div class="rc-sl">To'g'ri</div></div>
-      <div class="rc-stat"><div class="rc-sv" id="rc-wrong" style="color:#ff8b80">0</div><div class="rc-sl">Xato</div></div>
-      <div class="rc-stat"><div class="rc-sv" id="rc-score" style="color:#ffe74d">0</div><div class="rc-sl">Ball</div></div>
+      <div class="rc-stat"><div class="rc-sv ok" id="rc-correct">0</div><div class="rc-sl">To'g'ri</div></div>
+      <div class="rc-stat"><div class="rc-sv bad" id="rc-wrong">0</div><div class="rc-sl">Xato</div></div>
+      <div class="rc-stat"><div class="rc-sv ok" id="rc-score">0</div><div class="rc-sl">Ball</div></div>
       <div class="rc-stat"><div class="rc-sv" id="rc-time">0:00</div><div class="rc-sl">Vaqt</div></div>
     </div>
     <div class="rc-new" id="rc-new" style="display:none">+ N ta yangi so'z o'rgandingiz!</div>
@@ -774,8 +807,8 @@
       <div class="rc-title" id="ai-rc-title">Test tugadi!</div>
       <div class="rc-sub" id="ai-rc-sub"></div>
       <div class="rc-stats">
-        <div class="rc-stat"><div class="rc-sv" id="ai-rc-correct" style="color:#ffe74d">0</div><div class="rc-sl">To'g'ri</div></div>
-        <div class="rc-stat"><div class="rc-sv" id="ai-rc-wrong" style="color:#ff8b80">0</div><div class="rc-sl">Xato</div></div>
+        <div class="rc-stat"><div class="rc-sv ok" id="ai-rc-correct">0</div><div class="rc-sl">To'g'ri</div></div>
+        <div class="rc-stat"><div class="rc-sv bad" id="ai-rc-wrong">0</div><div class="rc-sl">Xato</div></div>
       </div>
     </div>
     <div class="sec-lbl" id="ai-review-lbl" style="display:none">Xatolar ustida ishlash</div>

@@ -975,6 +975,13 @@ function authTab(mode) {
   authMode = mode;
   document.getElementById('auth-tab-in').classList.toggle('active', mode === 'in');
   document.getElementById('auth-tab-up').classList.toggle('active', mode === 'up');
+  // Заголовок формы говорит, что именно сейчас произойдёт: вход или регистрация
+  document.getElementById('auth-title').textContent = mode === 'up'
+    ? "Ro'yxatdan o'ting"
+    : 'Qaytganingizdan xursandmiz';
+  document.getElementById('auth-sub').textContent = mode === 'up'
+    ? "Bir daqiqa vaqt oladi. To'lov talab qilinmaydi, reklama yo'q."
+    : 'Seriyangiz sizni kutib turadi — kirib, bugungi 10 daqiqani yopamiz.';
   document.getElementById('auth-name-row').style.display = mode === 'up' ? '' : 'none';
   document.getElementById('auth-submit').textContent = mode === 'up' ? "Ro'yxatdan o'tish" : 'Kirish';
   document.getElementById('auth-pass').setAttribute('autocomplete', mode === 'up' ? 'new-password' : 'current-password');

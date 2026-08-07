@@ -1,0 +1,111 @@
+{
+  "id": "a1-b1-l1",
+  "level": "A1",
+  "block": "a1-b1",
+  "title": "O'zingizni tanishtirish",
+  "can_do": "Ismingizni, kasbingizni va qayerdanligingizni ayta olasiz",
+  "why": "Har qanday suhbat shundan boshlanadi. Bu darsdan keyin siz o'zingiz haqingizda uchta gap tuza olasiz.",
+  "rule": {
+    "title": "to be — «bo'lmoq» fe'li",
+    "points": [
+      {
+        "text": "Ingliz tilida «Men talabaman» degan gapda «man» ni tashlab ketib bo'lmaydi. Har bir gapda to be fe'li bo'lishi shart: am, is yoki are.",
+        "examples": [
+          { "en": "I am a student.", "uz": "Men talabaman." },
+          { "en": "She is a doctor.", "uz": "U shifokor." }
+        ]
+      },
+      {
+        "text": "Qaysi shaklni tanlash — kim haqida gapirayotganingizga bog'liq: I bilan am, he / she / it bilan is, you / we / they bilan are.",
+        "examples": [
+          { "en": "I am Aziz.", "uz": "Men Azizman." },
+          { "en": "You are late.", "uz": "Siz kechikdingiz." },
+          { "en": "We are friends.", "uz": "Biz do'stmiz." }
+        ]
+      },
+      {
+        "text": "Og'zaki nutqda deyarli har doim qisqartiriladi: I am → I'm, he is → he's, they are → they're. Yozganda ham shunday yozish tabiiy ko'rinadi.",
+        "examples": [
+          { "en": "I'm from Tashkent.", "uz": "Men Toshkentdanman." },
+          { "en": "He's my brother.", "uz": "U mening akam." }
+        ]
+      },
+      {
+        "text": "Kasb aytilganda oldiga a yoki an qo'yiladi: a teacher, an engineer. O'zbek tilida bunday so'z yo'q, shuning uchun uni tushirib qoldirish eng ko'p uchraydigan xato.",
+        "examples": [
+          { "en": "My father is a driver.", "uz": "Otam haydovchi." },
+          { "en": "I am an engineer.", "uz": "Men muhandisman." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shaxs", "To be", "Qisqa shakl"],
+      "rows": [
+        ["I", "am", "I'm"],
+        ["you", "are", "you're"],
+        ["he / she / it", "is", "he's / she's / it's"],
+        ["we", "are", "we're"],
+        ["they", "are", "they're"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I student.",
+      "right": "I am a student.",
+      "why": "To be tushib qolgan. O'zbek tilida «Men talaba» deyish mumkin, ingliz tilida — yo'q."
+    },
+    {
+      "wrong": "I am engineer.",
+      "right": "I am an engineer.",
+      "why": "Kasb oldidan artikl kerak. Unli tovush bilan boshlansa — an."
+    },
+    {
+      "wrong": "He are my brother.",
+      "right": "He is my brother.",
+      "why": "He bilan doim is keladi, are emas."
+    },
+    {
+      "wrong": "I am agree.",
+      "right": "I agree.",
+      "why": "Agree — fe'l, u to be ni talab qilmaydi. Bu o'zbek tilidan to'g'ridan-to'g'ri tarjima qilishdan kelib chiqadi."
+    },
+    {
+      "wrong": "My name is Aziz. I am Aziz too.",
+      "right": "My name is Aziz.",
+      "why": "Ikkalasi bir xil ma'noni beradi, birini tanlang."
+    }
+  ],
+  "words": [
+    { "en": "name", "uz": "ism", "ipa": "/neɪm/", "example": "My name is Dilnoza." },
+    { "en": "student", "uz": "talaba", "ipa": "/ˈstjuːdnt/", "example": "She is a student." },
+    { "en": "teacher", "uz": "o'qituvchi", "ipa": "/ˈtiːtʃə/", "example": "My mother is a teacher." },
+    { "en": "doctor", "uz": "shifokor", "ipa": "/ˈdɒktə/", "example": "He is a doctor." },
+    { "en": "engineer", "uz": "muhandis", "ipa": "/ˌendʒɪˈnɪə/", "example": "I am an engineer." },
+    { "en": "driver", "uz": "haydovchi", "ipa": "/ˈdraɪvə/", "example": "My father is a driver." },
+    { "en": "friend", "uz": "do'st", "ipa": "/frend/", "example": "We are friends." },
+    { "en": "nice", "uz": "yoqimli", "ipa": "/naɪs/", "example": "Nice to meet you." },
+    { "en": "from", "uz": "-dan", "ipa": "/frɒm/", "example": "I am from Uzbekistan." },
+    { "en": "years old", "uz": "yoshda", "ipa": "/jɪəz əʊld/", "example": "I am twenty years old." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 2, "focus": "am / is / are ni tanlash" },
+      { "type": 3, "count": 2, "focus": "darak gapni savol va inkorga aylantirish" },
+      { "type": 5, "count": 2, "focus": "common_errors ro'yxatidagi xatolarni topish va tushuntirish" },
+      { "type": 4, "count": 2, "focus": "berilgan kasb bilan o'zingiz haqingizda gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U mening akam», «Biz talabamiz»" }
+    ],
+    "final": { "type": 7, "task": "Yangi guruhdoshingiz bilan tanishyapsiz. O'zingiz haqingizda 3-4 gap yozing: ism, yosh, kasb, shahar." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Ikki kishi tanishmoqda. Suhbatni tinglang va ularning ismi, kasbi va shahrini yozing.",
+    "level_hint": "sekin nutq, 30 soniya"
+  },
+  "review": {
+    "topic": "to be",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

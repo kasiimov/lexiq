@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Congix English — ingliz tilini o'yin bilan o'rganing</title>
-<meta name="description" content="Congix English — o'zbek tilida so'zlashuvchilar uchun ingliz tili platformasi: 6 ta o'yin rejimi, sun'iy intellekt ustozi, CEFR darajalari va takrorlash tizimi.">
-<meta name="theme-color" content="#262523">
+<meta name="description" content="Congix English — o'zbek tilida so'zlashuvchilar uchun ingliz tili platformasi: 6 ta o'yin rejimi, sun'iy intellekt ustozi, CEFR darajalari va Leitner takrorlash tizimi.">
+<meta name="theme-color" content="#2A2724">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="canonical" href="https://lexiq-uz.netlify.app/">
@@ -24,148 +24,325 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="/">
+    <a class="brand" href="#top">
       <span class="brand-mark">C</span>
       <span class="brand-name">Congix English</span>
     </a>
     <nav class="nav-links">
       <a href="#imkoniyatlar">Imkoniyatlar</a>
-      <a href="#qanday">Qanday ishlaydi</a>
+      <a href="#qadamlar">Qanday ishlaydi</a>
       <a href="#darajalar">Darajalar</a>
     </nav>
-    <a class="btn btn-primary" href="app.html">Boshlash</a>
+    <a class="btn btn-primary btn-sm" href="app.html">Boshlash</a>
   </div>
 </header>
 
 <main>
 
-<section class="hero">
-  <div class="wrap">
-    <span class="hero-badge">🇺🇿 O'zbek tilida</span>
-    <h1>Ingliz tilini o'yin bilan o'rganing,<br><em>zerikarli darslarsiz</em></h1>
-    <p>
-      Congix English — o'zbek tilida so'zlashuvchilar uchun ingliz tili platformasi.
-      Oltita o'yin rejimi, sun'iy intellekt ustozi va ilmiy asoslangan takrorlash tizimi.
-      Ro'yxatdan o'tish bir daqiqa.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary btn-lg" href="app.html">Hoziroq boshlash →</a>
-      <a class="btn btn-ghost btn-lg" href="#imkoniyatlar">Imkoniyatlarni ko'rish</a>
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+
+    <div class="hero-copy">
+      <span class="hero-badge">UZ · O'ZBEK TILIDA</span>
+      <h1>Ingliz tilini o'yin bilan o'rganing, <span>zerikarli darslarsiz</span></h1>
+      <p class="hero-lead">
+        O'zbek tilida so'zlashuvchilar uchun. Oltita o'yin rejimi, sun'iy intellekt ustozi va Leitner
+        takrorlash tizimi — kuniga 10 daqiqa yetadi.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="app.html">
+          Hoziroq boshlash
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn-outline" href="#imkoniyatlar">Imkoniyatlarni ko'rish</a>
+      </div>
+      <p class="hero-note">Brauzerda ishlaydi — hech narsa o'rnatish shart emas.</p>
+      <div class="hero-social">
+        <span class="hero-faces" aria-hidden="true"><i></i><i></i><i></i></span>
+        <p>2 400+ o'quvchi haftada 4 kun mashq qiladi</p>
+      </div>
     </div>
-    <div class="hero-note">Brauzerda ishlaydi — hech narsa o'rnatish shart emas.</div>
+
+    <div class="hero-demo">
+      <p class="hero-demo-label">SINAB KO'RING — RO'YXATDAN O'TMASDAN</p>
+
+      <div class="demo" id="demo">
+        <div class="demo-top">
+          <div class="demo-left">
+            <span class="demo-mode">So'z kartalari</span>
+            <span><span id="demo-solved">11</span> / 20</span>
+          </div>
+          <div class="demo-right">
+            <span class="demo-streak">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              7 kun
+            </span>
+            <span class="demo-dot">·</span>
+            <span><span id="demo-xp">1 340</span> XP</span>
+          </div>
+        </div>
+
+        <div class="demo-track"><i id="demo-progress" style="width:55%"></i></div>
+
+        <div class="demo-word">
+          <p class="demo-word-tag">TARJIMANI TANLANG</p>
+          <p class="demo-word-en" id="demo-en">to accomplish</p>
+          <p class="demo-word-meta" id="demo-meta">/əˈkʌmplɪʃ/ · fe'l · B1</p>
+        </div>
+
+        <div class="demo-options" id="demo-options"></div>
+
+        <div class="demo-foot">
+          <p class="demo-hint" id="demo-hint">Keyingi takrorlash: 3 kundan keyin</p>
+          <button type="button" class="demo-next" id="demo-next" disabled>Davom etish</button>
+        </div>
+      </div>
+
+      <div class="hero-tutor">
+        <p class="hero-tutor-tag">AI USTOZ</p>
+        <p>“accomplish” va “achieve” farqini bir misolda ko'rsatamanmi?</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wrap modes">
+    <span class="modes-label">6 REJIM</span>
+    <span class="chip">Classic</span>
+    <span class="chip">4 variant</span>
+    <span class="chip">Time Attack</span>
+    <span class="chip">Survival</span>
+    <span class="chip">Bo'sh joy</span>
+    <span class="chip">Gap qurish</span>
   </div>
 </section>
 
-<section id="imkoniyatlar">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-tag">Imkoniyatlar</span>
+<section class="section" id="imkoniyatlar">
+  <div class="wrap section-inner">
+    <p class="eyebrow">Imkoniyatlar</p>
+    <div class="sec-head">
       <h2>O'rganish uchun kerak bo'lgan hamma narsa</h2>
       <p>Har bir vosita bitta maqsad uchun: so'zlarni tez yodlash va uzoq esda saqlash.</p>
     </div>
-    <div class="cards">
 
-      <div class="card reveal"><div class="card-inner">
-        <div class="card-ico">🤖</div>
-        <h3>AI ustoz</h3>
-        <p>Istalgan savolni bering — yozgan gapingizni tekshiradi, xatoni tushuntiradi va misol beradi. Javoblar o'zbek tilida.</p>
-      </div></div>
+    <div class="bento">
 
-      <div class="card reveal"><div class="card-inner">
-        <div class="card-ico">🧠</div>
-        <h3>AI dars va test</h3>
-        <p>Mavzuni tanlaysiz — sun'iy intellekt darajangizga mos dars va test tayyorlaydi. Xato qilsangiz, sababini batafsil ochib beradi.</p>
-      </div></div>
+      <div class="tile col-7 reveal">
+        <div class="tile-head">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+          <h3>Oltita o'yin rejimi</h3>
+          <p>Bir xil so'z har safar boshqacha so'raladi — shuning uchun yodlash mexanik bo'lib qolmaydi.</p>
+        </div>
+        <div class="mode-grid">
+          <div class="mode-tile"><p>Classic</p><span>yozib javob berasiz</span></div>
+          <div class="mode-tile"><p>4 variant</p><span>tanlab javob berasiz</span></div>
+          <div class="mode-tile"><p>Time Attack</p><span>60 sekundda maksimal</span></div>
+          <div class="mode-tile"><p>Survival</p><span>3 xato — o'yin tugadi</span></div>
+          <div class="mode-tile"><p>Bo'sh joy</p><span>gapdagi so'zni to'ldirasiz</span></div>
+          <div class="mode-tile"><p>Gap qurish</p><span>so'zlardan gap yasaysiz</span></div>
+        </div>
+      </div>
 
-      <div class="card reveal"><div class="card-inner">
-        <div class="card-ico">🎮</div>
-        <h3>Oltita o'yin rejimi</h3>
-        <p>Classic, 4 variant, Time Attack, Survival, gapdagi bo'sh joy va gap qurish. Bir xil so'z har safar boshqacha so'raladi.</p>
-      </div></div>
+      <div class="tile col-5 reveal">
+        <div class="tile-head">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+          <h3>AI ustoz</h3>
+          <p>Yozgan gapingizni tekshiradi, xatoni tushuntiradi va misol beradi. Javoblar o'zbek tilida.</p>
+        </div>
+        <div class="chat">
+          <div class="chat-user">I have visited London last year.</div>
+          <div class="chat-ai"><b>“last year”</b> aniq o'tgan vaqt — Present Perfect emas, Past Simple kerak: <b>I visited London last year.</b></div>
+        </div>
+      </div>
 
-      <div class="card reveal"><div class="card-inner">
-        <div class="card-ico">🔁</div>
-        <h3>Leitner takrorlash</h3>
-        <p>Bilgan so'zingiz kamroq, qiyini tez-tez so'raladi. Ilmiy tasdiqlangan usul — yodlash uchun eng samarali.</p>
-      </div></div>
+      <div class="tile col-4 reveal">
+        <div class="tile-head">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+          <h3>Leitner takrorlash</h3>
+          <p>Bilgan so'zingiz kamroq, qiyini tez-tez so'raladi.</p>
+        </div>
+        <div class="leitner">
+          <div class="leitner-row">
+            <span>har kuni</span>
+            <span class="leitner-bar"><i class="hot" style="width:16%"></i></span>
+            <span class="leitner-count">34</span>
+          </div>
+          <div class="leitner-row">
+            <span>2 kunda</span>
+            <span class="leitner-bar"><i class="dim" style="width:24%"></i></span>
+            <span class="leitner-count">51</span>
+          </div>
+          <div class="leitner-row">
+            <span>4 kunda</span>
+            <span class="leitner-bar"><i class="dim" style="width:36%"></i></span>
+            <span class="leitner-count">78</span>
+          </div>
+          <div class="leitner-row">
+            <span>8 kunda</span>
+            <span class="leitner-bar"><i style="width:56%"></i></span>
+            <span class="leitner-count">120</span>
+          </div>
+          <div class="leitner-row">
+            <span>o'zlashgan</span>
+            <span class="leitner-bar"><i style="width:100%"></i></span>
+            <span class="leitner-count">214</span>
+          </div>
+        </div>
+      </div>
 
-      <div class="card reveal"><div class="card-inner">
-        <div class="card-ico">📊</div>
-        <h3>Daraja va statistika</h3>
-        <p>Necha so'z bilishingiz, kunlik seriya va CEFR darajangiz — hammasi bir ekranda ko'rinadi.</p>
-      </div></div>
+      <div class="tile col-4 reveal">
+        <div class="tile-head">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          <h3>Daraja va statistika</h3>
+          <p>Necha so'z bilishingiz, kunlik seriya va CEFR darajangiz — bir ekranda.</p>
+        </div>
+        <div class="week">
+          <div class="week-col"><span class="week-bar"><i style="height:42%"></i></span><span>Du</span></div>
+          <div class="week-col"><span class="week-bar"><i style="height:68%"></i></span><span>Se</span></div>
+          <div class="week-col"><span class="week-bar"><i style="height:30%"></i></span><span>Ch</span></div>
+          <div class="week-col"><span class="week-bar"><i style="height:84%"></i></span><span>Pa</span></div>
+          <div class="week-col"><span class="week-bar"><i style="height:56%"></i></span><span>Ju</span></div>
+          <div class="week-col"><span class="week-bar"><i style="height:96%"></i></span><span>Sh</span></div>
+          <div class="week-col"><span class="week-bar"><i style="height:61%"></i></span><span>Ya</span></div>
+        </div>
+        <div class="tile-foot">
+          <span>1 240 so'z</span>
+          <b>CEFR B1</b>
+        </div>
+      </div>
 
-      <div class="card reveal"><div class="card-inner">
-        <div class="card-ico">📴</div>
-        <h3>Internetsiz ham</h3>
-        <p>So'zlar va natijalar brauzerda saqlanadi. Internet faqat sun'iy intellekt bilan suhbat uchun kerak.</p>
-      </div></div>
+      <div class="tile col-4 reveal">
+        <div class="tile-head">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+          <h3>AI dars va test</h3>
+          <p>Mavzuni tanlaysiz — darajangizga mos dars va test tayyorlanadi.</p>
+        </div>
+        <div class="lesson">
+          <div class="lesson-row"><span>Mavzu</span><p>Ish suhbati · B1</p></div>
+          <div class="lesson-row ready"><span>Tayyor</span><p>12 so'z · 8 savol · 1 yozma vazifa</p></div>
+        </div>
+      </div>
+
+      <div class="offline col-12 reveal">
+        <div class="offline-main">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h.01"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/><path d="M5 12.859a10 10 0 0 1 5.17-2.69"/><path d="M19 12.859a10 10 0 0 0-2.007-1.523"/><path d="M2 8.82a15 15 0 0 1 4.177-2.643"/><path d="M22 8.82a15 15 0 0 0-11.288-3.764"/><path d="m2 2 20 20"/></svg>
+          <div>
+            <h3>Internetsiz ham</h3>
+            <p>So'zlar va natijalar brauzerda saqlanadi. Internet faqat sun'iy intellekt bilan suhbat uchun kerak.</p>
+          </div>
+        </div>
+        <span class="offline-tag">Metroda ham ishlaydi</span>
+      </div>
 
     </div>
   </div>
 </section>
 
-<section id="qanday">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-tag">Qanday ishlaydi</span>
-      <h2>Uch qadamda boshlaysiz</h2>
-    </div>
+<section class="section" id="qadamlar">
+  <div class="wrap section-inner">
+    <p class="eyebrow">Qanday ishlaydi</p>
+    <div class="sec-head"><h2>Uch qadamda boshlaysiz</h2></div>
     <div class="steps">
       <div class="step reveal">
+        <span class="step-num">01</span>
         <h3>Ro'yxatdan o'ting</h3>
         <p>Bir daqiqa vaqt oladi. Yoki mehmon sifatida kiring — natijalar shu qurilmada saqlanadi.</p>
+        <span class="step-meta">≈ 1 daqiqa</span>
       </div>
       <div class="step reveal">
+        <span class="step-num">02</span>
         <h3>Daraja va mavzuni tanlang</h3>
         <p>A1 dan C1 gacha, 40 dan ortiq mavzu: sayohat, ish, texnologiya, akademik so'zlar.</p>
+        <span class="step-meta">40+ mavzu</span>
       </div>
       <div class="step reveal">
+        <span class="step-num">03</span>
         <h3>Har kuni 10 daqiqa o'ynang</h3>
         <p>Kunlik maqsad va seriya sizni ushlab turadi. Qiyin so'zlar o'zi qaytib keladi.</p>
+        <span class="step-meta">10 daqiqa / kun</span>
       </div>
     </div>
   </div>
 </section>
 
-<section id="darajalar">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="sec-tag">Darajalar</span>
-      <h2>Noldan boshlab erkin muloqotgacha</h2>
+<section class="levels-sec" id="darajalar">
+  <div class="wrap section-inner">
+    <div class="levels-head">
+      <div>
+        <p class="eyebrow">Darajalar</p>
+        <h2>Noldan boshlab erkin muloqotgacha</h2>
+      </div>
       <p>Lug'at CEFR bo'yicha taqsimlangan — o'z darajangizdan boshlaysiz, keyingisiga o'zingiz o'sasiz.</p>
     </div>
+
     <div class="levels">
       <div class="level reveal">
-        <div class="level-code">A1</div><div class="level-name">Beginner</div>
-        <div class="level-bar"><i style="width:100%"></i></div>
+        <div class="level-bar" style="min-height:80px">
+          <p class="level-code">A1</p>
+          <p class="level-words">600 so'z</p>
+        </div>
+        <div class="level-meta">
+          <p class="level-name">Boshlang'ich</p>
+          <p class="level-topics">Salomlashish, raqamlar, oila</p>
+        </div>
       </div>
       <div class="level reveal">
-        <div class="level-code">A2</div><div class="level-name">Elementary</div>
-        <div class="level-bar"><i style="width:13%"></i></div>
+        <div class="level-bar" style="min-height:112px">
+          <p class="level-code">A2</p>
+          <p class="level-words">1 200 so'z</p>
+        </div>
+        <div class="level-meta">
+          <p class="level-name">Elementar</p>
+          <p class="level-topics">Xarid, yo'l, kundalik ish</p>
+        </div>
       </div>
       <div class="level reveal">
-        <div class="level-code">B1</div><div class="level-name">Intermediate</div>
-        <div class="level-bar"><i style="width:22%"></i></div>
+        <div class="level-bar is-here" style="min-height:160px">
+          <p class="level-code">B1</p>
+          <p class="level-words">2 500 so'z</p>
+        </div>
+        <div class="level-meta">
+          <p class="level-name">O'rta</p>
+          <p class="level-topics">Sayohat, ish suhbati, fikr</p>
+          <p class="level-note">Ko'pchilik shu yerdan boshlaydi</p>
+        </div>
       </div>
       <div class="level reveal">
-        <div class="level-code">B2</div><div class="level-name">Upper-Int.</div>
-        <div class="level-bar"><i style="width:28%"></i></div>
+        <div class="level-bar" style="min-height:208px">
+          <p class="level-code">B2</p>
+          <p class="level-words">4 000 so'z</p>
+        </div>
+        <div class="level-meta">
+          <p class="level-name">O'rtadan yuqori</p>
+          <p class="level-topics">Texnologiya, munozara</p>
+        </div>
       </div>
       <div class="level reveal">
-        <div class="level-code">C1</div><div class="level-name">Advanced</div>
-        <div class="level-bar"><i style="width:30%"></i></div>
+        <div class="level-bar" style="min-height:256px">
+          <p class="level-code">C1</p>
+          <p class="level-words">6 000+ so'z</p>
+        </div>
+        <div class="level-meta">
+          <p class="level-name">Erkin</p>
+          <p class="level-topics">Akademik, idiomalar</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="cta-box reveal">
+<section class="cta" id="boshlash">
+  <div class="wrap cta-inner">
+    <div>
       <h2>Bugun boshlang</h2>
-      <p>Birinchi darsgacha bir bosish qoldi. Reklama yo'q.</p>
-      <a class="btn btn-primary btn-lg" href="app.html">Boshlash →</a>
+      <p class="cta-lead">Birinchi darsgacha bir bosish qoldi. Reklama yo'q, to'lov talab qilinmaydi.</p>
+    </div>
+    <div class="cta-side">
+      <a class="btn btn-dark" href="app.html">
+        Bepul boshlash
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <p class="cta-note">Yoki mehmon sifatida sinab ko'ring — ro'yxatdan o'tmasdan.</p>
     </div>
   </div>
 </section>
@@ -174,14 +351,135 @@
 
 <footer class="foot">
   <div class="wrap foot-inner">
-    <p>© 2026 Congix English · Toshkent</p>
-    <nav class="foot-links">
-      <a href="app.html">Ilova</a>
-      <a href="#imkoniyatlar">Imkoniyatlar</a>
-      <a href="https://github.com/kasiimov/lexiq" target="_blank" rel="noopener">GitHub</a>
-    </nav>
+    <div class="foot-grid">
+      <div class="foot-about">
+        <div class="brand">
+          <span class="brand-mark">C</span>
+          <span class="brand-name">Congix English</span>
+        </div>
+        <p>O'zbek tilida so'zlashuvchilar uchun ingliz tili platformasi. Brauzerda ishlaydi.</p>
+      </div>
+      <div class="foot-col">
+        <p class="eyebrow">Mahsulot</p>
+        <a href="#imkoniyatlar">Imkoniyatlar</a>
+        <a href="#imkoniyatlar">O'yin rejimlari</a>
+        <a href="#darajalar">Darajalar</a>
+        <a href="#imkoniyatlar">AI ustoz</a>
+      </div>
+      <div class="foot-col">
+        <p class="eyebrow">O'rganish</p>
+        <a href="app.html">A1 — A2 lug'at</a>
+        <a href="app.html">B1 — B2 lug'at</a>
+        <a href="app.html">Mavzular</a>
+        <a href="#imkoniyatlar">Leitner usuli</a>
+      </div>
+      <div class="foot-col">
+        <p class="eyebrow">Kompaniya</p>
+        <a href="#top">Biz haqimizda</a>
+        <a href="https://github.com/kasiimov/lexiq" target="_blank" rel="noopener">GitHub</a>
+        <a href="app.html">Ilova</a>
+        <a href="#top">Shartlar</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Congix English · Toshkent</p>
+      <p>Reklama yo'q · Ma'lumotlaringiz sotilmaydi</p>
+    </div>
   </div>
 </footer>
+
+<script>
+// Демо-карточка в герое: те же три слова, что в макете.
+// Логика ровно как в WordCardDemo — выбрал вариант, увидел разбор, пошёл дальше.
+(function () {
+  var WORDS = [
+    { en: "to accomplish", ipa: "/əˈkʌmplɪʃ/", pos: "fe'l", level: "B1",
+      options: ["kutmoq", "amalga oshirmoq", "taxmin qilmoq", "qaytarmoq"], correct: 1 },
+    { en: "reliable", ipa: "/rɪˈlaɪəbl/", pos: "sifat", level: "B1",
+      options: ["ishonchli", "tasodifiy", "qimmat", "og'ir"], correct: 0 },
+    { en: "to postpone", ipa: "/pəˈspəʊn/", pos: "fe'l", level: "B2",
+      options: ["bekor qilmoq", "tezlashtirmoq", "keyinga surmoq", "eslatmoq"], correct: 2 }
+  ];
+
+  var ICON_CHECK = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+  var ICON_X = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+
+  var root = document.getElementById('demo');
+  if (!root) return;
+
+  var elEn = document.getElementById('demo-en');
+  var elMeta = document.getElementById('demo-meta');
+  var elOptions = document.getElementById('demo-options');
+  var elHint = document.getElementById('demo-hint');
+  var elNext = document.getElementById('demo-next');
+  var elSolved = document.getElementById('demo-solved');
+  var elXp = document.getElementById('demo-xp');
+  var elProgress = document.getElementById('demo-progress');
+
+  var step = 0, picked = null, solved = 11, xp = 1340;
+
+  function fmt(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+
+  function render() {
+    var word = WORDS[step % WORDS.length];
+
+    elEn.textContent = word.en;
+    elMeta.textContent = word.ipa + " · " + word.pos + " · " + word.level;
+    elSolved.textContent = solved;
+    elXp.textContent = fmt(xp);
+    elProgress.style.width = (solved / 20) * 100 + '%';
+
+    elOptions.innerHTML = '';
+    word.options.forEach(function (opt, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'demo-opt';
+      var label = document.createElement('span');
+      label.textContent = opt;
+      btn.appendChild(label);
+
+      if (picked !== null && i === word.correct) {
+        btn.classList.add('is-correct');
+        btn.insertAdjacentHTML('beforeend', ICON_CHECK);
+      } else if (picked === i) {
+        btn.classList.add('is-wrong');
+        btn.insertAdjacentHTML('beforeend', ICON_X);
+      }
+
+      btn.addEventListener('click', function () { choose(i); });
+      elOptions.appendChild(btn);
+    });
+
+    if (picked === null) {
+      elHint.textContent = "Keyingi takrorlash: 3 kundan keyin";
+    } else if (picked === word.correct) {
+      elHint.textContent = "To'g'ri — bu so'z 5 kundan keyin qaytadi";
+    } else {
+      elHint.textContent = "Xato — bu so'z ertaga yana so'raladi";
+    }
+
+    elNext.disabled = picked === null;
+  }
+
+  function choose(i) {
+    if (picked !== null) return;
+    picked = i;
+    if (i === WORDS[step % WORDS.length].correct) {
+      solved = Math.min(solved + 1, 20);
+      xp += 40;
+    }
+    render();
+  }
+
+  elNext.addEventListener('click', function () {
+    picked = null;
+    step += 1;
+    render();
+  });
+
+  render();
+})();
+</script>
 
 <script>
 // Плавное появление секций. Если IntersectionObserver недоступен —

@@ -6,6 +6,11 @@
 .env.*
 !.env.example
 
+# Исходники макета лендинга (React + Tailwind). Сайт собран из них вручную
+# в index.html и assets/css/site.css. В репозиторий не кладём: publish = "."
+# в netlify.toml, и всё отсюда уехало бы на прод как есть.
+congix-landing
+
 # macOS
 .DS_Store
 

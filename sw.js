@@ -7,7 +7,7 @@
 //
 // /api/* не кэшируется никогда: ответ ИИ одноразовый.
 
-const VERSION = 'lexiq-v2';
+const VERSION = 'lexiq-v3';
 const SHELL = [
   '/',
   '/app.html',

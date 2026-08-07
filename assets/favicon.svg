@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LexiQ">
-  <rect width="64" height="64" rx="16" fill="#262523"/>
-  <text x="32" y="45" font-family="Syne, Verdana, sans-serif" font-size="38" font-weight="800"
-        fill="#efede3" text-anchor="middle">L</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Congix English">
+  <rect width="64" height="64" rx="16" fill="#CBF24C"/>
+  <text x="32" y="45" font-family="'Bricolage Grotesque', Verdana, sans-serif" font-size="38" font-weight="800"
+        fill="#211E1B" text-anchor="middle">C</text>
 </svg>

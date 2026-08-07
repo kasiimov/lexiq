@@ -7,14 +7,18 @@
 //
 // /api/* не кэшируется никогда: ответ ИИ одноразовый.
 
-const VERSION = 'lexiq-v5';
+// ASSET_V должен совпадать с ?v= в ссылках на стили и скрипты в HTML.
+// Иначе в кэш ляжет один адрес, а страница попросит другой, и офлайн-старт
+// останется без стилей.
+const ASSET_V = '6';
+const VERSION = 'lexiq-v6';
 const SHELL = [
   '/',
   '/app.html',
-  '/assets/css/site.css',
-  '/assets/css/app.css',
-  '/assets/js/app.js',
-  '/assets/js/auth.js',
+  `/assets/css/site.css?v=${ASSET_V}`,
+  `/assets/css/app.css?v=${ASSET_V}`,
+  `/assets/js/app.js?v=${ASSET_V}`,
+  `/assets/js/auth.js?v=${ASSET_V}`,
   '/assets/favicon.svg',
   '/manifest.webmanifest',
 ];

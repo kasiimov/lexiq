@@ -46,8 +46,12 @@
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://securetoken.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com; frame-src https://*.firebaseapp.com; worker-src 'self'; base-uri 'self'; form-action 'self'"
 
+# Имена файлов не содержат хэша, поэтому годовой кэш здесь опасен: браузер
+# неделю держал старый app.css, HTML приезжал новый — и интерфейс разъезжался.
+# Теперь браузер обязан переспросить; при совпадении ETag ответ 304, это дёшево.
+# Офлайн обеспечивает service worker, а не заголовок.
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, max-age=0, must-revalidate"
 

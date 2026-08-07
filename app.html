@@ -10,7 +10,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/app.css?v=6">
 </head>
 <!-- Приложение открывается на экране входа: меню и шапка там ни к чему,
      поэтому классы стоят сразу в разметке — иначе они мигнут до первого show() -->
@@ -970,9 +970,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <!-- Конфига может не быть: тогда включается режим «Mehmon» -->
-<script src="assets/js/firebase-config.js" onerror="console.info('firebase-config.js yo\'q — mehmon rejimi')"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/firebase-config.js?v=6" onerror="console.info('firebase-config.js yo\'q — mehmon rejimi')"></script>
+<script src="assets/js/auth.js?v=6"></script>
+<script src="assets/js/app.js?v=6"></script>
 <script>
 // Офлайн-режим. Регистрация не должна ронять страницу, если браузер не умеет.
 if ('serviceWorker' in navigator) {

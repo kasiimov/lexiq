@@ -91,8 +91,18 @@ body {
 .side-collapsed .side-group + .side-group { border-top:1px solid var(--line-soft); padding-top:14px; }
 .side-collapsed .side-user { justify-content:center; padding:4px 0; }
 .side-collapsed .side-foot { gap:8px; }
+/* Иконки интерфейса: наследуют цвет текста и стоят на его базовой линии.
+   Раньше здесь были эмодзи — их рисует система, и рядом с тонкими линиями
+   макета они выглядели наклейками, разными на каждой платформе. */
+.ic-svg { flex:none; vertical-align:-0.18em; }
+.ic { display:inline-block; width:1em; height:1em; }
+
 .side-head { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0 4px 0 8px; }
-.side-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; min-width:0; }
+.side-logo {
+  display:flex; align-items:center; gap:10px; min-width:0;
+  background:transparent; border:none; padding:0; cursor:pointer;
+  color:inherit; font:inherit; text-align:left;
+}
 .side-toggle {
   flex-shrink:0; cursor:pointer;
   background:transparent; color:var(--muted-2); border:none;
@@ -225,7 +235,7 @@ body.flush .app { max-width:none; }
   letter-spacing:-0.02em; color:var(--lime); line-height:1.05; margin-top:6px;
 }
 .lc-sub { font-size:13px; color:var(--muted); margin-top:2px; }
-.lc-icon { font-size:40px; opacity:.9; }
+.lc-icon { line-height:0; color:var(--lime); }
 .lc-bar-wrap { margin-top:18px; background:var(--line); border-radius:99px; height:8px; overflow:hidden; }
 .lc-bar { height:100%; background:var(--lime); border-radius:99px; transition:width .6s ease; }
 .lc-bar-label { display:flex; justify-content:space-between; margin-top:8px; font-size:12px; color:var(--muted-2); }
@@ -286,7 +296,7 @@ body.flush .app { max-width:none; }
 }
 .action-card:hover { border-color:var(--muted-2); }
 .action-card:active { transform:scale(.97); }
-.action-card .ac-ico { font-size:24px; }
+.action-card .ac-ico { line-height:0; color:var(--lime); }
 .action-card .ac-title {
   font-family:var(--font-display); font-size:16px; font-weight:600;
   letter-spacing:-0.02em; color:var(--cream);
@@ -318,7 +328,7 @@ body.flush .app { max-width:none; }
 /* Выбранное состояние — лаймовая рамка. Ни заливки, ни свечения:
    в макете отмеченный элемент отличается только контуром. */
 .topic-card.selected { background:var(--surface-3); border-color:var(--lime); }
-.topic-card .tc-ico { font-size:22px; }
+.topic-card .tc-ico { line-height:0; color:var(--muted); }
 .topic-card .tc-name { font-size:14px; font-weight:500; color:var(--cream); }
 .topic-card .tc-count { font-size:12px; color:var(--muted-2); }
 .topic-card .tc-prog { position:absolute; right:12px; top:12px; font-size:11px; color:var(--lime); font-weight:500; }
@@ -344,7 +354,7 @@ body.flush .app { max-width:none; }
   transition:border-color .15s, transform .12s;
   text-align:center; min-height:124px; justify-content:center;
 }
-.gm-card .gm-ico { font-size:24px; }
+.gm-card .gm-ico { line-height:0; color:var(--muted); }
 .gm-card .gm-name {
   font-family:var(--font-display); font-size:14px; font-weight:600;
   letter-spacing:-0.02em; color:var(--cream);
@@ -354,6 +364,7 @@ body.flush .app { max-width:none; }
 .gm-card:active { transform:scale(.97); }
 .gm-card.selected { background:var(--surface-3); border-color:var(--lime); }
 .gm-card.selected .gm-name { color:var(--lime); }
+.gm-card.selected .gm-ico { color:var(--lime); }
 
 .train-opt-box { background:var(--surface-2); border:1px solid var(--line); border-radius:16px; padding:16px; }
 .train-toggle-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -611,7 +622,7 @@ body.flush .app { max-width:none; }
 .indicator.fail { background:var(--clay); border-color:var(--clay); animation:wag .3s ease; }
 @keyframes popIn { 0%{transform:scale(.96)} 60%{transform:scale(1.02)} 100%{transform:scale(1)} }
 @keyframes wag { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
-.ind-ico { font-size:20px; flex-shrink:0; margin-top:1px; }
+.ind-ico { line-height:0; flex-shrink:0; margin-top:2px; }
 
 .ind-title { font-size:14px; font-weight:500; color:var(--cream); }
 .ind-msg { font-size:13px; color:var(--muted); margin-top:3px; line-height:1.5; }
@@ -652,7 +663,7 @@ body.flush .app { max-width:none; }
   position:relative; overflow:hidden;
   animation:slideUp .4s ease;
 }
-.rc-emoji { font-size:48px; margin-bottom:10px; }
+.rc-emoji { line-height:0; margin-bottom:14px; color:var(--lime); }
 .rc-title {
   font-family:var(--font-display); font-size:26px; font-weight:600;
   letter-spacing:-0.02em; color:var(--cream);
@@ -699,7 +710,7 @@ body.flush .app { max-width:none; }
 
 /* ── LOADING / ERROR SCREENS ── */
 .loading-screen, .error-screen { text-align:center; padding:48px 20px; }
-.loading-screen .ls-icon, .error-screen .es-icon { font-size:56px; margin-bottom:16px; }
+.loading-screen .ls-icon, .error-screen .es-icon { line-height:0; margin-bottom:18px; color:var(--muted-2); }
 .loading-screen .ls-title, .error-screen .es-title {
   font-family:var(--font-display);
   font-size:24px; font-weight:600; letter-spacing:-0.02em;
@@ -747,9 +758,8 @@ body.flush .app { max-width:none; }
 .tutor-head { display:flex; align-items:center; gap:12px; }
 .tutor-ava {
   width:40px; height:40px; flex-shrink:0;
-  background:var(--lime);
+  background:var(--lime); color:var(--ink);
   border-radius:12px; display:flex; align-items:center; justify-content:center;
-  font-size:20px;
 }
 .tutor-head-txt { flex:1; min-width:0; }
 .tutor-name {
@@ -1116,8 +1126,8 @@ body.flush .app { max-width:none; }
   border-radius:24px; padding:20px;
 }
 .streak-card.cold { opacity:.75; }
-.sk-flame { font-size:30px; line-height:1; filter:grayscale(1); transition:filter .3s; }
-.streak-card.lit .sk-flame { filter:none; animation:flameBeat 2.4s ease-in-out infinite; }
+.sk-flame { line-height:0; color:var(--muted-2); transition:color .3s; }
+.streak-card.lit .sk-flame { color:var(--lime); animation:flameBeat 2.4s ease-in-out infinite; }
 @keyframes flameBeat { 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.12) } }
 .sk-body { flex:1; min-width:0; }
 .sk-days { font-family:var(--font-display); font-size:20px; font-weight:600; letter-spacing:-0.02em; }
@@ -1194,7 +1204,7 @@ body.flush .app { max-width:none; }
 .city-top { display:flex; align-items:center; gap:10px; }
 .city-code { font-family:var(--font-display); font-size:22px; font-weight:600; letter-spacing:-0.02em; }
 .city-name { font-size:13px; color:var(--muted); }
-.city-state { margin-left:auto; font-size:18px; }
+.city-state { margin-left:auto; line-height:0; color:var(--muted-2); }
 .city-bar { height:6px; border-radius:99px; background:var(--line); margin-top:14px; overflow:hidden; }
 .city-bar i { display:block; height:100%; background:var(--lime); border-radius:99px; transition:width .4s ease; }
 .city-meta { display:flex; justify-content:space-between; font-size:12px; color:var(--muted-2); margin-top:10px; }
@@ -1357,7 +1367,7 @@ body.flush .app { max-width:none; }
   animation:modalIn .18s ease;
 }
 @keyframes modalIn { from { opacity:0; transform:translateY(10px) scale(.98) } to { opacity:1; transform:none } }
-.modal-ico { font-size:28px; }
+.modal-ico { line-height:0; color:var(--clay); }
 .modal-title { font-family:var(--font-display); font-size:22px; font-weight:600; letter-spacing:-0.02em; margin-top:12px; }
 .modal-text { font-size:14px; color:var(--muted); margin-top:10px; line-height:1.6; }
 .modal-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:24px; }

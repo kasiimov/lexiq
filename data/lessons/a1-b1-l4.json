@@ -1,0 +1,118 @@
+{
+  "id": "a1-b1-l4",
+  "level": "A1",
+  "block": "a1-b1",
+  "title": "Qayerdanligingizni aytish",
+  "can_do": "Qaysi davlat va shahardan ekaningizni ayta olasiz va millatni to'g'ri nomlaysiz",
+  "why": "Chet elliklar bilan har qanday tanishuvda birinchi so'raladigan savol shu. Bir marta o'rgansangiz, umr bo'yi ishlatasiz.",
+  "rule": {
+    "title": "from + davlat; millat sifatlari",
+    "points": [
+      {
+        "text": "Kelib chiqishni aytishning ikki yo'li bor. Birinchisi — from bilan joy nomi: I am from Uzbekistan. Ikkinchisi — millat sifati: I am Uzbek. Ikkalasi ham to'g'ri.",
+        "examples": [
+          { "en": "I am from Uzbekistan.", "uz": "Men O'zbekistondanman." },
+          { "en": "I am Uzbek.", "uz": "Men o'zbekman." }
+        ]
+      },
+      {
+        "text": "From dan keyin joy nomi keladi, millat sifati emas. «I am from Uzbek» — xato. From bilan davlat, shahar yoki qishloq nomi ishlatiladi.",
+        "examples": [
+          { "en": "She is from Turkey.", "uz": "U Turkiyadan." },
+          { "en": "She is Turkish.", "uz": "U turk." }
+        ]
+      },
+      {
+        "text": "Davlat va millat nomlari doim bosh harf bilan yoziladi — gap o'rtasida ham. Bu ingliz tilining qat'iy qoidasi.",
+        "examples": [
+          { "en": "He is from Korea and she is Japanese.", "uz": "U Koreyadan, u esa yapon." },
+          { "en": "I speak Uzbek and Russian.", "uz": "Men o'zbek va rus tillarida gaplashaman." }
+        ]
+      },
+      {
+        "text": "Ko'p tillarda millat va til nomi bir xil: Uzbek — o'zbek va o'zbek tili; French — fransuz va fransuz tili. Kontekst qaysi ma'no ekanini ko'rsatadi.",
+        "examples": [
+          { "en": "He is French. He speaks French.", "uz": "U fransuz. U fransuzcha gapiradi." },
+          { "en": "Do you speak English?", "uz": "Ingliz tilida gaplashasizmi?" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Davlat", "Millat", "Til"],
+      "rows": [
+        ["Uzbekistan", "Uzbek", "Uzbek"],
+        ["Russia", "Russian", "Russian"],
+        ["Turkey", "Turkish", "Turkish"],
+        ["Kazakhstan", "Kazakh", "Kazakh"],
+        ["England", "English", "English"],
+        ["China", "Chinese", "Chinese"],
+        ["Korea", "Korean", "Korean"],
+        ["Germany", "German", "German"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I am from uzbekistan.",
+      "right": "I am from Uzbekistan.",
+      "why": "Davlat nomi doim bosh harf bilan."
+    },
+    {
+      "wrong": "I am from Uzbek.",
+      "right": "I am from Uzbekistan. / I am Uzbek.",
+      "why": "From dan keyin davlat nomi keladi, millat sifati emas."
+    },
+    {
+      "wrong": "I am uzbek.",
+      "right": "I am Uzbek.",
+      "why": "Millat nomi ham bosh harf bilan yoziladi."
+    },
+    {
+      "wrong": "I live in Tashkent city.",
+      "right": "I live in Tashkent.",
+      "why": "Shahar nomidan keyin «city» so'zi ortiqcha. Bu o'zbekchadagi «Toshkent shahri» dan kelib chiqadi."
+    },
+    {
+      "wrong": "Where are you from? — I am from the Uzbekistan.",
+      "right": "I am from Uzbekistan.",
+      "why": "Ko'p davlat nomlari oldiga the qo'yilmaydi. Istisnolar: the USA, the UK."
+    },
+    {
+      "wrong": "I am comed from Uzbekistan.",
+      "right": "I am from Uzbekistan.",
+      "why": "Kelib chiqishni aytishda oddiy to be yetarli, «kelmoq» fe'li kerak emas."
+    }
+  ],
+  "words": [
+    { "en": "from", "uz": "-dan", "ipa": "/frɒm/", "example": "I am from Uzbekistan." },
+    { "en": "country", "uz": "davlat", "ipa": "/ˈkʌntri/", "example": "What country are you from?" },
+    { "en": "city", "uz": "shahar", "ipa": "/ˈsɪti/", "example": "Tashkent is a big city." },
+    { "en": "village", "uz": "qishloq", "ipa": "/ˈvɪlɪdʒ/", "example": "He is from a small village." },
+    { "en": "language", "uz": "til", "ipa": "/ˈlæŋɡwɪdʒ/", "example": "How many languages do you speak?" },
+    { "en": "speak", "uz": "gapirmoq", "ipa": "/spiːk/", "example": "I speak Uzbek." },
+    { "en": "live", "uz": "yashamoq", "ipa": "/lɪv/", "example": "I live in Tashkent." },
+    { "en": "capital", "uz": "poytaxt", "ipa": "/ˈkæpɪtl/", "example": "Tashkent is the capital of Uzbekistan." },
+    { "en": "foreigner", "uz": "chet ellik", "ipa": "/ˈfɒrənə(r)/", "example": "He is a foreigner." },
+    { "en": "abroad", "uz": "chet elda", "ipa": "/əˈbrɔːd/", "example": "My brother works abroad." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 1, "count": 2, "focus": "davlat nomiga mos millat sifatini tanlash" },
+      { "type": 2, "count": 3, "focus": "from yoki millat sifatini bo'sh joyga qo'yish" },
+      { "type": 5, "count": 3, "focus": "bosh harf, ortiqcha the va «from + millat» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "berilgan davlat bilan ikki xil usulda gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U turk emas, u qozoq», «Men kichik qishloqdanman»" }
+    ],
+    "final": { "type": 7, "task": "Xalqaro konferensiyada tanishyapsiz. O'zingiz va shahringiz haqida 4 gap yozing: davlat, shahar, til, kasb." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "To'rt kishi o'zini tanishtiradi. Har birining davlati va tilini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "from + davlat, millat sifatlari",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

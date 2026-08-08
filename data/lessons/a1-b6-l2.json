@@ -1,0 +1,114 @@
+{
+  "id": "a1-b6-l2",
+  "level": "A1",
+  "block": "a1-b6",
+  "title": "Vaqt predloglari: in, on, at",
+  "can_do": "Voqea qachon bo'lishini to'g'ri predlog bilan aytasiz",
+  "why": "Uchta kichik so'z, lekin ular butun gapni to'g'ri yoki noto'g'ri qiladi. Bu qoidani bir marta jadval sifatida yodlab olish kifoya.",
+  "rule": {
+    "title": "in / on / at vaqt bilan",
+    "points": [
+      {
+        "text": "Qoidani eng oson yodlash yo'li — «kattadan kichikka». In eng katta bo'laklar bilan: yil, oy, fasl, kun qismi. On o'rtacha: aniq kun va sana. At eng kichik: aniq soat va nuqta.",
+        "examples": [
+          { "en": "in 2026, in May, in summer", "uz": "2026-yilda, mayda, yozda" },
+          { "en": "on Monday, on 5 May", "uz": "dushanba kuni, 5-mayda" },
+          { "en": "at seven o'clock, at midnight", "uz": "soat yettida, yarim tunda" }
+        ]
+      },
+      {
+        "text": "Kun qismlari in bilan: in the morning, in the afternoon, in the evening. Lekin «at night» — istisno, yodlab qo'yish kerak.",
+        "examples": [
+          { "en": "I study in the morning.", "uz": "Men ertalab o'qiyman." },
+          { "en": "He works at night.", "uz": "U tunda ishlaydi." }
+        ]
+      },
+      {
+        "text": "Aniq kun bilan on ishlatiladi, hatto kun qismi qo'shilsa ham: on Monday morning, «in Monday morning» emas.",
+        "examples": [
+          { "en": "The meeting is on Friday morning.", "uz": "Uchrashuv juma kuni ertalab." },
+          { "en": "I don't work on Sundays.", "uz": "Men yakshanba kunlari ishlamayman." }
+        ]
+      },
+      {
+        "text": "Ba'zi iboralarda predlog umuman qo'yilmaydi: today, tomorrow, yesterday, next week, last year, every day. «In tomorrow» — xato.",
+        "examples": [
+          { "en": "I'll call you tomorrow.", "uz": "Ertaga qo'ng'iroq qilaman." },
+          { "en": "We meet every day.", "uz": "Biz har kuni uchrashamiz." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Predlog", "Nima bilan", "Misol"],
+      "rows": [
+        ["in", "yil", "in 2026"],
+        ["in", "oy, fasl", "in May, in winter"],
+        ["in", "kun qismi", "in the morning"],
+        ["on", "hafta kuni", "on Monday"],
+        ["on", "sana", "on 5 May"],
+        ["at", "aniq soat", "at 7 o'clock"],
+        ["at", "istisnolar", "at night, at the weekend"],
+        ["—", "today, tomorrow, next week", "predlogsiz"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I was born in 5 May.",
+      "right": "I was born on 5 May.",
+      "why": "Sana bilan on ishlatiladi, in faqat oy bilan: in May."
+    },
+    {
+      "wrong": "The lesson starts in 9 o'clock.",
+      "right": "The lesson starts at 9 o'clock.",
+      "why": "Aniq soat bilan at."
+    },
+    {
+      "wrong": "I work in the night.",
+      "right": "I work at night.",
+      "why": "«Night» — istisno, at bilan ishlatiladi."
+    },
+    {
+      "wrong": "See you in tomorrow.",
+      "right": "See you tomorrow.",
+      "why": "Tomorrow, today, yesterday oldiga predlog qo'yilmaydi."
+    },
+    {
+      "wrong": "The meeting is in Monday morning.",
+      "right": "The meeting is on Monday morning.",
+      "why": "Aniq kun aytilsa, on ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "Monday", "uz": "dushanba", "ipa": "/ˈmʌndeɪ/", "example": "See you on Monday." },
+    { "en": "weekend", "uz": "dam olish kunlari", "ipa": "/ˌwiːkˈend/", "example": "What do you do at the weekend?" },
+    { "en": "month", "uz": "oy", "ipa": "/mʌnθ/", "example": "Which month is it?" },
+    { "en": "year", "uz": "yil", "ipa": "/jɪə(r)/", "example": "I was born in 2005." },
+    { "en": "summer", "uz": "yoz", "ipa": "/ˈsʌmə(r)/", "example": "We travel in summer." },
+    { "en": "winter", "uz": "qish", "ipa": "/ˈwɪntə(r)/", "example": "It's cold in winter." },
+    { "en": "today", "uz": "bugun", "ipa": "/təˈdeɪ/", "example": "I'm busy today." },
+    { "en": "tomorrow", "uz": "ertaga", "ipa": "/təˈmɒrəʊ/", "example": "See you tomorrow." },
+    { "en": "birthday", "uz": "tug'ilgan kun", "ipa": "/ˈbɜːθdeɪ/", "example": "My birthday is on 3 June." },
+    { "en": "holiday", "uz": "ta'til, bayram", "ipa": "/ˈhɒlədeɪ/", "example": "We are on holiday in July." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 5, "focus": "in / on / at ni bo'sh joyga qo'yish" },
+      { "type": 1, "count": 2, "focus": "predlog kerakmi yoki yo'qligini aniqlash" },
+      { "type": 5, "count": 3, "focus": "«in 5 May», «in the night», «in tomorrow» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'z jadvalingiz haqida vaqt predloglari bilan gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Tug'ilgan kunim 3-iyunda», «Yozda sayohat qilamiz»" }
+    ],
+    "final": { "type": 7, "task": "Kelasi haftangiz jadvalini yozing: qaysi kuni, soat nechada, nima qilasiz. Vaqt predloglarini ishlating. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam haftalik rejasini aytadi. Har bir ish uchun kun va soatni yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "vaqt predloglari in / on / at",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

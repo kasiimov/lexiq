@@ -1,0 +1,115 @@
+{
+  "id": "a1-b4-l2",
+  "level": "A1",
+  "block": "a1-b4",
+  "title": "Narsa qayerdaligini aytish",
+  "can_do": "Narsa yoki odam qayerda ekanini aniq ayta olasiz",
+  "why": "«Kalit stol ustida», «Bank kutubxona yonida» — o'rin predloglari bo'lmasa, joyni tushuntira olmaysiz. O'zbek tilida bu qo'shimcha, ingliz tilida — alohida so'z.",
+  "rule": {
+    "title": "O'rin predloglari",
+    "points": [
+      {
+        "text": "O'zbek tilida joy qo'shimcha bilan ko'rsatiladi: stol-da, stol-ning ost-ida. Ingliz tilida esa otdan OLDIN alohida so'z turadi: on the table, under the table.",
+        "examples": [
+          { "en": "The book is on the table.", "uz": "Kitob stol ustida." },
+          { "en": "The cat is under the chair.", "uz": "Mushuk stul tagida." }
+        ]
+      },
+      {
+        "text": "Uchta asosiy predlog: in — ichida, on — ustida yoki yuzasida, at — nuqtada. In the box, on the wall, at the door.",
+        "examples": [
+          { "en": "The keys are in my bag.", "uz": "Kalitlar sumkamda." },
+          { "en": "The picture is on the wall.", "uz": "Rasm devorda." },
+          { "en": "She is at the bus stop.", "uz": "U avtobus bekatida." }
+        ]
+      },
+      {
+        "text": "Ikki so'zli predloglar ham bor: next to — yonida, in front of — oldida, behind — orqasida, between — orasida, opposite — ro'parasida.",
+        "examples": [
+          { "en": "The bank is next to the school.", "uz": "Bank maktab yonida." },
+          { "en": "The car is in front of the house.", "uz": "Mashina uy oldida." },
+          { "en": "The shop is between the bank and the café.", "uz": "Do'kon bank bilan kafe orasida." }
+        ]
+      },
+      {
+        "text": "Shahar bilan in, aniq manzil bilan at ishlatiladi: in Tashkent, at 5 Navoi Street. Bu farq ko'p xatoga sabab bo'ladi.",
+        "examples": [
+          { "en": "I live in Tashkent.", "uz": "Men Toshkentda yashayman." },
+          { "en": "I work at 12 Amir Temur Street.", "uz": "Men Amir Temur ko'chasi 12-uyda ishlayman." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Predlog", "Ma'nosi", "Misol"],
+      "rows": [
+        ["in", "ichida", "in the room"],
+        ["on", "ustida", "on the table"],
+        ["under", "tagida", "under the bed"],
+        ["next to", "yonida", "next to the bank"],
+        ["behind", "orqasida", "behind the house"],
+        ["in front of", "oldida", "in front of the shop"],
+        ["between", "orasida", "between two buildings"],
+        ["opposite", "ro'parasida", "opposite the park"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "The book is the table on.",
+      "right": "The book is on the table.",
+      "why": "Predlog otdan oldin turadi. O'zbekchadagi qo'shimcha tartibini ko'chirishdan chiqadigan xato."
+    },
+    {
+      "wrong": "I live at Tashkent.",
+      "right": "I live in Tashkent.",
+      "why": "Shahar bilan in ishlatiladi."
+    },
+    {
+      "wrong": "The bank is near to my house.",
+      "right": "The bank is near my house.",
+      "why": "Near dan keyin to qo'yilmaydi. Lekin «next to» — ikkalasi birga."
+    },
+    {
+      "wrong": "The car is in front the house.",
+      "right": "The car is in front of the house.",
+      "why": "«In front of» uch so'zdan iborat, of tushib qolmaydi."
+    },
+    {
+      "wrong": "The shop is between the bank with the café.",
+      "right": "The shop is between the bank and the café.",
+      "why": "Between doim and bilan ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "in", "uz": "ichida", "ipa": "/ɪn/", "example": "The keys are in the bag." },
+    { "en": "on", "uz": "ustida", "ipa": "/ɒn/", "example": "The book is on the desk." },
+    { "en": "under", "uz": "tagida", "ipa": "/ˈʌndə(r)/", "example": "The ball is under the table." },
+    { "en": "next to", "uz": "yonida", "ipa": "/ˈnekst tuː/", "example": "The café is next to the bank." },
+    { "en": "behind", "uz": "orqasida", "ipa": "/bɪˈhaɪnd/", "example": "The garden is behind the house." },
+    { "en": "in front of", "uz": "oldida", "ipa": "/ɪn ˈfrʌnt əv/", "example": "Wait in front of the door." },
+    { "en": "between", "uz": "orasida", "ipa": "/bɪˈtwiːn/", "example": "It's between the shop and the school." },
+    { "en": "opposite", "uz": "ro'parasida", "ipa": "/ˈɒpəzɪt/", "example": "The park is opposite my house." },
+    { "en": "near", "uz": "yaqin", "ipa": "/nɪə(r)/", "example": "Is there a shop near here?" },
+    { "en": "corner", "uz": "burchak", "ipa": "/ˈkɔːnə(r)/", "example": "The shop is on the corner." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "rasm yoki tavsifga mos predlogni qo'yish" },
+      { "type": 1, "count": 2, "focus": "in / on / at ni to'g'ri tanlash" },
+      { "type": 5, "count": 3, "focus": "«near to», «in front the», «at Tashkent» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'z xonangizdagi narsalar joyi haqida gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Bank maktab yonida», «Kalitlar sumkamda»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingiz siznikiga kelmoqchi. Uyingiz qayerdaligini predloglar bilan tushuntiring: nima yonida, nima ro'parasida. 4-5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam xonasini tasvirlaydi. Qaysi narsa qayerdaligini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "o'rin predloglari",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

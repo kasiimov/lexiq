@@ -1,0 +1,110 @@
+{
+  "id": "a1-b5-l2",
+  "level": "A1",
+  "block": "a1-b5",
+  "title": "«Biroz» va «hech» deb aytish",
+  "can_do": "Aniq miqdorni aytmasdan borligini yoki yo'qligini bildirasiz",
+  "why": "Kundalik suhbatda aniq son kamdan-kam kerak bo'ladi. «Sut bormi?», «Bir oz pul bor» — bularning hammasi some va any bilan aytiladi.",
+  "rule": {
+    "title": "some va any",
+    "points": [
+      {
+        "text": "Some darak gaplarda ishlatiladi va «biroz, bir nechta» degani. U sanalmaydigan otlar bilan ham, ko'plik bilan ham keladi.",
+        "examples": [
+          { "en": "There is some milk in the fridge.", "uz": "Muzlatkichda biroz sut bor." },
+          { "en": "I have some friends in Bukhara.", "uz": "Buxoroda bir nechta do'stim bor." }
+        ]
+      },
+      {
+        "text": "Any savol va inkor gaplarda ishlatiladi. Inkorda «hech» ma'nosini beradi.",
+        "examples": [
+          { "en": "Have you got any sugar?", "uz": "Shakaringiz bormi?" },
+          { "en": "There isn't any bread.", "uz": "Non yo'q." }
+        ]
+      },
+      {
+        "text": "Muhim istisno: taklif qilganda yoki so'raganda savolda ham some ishlatiladi — bu odobli eshitiladi va ijobiy javob kutilayotganini bildiradi.",
+        "examples": [
+          { "en": "Would you like some tea?", "uz": "Choy ichasizmi?" },
+          { "en": "Can I have some water, please?", "uz": "Suv bersangiz, iltimos?" }
+        ]
+      },
+      {
+        "text": "Birlik sanaladigan ot bilan some emas, a / an ishlatiladi: «I need a pen», «I need some pen» emas.",
+        "examples": [
+          { "en": "I need a pen.", "uz": "Menga ruchka kerak." },
+          { "en": "I need some pens.", "uz": "Menga bir nechta ruchka kerak." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Gap turi", "So'z", "Misol"],
+      "rows": [
+        ["Darak", "some", "There is some milk."],
+        ["Inkor", "any", "There isn't any milk."],
+        ["Savol", "any", "Is there any milk?"],
+        ["Taklif / iltimos", "some", "Would you like some milk?"],
+        ["Birlik sanaladigan", "a / an", "I need a cup."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "There isn't some bread.",
+      "right": "There isn't any bread.",
+      "why": "Inkor gapda any ishlatiladi."
+    },
+    {
+      "wrong": "Have you got some money?",
+      "right": "Have you got any money?",
+      "why": "Oddiy savolda any. Some faqat taklif va iltimosda."
+    },
+    {
+      "wrong": "I have any friends here.",
+      "right": "I have some friends here.",
+      "why": "Darak gapda some ishlatiladi."
+    },
+    {
+      "wrong": "I need some pen.",
+      "right": "I need a pen.",
+      "why": "Birlik sanaladigan ot bilan a / an keladi."
+    },
+    {
+      "wrong": "There is any problem.",
+      "right": "There isn't any problem. / There is a problem.",
+      "why": "Any darak gapda yolg'iz ishlatilmaydi."
+    }
+  ],
+  "words": [
+    { "en": "some", "uz": "biroz, bir nechta", "ipa": "/sʌm/", "example": "There is some tea." },
+    { "en": "any", "uz": "hech, biror", "ipa": "/ˈeni/", "example": "Is there any sugar?" },
+    { "en": "milk", "uz": "sut", "ipa": "/mɪlk/", "example": "I drink milk every morning." },
+    { "en": "fridge", "uz": "muzlatkich", "ipa": "/frɪdʒ/", "example": "It's in the fridge." },
+    { "en": "cheese", "uz": "pishloq", "ipa": "/tʃiːz/", "example": "We haven't got any cheese." },
+    { "en": "fruit", "uz": "meva", "ipa": "/fruːt/", "example": "I eat a lot of fruit." },
+    { "en": "vegetables", "uz": "sabzavotlar", "ipa": "/ˈvedʒtəblz/", "example": "Buy some vegetables." },
+    { "en": "salt", "uz": "tuz", "ipa": "/sɔːlt/", "example": "There isn't any salt." },
+    { "en": "oil", "uz": "yog'", "ipa": "/ɔɪl/", "example": "We need some oil." },
+    { "en": "would like", "uz": "xohlamoq (odobli)", "ipa": "/wʊd ˈlaɪk/", "example": "Would you like some tea?" }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "some yoki any ni gap turiga qarab qo'yish" },
+      { "type": 3, "count": 2, "focus": "darak gapni inkor va savolga aylantirib, some ni any ga o'zgartirish" },
+      { "type": 5, "count": 3, "focus": "«isn't some», «some pen» xatolarini topish va tushuntirish" },
+      { "type": 4, "count": 2, "focus": "muzlatkichingizda nima borligi haqida gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Non yo'q», «Choy ichasizmi?»" }
+    ],
+    "final": { "type": 7, "task": "Uyda mehmon kutyapsiz. Muzlatkichda nima bor va nima yo'qligini some / any bilan yozing. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Ikki kishi oshxonada nima borligini muhokama qiladi. Nima bor va nima yo'qligini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "some / any",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -1,10 +1,10 @@
 {
   "meta": {
     "version": "1.0",
-    "total_words": 558,
+    "total_words": 581,
     "language": "Uzbek (Latin)",
     "exported_at": "2026-05-18T14:53:24.369Z",
-    "status_ok": 558,
+    "status_ok": 581,
     "status_todo": 0,
     "status_review": 0
   },
@@ -7675,6 +7675,332 @@
       "phon": "",
       "example_en": "The bridge can withstand heavy storms.",
       "example_uz": "Ko‘prik kuchli bo‘ronlarga bardosh bera oladi.",
+      "status": "ok"
+    },
+    {
+      "id": "a072",
+      "en": "address",
+      "uz": [
+        "manzil"
+      ],
+      "level": "A1",
+      "topic": "people",
+      "pos": "noun",
+      "phon": "/əˈdres/",
+      "example_en": "What is your home address?",
+      "example_uz": "Uy manzilingiz qanday?",
+      "status": "ok"
+    },
+    {
+      "id": "a073",
+      "en": "alphabet",
+      "uz": [
+        "alifbo"
+      ],
+      "level": "A1",
+      "topic": "education",
+      "pos": "noun",
+      "phon": "/ˈælfəbet/",
+      "example_en": "The English alphabet has twenty-six letters.",
+      "example_uz": "Ingliz alifbosida yigirma olti harf bor.",
+      "status": "ok"
+    },
+    {
+      "id": "a074",
+      "en": "am",
+      "uz": [
+        "-man (bo'lmoq)"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "verb",
+      "phon": "/æm/",
+      "example_en": "I am here on holiday.",
+      "example_uz": "Men bu yerda ta'tildaman.",
+      "status": "ok"
+    },
+    {
+      "id": "a075",
+      "en": "are",
+      "uz": [
+        "-siz (bo'lmoq)"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "verb",
+      "phon": "/ɑː(r)/",
+      "example_en": "Are you here to study?",
+      "example_uz": "Siz bu yerga o'qish uchun kelganmisiz?",
+      "status": "ok"
+    },
+    {
+      "id": "f046",
+      "en": "first name",
+      "uz": [
+        "ism"
+      ],
+      "level": "A1",
+      "topic": "people",
+      "pos": "noun",
+      "phon": "/ˈfɜːst neɪm/",
+      "example_en": "My first name is Anna.",
+      "example_uz": "Mening ismim Anna.",
+      "status": "ok"
+    },
+    {
+      "id": "g018",
+      "en": "good morning",
+      "uz": [
+        "xayrli tong"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "interj",
+      "phon": "/ɡʊd ˈmɔːnɪŋ/",
+      "example_en": "Good morning. How are you?",
+      "example_uz": "Xayrli tong. Qalaysiz?",
+      "status": "ok"
+    },
+    {
+      "id": "h036",
+      "en": "hi",
+      "uz": [
+        "salom"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "interj",
+      "phon": "/haɪ/",
+      "example_en": "Hi, I'm Paul.",
+      "example_uz": "Salom, men Paulman.",
+      "status": "ok"
+    },
+    {
+      "id": "i036",
+      "en": "introduce",
+      "uz": [
+        "tanishtirmoq"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "verb",
+      "phon": "/ˌɪntrəˈdjuːs/",
+      "example_en": "Henry, let me introduce you to Lena.",
+      "example_uz": "Genri, sizni Lena bilan tanishtiray.",
+      "status": "ok"
+    },
+    {
+      "id": "i037",
+      "en": "is",
+      "uz": [
+        "-dir (bo'lmoq)"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "verb",
+      "phon": "/ɪz/",
+      "example_en": "My address is 909 Cameron Road, Austin, Texas.",
+      "example_uz": "Mening manzilim 909 Cameron Road, Ostin, Texas.",
+      "status": "ok"
+    },
+    {
+      "id": "l028",
+      "en": "last name",
+      "uz": [
+        "familiya"
+      ],
+      "level": "A1",
+      "topic": "people",
+      "pos": "noun",
+      "phon": "/ˈlɑːst neɪm/",
+      "example_en": "What's your last name?",
+      "example_uz": "Familiyangiz nima?",
+      "status": "ok"
+    },
+    {
+      "id": "m010",
+      "en": "map",
+      "uz": [
+        "xarita"
+      ],
+      "level": "A1",
+      "topic": "objects",
+      "pos": "noun",
+      "phon": "/mæp/",
+      "example_en": "This is a map of the world.",
+      "example_uz": "Bu dunyo xaritasi.",
+      "status": "ok"
+    },
+    {
+      "id": "m011",
+      "en": "meeting",
+      "uz": [
+        "uchrashuv"
+      ],
+      "level": "A1",
+      "topic": "work",
+      "pos": "noun",
+      "phon": "/ˈmiːtɪŋ/",
+      "example_en": "What time's the meeting?",
+      "example_uz": "Uchrashuv soat nechada?",
+      "status": "ok"
+    },
+    {
+      "id": "n004",
+      "en": "name",
+      "uz": [
+        "ism"
+      ],
+      "level": "A1",
+      "topic": "people",
+      "pos": "noun",
+      "phon": "/neɪm/",
+      "example_en": "What's your name?",
+      "example_uz": "Ismingiz nima?",
+      "status": "ok"
+    },
+    {
+      "id": "n005",
+      "en": "no",
+      "uz": [
+        "yo'q"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "interj",
+      "phon": "/nəʊ/",
+      "example_en": "'Are you American?' 'No, I'm not. I'm Canadian.'",
+      "example_uz": "«Siz amerikalikmisiz?» «Yo'q. Men kanadalikman.»",
+      "status": "ok"
+    },
+    {
+      "id": "n006",
+      "en": "number",
+      "uz": [
+        "raqam",
+        "son"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/ˈnʌmbə(r)/",
+      "example_en": "I think number 1 is China.",
+      "example_uz": "Menimcha, 1-raqam — Xitoy.",
+      "status": "ok"
+    },
+    {
+      "id": "o009",
+      "en": "on",
+      "uz": [
+        "-da",
+        "ustida"
+      ],
+      "level": "A1",
+      "topic": "position",
+      "pos": "prep",
+      "phon": "/ɒn/",
+      "example_en": "Are you on holiday?",
+      "example_uz": "Siz ta'tildamisiz?",
+      "status": "ok"
+    },
+    {
+      "id": "r019",
+      "en": "right",
+      "uz": [
+        "to'g'ri"
+      ],
+      "level": "A1",
+      "topic": "adjectives",
+      "pos": "adj",
+      "phon": "/raɪt/",
+      "example_en": "That's right.",
+      "example_uz": "To'g'ri.",
+      "status": "ok"
+    },
+    {
+      "id": "p024",
+      "en": "phone number",
+      "uz": [
+        "telefon raqami"
+      ],
+      "level": "A1",
+      "topic": "people",
+      "pos": "noun",
+      "phon": "/ˈfəʊn ˌnʌmbə(r)/",
+      "example_en": "My mobile phone number is 0918-143-4267.",
+      "example_uz": "Mening mobil telefon raqamim 0918-143-4267.",
+      "status": "ok"
+    },
+    {
+      "id": "s013",
+      "en": "spell",
+      "uz": [
+        "harflab aytmoq"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "verb",
+      "phon": "/spel/",
+      "example_en": "How do you spell your name?",
+      "example_uz": "Ismingiz qanday yoziladi?",
+      "status": "ok"
+    },
+    {
+      "id": "s014",
+      "en": "study",
+      "uz": [
+        "o'qimoq",
+        "tahsil olmoq"
+      ],
+      "level": "A1",
+      "topic": "education",
+      "pos": "verb",
+      "phon": "/ˈstʌdi/",
+      "example_en": "I'm here to study.",
+      "example_uz": "Men bu yerga o'qish uchun kelganman.",
+      "status": "ok"
+    },
+    {
+      "id": "t006",
+      "en": "thanks",
+      "uz": [
+        "rahmat"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "interj",
+      "phon": "/θæŋks/",
+      "example_en": "'Have a nice day.' 'Thanks.'",
+      "example_uz": "«Kuningiz xayrli o'tsin.» «Rahmat.»",
+      "status": "ok"
+    },
+    {
+      "id": "t007",
+      "en": "that",
+      "uz": [
+        "u",
+        "o'sha"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "det",
+      "phon": "/ðæt/",
+      "example_en": "How do you spell that?",
+      "example_uz": "U qanday yoziladi?",
+      "status": "ok"
+    },
+    {
+      "id": "t008",
+      "en": "too",
+      "uz": [
+        "ham"
+      ],
+      "level": "A1",
+      "topic": "adverbs",
+      "pos": "adv",
+      "phon": "/tuː/",
+      "example_en": "'Nice to meet you, Gary.' 'You too.'",
+      "example_uz": "«Tanishganimdan xursandman, Gari.» «Men ham.»",
       "status": "ok"
     }
   ]

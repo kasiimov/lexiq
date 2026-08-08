@@ -1,0 +1,111 @@
+{
+  "id": "a1-b1-l3",
+  "level": "A1",
+  "block": "a1-b1",
+  "title": "Inkor: «Yo'q, men emas»",
+  "can_do": "Noto'g'ri ma'lumotni rad eta olasiz va aniqlik kiritasiz",
+  "why": "Sizni boshqa odam bilan adashtirishadi yoki noto'g'ri tushunishadi. «Yo'q, men shifokor emasman, men hamshiraman» deb ayta olish kerak.",
+  "rule": {
+    "title": "to be inkori: not qo'shish",
+    "points": [
+      {
+        "text": "Inkor yasash uchun to be dan keyin not qo'yiladi. Boshqa hech narsa o'zgarmaydi: I am → I am not, he is → he is not, they are → they are not.",
+        "examples": [
+          { "en": "I am not a doctor.", "uz": "Men shifokor emasman." },
+          { "en": "She is not at home.", "uz": "U uyda emas." }
+        ]
+      },
+      {
+        "text": "Jonli nutqda deyarli har doim qisqartiriladi: is not → isn't, are not → aren't. Lekin am not ning qisqa shakli yo'q — faqat I'm not deyiladi.",
+        "examples": [
+          { "en": "He isn't my brother.", "uz": "U mening akam emas." },
+          { "en": "We aren't from Tashkent.", "uz": "Biz Toshkentdan emasmiz." },
+          { "en": "I'm not tired.", "uz": "Men charchamaganman." }
+        ]
+      },
+      {
+        "text": "Ikki xil qisqartirish mumkin va ikkalasi ham to'g'ri: she is not → she isn't yoki she's not. Ma'nosi bir xil.",
+        "examples": [
+          { "en": "She isn't here. = She's not here.", "uz": "U shu yerda emas." },
+          { "en": "They aren't ready. = They're not ready.", "uz": "Ular tayyor emas." }
+        ]
+      },
+      {
+        "text": "Rad etganda odatda to'g'ri ma'lumot ham aytiladi: «No, I'm not a doctor. I'm a nurse.» Faqat inkor bilan cheklanish qo'pol eshitiladi.",
+        "examples": [
+          { "en": "I'm not Russian. I'm Uzbek.", "uz": "Men rus emasman. Men o'zbekman." },
+          { "en": "It isn't cold. It's warm.", "uz": "Sovuq emas. Iliq." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["To'liq shakl", "Qisqa shakl 1", "Qisqa shakl 2"],
+      "rows": [
+        ["I am not", "I'm not", "—"],
+        ["you are not", "you aren't", "you're not"],
+        ["he / she / it is not", "he isn't", "he's not"],
+        ["we are not", "we aren't", "we're not"],
+        ["they are not", "they aren't", "they're not"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I amn't a student.",
+      "right": "I'm not a student.",
+      "why": "Amn't degan shakl ingliz tilida yo'q. I am not yoki I'm not."
+    },
+    {
+      "wrong": "He not my friend.",
+      "right": "He isn't my friend.",
+      "why": "Not yolg'iz ishlatilmaydi, unga to be kerak."
+    },
+    {
+      "wrong": "I don't be a teacher.",
+      "right": "I'm not a teacher.",
+      "why": "To be inkorida do / don't ishlatilmaydi — not to'g'ridan-to'g'ri to be dan keyin qo'yiladi."
+    },
+    {
+      "wrong": "She isn't not here.",
+      "right": "She isn't here.",
+      "why": "Bitta gapda ikkita inkor bo'lmaydi. O'zbek tilida «hech kim kelmadi» kabi qo'sh inkor bor, ingliz tilida yo'q."
+    },
+    {
+      "wrong": "We not are from Andijan.",
+      "right": "We aren't from Andijan.",
+      "why": "Not har doim to be dan keyin turadi, oldin emas."
+    }
+  ],
+  "words": [
+    { "en": "not", "uz": "emas", "ipa": "/nɒt/", "example": "I am not ready." },
+    { "en": "nurse", "uz": "hamshira", "ipa": "/nɜːs/", "example": "She is a nurse, not a doctor." },
+    { "en": "tired", "uz": "charchagan", "ipa": "/ˈtaɪəd/", "example": "I'm not tired." },
+    { "en": "busy", "uz": "band", "ipa": "/ˈbɪzi/", "example": "He isn't busy today." },
+    { "en": "ready", "uz": "tayyor", "ipa": "/ˈredi/", "example": "We aren't ready." },
+    { "en": "late", "uz": "kech", "ipa": "/leɪt/", "example": "You are late." },
+    { "en": "married", "uz": "turmush qurgan", "ipa": "/ˈmærid/", "example": "I'm not married." },
+    { "en": "sure", "uz": "aniq, ishonchli", "ipa": "/ʃʊə(r)/", "example": "I'm not sure." },
+    { "en": "wrong", "uz": "noto'g'ri", "ipa": "/rɒŋ/", "example": "That is wrong." },
+    { "en": "same", "uz": "bir xil", "ipa": "/seɪm/", "example": "We aren't the same." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 3, "focus": "darak gapni inkorga aylantirish" },
+      { "type": 2, "count": 2, "focus": "isn't / aren't / 'm not ni bo'sh joyga qo'yish" },
+      { "type": 5, "count": 3, "focus": "amn't, don't be, qo'sh inkor kabi xatolarni topish va tushuntirish" },
+      { "type": 4, "count": 2, "focus": "«Men ... emasman, men ...man» qolipida o'zingiz haqingizda gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U band emas», «Biz tayyor emasmiz»" }
+    ],
+    "final": { "type": 7, "task": "Sizni boshqa odam bilan adashtirishdi. Kim emasligingizni va aslida kim ekanligingizni 3 gapda tushuntiring." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Suhbatni tinglang. Qaysi ma'lumot noto'g'ri ekanini va odam uni qanday tuzatganini yozing.",
+    "level_hint": "sekin nutq, 30 soniya"
+  },
+  "review": {
+    "topic": "to be inkori",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

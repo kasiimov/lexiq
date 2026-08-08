@@ -1,0 +1,111 @@
+{
+  "id": "a1-b3-l2",
+  "level": "A1",
+  "block": "a1-b3",
+  "title": "Qanchalik tez-tez qilishingizni aytish",
+  "can_do": "Ishni qanchalik tez-tez bajarishingizni ayta olasiz",
+  "why": "«Ba'zan», «har doim», «hech qachon» — bularsiz odatlaringiz haqida aniq gapira olmaysiz. Ingliz tilida bu so'zlarning gapdagi o'rni qat'iy.",
+  "rule": {
+    "title": "Takrorlanish ravishlari va ularning o'rni",
+    "points": [
+      {
+        "text": "Takrorlanish ravishlari 100% dan 0% gacha shkalani tashkil qiladi: always, usually, often, sometimes, rarely, never.",
+        "examples": [
+          { "en": "I always get up at six.", "uz": "Men doim soat oltida turaman." },
+          { "en": "She never drinks coffee.", "uz": "U hech qachon qahva ichmaydi." }
+        ]
+      },
+      {
+        "text": "Bu ravishlar oddiy fe'ldan OLDIN turadi: I usually work. Lekin to be dan KEYIN keladi: I am usually busy. Bu farqni yodda tutish kerak.",
+        "examples": [
+          { "en": "He often comes late.", "uz": "U tez-tez kechikadi." },
+          { "en": "He is often late.", "uz": "U tez-tez kechikadi." }
+        ]
+      },
+      {
+        "text": "Never o'zi inkor ma'nosini beradi, shuning uchun gapda boshqa inkor bo'lmaydi. «I never don't go» — xato.",
+        "examples": [
+          { "en": "I never eat meat.", "uz": "Men hech qachon go'sht yemayman." },
+          { "en": "She never watches TV.", "uz": "U hech qachon televizor ko'rmaydi." }
+        ]
+      },
+      {
+        "text": "Aniq davriylikni ko'rsatish uchun «once / twice / three times a week» qolipi ishlatiladi. U gap oxirida turadi.",
+        "examples": [
+          { "en": "I go to the gym three times a week.", "uz": "Men haftada uch marta sport zaliga boraman." },
+          { "en": "We visit them once a month.", "uz": "Biz ularnikiga oyda bir marta boramiz." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Ravish", "Ma'nosi", "Taxminan"],
+      "rows": [
+        ["always", "doim", "100%"],
+        ["usually", "odatda", "80%"],
+        ["often", "tez-tez", "60%"],
+        ["sometimes", "ba'zan", "40%"],
+        ["rarely", "kamdan-kam", "10%"],
+        ["never", "hech qachon", "0%"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I go always to work by bus.",
+      "right": "I always go to work by bus.",
+      "why": "Ravish oddiy fe'ldan oldin turadi."
+    },
+    {
+      "wrong": "She always is happy.",
+      "right": "She is always happy.",
+      "why": "To be bilan ravish fe'ldan keyin keladi."
+    },
+    {
+      "wrong": "I never don't eat fish.",
+      "right": "I never eat fish.",
+      "why": "Never o'zi inkor. Ikkita inkor ingliz tilida ishlatilmaydi."
+    },
+    {
+      "wrong": "He sometime comes late.",
+      "right": "He sometimes comes late.",
+      "why": "To'g'ri shakli — sometimes, -s bilan."
+    },
+    {
+      "wrong": "I go to the gym three times in a week.",
+      "right": "I go to the gym three times a week.",
+      "why": "Bu qolipda «in» ishlatilmaydi, faqat a."
+    }
+  ],
+  "words": [
+    { "en": "always", "uz": "doim", "ipa": "/ˈɔːlweɪz/", "example": "I always drink tea." },
+    { "en": "usually", "uz": "odatda", "ipa": "/ˈjuːʒuəli/", "example": "She usually walks to work." },
+    { "en": "often", "uz": "tez-tez", "ipa": "/ˈɒfn/", "example": "We often meet at weekends." },
+    { "en": "sometimes", "uz": "ba'zan", "ipa": "/ˈsʌmtaɪmz/", "example": "Sometimes I cook dinner." },
+    { "en": "never", "uz": "hech qachon", "ipa": "/ˈnevə(r)/", "example": "He never smokes." },
+    { "en": "rarely", "uz": "kamdan-kam", "ipa": "/ˈreəli/", "example": "I rarely watch films." },
+    { "en": "once", "uz": "bir marta", "ipa": "/wʌns/", "example": "Once a week." },
+    { "en": "twice", "uz": "ikki marta", "ipa": "/twaɪs/", "example": "Twice a month." },
+    { "en": "weekend", "uz": "dam olish kuni", "ipa": "/ˌwiːkˈend/", "example": "What do you do at weekends?" },
+    { "en": "free time", "uz": "bo'sh vaqt", "ipa": "/ˈfriː taɪm/", "example": "I read in my free time." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 3, "focus": "ravishni gapdagi to'g'ri o'ringa qo'yish" },
+      { "type": 1, "count": 2, "focus": "foizga mos ravishni tanlash" },
+      { "type": 5, "count": 3, "focus": "«She always is», «I never don't» xatolarini topish va tushuntirish" },
+      { "type": 4, "count": 2, "focus": "o'z odatlaringiz haqida ravish bilan gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U tez-tez kechikadi», «Men haftada ikki marta sport bilan shug'ullanaman»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingiz sizning odatlaringizni so'radi. Bir haftangizni ravishlar bilan tasvirlang: nimani doim, nimani ba'zan, nimani hech qachon qilmaysiz. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam odatlari haqida gapiradi. Har bir ish uchun qaysi ravish ishlatilganini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "takrorlanish ravishlari",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

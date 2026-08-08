@@ -1,0 +1,118 @@
+{
+  "id": "a1-b2-l2",
+  "level": "A1",
+  "block": "a1-b2",
+  "title": "Kimning narsasi ekanini aytish",
+  "can_do": "Narsa kimga tegishli ekanini ikki xil usulda ayta olasiz",
+  "why": "«Mening akamning mashinasi» degan oddiy iborani ingliz tilida tuzish uchun alohida qoida kerak. Uni bilmasangiz, har safar aylanma yo'ldan gapirasiz.",
+  "rule": {
+    "title": "Egalik olmoshlari va 's",
+    "points": [
+      {
+        "text": "Egalik olmoshi otdan oldin turadi va hech qachon o'zgarmaydi: my, your, his, her, its, our, their. O'zbekchadagi «-im, -ing, -i» qo'shimchalariga to'g'ri keladi, lekin so'z oldida yoziladi.",
+        "examples": [
+          { "en": "my book", "uz": "mening kitobim" },
+          { "en": "her name", "uz": "uning ismi" },
+          { "en": "their house", "uz": "ularning uyi" }
+        ]
+      },
+      {
+        "text": "His yoki her tanlash — egasining jinsiga qarab, narsaga emas. O'zbek tilida «u» hamma uchun bir xil, shuning uchun bu joy qiyin.",
+        "examples": [
+          { "en": "Aziz and his sister", "uz": "Aziz va uning singlisi" },
+          { "en": "Malika and her brother", "uz": "Malika va uning akasi" }
+        ]
+      },
+      {
+        "text": "Aniq odam nomi bilan egalikni ko'rsatish uchun 's qo'shiladi: Aziz's car — Azizning mashinasi. Egasi birinchi, narsa ikkinchi turadi.",
+        "examples": [
+          { "en": "Aziz's car", "uz": "Azizning mashinasi" },
+          { "en": "My mother's phone", "uz": "Onamning telefoni" }
+        ]
+      },
+      {
+        "text": "Ko'plikda -s allaqachon bor, shuning uchun faqat apostrof qo'yiladi: my parents' house. Nostandart ko'plikda esa odatdagidek 's: the children's room.",
+        "examples": [
+          { "en": "my parents' house", "uz": "ota-onamning uyi" },
+          { "en": "the children's toys", "uz": "bolalarning o'yinchoqlari" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shaxs olmoshi", "Egalik olmoshi", "Misol"],
+      "rows": [
+        ["I", "my", "my name"],
+        ["you", "your", "your book"],
+        ["he", "his", "his car"],
+        ["she", "her", "her bag"],
+        ["it", "its", "its colour"],
+        ["we", "our", "our city"],
+        ["they", "their", "their house"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "Malika and his brother",
+      "right": "Malika and her brother",
+      "why": "His / her egasining jinsiga qarab tanlanadi. Malika ayol — her."
+    },
+    {
+      "wrong": "the car of Aziz",
+      "right": "Aziz's car",
+      "why": "Odam nomi bilan 's ishlatiladi. «Of» konstruksiyasi jonsiz narsalar uchun qoladi."
+    },
+    {
+      "wrong": "It's colour is red.",
+      "right": "Its colour is red.",
+      "why": "Its — egalik, it's — «it is». Apostrof bu yerda ma'noni butunlay o'zgartiradi."
+    },
+    {
+      "wrong": "my mother house",
+      "right": "my mother's house",
+      "why": "Egalik ko'rsatkichi 's tushib qolgan."
+    },
+    {
+      "wrong": "This is my's book.",
+      "right": "This is my book.",
+      "why": "Egalik olmoshiga 's qo'shilmaydi — u allaqachon egalikni bildiradi."
+    },
+    {
+      "wrong": "Their are my friends.",
+      "right": "They are my friends.",
+      "why": "Their — egalik, they're — «they are». Talaffuzi bir xil, yozilishi boshqa."
+    }
+  ],
+  "words": [
+    { "en": "my", "uz": "mening", "ipa": "/maɪ/", "example": "This is my bag." },
+    { "en": "your", "uz": "sizning", "ipa": "/jɔː(r)/", "example": "Is this your phone?" },
+    { "en": "his", "uz": "uning (erkak)", "ipa": "/hɪz/", "example": "His name is Aziz." },
+    { "en": "her", "uz": "uning (ayol)", "ipa": "/hɜː(r)/", "example": "Her sister is a doctor." },
+    { "en": "our", "uz": "bizning", "ipa": "/ˈaʊə(r)/", "example": "Our city is beautiful." },
+    { "en": "their", "uz": "ularning", "ipa": "/ðeə(r)/", "example": "Their house is big." },
+    { "en": "parents", "uz": "ota-ona", "ipa": "/ˈpeərənts/", "example": "My parents live in Bukhara." },
+    { "en": "bag", "uz": "sumka", "ipa": "/bæɡ/", "example": "Where is my bag?" },
+    { "en": "key", "uz": "kalit", "ipa": "/kiː/", "example": "These are her keys." },
+    { "en": "family", "uz": "oila", "ipa": "/ˈfæməli/", "example": "Our family is big." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 3, "focus": "to'g'ri egalik olmoshini qo'yish: his / her / their" },
+      { "type": 3, "count": 2, "focus": "«the book of Aziz» ni 's bilan qayta yozish" },
+      { "type": 5, "count": 3, "focus": "its / it's va their / they're xatolarini topish va tushuntirish" },
+      { "type": 4, "count": 2, "focus": "o'z oilangiz a'zolari haqida 's bilan gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Onamning telefoni», «Ularning uyi katta»" }
+    ],
+    "final": { "type": 7, "task": "Oilangiz suratini tasvirlab bering: kim kim, kimning nimasi bor. Egalik shakllarini ishlating, 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam oila suratini tasvirlaydi. Kimning nimasi borligini yozing.",
+    "level_hint": "sekin nutq, 35 soniya"
+  },
+  "review": {
+    "topic": "egalik olmoshlari va 's",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

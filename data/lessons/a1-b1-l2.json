@@ -1,0 +1,116 @@
+{
+  "id": "a1-b1-l2",
+  "level": "A1",
+  "block": "a1-b1",
+  "title": "Savol berish va javob olish",
+  "can_do": "Yangi tanishingizdan ism, kasb va shahar haqida so'ray olasiz",
+  "why": "Tanishuv bir tomonlama bo'lmaydi. O'zingiz haqingizda aytdingiz — endi suhbatdoshingizdan so'rashingiz kerak, aks holda suhbat shu yerda tugaydi.",
+  "rule": {
+    "title": "to be bilan savol: so'zlar o'rnini almashtirish",
+    "points": [
+      {
+        "text": "O'zbek tilida savol qilish uchun oxiriga «-mi» qo'shiladi, so'z tartibi o'zgarmaydi. Ingliz tilida boshqacha: to be fe'li gap boshiga chiqadi. «You are a doctor» → «Are you a doctor?»",
+        "examples": [
+          { "en": "You are a student. → Are you a student?", "uz": "Siz talabasiz. → Siz talabamisiz?" },
+          { "en": "He is from Samarkand. → Is he from Samarkand?", "uz": "U Samarqanddan. → U Samarqanddanmi?" }
+        ]
+      },
+      {
+        "text": "Savol so'zi bo'lsa, u eng oldinga turadi, keyin to be, keyin shaxs: What is your name? Where are you from? Bu tartib hech qachon buzilmaydi.",
+        "examples": [
+          { "en": "What is your name?", "uz": "Ismingiz nima?" },
+          { "en": "Where are you from?", "uz": "Qayerdansiz?" },
+          { "en": "How old are you?", "uz": "Necha yoshdasiz?" }
+        ]
+      },
+      {
+        "text": "Qisqa javob berish odat: Yes, I am. / No, I'm not. To'liq gap qaytarish shart emas, lekin faqat «Yes» yoki «No» deyish quruq eshitiladi.",
+        "examples": [
+          { "en": "'Are you a teacher?' 'Yes, I am.'", "uz": "«Siz o'qituvchimisiz?» «Ha.»" },
+          { "en": "'Is she your sister?' 'No, she isn't.'", "uz": "«U sizning singlingizmi?» «Yo'q.»" }
+        ]
+      },
+      {
+        "text": "Qisqa javobda to be qisqartirilmaydi: «Yes, I am» to'g'ri, «Yes, I'm» — xato. Inkorda esa qisqartiriladi: «No, I'm not».",
+        "examples": [
+          { "en": "'Are you Aziz?' 'Yes, I am.'", "uz": "«Siz Azizmisiz?» «Ha.»" },
+          { "en": "'Are they here?' 'No, they aren't.'", "uz": "«Ular shu yerdami?» «Yo'q.»" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Savol so'zi", "Nimani so'raydi", "Misol"],
+      "rows": [
+        ["What", "narsa, ism", "What is your job?"],
+        ["Where", "joy", "Where are you from?"],
+        ["Who", "odam", "Who is that man?"],
+        ["How old", "yosh", "How old are you?"],
+        ["How", "holat, usul", "How are you?"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "You are a doctor?",
+      "right": "Are you a doctor?",
+      "why": "Faqat ohang bilan savol qilish og'zaki nutqda uchraydi, lekin to'g'ri shakl — to be ni oldinga chiqarish."
+    },
+    {
+      "wrong": "What is your name? — My name Aziz.",
+      "right": "My name is Aziz.",
+      "why": "Javobda ham to be tushib qolmasligi kerak."
+    },
+    {
+      "wrong": "Where you are from?",
+      "right": "Where are you from?",
+      "why": "Savol so'zidan keyin darhol to be keladi, keyin shaxs."
+    },
+    {
+      "wrong": "How many years you have?",
+      "right": "How old are you?",
+      "why": "Yoshni so'rashda ingliz tilida «necha yil» emas, «qanchalik keksa» deyiladi. Bu to'g'ridan-to'g'ri tarjimadan kelib chiqadigan xato."
+    },
+    {
+      "wrong": "'Are you a student?' 'Yes, I'm.'",
+      "right": "'Are you a student?' 'Yes, I am.'",
+      "why": "Qisqa ijobiy javobda qisqartirish ishlatilmaydi."
+    },
+    {
+      "wrong": "Where are you from? — I from Bukhara.",
+      "right": "I am from Bukhara.",
+      "why": "From — predlog, u to be ni almashtirmaydi."
+    }
+  ],
+  "words": [
+    { "en": "what", "uz": "nima", "ipa": "/wɒt/", "example": "What is your name?" },
+    { "en": "where", "uz": "qayerda", "ipa": "/weə(r)/", "example": "Where are you from?" },
+    { "en": "who", "uz": "kim", "ipa": "/huː/", "example": "Who is she?" },
+    { "en": "how", "uz": "qanday", "ipa": "/haʊ/", "example": "How are you?" },
+    { "en": "how old", "uz": "necha yoshda", "ipa": "/haʊ əʊld/", "example": "How old are you?" },
+    { "en": "job", "uz": "kasb, ish", "ipa": "/dʒɒb/", "example": "What is your job?" },
+    { "en": "city", "uz": "shahar", "ipa": "/ˈsɪti/", "example": "What city are you from?" },
+    { "en": "country", "uz": "davlat", "ipa": "/ˈkʌntri/", "example": "What country are you from?" },
+    { "en": "yes", "uz": "ha", "ipa": "/jes/", "example": "Yes, I am." },
+    { "en": "no", "uz": "yo'q", "ipa": "/nəʊ/", "example": "No, I'm not." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 1, "count": 2, "focus": "berilgan javobga mos savol so'zini tanlash" },
+      { "type": 3, "count": 3, "focus": "darak gapni savolga aylantirish: to be ni oldinga chiqarish" },
+      { "type": 2, "count": 2, "focus": "savol so'zini bo'sh joyga qo'yish: What / Where / Who / How old" },
+      { "type": 5, "count": 2, "focus": "so'z tartibi buzilgan savollarni topish va tuzatish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Siz qayerdansiz?», «U sizning akangizmi?»" }
+    ],
+    "final": { "type": 7, "task": "Samolyotda yoningizda o'tirgan odam bilan gaplashyapsiz. Unga beradigan 4 ta savolingizni yozing." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Qisqa suhbatni tinglang. Qanday savollar berilganini va javoblarni yozing.",
+    "level_hint": "sekin nutq, 30 soniya"
+  },
+  "review": {
+    "topic": "to be bilan savol",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

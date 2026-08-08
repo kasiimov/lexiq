@@ -1,0 +1,112 @@
+{
+  "id": "a1-b5-l3",
+  "level": "A1",
+  "block": "a1-b5",
+  "title": "Narx va miqdorni so'rash",
+  "can_do": "Narxni va miqdorni so'ray olasiz va javobni tushunasiz",
+  "why": "Bozorda, do'konda, kafeda — narxni so'ramasdan xarid qilib bo'lmaydi. Ikkita savol so'zini adashtirish esa eng ko'p uchraydigan xato.",
+  "rule": {
+    "title": "How much va how many",
+    "points": [
+      {
+        "text": "How many sanaladigan otlar bilan ishlatiladi va ot ko'plikda turadi: How many apples? How many people?",
+        "examples": [
+          { "en": "How many brothers have you got?", "uz": "Nechta akangiz bor?" },
+          { "en": "How many students are there?", "uz": "Nechta talaba bor?" }
+        ]
+      },
+      {
+        "text": "How much sanalmaydigan otlar bilan ishlatiladi va ot birlikda qoladi: How much water? How much time?",
+        "examples": [
+          { "en": "How much sugar do you want?", "uz": "Qancha shakar xohlaysiz?" },
+          { "en": "How much time have we got?", "uz": "Qancha vaqtimiz bor?" }
+        ]
+      },
+      {
+        "text": "Narx so'raganda doim how much ishlatiladi — pul sanalmaydigan hisoblanadi. «How much is it?» — eng kerakli savol.",
+        "examples": [
+          { "en": "How much is this?", "uz": "Bu qancha turadi?" },
+          { "en": "How much are these apples?", "uz": "Bu olmalar qancha?" }
+        ]
+      },
+      {
+        "text": "Miqdorni aytishda: a lot of — ko'p (ikkalasi bilan ham), a few — bir nechta (sanaladigan), a little — ozgina (sanalmaydigan).",
+        "examples": [
+          { "en": "I have a few friends here.", "uz": "Bu yerda bir nechta do'stim bor." },
+          { "en": "Add a little salt.", "uz": "Ozgina tuz qo'shing." },
+          { "en": "There are a lot of shops.", "uz": "Ko'p do'konlar bor." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Savol", "Qaysi ot bilan", "Misol"],
+      "rows": [
+        ["How many", "sanaladigan, ko'plik", "How many eggs?"],
+        ["How much", "sanalmaydigan", "How much rice?"],
+        ["How much", "narx", "How much is it?"],
+        ["a few", "sanaladigan", "a few apples"],
+        ["a little", "sanalmaydigan", "a little water"],
+        ["a lot of", "ikkalasi ham", "a lot of money"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "How much apples do you want?",
+      "right": "How many apples do you want?",
+      "why": "Apples sanaladigan — how many kerak."
+    },
+    {
+      "wrong": "How many money have you got?",
+      "right": "How much money have you got?",
+      "why": "Money sanalmaydigan — how much kerak."
+    },
+    {
+      "wrong": "How many is this?",
+      "right": "How much is this?",
+      "why": "Narx doim how much bilan so'raladi."
+    },
+    {
+      "wrong": "I have a little friends.",
+      "right": "I have a few friends.",
+      "why": "Friends sanaladigan — a few ishlatiladi."
+    },
+    {
+      "wrong": "How much cost this book?",
+      "right": "How much is this book? / How much does this book cost?",
+      "why": "Cost fe'li bilan does kerak, aks holda is ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "how much", "uz": "qancha (sanalmaydigan)", "ipa": "/haʊ ˈmʌtʃ/", "example": "How much is it?" },
+    { "en": "how many", "uz": "nechta", "ipa": "/haʊ ˈmeni/", "example": "How many people?" },
+    { "en": "price", "uz": "narx", "ipa": "/praɪs/", "example": "What is the price?" },
+    { "en": "cheap", "uz": "arzon", "ipa": "/tʃiːp/", "example": "It's very cheap." },
+    { "en": "expensive", "uz": "qimmat", "ipa": "/ɪkˈspensɪv/", "example": "This is too expensive." },
+    { "en": "a lot of", "uz": "ko'p", "ipa": "/ə ˈlɒt əv/", "example": "There are a lot of shops." },
+    { "en": "a few", "uz": "bir nechta", "ipa": "/ə ˈfjuː/", "example": "I have a few questions." },
+    { "en": "a little", "uz": "ozgina", "ipa": "/ə ˈlɪtl/", "example": "Add a little sugar." },
+    { "en": "cost", "uz": "turmoq (narx)", "ipa": "/kɒst/", "example": "How much does it cost?" },
+    { "en": "change", "uz": "qaytim", "ipa": "/tʃeɪndʒ/", "example": "Here is your change." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "how much yoki how many ni tanlash" },
+      { "type": 1, "count": 2, "focus": "a few / a little / a lot of ni otga qarab tanlash" },
+      { "type": 5, "count": 3, "focus": "«How much apples», «How many money» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "do'kondagi savollarni tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Bu qancha turadi?», «Nechta akangiz bor?»" }
+    ],
+    "final": { "type": 7, "task": "Bozorda savdolashyapsiz. Sotuvchi bilan suhbatni yozing: narx so'rash, miqdor aytish, qaytim. 6 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Bozorda savdo bo'lmoqda. Mahsulot, miqdor va narxni yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "how much / how many",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "a1-b5-l1",
+  "level": "A1",
+  "block": "a1-b5",
+  "title": "Sanaladigan va sanalmaydigan so'zlar",
+  "can_do": "Qaysi so'zni sanash mumkinligini ajratasiz va to'g'ri shakl tanlaysiz",
+  "why": "O'zbek tilida non ham, olma ham bir xil sanaladi. Ingliz tilida esa bu ikki xil toifa — va ular artikl, ko'plik, some/any tanlashga ta'sir qiladi. Bu farqni bilmaslik butun mavzuni buzadi.",
+  "rule": {
+    "title": "Countable va uncountable otlar",
+    "points": [
+      {
+        "text": "Sanaladigan ot — bittasini, ikkitasini sanash mumkin: an apple, two apples. Ularning ko'pligi bor va oldiga a / an qo'yiladi.",
+        "examples": [
+          { "en": "I eat an apple every day.", "uz": "Men har kuni bitta olma yeyman." },
+          { "en": "There are three eggs.", "uz": "Uchta tuxum bor." }
+        ]
+      },
+      {
+        "text": "Sanalmaydigan ot — massa yoki modda, uni donalab sanab bo'lmaydi: water, bread, rice, sugar, money. Ularda ko'plik yo'q va a / an qo'yilmaydi.",
+        "examples": [
+          { "en": "I drink water.", "uz": "Men suv ichaman." },
+          { "en": "We need bread.", "uz": "Bizga non kerak." }
+        ]
+      },
+      {
+        "text": "Sanalmaydigan otni sanash uchun o'lchov so'zi qo'shiladi: a bottle of water, a piece of bread, a kilo of rice, a cup of tea.",
+        "examples": [
+          { "en": "Two bottles of water, please.", "uz": "Ikkita shisha suv, iltimos." },
+          { "en": "A cup of tea and a piece of cake.", "uz": "Bir piyola choy va bir bo'lak tort." }
+        ]
+      },
+      {
+        "text": "Sanalmaydigan ot doim birlik fe'l oladi, hatto ko'p bo'lsa ham: The water is cold. Money is important.",
+        "examples": [
+          { "en": "The water is cold.", "uz": "Suv sovuq." },
+          { "en": "Money is not everything.", "uz": "Pul hamma narsa emas." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Sanaladigan", "Sanalmaydigan", "O'lchov bilan"],
+      "rows": [
+        ["an apple / apples", "bread", "a piece of bread"],
+        ["an egg / eggs", "rice", "a kilo of rice"],
+        ["a bottle / bottles", "water", "a bottle of water"],
+        ["a cup / cups", "tea", "a cup of tea"],
+        ["a coin / coins", "money", "—"],
+        ["a tomato / tomatoes", "meat", "a kilo of meat"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I need a bread.",
+      "right": "I need bread. / I need a loaf of bread.",
+      "why": "Bread — sanalmaydigan, oldiga a qo'yilmaydi."
+    },
+    {
+      "wrong": "Give me two waters.",
+      "right": "Give me two bottles of water.",
+      "why": "Water ko'plik shaklini olmaydi, o'lchov so'zi kerak."
+    },
+    {
+      "wrong": "The moneys are on the table.",
+      "right": "The money is on the table.",
+      "why": "Money — sanalmaydigan va doim birlik fe'l oladi."
+    },
+    {
+      "wrong": "I have many works today.",
+      "right": "I have a lot of work today.",
+      "why": "Work bu ma'noda sanalmaydigan, ko'pligi yo'q."
+    },
+    {
+      "wrong": "She bought three breads.",
+      "right": "She bought three loaves of bread.",
+      "why": "Non sanalganda «loaf» o'lchov so'zi ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "bread", "uz": "non", "ipa": "/bred/", "example": "We need bread." },
+    { "en": "water", "uz": "suv", "ipa": "/ˈwɔːtə(r)/", "example": "A bottle of water, please." },
+    { "en": "rice", "uz": "guruch", "ipa": "/raɪs/", "example": "A kilo of rice." },
+    { "en": "sugar", "uz": "shakar", "ipa": "/ˈʃʊɡə(r)/", "example": "No sugar, thanks." },
+    { "en": "meat", "uz": "go'sht", "ipa": "/miːt/", "example": "I don't eat meat." },
+    { "en": "egg", "uz": "tuxum", "ipa": "/eɡ/", "example": "There are two eggs." },
+    { "en": "apple", "uz": "olma", "ipa": "/ˈæpl/", "example": "I eat an apple." },
+    { "en": "bottle", "uz": "shisha", "ipa": "/ˈbɒtl/", "example": "Two bottles of water." },
+    { "en": "piece", "uz": "bo'lak", "ipa": "/piːs/", "example": "A piece of bread." },
+    { "en": "kilo", "uz": "kilogramm", "ipa": "/ˈkiːləʊ/", "example": "A kilo of tomatoes." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 1, "count": 3, "focus": "so'zni sanaladigan yoki sanalmaydiganga ajratish" },
+      { "type": 2, "count": 3, "focus": "a / an yoki bo'sh qoldirishni tanlash" },
+      { "type": 5, "count": 3, "focus": "«a bread», «two waters», «moneys» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'lchov so'zi bilan xarid ro'yxatidan gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Ikkita shisha suv», «Bizga non kerak»" }
+    ],
+    "final": { "type": 7, "task": "Bozorga ketyapsiz. Xarid ro'yxatini ingliz tilida yozing — sanaladigan va sanalmaydigan mahsulotlarni to'g'ri shaklda. 6 ta band." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam xarid ro'yxatini aytadi. Nima va qancha kerakligini yozing.",
+    "level_hint": "sekin nutq, 35 soniya"
+  },
+  "review": {
+    "topic": "countable / uncountable",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

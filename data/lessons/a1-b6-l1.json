@@ -1,0 +1,111 @@
+{
+  "id": "a1-b6-l1",
+  "level": "A1",
+  "block": "a1-b6",
+  "title": "Nima qila olishingizni aytish",
+  "can_do": "Qobiliyatingiz haqida gapirasiz va iltimos qila olasiz",
+  "why": "Ish suhbatida, do'st orttirganda, yordam so'raganda — «qila olaman» va «qila olmayman» kerak bo'ladi. Can — ingliz tilidagi eng oson modal fe'l.",
+  "rule": {
+    "title": "can va can't",
+    "points": [
+      {
+        "text": "Can dan keyin fe'l lug'at shaklida keladi — hech qanday qo'shimchasiz. To ham qo'yilmaydi: I can swim, «I can to swim» emas.",
+        "examples": [
+          { "en": "I can swim.", "uz": "Men suza olaman." },
+          { "en": "She can drive.", "uz": "U mashina hayday oladi." }
+        ]
+      },
+      {
+        "text": "Can hech qachon o'zgarmaydi — he, she, it bilan ham -s olmaydi. Bu boshqa fe'llardan farqi.",
+        "examples": [
+          { "en": "He can cook very well.", "uz": "U juda yaxshi ovqat pishira oladi." },
+          { "en": "My sister can speak three languages.", "uz": "Singlim uch tilda gapira oladi." }
+        ]
+      },
+      {
+        "text": "Inkor — cannot, qisqasi can't. Savol uchun can gap boshiga chiqadi, do / does kerak emas.",
+        "examples": [
+          { "en": "I can't drive.", "uz": "Men mashina hayday olmayman." },
+          { "en": "Can you help me?", "uz": "Menga yordam bera olasizmi?" }
+        ]
+      },
+      {
+        "text": "Can faqat qobiliyat emas, iltimos va ruxsat uchun ham ishlatiladi: Can you help me? — iltimos; Can I sit here? — ruxsat so'rash.",
+        "examples": [
+          { "en": "Can I open the window?", "uz": "Deraza ochsam bo'ladimi?" },
+          { "en": "Can you repeat that, please?", "uz": "Takrorlab bera olasizmi?" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shakl", "Misol", "Ma'nosi"],
+      "rows": [
+        ["Darak", "I can swim.", "qobiliyat"],
+        ["Inkor", "I can't swim.", "qobiliyat yo'q"],
+        ["Savol", "Can you swim?", "so'rash"],
+        ["Iltimos", "Can you help me?", "yordam so'rash"],
+        ["Ruxsat", "Can I come in?", "ruxsat so'rash"],
+        ["Qisqa javob", "Yes, I can. / No, I can't.", "—"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I can to swim.",
+      "right": "I can swim.",
+      "why": "Can dan keyin to qo'yilmaydi."
+    },
+    {
+      "wrong": "He cans play the guitar.",
+      "right": "He can play the guitar.",
+      "why": "Can hech qachon -s olmaydi."
+    },
+    {
+      "wrong": "Do you can drive?",
+      "right": "Can you drive?",
+      "why": "Can savolida do ishlatilmaydi — can o'zi oldinga chiqadi."
+    },
+    {
+      "wrong": "I can't to come tomorrow.",
+      "right": "I can't come tomorrow.",
+      "why": "Inkorda ham to qo'yilmaydi."
+    },
+    {
+      "wrong": "She can speaks English.",
+      "right": "She can speak English.",
+      "why": "Can dan keyin fe'l lug'at shaklida qoladi."
+    }
+  ],
+  "words": [
+    { "en": "can", "uz": "-a olmoq", "ipa": "/kæn/", "example": "I can swim." },
+    { "en": "swim", "uz": "suzmoq", "ipa": "/swɪm/", "example": "Can you swim?" },
+    { "en": "drive", "uz": "haydamoq", "ipa": "/draɪv/", "example": "He can't drive." },
+    { "en": "cook", "uz": "ovqat pishirmoq", "ipa": "/kʊk/", "example": "She can cook well." },
+    { "en": "play", "uz": "o'ynamoq, chalmoq", "ipa": "/pleɪ/", "example": "I can play the guitar." },
+    { "en": "ride", "uz": "minmoq", "ipa": "/raɪd/", "example": "Can you ride a bike?" },
+    { "en": "dance", "uz": "raqsga tushmoq", "ipa": "/dɑːns/", "example": "They can dance." },
+    { "en": "help", "uz": "yordam bermoq", "ipa": "/help/", "example": "Can you help me?" },
+    { "en": "repeat", "uz": "takrorlamoq", "ipa": "/rɪˈpiːt/", "example": "Can you repeat that?" },
+    { "en": "well", "uz": "yaxshi", "ipa": "/wel/", "example": "He speaks English well." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 3, "focus": "darak gapni savol va inkorga aylantirish" },
+      { "type": 2, "count": 2, "focus": "can yoki can't ni ma'noga qarab qo'yish" },
+      { "type": 5, "count": 3, "focus": "«can to», «cans», «Do you can» xatolarini topish" },
+      { "type": 4, "count": 3, "focus": "o'z qobiliyatlaringiz haqida gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U mashina hayday olmaydi», «Menga yordam bera olasizmi?»" }
+    ],
+    "final": { "type": 7, "task": "Ish uchun ariza yozyapsiz. Nima qila olishingizni va nima qila olmasligingizni 5 gapda yozing." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Ish suhbati bo'lmoqda. Nomzod nima qila olishini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "can / can't",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

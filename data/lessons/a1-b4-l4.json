@@ -1,0 +1,111 @@
+{
+  "id": "a1-b4-l4",
+  "level": "A1",
+  "block": "a1-b4",
+  "title": "Transportdan foydalanish",
+  "can_do": "Qanday qatnashingizni ayta olasiz va chipta so'ray olasiz",
+  "why": "Har kuni ishga qanday borishingizdan tortib chet elda taksi chaqirishgacha — hammasi shu bir necha qolipga tayanadi.",
+  "rule": {
+    "title": "by + transport va istisnolar",
+    "points": [
+      {
+        "text": "Qanday qatnashni aytish uchun by + transport ishlatiladi va otdan oldin artikl QO'YILMAYDI: by bus, by car, by train. «By a bus» — xato.",
+        "examples": [
+          { "en": "I go to work by bus.", "uz": "Men ishga avtobusda boraman." },
+          { "en": "We travel by train.", "uz": "Biz poyezdda sayohat qilamiz." }
+        ]
+      },
+      {
+        "text": "Bitta muhim istisno: piyoda — on foot, «by foot» emas. Buni alohida yodlash kerak.",
+        "examples": [
+          { "en": "I go to school on foot.", "uz": "Men maktabga piyoda boraman." },
+          { "en": "It's twenty minutes on foot.", "uz": "Piyoda yigirma daqiqa." }
+        ]
+      },
+      {
+        "text": "Aniq transport haqida gapirilsa, by o'rniga boshqa fe'l ishlatiladi: take the bus, catch the train, get a taxi. Bu tabiiyroq eshitiladi.",
+        "examples": [
+          { "en": "Take the number 5 bus.", "uz": "5-avtobusga chiqing." },
+          { "en": "Let's get a taxi.", "uz": "Keling, taksi olaylik." }
+        ]
+      },
+      {
+        "text": "Transportga chiqish va tushish uchun maxsus fe'llar bor: get on / get off — avtobus, poyezd, samolyot uchun; get in / get out of — mashina va taksi uchun.",
+        "examples": [
+          { "en": "Get off at the next stop.", "uz": "Keyingi bekatda tushing." },
+          { "en": "Get in the car.", "uz": "Mashinaga o'tiring." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Ibora", "Ma'nosi", "Misol"],
+      "rows": [
+        ["by bus / car / train", "avtobusda / mashinada / poyezdda", "I come by car."],
+        ["on foot", "piyoda", "She goes on foot."],
+        ["take the bus", "avtobusga chiqmoq", "Take the bus to the centre."],
+        ["get on / get off", "chiqmoq / tushmoq", "Get off at the market."],
+        ["a single ticket", "bir tomonlama chipta", "A single to Samarkand, please."],
+        ["a return ticket", "borish-kelish chiptasi", "Two returns, please."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I go to work by a bus.",
+      "right": "I go to work by bus.",
+      "why": "By dan keyin artikl qo'yilmaydi."
+    },
+    {
+      "wrong": "I go to school by foot.",
+      "right": "I go to school on foot.",
+      "why": "Piyoda faqat on foot bo'ladi — bu istisno."
+    },
+    {
+      "wrong": "I get off from the bus.",
+      "right": "I get off the bus.",
+      "why": "Get off dan keyin from qo'yilmaydi."
+    },
+    {
+      "wrong": "I take a taxi to home.",
+      "right": "I take a taxi home.",
+      "why": "«Home» oldiga to qo'yilmaydi."
+    },
+    {
+      "wrong": "How much is the ticket for Samarkand?",
+      "right": "How much is the ticket to Samarkand?",
+      "why": "Yo'nalish to bilan ko'rsatiladi."
+    }
+  ],
+  "words": [
+    { "en": "bus", "uz": "avtobus", "ipa": "/bʌs/", "example": "I go by bus." },
+    { "en": "train", "uz": "poyezd", "ipa": "/treɪn/", "example": "The train leaves at nine." },
+    { "en": "taxi", "uz": "taksi", "ipa": "/ˈtæksi/", "example": "Let's get a taxi." },
+    { "en": "plane", "uz": "samolyot", "ipa": "/pleɪn/", "example": "We travel by plane." },
+    { "en": "ticket", "uz": "chipta", "ipa": "/ˈtɪkɪt/", "example": "How much is a ticket?" },
+    { "en": "airport", "uz": "aeroport", "ipa": "/ˈeəpɔːt/", "example": "The airport is far." },
+    { "en": "get on", "uz": "chiqmoq", "ipa": "/ˌɡet ˈɒn/", "example": "Get on the bus here." },
+    { "en": "get off", "uz": "tushmoq", "ipa": "/ˌɡet ˈɒf/", "example": "Get off at the station." },
+    { "en": "on foot", "uz": "piyoda", "ipa": "/ɒn ˈfʊt/", "example": "I go on foot." },
+    { "en": "far", "uz": "uzoq", "ipa": "/fɑː(r)/", "example": "Is it far from here?" }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 3, "focus": "by yoki on ni transport bilan to'g'ri qo'yish" },
+      { "type": 1, "count": 2, "focus": "get on / get off / get in ni vaziyatga qarab tanlash" },
+      { "type": 5, "count": 3, "focus": "«by a bus», «by foot», «get off from» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'zingizning kunlik qatnovingiz haqida gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Men ishga piyoda boraman», «Keyingi bekatda tushing»" }
+    ],
+    "final": { "type": 7, "task": "Vokzalda chipta olyapsiz. Kassirga aytadigan gaplaringizni yozing: qayerga, nechta, qachon. 4 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Kassada suhbat bo'lmoqda. Yo'nalish, chipta turi va narxini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "by + transport, on foot",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "id": "a1-b7-l4",
+  "level": "A1",
+  "block": "a1-b7",
+  "title": "O'tgan hafta haqida savol va inkor",
+  "can_do": "O'tgan voqealar haqida savol berasiz va inkor gap tuzasiz",
+  "why": "Bu A1 darajaning eng oxirgi va eng foydali qoidasi. Did paydo bo'lgach, fe'l o'z asl shakliga qaytadi — bu ko'pchilikni chalkashtiradi, lekin aslida ishni osonlashtiradi.",
+  "rule": {
+    "title": "did va didn't",
+    "points": [
+      {
+        "text": "O'tgan zamonda savol berish uchun gap boshiga did qo'yiladi. U barcha shaxslar uchun bir xil — was / were dagidek bo'linish yo'q.",
+        "examples": [
+          { "en": "Did you go to the party?", "uz": "Bazmga bordingizmi?" },
+          { "en": "Did she call you?", "uz": "U sizga qo'ng'iroq qildimi?" }
+        ]
+      },
+      {
+        "text": "Eng muhim qoida: did paydo bo'lgach, asosiy fe'l lug'at shakliga qaytadi. O'tganlik did da allaqachon bor, ikki marta ko'rsatilmaydi. «Did you went» — xato.",
+        "examples": [
+          { "en": "She went. → Did she go?", "uz": "U bordi. → U bordimi?" },
+          { "en": "They saw it. → Did they see it?", "uz": "Ular ko'rdi. → Ular ko'rdimi?" }
+        ]
+      },
+      {
+        "text": "Inkor didn't bilan yasaladi va bu yerda ham fe'l lug'at shaklida qoladi: I didn't go, «I didn't went» emas.",
+        "examples": [
+          { "en": "I didn't see him yesterday.", "uz": "Kecha men uni ko'rmadim." },
+          { "en": "We didn't have time.", "uz": "Bizda vaqt yo'q edi." }
+        ]
+      },
+      {
+        "text": "Qisqa javob did bilan beriladi: «Did you go?» — «Yes, I did.» / «No, I didn't.» Asosiy fe'l takrorlanmaydi.",
+        "examples": [
+          { "en": "'Did you like the film?' 'Yes, I did.'", "uz": "«Film yoqdimi?» «Ha.»" },
+          { "en": "'Did they come?' 'No, they didn't.'", "uz": "«Ular kelishdimi?» «Yo'q.»" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shakl", "Misol", "Fe'l qanday"],
+      "rows": [
+        ["Darak", "I went to school.", "o'tgan zamon shakli"],
+        ["Inkor", "I didn't go to school.", "lug'at shakli"],
+        ["Savol", "Did you go to school?", "lug'at shakli"],
+        ["Savol so'zi bilan", "Where did you go?", "lug'at shakli"],
+        ["Qisqa javob", "Yes, I did. / No, I didn't.", "fe'l takrorlanmaydi"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "Did you went to the market?",
+      "right": "Did you go to the market?",
+      "why": "Did dan keyin fe'l lug'at shaklida qoladi. O'tganlik did da bor."
+    },
+    {
+      "wrong": "I didn't saw him.",
+      "right": "I didn't see him.",
+      "why": "Didn't dan keyin ham fe'l asl shaklida bo'ladi."
+    },
+    {
+      "wrong": "Did she was at home?",
+      "right": "Was she at home?",
+      "why": "To be bilan did ishlatilmaydi — was o'zi oldinga chiqadi."
+    },
+    {
+      "wrong": "Where you did go?",
+      "right": "Where did you go?",
+      "why": "Savol so'zidan keyin darhol did keladi, keyin ega."
+    },
+    {
+      "wrong": "'Did you like it?' 'Yes, I liked.'",
+      "right": "'Did you like it?' 'Yes, I did.'",
+      "why": "Qisqa javobda did takrorlanadi, asosiy fe'l emas."
+    },
+    {
+      "wrong": "I not went yesterday.",
+      "right": "I didn't go yesterday.",
+      "why": "Inkor uchun didn't kerak, yolg'iz not yetarli emas."
+    }
+  ],
+  "words": [
+    { "en": "did", "uz": "qildi (yordamchi)", "ipa": "/dɪd/", "example": "Did you see it?" },
+    { "en": "didn't", "uz": "-madi", "ipa": "/ˈdɪdnt/", "example": "I didn't go." },
+    { "en": "call", "uz": "qo'ng'iroq qilmoq", "ipa": "/kɔːl/", "example": "Did she call you?" },
+    { "en": "visit", "uz": "tashrif buyurmoq", "ipa": "/ˈvɪzɪt/", "example": "We visited my aunt." },
+    { "en": "travel", "uz": "sayohat qilmoq", "ipa": "/ˈtrævl/", "example": "Did you travel last year?" },
+    { "en": "enjoy", "uz": "zavqlanmoq", "ipa": "/ɪnˈdʒɔɪ/", "example": "Did you enjoy the party?" },
+    { "en": "stay", "uz": "qolmoq", "ipa": "/steɪ/", "example": "We stayed at home." },
+    { "en": "leave", "uz": "ketmoq", "ipa": "/liːv/", "example": "What time did you leave?" },
+    { "en": "happen", "uz": "sodir bo'lmoq", "ipa": "/ˈhæpən/", "example": "What happened?" },
+    { "en": "last year", "uz": "o'tgan yil", "ipa": "/lɑːst ˈjɪə(r)/", "example": "I visited Turkey last year." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 4, "focus": "darak gapni savol va inkorga aylantirish, fe'lni asl shaklga qaytarish" },
+      { "type": 2, "count": 2, "focus": "did / didn't va fe'l shaklini to'g'ri qo'yish" },
+      { "type": 5, "count": 4, "focus": "«Did you went», «I didn't saw», «Did she was» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "do'stingizga o'tgan hafta haqida savollar tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Kecha uni ko'rmadim», «Bazmga bordingizmi?»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingiz ta'tildan qaytdi. Unga o'tgan haftasi haqida 5 ta savol yozing va nima qilmaganingizni 2 gapda ayting." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Ikki do'st dam olish kuni haqida gaplashadi. Berilgan savollarni va javoblarni yozing.",
+    "level_hint": "sekin nutq, 45 soniya"
+  },
+  "review": {
+    "topic": "did / didn't",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "a1-b7-l2",
+  "level": "A1",
+  "block": "a1-b7",
+  "title": "Kecha nima qilganingizni aytish",
+  "can_do": "O'tgan vaqtda bajarilgan ishlar haqida gapira olasiz",
+  "why": "Hikoya qilish shu yerdan boshlanadi. Ingliz tilida o'tgan zamon uchun bitta qo'shimcha yetarli — -ed, va u barcha shaxslar uchun bir xil.",
+  "rule": {
+    "title": "Past Simple: to'g'ri fe'llar va -ed",
+    "points": [
+      {
+        "text": "To'g'ri fe'llarning o'tgan zamon shakli -ed qo'shib yasaladi. Eng yoqimli tomoni: shakl barcha shaxslar uchun bir xil, hech narsa o'zgarmaydi.",
+        "examples": [
+          { "en": "I worked yesterday.", "uz": "Kecha men ishladim." },
+          { "en": "She worked yesterday.", "uz": "Kecha u ishladi." }
+        ]
+      },
+      {
+        "text": "Yozilish qoidalari: odatda -ed (work → worked). -e bilan tugasa faqat -d (live → lived). Undosh + y bo'lsa y → i va -ed (study → studied). Qisqa bo'g'inda oxirgi undosh takrorlanadi (stop → stopped).",
+        "examples": [
+          { "en": "We lived in Bukhara.", "uz": "Biz Buxoroda yashaganmiz." },
+          { "en": "He studied all night.", "uz": "U tun bo'yi o'qidi." },
+          { "en": "The bus stopped here.", "uz": "Avtobus shu yerda to'xtadi." }
+        ]
+      },
+      {
+        "text": "-ed uch xil o'qiladi: /t/ jarangsizdan keyin (worked), /d/ jarangli va unlidan keyin (played), /ɪd/ faqat t yoki d dan keyin (wanted, needed). Uchinchi holatda qo'shimcha bo'g'in qo'shiladi.",
+        "examples": [
+          { "en": "worked /wɜːkt/", "uz": "ishladi" },
+          { "en": "played /pleɪd/", "uz": "o'ynadi" },
+          { "en": "wanted /ˈwɒntɪd/", "uz": "xohladi" }
+        ]
+      },
+      {
+        "text": "Past Simple aniq tugagan vaqt bilan ishlatiladi: yesterday, last night, in 2020, two hours ago. Vaqt aytilmasa ham, kontekstdan o'tganligi tushuniladi.",
+        "examples": [
+          { "en": "I finished the work last night.", "uz": "Ishni kecha kechqurun tugatdim." },
+          { "en": "They arrived two hours ago.", "uz": "Ular ikki soat oldin yetib kelishdi." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Qoida", "Fe'l", "O'tgan zamon"],
+      "rows": [
+        ["odatda + ed", "work", "worked"],
+        ["-e bilan tugasa + d", "live", "lived"],
+        ["undosh + y → ied", "study", "studied"],
+        ["unli + y → yed", "play", "played"],
+        ["qisqa bo'g'in, undosh ikkilanadi", "stop", "stopped"],
+        ["talaffuz /ɪd/", "want", "wanted"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I workeded yesterday.",
+      "right": "I worked yesterday.",
+      "why": "-ed bir marta qo'shiladi."
+    },
+    {
+      "wrong": "She studyed English.",
+      "right": "She studied English.",
+      "why": "Undosh + y bo'lsa y → i bo'ladi."
+    },
+    {
+      "wrong": "He worked yesterday and she workeds too.",
+      "right": "He worked yesterday and she worked too.",
+      "why": "O'tgan zamonda -s hech qachon qo'shilmaydi, barcha shaxsda shakl bir xil."
+    },
+    {
+      "wrong": "Yesterday I go to the market.",
+      "right": "Yesterday I went to the market.",
+      "why": "Yesterday o'tgan zamon talab qiladi. Go — noto'g'ri fe'l, keyingi darsda."
+    },
+    {
+      "wrong": "I was worked yesterday.",
+      "right": "I worked yesterday.",
+      "why": "Past Simple da to be kerak emas, bitta fe'l yetarli."
+    }
+  ],
+  "words": [
+    { "en": "worked", "uz": "ishladi", "ipa": "/wɜːkt/", "example": "I worked all day." },
+    { "en": "lived", "uz": "yashadi", "ipa": "/lɪvd/", "example": "We lived in Bukhara." },
+    { "en": "studied", "uz": "o'qidi", "ipa": "/ˈstʌdid/", "example": "She studied medicine." },
+    { "en": "played", "uz": "o'ynadi", "ipa": "/pleɪd/", "example": "They played football." },
+    { "en": "watched", "uz": "tomosha qildi", "ipa": "/wɒtʃt/", "example": "I watched a film." },
+    { "en": "wanted", "uz": "xohladi", "ipa": "/ˈwɒntɪd/", "example": "He wanted to help." },
+    { "en": "started", "uz": "boshladi", "ipa": "/ˈstɑːtɪd/", "example": "The film started at eight." },
+    { "en": "finished", "uz": "tugatdi", "ipa": "/ˈfɪnɪʃt/", "example": "I finished my work." },
+    { "en": "arrived", "uz": "yetib keldi", "ipa": "/əˈraɪvd/", "example": "We arrived late." },
+    { "en": "last night", "uz": "kecha kechqurun", "ipa": "/lɑːst ˈnaɪt/", "example": "I called you last night." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "fe'lni -ed shaklida to'g'ri yozish" },
+      { "type": 3, "count": 2, "focus": "hozirgi zamon gapini o'tgan zamonga o'tkazish" },
+      { "type": 1, "count": 2, "focus": "-ed talaffuzini /t/, /d/, /ɪd/ ga ajratish" },
+      { "type": 5, "count": 2, "focus": "«studyed», «was worked», «workeds» xatolarini topish" },
+      { "type": 6, "count": 3, "focus": "o'zbekchadan tarjima: «Kecha ishladim», «Biz Buxoroda yashaganmiz»" }
+    ],
+    "final": { "type": 7, "task": "Kechagi kuningizni yozing: nima qildingiz, qayerga bordingiz, kim bilan uchrashdingiz. Faqat to'g'ri fe'llar bilan. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam kechagi kuni haqida gapiradi. Nima qilganini tartib bilan yozing.",
+    "level_hint": "sekin nutq, 45 soniya"
+  },
+  "review": {
+    "topic": "Past Simple, to'g'ri fe'llar",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

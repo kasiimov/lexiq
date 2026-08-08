@@ -1,0 +1,111 @@
+{
+  "id": "a1-b5-l4",
+  "level": "A1",
+  "block": "a1-b5",
+  "title": "Kafeda buyurtma berish",
+  "can_do": "Kafeda odobli tarzda buyurtma bera olasiz va hisobni so'raysiz",
+  "why": "«I want coffee» grammatik jihatdan to'g'ri, lekin qo'pol eshitiladi. Bitta ibora — I'd like — sizni odobli mijozga aylantiradi.",
+  "rule": {
+    "title": "I'd like va buyurtma iboralari",
+    "points": [
+      {
+        "text": "I would like — «xohlayman» ning odobli shakli. Deyarli har doim qisqartiriladi: I'd like. Bu I want dan ancha yumshoqroq eshitiladi.",
+        "examples": [
+          { "en": "I'd like a coffee, please.", "uz": "Bir qahva bering, iltimos." },
+          { "en": "We'd like two teas.", "uz": "Bizga ikkita choy." }
+        ]
+      },
+      {
+        "text": "I'd like dan keyin ot yoki to + fe'l keladi: I'd like a sandwich. I'd like to see the menu.",
+        "examples": [
+          { "en": "I'd like to order, please.", "uz": "Buyurtma bermoqchiman." },
+          { "en": "I'd like the chicken, please.", "uz": "Menga tovuq bering." }
+        ]
+      },
+      {
+        "text": "Savol shakli — Would you like ...? Bu taklif qilish uchun ishlatiladi va javobda «Yes, please» yoki «No, thank you» deyiladi.",
+        "examples": [
+          { "en": "'Would you like a dessert?' 'Yes, please.'", "uz": "«Shirinlik xohlaysizmi?» «Ha, iltimos.»" },
+          { "en": "'Would you like anything else?' 'No, thank you.'", "uz": "«Yana biror narsa?» «Yo'q, rahmat.»" }
+        ]
+      },
+      {
+        "text": "Kafedagi tayyor iboralar: Can I have the menu? — menyu bering; The bill, please — hisob; Is service included? — xizmat haqi kirganmi?",
+        "examples": [
+          { "en": "Can I have the bill, please?", "uz": "Hisobni bering, iltimos." },
+          { "en": "A table for two, please.", "uz": "Ikki kishilik stol, iltimos." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Vaziyat", "Ibora"],
+      "rows": [
+        ["Stol so'rash", "A table for two, please."],
+        ["Menyu so'rash", "Can I have the menu, please?"],
+        ["Buyurtma berish", "I'd like the soup, please."],
+        ["Taklifga rozilik", "Yes, please."],
+        ["Taklifni rad etish", "No, thank you."],
+        ["Hisob so'rash", "The bill, please."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I want a coffee.",
+      "right": "I'd like a coffee, please.",
+      "why": "Grammatik to'g'ri, lekin buyruq kabi eshitiladi. Xizmat joyida I'd like ishlatiladi."
+    },
+    {
+      "wrong": "I'd like to a coffee.",
+      "right": "I'd like a coffee.",
+      "why": "To faqat fe'l oldidan qo'yiladi, ot oldidan emas."
+    },
+    {
+      "wrong": "I would like drink tea.",
+      "right": "I'd like to drink tea. / I'd like some tea.",
+      "why": "Fe'l kelsa, oldiga to qo'yiladi."
+    },
+    {
+      "wrong": "'Would you like a dessert?' 'Yes, I would like.'",
+      "right": "'Would you like a dessert?' 'Yes, please.'",
+      "why": "Taklifga qisqa va odobli javob — Yes, please."
+    },
+    {
+      "wrong": "Bring me the bill.",
+      "right": "Can I have the bill, please?",
+      "why": "Buyruq shakli qo'pol. Iltimos qolipini ishlating."
+    }
+  ],
+  "words": [
+    { "en": "I'd like", "uz": "xohlardim", "ipa": "/aɪd ˈlaɪk/", "example": "I'd like a tea, please." },
+    { "en": "menu", "uz": "menyu", "ipa": "/ˈmenjuː/", "example": "Can I have the menu?" },
+    { "en": "order", "uz": "buyurtma bermoq", "ipa": "/ˈɔːdə(r)/", "example": "I'd like to order." },
+    { "en": "bill", "uz": "hisob", "ipa": "/bɪl/", "example": "The bill, please." },
+    { "en": "coffee", "uz": "qahva", "ipa": "/ˈkɒfi/", "example": "Two coffees, please." },
+    { "en": "soup", "uz": "sho'rva", "ipa": "/suːp/", "example": "I'd like the soup." },
+    { "en": "dessert", "uz": "shirinlik", "ipa": "/dɪˈzɜːt/", "example": "Would you like a dessert?" },
+    { "en": "waiter", "uz": "ofitsiant", "ipa": "/ˈweɪtə(r)/", "example": "Ask the waiter." },
+    { "en": "table", "uz": "stol", "ipa": "/ˈteɪbl/", "example": "A table for two, please." },
+    { "en": "delicious", "uz": "mazali", "ipa": "/dɪˈlɪʃəs/", "example": "The food is delicious." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 3, "focus": "«I want» gaplarini «I'd like» ga aylantirish" },
+      { "type": 2, "count": 2, "focus": "to qo'yish kerakmi yoki yo'qligini aniqlash" },
+      { "type": 5, "count": 2, "focus": "«I'd like to a coffee», «Bring me the bill» xatolarini topish" },
+      { "type": 4, "count": 3, "focus": "menyu asosida buyurtma gapi tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Hisobni bering», «Ikki kishilik stol»" }
+    ],
+    "final": { "type": 7, "task": "Kafega kirdingiz. Ofitsiant bilan to'liq suhbatni yozing: stol, menyu, buyurtma, hisob. 6-8 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Kafeda buyurtma berilmoqda. Nima buyurtma qilinganini va hisob qanchaligini yozing.",
+    "level_hint": "sekin nutq, 45 soniya"
+  },
+  "review": {
+    "topic": "I'd like, buyurtma iboralari",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

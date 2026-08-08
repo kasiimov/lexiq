@@ -1,0 +1,111 @@
+{
+  "id": "a1-b2-l3",
+  "level": "A1",
+  "block": "a1-b2",
+  "title": "Odamni tasvirlash",
+  "can_do": "Odamning tashqi ko'rinishi va xarakterini sifatlar bilan tasvirlaysiz",
+  "why": "Kimnidir tanishtirish, izlash yoki hikoya qilish uchun tasvirlash kerak. Sifat tartibi ingliz tilida qat'iy — noto'g'ri tartib gapni g'alati qiladi.",
+  "rule": {
+    "title": "Sifat + ot: tartib va qoidalar",
+    "points": [
+      {
+        "text": "Sifat doim otdan oldin turadi va hech qachon ko'plik shaklini olmaydi. «Katta uylar» — big houses, «bigs houses» emas.",
+        "examples": [
+          { "en": "a big house", "uz": "katta uy" },
+          { "en": "two big houses", "uz": "ikkita katta uy" }
+        ]
+      },
+      {
+        "text": "Bir nechta sifat bo'lsa, tartib qat'iy: fikr → o'lcham → yosh → rang. «A nice tall young man» — chiroyli, baland, yosh. Bu tartibni ona tilida so'zlashuvchilar o'ylamay ishlatadi.",
+        "examples": [
+          { "en": "a nice young teacher", "uz": "yaxshi yosh o'qituvchi" },
+          { "en": "a big old house", "uz": "katta eski uy" },
+          { "en": "a small black bag", "uz": "kichkina qora sumka" }
+        ]
+      },
+      {
+        "text": "Sifat to be dan keyin ham kelishi mumkin — o'shanda ot kerak emas: The house is big. Ikkala qolip ham to'g'ri, ma'no bir xil.",
+        "examples": [
+          { "en": "a tall man = The man is tall.", "uz": "baland bo'yli odam = U odam baland bo'yli." },
+          { "en": "The bag is black.", "uz": "Sumka qora." }
+        ]
+      },
+      {
+        "text": "Very va really sifatni kuchaytiradi va uning oldida turadi: a very big house, really nice people.",
+        "examples": [
+          { "en": "She is very kind.", "uz": "U juda mehribon." },
+          { "en": "It is a really good film.", "uz": "Bu juda yaxshi film." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Ma'no", "Sifatlar", "Qarama-qarshisi"],
+      "rows": [
+        ["o'lcham", "big, tall, long", "small, short, short"],
+        ["yosh", "young, new", "old, old"],
+        ["tashqi ko'rinish", "beautiful, handsome", "ugly"],
+        ["xarakter", "kind, friendly, clever", "unkind, shy, lazy"],
+        ["holat", "happy, tired", "sad, energetic"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "a house big",
+      "right": "a big house",
+      "why": "Ingliz tilida sifat otdan oldin turadi. O'zbekchada ham shunday, lekin tarjimada tartib chalkashib ketadi."
+    },
+    {
+      "wrong": "two bigs houses",
+      "right": "two big houses",
+      "why": "Sifat hech qachon ko'plik qo'shimchasini olmaydi."
+    },
+    {
+      "wrong": "a young nice teacher",
+      "right": "a nice young teacher",
+      "why": "Fikr bildiruvchi sifat (nice) yoshdan oldin turadi."
+    },
+    {
+      "wrong": "She is very much kind.",
+      "right": "She is very kind.",
+      "why": "Very sifat bilan yolg'iz ishlatiladi, «very much» fe'l bilan keladi."
+    },
+    {
+      "wrong": "He is a tall.",
+      "right": "He is tall. / He is a tall man.",
+      "why": "Artikl otsiz ishlatilmaydi. Sifat yolg'iz qolsa, a kerak emas."
+    }
+  ],
+  "words": [
+    { "en": "tall", "uz": "baland bo'yli", "ipa": "/tɔːl/", "example": "My brother is tall." },
+    { "en": "short", "uz": "past bo'yli, kalta", "ipa": "/ʃɔːt/", "example": "She has short hair." },
+    { "en": "young", "uz": "yosh", "ipa": "/jʌŋ/", "example": "He is a young doctor." },
+    { "en": "old", "uz": "keksa, eski", "ipa": "/əʊld/", "example": "This is an old house." },
+    { "en": "beautiful", "uz": "chiroyli", "ipa": "/ˈbjuːtɪfl/", "example": "Samarkand is a beautiful city." },
+    { "en": "kind", "uz": "mehribon", "ipa": "/kaɪnd/", "example": "My teacher is very kind." },
+    { "en": "friendly", "uz": "do'stona", "ipa": "/ˈfrendli/", "example": "The people here are friendly." },
+    { "en": "clever", "uz": "aqlli", "ipa": "/ˈklevə(r)/", "example": "She is a clever student." },
+    { "en": "hair", "uz": "soch", "ipa": "/heə(r)/", "example": "She has got long hair." },
+    { "en": "eyes", "uz": "ko'zlar", "ipa": "/aɪz/", "example": "He has got blue eyes." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 3, "focus": "sifatlarni to'g'ri tartibda joylashtirish" },
+      { "type": 1, "count": 2, "focus": "sifatga qarama-qarshi ma'noli so'zni tanlash" },
+      { "type": 5, "count": 2, "focus": "«bigs», «a house big», «very much kind» xatolarini topish" },
+      { "type": 4, "count": 3, "focus": "berilgan sifatlar bilan odamni tasvirlovchi gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Kichkina qora sumka», «U juda mehribon»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingizni aeroportda kutib olishadi, lekin uni tanimaydilar. Uning tashqi ko'rinishini 4-5 gapda tasvirlab yozing." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam do'stini tasvirlaydi. Bo'yi, sochi, ko'zi va xarakterini yozing.",
+    "level_hint": "sekin nutq, 35 soniya"
+  },
+  "review": {
+    "topic": "sifat + ot tartibi",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

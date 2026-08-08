@@ -1,0 +1,111 @@
+{
+  "id": "a1-b4-l3",
+  "level": "A1",
+  "block": "a1-b4",
+  "title": "Yo'l so'rash va ko'rsatish",
+  "can_do": "Yo'lni so'ray olasiz va boshqaga yo'l ko'rsata olasiz",
+  "why": "Notanish shaharda adashsangiz, shu bir necha ibora sizni maqsadga yetkazadi. Javobni tushunish esa savol berishdan ham muhimroq.",
+  "rule": {
+    "title": "Buyruq gap va yo'l ko'rsatish",
+    "points": [
+      {
+        "text": "Buyruq gapda ega yozilmaydi — fe'l darhol boshda turadi: Go straight. Turn left. Take the bus. «You go straight» deyish shart emas.",
+        "examples": [
+          { "en": "Go straight on.", "uz": "To'g'riga yuring." },
+          { "en": "Turn right at the corner.", "uz": "Burchakdan o'ngga buriling." }
+        ]
+      },
+      {
+        "text": "Inkor buyruq don't bilan yasaladi: Don't turn left. Bu ham egasiz ishlatiladi.",
+        "examples": [
+          { "en": "Don't cross here.", "uz": "Bu yerdan o'tmang." },
+          { "en": "Don't take the first street.", "uz": "Birinchi ko'chaga kirmang." }
+        ]
+      },
+      {
+        "text": "Yo'l so'rashning odobli qolipi: «Excuse me, how do I get to ...?» yoki «Where is the ...?». Excuse me — begona odamga murojaat qilishning oddiy usuli.",
+        "examples": [
+          { "en": "Excuse me, where is the station?", "uz": "Kechirasiz, vokzal qayerda?" },
+          { "en": "How do I get to the museum?", "uz": "Muzeyga qanday boraman?" }
+        ]
+      },
+      {
+        "text": "Javobda ko'p ishlatiladigan iboralar: on the left / on the right — chapda / o'ngda, straight on — to'g'riga, it's about five minutes — taxminan besh daqiqa.",
+        "examples": [
+          { "en": "It's on the left, next to the bank.", "uz": "U chapda, bank yonida." },
+          { "en": "It's about ten minutes on foot.", "uz": "Piyoda taxminan o'n daqiqa." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Ibora", "Ma'nosi"],
+      "rows": [
+        ["Go straight on", "To'g'riga yuring"],
+        ["Turn left / right", "Chapga / o'ngga buriling"],
+        ["Take the first street", "Birinchi ko'chaga kiring"],
+        ["Cross the road", "Yo'ldan o'ting"],
+        ["It's on the left", "U chap tomonda"],
+        ["Go past the bank", "Bankdan o'tib keting"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "You go straight and you turn left.",
+      "right": "Go straight and turn left.",
+      "why": "Buyruq gapda ega ishlatilmaydi."
+    },
+    {
+      "wrong": "Turn to left.",
+      "right": "Turn left.",
+      "why": "Turn dan keyin to qo'yilmaydi."
+    },
+    {
+      "wrong": "Where is the station? — It is in the left.",
+      "right": "It's on the left.",
+      "why": "Tomon ko'rsatishda on ishlatiladi, in emas."
+    },
+    {
+      "wrong": "How I can go to the museum?",
+      "right": "How do I get to the museum?",
+      "why": "Savolda so'z tartibi buziladi va «get to» tabiiyroq ibora."
+    },
+    {
+      "wrong": "Not turn right.",
+      "right": "Don't turn right.",
+      "why": "Inkor buyruq don't bilan yasaladi."
+    }
+  ],
+  "words": [
+    { "en": "turn", "uz": "burilmoq", "ipa": "/tɜːn/", "example": "Turn left here." },
+    { "en": "straight on", "uz": "to'g'riga", "ipa": "/ˌstreɪt ˈɒn/", "example": "Go straight on." },
+    { "en": "left", "uz": "chap", "ipa": "/left/", "example": "It's on the left." },
+    { "en": "right", "uz": "o'ng", "ipa": "/raɪt/", "example": "Turn right at the bank." },
+    { "en": "cross", "uz": "kesib o'tmoq", "ipa": "/krɒs/", "example": "Cross the road here." },
+    { "en": "excuse me", "uz": "kechirasiz", "ipa": "/ɪkˈskjuːz miː/", "example": "Excuse me, where is the bank?" },
+    { "en": "station", "uz": "vokzal, bekat", "ipa": "/ˈsteɪʃn/", "example": "The station is near here." },
+    { "en": "get to", "uz": "yetib bormoq", "ipa": "/ˈɡet tuː/", "example": "How do I get to the airport?" },
+    { "en": "road", "uz": "yo'l", "ipa": "/rəʊd/", "example": "Cross the road." },
+    { "en": "on foot", "uz": "piyoda", "ipa": "/ɒn ˈfʊt/", "example": "It's ten minutes on foot." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 3, "focus": "darak gapni buyruq gapga aylantirish" },
+      { "type": 1, "count": 2, "focus": "yo'l ko'rsatish iborasiga mos ma'noni tanlash" },
+      { "type": 5, "count": 2, "focus": "«Turn to left», «in the left» xatolarini topish" },
+      { "type": 4, "count": 3, "focus": "berilgan xaritada A nuqtadan B ga yo'l ko'rsatish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Burchakdan o'ngga buriling», «Kechirasiz, bozor qayerda?»" }
+    ],
+    "final": { "type": 7, "task": "Chet ellik mehmon uyingizni topolmayapti. Vokzaldan uyingizgacha yo'lni bosqichma-bosqich yozing. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Yo'lovchiga yo'l ko'rsatilmoqda. Bosqichlarni tartib bilan yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "buyruq gap, yo'l ko'rsatish",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

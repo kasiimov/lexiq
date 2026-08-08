@@ -1,0 +1,109 @@
+{
+  "id": "a1-b4-l1",
+  "level": "A1",
+  "block": "a1-b4",
+  "title": "Shahringizda nima borligini aytish",
+  "can_do": "Joyda nima borligini va nima yo'qligini ayta olasiz",
+  "why": "Shaharni, uyni, xonani tasvirlash — sayohatda va yangi joyda eng kerakli ko'nikma. Bu qolip o'zbek tilida umuman boshqacha ishlaydi.",
+  "rule": {
+    "title": "there is / there are — «bor»",
+    "points": [
+      {
+        "text": "Joyda biror narsa borligini aytish uchun gap there bilan boshlanadi. So'zma-so'z tarjima qilinmaydi: «There is a park» — «Park bor», «U yerda park bor» emas.",
+        "examples": [
+          { "en": "There is a park near my house.", "uz": "Uyim yonida park bor." },
+          { "en": "There is a problem.", "uz": "Muammo bor." }
+        ]
+      },
+      {
+        "text": "Birlik bilan there is, ko'plik bilan there are. Tanlash keyingi otga qarab qilinadi.",
+        "examples": [
+          { "en": "There is a bank in this street.", "uz": "Bu ko'chada bank bor." },
+          { "en": "There are two banks in this street.", "uz": "Bu ko'chada ikkita bank bor." }
+        ]
+      },
+      {
+        "text": "Inkor: there isn't / there aren't. Ko'plikda «any» qo'shiladi: There aren't any shops.",
+        "examples": [
+          { "en": "There isn't a bus stop here.", "uz": "Bu yerda avtobus bekati yo'q." },
+          { "en": "There aren't any cafés near here.", "uz": "Bu yaqinda kafe yo'q." }
+        ]
+      },
+      {
+        "text": "Savol: Is there ...? / Are there ...? Qisqa javob — Yes, there is. / No, there isn't.",
+        "examples": [
+          { "en": "'Is there a pharmacy near here?' 'Yes, there is.'", "uz": "«Bu yaqinda dorixona bormi?» «Ha.»" },
+          { "en": "'Are there any hotels?' 'No, there aren't.'", "uz": "«Mehmonxonalar bormi?» «Yo'q.»" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shakl", "Birlik", "Ko'plik"],
+      "rows": [
+        ["Darak", "There is a shop.", "There are two shops."],
+        ["Inkor", "There isn't a shop.", "There aren't any shops."],
+        ["Savol", "Is there a shop?", "Are there any shops?"],
+        ["Qisqa javob", "Yes, there is.", "Yes, there are."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "In my city is a big park.",
+      "right": "There is a big park in my city.",
+      "why": "Bu qolipda gap doim there bilan boshlanadi."
+    },
+    {
+      "wrong": "There is two hospitals.",
+      "right": "There are two hospitals.",
+      "why": "Ko'plik bilan there are ishlatiladi."
+    },
+    {
+      "wrong": "There are a museum here.",
+      "right": "There is a museum here.",
+      "why": "«A museum» — birlik, shuning uchun there is."
+    },
+    {
+      "wrong": "It is a park near my house.",
+      "right": "There is a park near my house.",
+      "why": "«It is» aniq narsani tasvirlaydi, mavjudligini bildirmaydi."
+    },
+    {
+      "wrong": "Have a bank in this street?",
+      "right": "Is there a bank in this street?",
+      "why": "Joyda nima borligini so'rashda have emas, there is ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "there is", "uz": "bor (birlik)", "ipa": "/ðeər ɪz/", "example": "There is a shop here." },
+    { "en": "park", "uz": "park", "ipa": "/pɑːk/", "example": "There is a park near my house." },
+    { "en": "shop", "uz": "do'kon", "ipa": "/ʃɒp/", "example": "There are many shops." },
+    { "en": "bank", "uz": "bank", "ipa": "/bæŋk/", "example": "Is there a bank near here?" },
+    { "en": "hospital", "uz": "shifoxona", "ipa": "/ˈhɒspɪtl/", "example": "The hospital is very big." },
+    { "en": "market", "uz": "bozor", "ipa": "/ˈmɑːkɪt/", "example": "There is a big market." },
+    { "en": "street", "uz": "ko'cha", "ipa": "/striːt/", "example": "I live in this street." },
+    { "en": "museum", "uz": "muzey", "ipa": "/mjuˈziːəm/", "example": "There is an old museum." },
+    { "en": "pharmacy", "uz": "dorixona", "ipa": "/ˈfɑːməsi/", "example": "Is there a pharmacy near here?" },
+    { "en": "bus stop", "uz": "avtobus bekati", "ipa": "/ˈbʌs stɒp/", "example": "There isn't a bus stop here." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 3, "focus": "there is yoki there are ni tanlash" },
+      { "type": 3, "count": 3, "focus": "darak gapni savol va inkorga aylantirish" },
+      { "type": 5, "count": 2, "focus": "«In my city is», «There is two» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'z shahringizda nima borligi haqida gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Bu yaqinda dorixona bormi?», «Bu yerda kafe yo'q»" }
+    ],
+    "final": { "type": 7, "task": "Mehmon kelmoqchi. Mahallangizda nima borligini yozing: do'kon, bekat, park. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam o'z mahallasini tasvirlaydi. Qaysi joylar bor va qaysilari yo'qligini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "there is / there are",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

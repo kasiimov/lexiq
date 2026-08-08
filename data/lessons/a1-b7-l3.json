@@ -1,0 +1,130 @@
+{
+  "id": "a1-b7-l3",
+  "level": "A1",
+  "block": "a1-b7",
+  "title": "Eng kerakli noto'g'ri fe'llar",
+  "can_do": "Eng ko'p ishlatiladigan noto'g'ri fe'llarni o'tgan zamonda to'g'ri qo'llaysiz",
+  "why": "Achinarli haqiqat: ingliz tilidagi eng kerakli fe'llarning aksariyati noto'g'ri. Go, have, do, see, come — bularsiz bitta ham hikoya tuzib bo'lmaydi, va ular -ed olmaydi.",
+  "rule": {
+    "title": "Noto'g'ri fe'llar: yodlash kerak bo'lgan shakllar",
+    "points": [
+      {
+        "text": "Noto'g'ri fe'llar -ed olmaydi — ularning o'tgan zamon shakli butunlay boshqacha bo'ladi. Qoida yo'q, faqat yodlash. Yaxshi xabar: kundalik nutqda 20 tasi yetadi.",
+        "examples": [
+          { "en": "I go → I went", "uz": "Men boraman → Men bordim" },
+          { "en": "She has → She had", "uz": "Uning bor → Uning bor edi" }
+        ]
+      },
+      {
+        "text": "Ba'zi fe'llar butunlay o'zgaradi: go → went, see → saw, take → took. Bularni bog'lash mumkin emas, shunchaki yodlanadi.",
+        "examples": [
+          { "en": "We saw a good film.", "uz": "Biz yaxshi film ko'rdik." },
+          { "en": "He took a taxi.", "uz": "U taksi oldi." }
+        ]
+      },
+      {
+        "text": "Ba'zilari faqat unlisini almashtiradi — bu guruhni yodlash osonroq: come → came, give → gave, sit → sat, drink → drank.",
+        "examples": [
+          { "en": "They came at seven.", "uz": "Ular soat yettida kelishdi." },
+          { "en": "I drank tea.", "uz": "Men choy ichdim." }
+        ]
+      },
+      {
+        "text": "Bir nechtasi umuman o'zgarmaydi: put → put, cut → cut, read → read. Read yozilishda bir xil qoladi, lekin talaffuzi o'zgaradi: /riːd/ → /red/.",
+        "examples": [
+          { "en": "I read a book last night. /red/", "uz": "Kecha kitob o'qidim." },
+          { "en": "He put the keys on the table.", "uz": "U kalitlarni stolga qo'ydi." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Fe'l", "O'tgan zamon", "Ma'nosi"],
+      "rows": [
+        ["go", "went", "bormoq"],
+        ["have", "had", "ega bo'lmoq"],
+        ["do", "did", "qilmoq"],
+        ["see", "saw", "ko'rmoq"],
+        ["come", "came", "kelmoq"],
+        ["take", "took", "olmoq"],
+        ["give", "gave", "bermoq"],
+        ["get", "got", "olmoq"],
+        ["make", "made", "yasamoq"],
+        ["say", "said", "aytmoq"],
+        ["eat", "ate", "yemoq"],
+        ["drink", "drank", "ichmoq"],
+        ["buy", "bought", "sotib olmoq"],
+        ["write", "wrote", "yozmoq"],
+        ["read", "read /red/", "o'qimoq"],
+        ["know", "knew", "bilmoq"],
+        ["think", "thought", "o'ylamoq"],
+        ["find", "found", "topmoq"],
+        ["put", "put", "qo'ymoq"],
+        ["meet", "met", "uchrashmoq"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I goed to the market.",
+      "right": "I went to the market.",
+      "why": "Go — noto'g'ri fe'l, -ed olmaydi."
+    },
+    {
+      "wrong": "She buyed a new phone.",
+      "right": "She bought a new phone.",
+      "why": "Buy → bought. Yodlash kerak."
+    },
+    {
+      "wrong": "We seed a film.",
+      "right": "We saw a film.",
+      "why": "See → saw."
+    },
+    {
+      "wrong": "He eated dinner.",
+      "right": "He ate dinner.",
+      "why": "Eat → ate."
+    },
+    {
+      "wrong": "I taked a taxi.",
+      "right": "I took a taxi.",
+      "why": "Take → took."
+    },
+    {
+      "wrong": "They comed late.",
+      "right": "They came late.",
+      "why": "Come → came."
+    }
+  ],
+  "words": [
+    { "en": "went", "uz": "bordi", "ipa": "/went/", "example": "I went to Samarkand." },
+    { "en": "saw", "uz": "ko'rdi", "ipa": "/sɔː/", "example": "We saw a film." },
+    { "en": "came", "uz": "keldi", "ipa": "/keɪm/", "example": "She came late." },
+    { "en": "took", "uz": "oldi", "ipa": "/tʊk/", "example": "He took a taxi." },
+    { "en": "had", "uz": "bor edi", "ipa": "/hæd/", "example": "I had a good time." },
+    { "en": "made", "uz": "yasadi", "ipa": "/meɪd/", "example": "She made a cake." },
+    { "en": "bought", "uz": "sotib oldi", "ipa": "/bɔːt/", "example": "I bought a new phone." },
+    { "en": "ate", "uz": "yedi", "ipa": "/eɪt/", "example": "We ate at home." },
+    { "en": "met", "uz": "uchrashdi", "ipa": "/met/", "example": "I met my friend." },
+    { "en": "wrote", "uz": "yozdi", "ipa": "/rəʊt/", "example": "He wrote a letter." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 5, "focus": "noto'g'ri fe'lning o'tgan zamon shaklini qo'yish" },
+      { "type": 1, "count": 3, "focus": "to'g'ri va noto'g'ri fe'llarni ajratish" },
+      { "type": 5, "count": 3, "focus": "«goed», «buyed», «eated» kabi yasama shakllarni topish" },
+      { "type": 4, "count": 2, "focus": "berilgan noto'g'ri fe'l bilan o'z hikoyangizdan gap tuzish" },
+      { "type": 6, "count": 3, "focus": "o'zbekchadan tarjima: «Kecha bozorga bordim», «U yangi telefon sotib oldi»" }
+    ],
+    "final": { "type": 7, "task": "O'tgan dam olish kuningiz haqida hikoya yozing. Kamida 5 ta noto'g'ri fe'l ishlating." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam sayohati haqida gapiradi. Ishlatilgan noto'g'ri fe'llarni va nima bo'lganini yozing.",
+    "level_hint": "sekin nutq, 45 soniya"
+  },
+  "review": {
+    "topic": "noto'g'ri fe'llar",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

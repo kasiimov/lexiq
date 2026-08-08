@@ -1,0 +1,116 @@
+{
+  "id": "a1-b3-l1",
+  "level": "A1",
+  "block": "a1-b3",
+  "title": "Har kuni nima qilishingizni aytish",
+  "can_do": "Kundalik ishlaringiz haqida gapira olasiz",
+  "why": "Present Simple — ingliz tilidagi eng ko'p ishlatiladigan zamon. Odat, jadval, doimiy haqiqat — hammasi shu zamonda aytiladi.",
+  "rule": {
+    "title": "Present Simple: doimiy va takrorlanuvchi ish",
+    "points": [
+      {
+        "text": "Present Simple har kuni takrorlanadigan ish uchun ishlatiladi. Fe'l o'zgarmaydi — faqat lug'atdagi shakli qo'yiladi: I work, you work, we work, they work.",
+        "examples": [
+          { "en": "I work in a school.", "uz": "Men maktabda ishlayman." },
+          { "en": "They live in Samarkand.", "uz": "Ular Samarqandda yashaydi." }
+        ]
+      },
+      {
+        "text": "He, she, it bilan fe'lga -s qo'shiladi. Bu butun A1 darajadagi eng ko'p unutiladigan qoida. He works, she lives, it starts.",
+        "examples": [
+          { "en": "He works in a bank.", "uz": "U bankda ishlaydi." },
+          { "en": "My sister studies at university.", "uz": "Singlim universitetda o'qiydi." }
+        ]
+      },
+      {
+        "text": "-s qo'shishning uch qoidasi bor. Odatda oddiy -s: work → works. -s, -sh, -ch, -x, -o bilan tugasa -es: watch → watches, go → goes. Undosh + y bilan tugasa, y → i va -es: study → studies.",
+        "examples": [
+          { "en": "She watches TV in the evening.", "uz": "U kechqurun televizor ko'radi." },
+          { "en": "He goes to work at eight.", "uz": "U soat sakkizda ishga boradi." },
+          { "en": "My brother studies English.", "uz": "Akam ingliz tilini o'rganadi." }
+        ]
+      },
+      {
+        "text": "Have fe'li istisno: he, she, it bilan has bo'lib o'zgaradi, «haves» degan shakl yo'q.",
+        "examples": [
+          { "en": "I have breakfast at seven.", "uz": "Men soat yettida nonushta qilaman." },
+          { "en": "She has lunch at one.", "uz": "U soat birda tushlik qiladi." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shaxs", "Fe'l shakli", "Misol"],
+      "rows": [
+        ["I", "work", "I work every day."],
+        ["you", "work", "You work hard."],
+        ["he / she / it", "works", "He works at home."],
+        ["we", "work", "We work together."],
+        ["they", "work", "They work in a shop."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "He work in a bank.",
+      "right": "He works in a bank.",
+      "why": "He, she, it bilan -s shart. Bu eng ko'p uchraydigan A1 xatosi."
+    },
+    {
+      "wrong": "She studys English.",
+      "right": "She studies English.",
+      "why": "Undosh + y bilan tugagan fe'lda y → i bo'ladi va -es qo'shiladi."
+    },
+    {
+      "wrong": "My friends works in a hospital.",
+      "right": "My friends work in a hospital.",
+      "why": "Friends — ko'plik, unga -s qo'shilmaydi. -s faqat birlik uchinchi shaxsga."
+    },
+    {
+      "wrong": "He haves two cars.",
+      "right": "He has two cars.",
+      "why": "Have fe'li nostandart: he / she / it bilan has bo'ladi."
+    },
+    {
+      "wrong": "I am work every day.",
+      "right": "I work every day.",
+      "why": "Present Simple da to be kerak emas. Bir gapda ikkita fe'l bo'lmaydi."
+    },
+    {
+      "wrong": "He goes to the work.",
+      "right": "He goes to work.",
+      "why": "«Work» ish joyi ma'nosida artiklsiz ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "work", "uz": "ishlamoq", "ipa": "/wɜːk/", "example": "I work in an office." },
+    { "en": "live", "uz": "yashamoq", "ipa": "/lɪv/", "example": "They live in Tashkent." },
+    { "en": "study", "uz": "o'qimoq", "ipa": "/ˈstʌdi/", "example": "She studies medicine." },
+    { "en": "get up", "uz": "turmoq", "ipa": "/ˌɡet ˈʌp/", "example": "I get up at six." },
+    { "en": "go", "uz": "bormoq", "ipa": "/ɡəʊ/", "example": "He goes to school." },
+    { "en": "start", "uz": "boshlamoq", "ipa": "/stɑːt/", "example": "Work starts at nine." },
+    { "en": "finish", "uz": "tugatmoq", "ipa": "/ˈfɪnɪʃ/", "example": "I finish at five." },
+    { "en": "watch", "uz": "tomosha qilmoq", "ipa": "/wɒtʃ/", "example": "She watches TV." },
+    { "en": "every day", "uz": "har kuni", "ipa": "/ˈevri deɪ/", "example": "I read every day." },
+    { "en": "breakfast", "uz": "nonushta", "ipa": "/ˈbrekfəst/", "example": "We have breakfast together." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "fe'lning to'g'ri shaklini qo'yish: work / works, study / studies" },
+      { "type": 3, "count": 2, "focus": "gapni I dan he ga o'tkazish va -s ni qo'shish" },
+      { "type": 5, "count": 3, "focus": "«He work», «She studys», «I am work» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'z kuningiz haqida Present Simple da gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U bankda ishlaydi», «Singlim ingliz tilini o'rganadi»" }
+    ],
+    "final": { "type": 7, "task": "Yangi tanishingizga oddiy kuningizni yozib bering: nechada turasiz, qayerda ishlaysiz yoki o'qiysiz, kechqurun nima qilasiz. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam kunlik tartibini aytadi. Nima qilishini va soatlarni yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "Present Simple, -s qo'shish",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

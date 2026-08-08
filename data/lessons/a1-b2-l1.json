@@ -1,0 +1,107 @@
+{
+  "id": "a1-b2-l1",
+  "level": "A1",
+  "block": "a1-b2",
+  "title": "Nima borligini aytish",
+  "can_do": "Sizda va boshqalarda nima borligini ayta olasiz",
+  "why": "«Menda mashina bor», «Uning ikkita akasi bor» — kundalik suhbatning yarmi shu qolipda. Bu tuzilma o'zbek tilidan butunlay boshqacha, shuning uchun alohida o'rganiladi.",
+  "rule": {
+    "title": "have got / has got — «bor»",
+    "points": [
+      {
+        "text": "O'zbek tilida «Menda kitob bor» deyiladi — egasi bosh kelishikda emas. Ingliz tilida esa aksincha: ega birinchi turadi va have got fe'lini oladi. So'zma-so'z «Men kitobga egaman».",
+        "examples": [
+          { "en": "I have got a book.", "uz": "Menda kitob bor." },
+          { "en": "They have got a big house.", "uz": "Ularning katta uyi bor." }
+        ]
+      },
+      {
+        "text": "He, she, it bilan have emas, has ishlatiladi: he has got, she has got. Bu eng ko'p xato qilinadigan joy.",
+        "examples": [
+          { "en": "She has got two sisters.", "uz": "Uning ikkita singlisi bor." },
+          { "en": "My city has got a new airport.", "uz": "Shahrimda yangi aeroport bor." }
+        ]
+      },
+      {
+        "text": "Og'zaki nutqda qisqartiriladi: I have got → I've got, he has got → he's got. Diqqat: he's — bu ham «he is», ham «he has». Qaysi ekanini keyingi so'z ko'rsatadi: he's got — has, he's tired — is.",
+        "examples": [
+          { "en": "I've got a question.", "uz": "Mening savolim bor." },
+          { "en": "He's got a car.", "uz": "Uning mashinasi bor." }
+        ]
+      },
+      {
+        "text": "Got siz ham aytish mumkin — I have a book. Ma'no bir xil. Britaniyada have got, Amerikada have ko'proq ishlatiladi. Ikkalasini ham tushunish kerak.",
+        "examples": [
+          { "en": "I have a brother. = I've got a brother.", "uz": "Mening akam bor." },
+          { "en": "She has a dog. = She's got a dog.", "uz": "Uning iti bor." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shaxs", "To'liq shakl", "Qisqa shakl"],
+      "rows": [
+        ["I / you / we / they", "have got", "I've got, you've got"],
+        ["he / she / it", "has got", "he's got, she's got"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "He have got a car.",
+      "right": "He has got a car.",
+      "why": "He, she, it bilan doim has, have emas."
+    },
+    {
+      "wrong": "By me there is a car.",
+      "right": "I have got a car.",
+      "why": "O'zbekcha «Menda mashina bor» ni so'zma-so'z tarjima qilishdan chiqadigan xato. Ingliz tilida ega — odam."
+    },
+    {
+      "wrong": "I have got 25 years.",
+      "right": "I am 25 years old.",
+      "why": "Yosh have got bilan emas, to be bilan aytiladi."
+    },
+    {
+      "wrong": "I have got hungry.",
+      "right": "I am hungry.",
+      "why": "Holat sifatlari to be ni oladi: hungry, tired, cold."
+    },
+    {
+      "wrong": "She has got a childrens.",
+      "right": "She has got children.",
+      "why": "Children — allaqachon ko'plik shakli, unga -s qo'shilmaydi va a qo'yilmaydi."
+    }
+  ],
+  "words": [
+    { "en": "have got", "uz": "bor (egalik)", "ipa": "/həv ɡɒt/", "example": "I have got a bike." },
+    { "en": "brother", "uz": "aka, uka", "ipa": "/ˈbrʌðə(r)/", "example": "I have got one brother." },
+    { "en": "sister", "uz": "opa, singil", "ipa": "/ˈsɪstə(r)/", "example": "She has got two sisters." },
+    { "en": "car", "uz": "mashina", "ipa": "/kɑː(r)/", "example": "My father has got a car." },
+    { "en": "house", "uz": "uy", "ipa": "/haʊs/", "example": "They have got a big house." },
+    { "en": "phone", "uz": "telefon", "ipa": "/fəʊn/", "example": "I've got a new phone." },
+    { "en": "dog", "uz": "it", "ipa": "/dɒɡ/", "example": "Have you got a dog?" },
+    { "en": "children", "uz": "bolalar", "ipa": "/ˈtʃɪldrən/", "example": "They have got three children." },
+    { "en": "money", "uz": "pul", "ipa": "/ˈmʌni/", "example": "I haven't got money." },
+    { "en": "time", "uz": "vaqt", "ipa": "/taɪm/", "example": "Have you got time?" }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 3, "focus": "have got yoki has got ni tanlash" },
+      { "type": 3, "count": 2, "focus": "to'liq shaklni qisqa shaklga aylantirish" },
+      { "type": 5, "count": 3, "focus": "«He have got», «I have got 25 years» kabi xatolarni topish" },
+      { "type": 4, "count": 2, "focus": "oila a'zolari haqida have got bilan gap tuzish" },
+      { "type": 6, "count": 3, "focus": "o'zbekchadan tarjima: «Menda vaqt yo'q», «Uning ikkita akasi bor»" }
+    ],
+    "final": { "type": 7, "task": "Yangi do'stingizga oilangiz haqida yozing: kim bor, nechta aka-uka, uyda nima bor. 4-5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam oilasi haqida gapiradi. Kimda nima borligini yozing.",
+    "level_hint": "sekin nutq, 35 soniya"
+  },
+  "review": {
+    "topic": "have got / has got",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

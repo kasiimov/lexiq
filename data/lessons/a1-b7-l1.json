@@ -1,0 +1,110 @@
+{
+  "id": "a1-b7-l1",
+  "level": "A1",
+  "block": "a1-b7",
+  "title": "Qayerda bo'lganingizni aytish",
+  "can_do": "O'tgan vaqtdagi holat va joy haqida gapira olasiz",
+  "why": "Bu o'tgan zamonga birinchi qadam. Was va were — o'tgan zamonda eng ko'p ishlatiladigan ikki so'z, ular hikoyaning asosini tutadi.",
+  "rule": {
+    "title": "was va were — to be o'tgan zamonda",
+    "points": [
+      {
+        "text": "To be fe'lining o'tgan zamon shakli ikkita: was va were. I, he, she, it bilan was; you, we, they bilan were.",
+        "examples": [
+          { "en": "I was at home yesterday.", "uz": "Kecha men uyda edim." },
+          { "en": "They were at school.", "uz": "Ular maktabda edi." }
+        ]
+      },
+      {
+        "text": "Diqqat: hozirgi zamonda you are, o'tgan zamonda ham you were — yakka odamga murojaat qilinsa ham. «You was» — xato.",
+        "examples": [
+          { "en": "You were late yesterday.", "uz": "Kecha siz kechikdingiz." },
+          { "en": "We were very tired.", "uz": "Biz juda charchagan edik." }
+        ]
+      },
+      {
+        "text": "Inkor: wasn't, weren't. Savol: was yoki were gap boshiga chiqadi, xuddi hozirgi zamondagidek.",
+        "examples": [
+          { "en": "I wasn't at work on Monday.", "uz": "Dushanba kuni men ishda emas edim." },
+          { "en": "Were you at the party?", "uz": "Siz bazmda edingizmi?" }
+        ]
+      },
+      {
+        "text": "O'tgan zamonni ko'rsatuvchi so'zlar bilan birga ishlatiladi: yesterday, last week, last year, two days ago, in 2020.",
+        "examples": [
+          { "en": "She was in Samarkand last week.", "uz": "U o'tgan hafta Samarqandda edi." },
+          { "en": "It was very cold two days ago.", "uz": "Ikki kun oldin juda sovuq edi." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shaxs", "Darak", "Inkor", "Savol"],
+      "rows": [
+        ["I", "I was", "I wasn't", "Was I?"],
+        ["you", "you were", "you weren't", "Were you?"],
+        ["he / she / it", "he was", "he wasn't", "Was he?"],
+        ["we", "we were", "we weren't", "Were we?"],
+        ["they", "they were", "they weren't", "Were they?"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "You was at home.",
+      "right": "You were at home.",
+      "why": "You bilan doim were, hatto bir kishiga murojaat qilinsa ham."
+    },
+    {
+      "wrong": "They was tired.",
+      "right": "They were tired.",
+      "why": "Ko'plik bilan were ishlatiladi."
+    },
+    {
+      "wrong": "I didn't was at home.",
+      "right": "I wasn't at home.",
+      "why": "To be inkorida did ishlatilmaydi — not to'g'ridan-to'g'ri was ga qo'shiladi."
+    },
+    {
+      "wrong": "Did you were at the party?",
+      "right": "Were you at the party?",
+      "why": "To be savolida did kerak emas — were o'zi oldinga chiqadi."
+    },
+    {
+      "wrong": "Yesterday I am at school.",
+      "right": "Yesterday I was at school.",
+      "why": "«Yesterday» o'tgan zamonni talab qiladi."
+    }
+  ],
+  "words": [
+    { "en": "was", "uz": "edi (birlik)", "ipa": "/wɒz/", "example": "I was at home." },
+    { "en": "were", "uz": "edi (ko'plik)", "ipa": "/wɜː(r)/", "example": "They were happy." },
+    { "en": "yesterday", "uz": "kecha", "ipa": "/ˈjestədeɪ/", "example": "I was busy yesterday." },
+    { "en": "last week", "uz": "o'tgan hafta", "ipa": "/lɑːst ˈwiːk/", "example": "She was ill last week." },
+    { "en": "ago", "uz": "oldin", "ipa": "/əˈɡəʊ/", "example": "Two days ago." },
+    { "en": "born", "uz": "tug'ilgan", "ipa": "/bɔːn/", "example": "I was born in 2005." },
+    { "en": "ill", "uz": "kasal", "ipa": "/ɪl/", "example": "He was ill yesterday." },
+    { "en": "party", "uz": "bazm", "ipa": "/ˈpɑːti/", "example": "Were you at the party?" },
+    { "en": "school", "uz": "maktab", "ipa": "/skuːl/", "example": "We were at school." },
+    { "en": "child", "uz": "bola", "ipa": "/tʃaɪld/", "example": "When I was a child..." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "was yoki were ni tanlash" },
+      { "type": 3, "count": 3, "focus": "hozirgi zamon gapini o'tgan zamonga o'tkazish" },
+      { "type": 5, "count": 3, "focus": "«You was», «I didn't was», «Did you were» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "bolaligingiz haqida was / were bilan gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Kecha men uyda edim», «Ular maktabda emas edi»" }
+    ],
+    "final": { "type": 7, "task": "Bolaligingizni eslang. Qayerda yashagansiz, qanday bola edingiz, do'stlaringiz kim edi. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam bolaligi haqida gapiradi. Qayerda va qanday bo'lganini yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "was / were",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

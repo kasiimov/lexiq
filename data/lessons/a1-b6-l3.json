@@ -1,0 +1,113 @@
+{
+  "id": "a1-b6-l3",
+  "level": "A1",
+  "block": "a1-b6",
+  "title": "Ob-havo haqida gapirish",
+  "can_do": "Ob-havoni tasvirlaysiz va u haqida savol berasiz",
+  "why": "Ingliz tilida ob-havo — suhbatni boshlashning eng oddiy yo'li. Bundan tashqari bu yerda o'zbek tilida yo'q bir narsa bor: gapning egasi «it» sifatida majburiy qo'yiladi.",
+  "rule": {
+    "title": "It is + sifat va ob-havo qoliplari",
+    "points": [
+      {
+        "text": "O'zbek tilida «Sovuq» deb bir so'z bilan aytish mumkin. Ingliz tilida esa har bir gapda ega bo'lishi shart, shuning uchun ma'nosiz «it» qo'yiladi: It is cold.",
+        "examples": [
+          { "en": "It is cold today.", "uz": "Bugun sovuq." },
+          { "en": "It's very hot in summer.", "uz": "Yozda juda issiq." }
+        ]
+      },
+      {
+        "text": "Yog'ingarchilik uchun ikki xil aytish mumkin. Sifat bilan: It's rainy. Yoki fe'l bilan hozirgi davomli zamonda: It's raining. Ikkinchisi «hozir yog'yapti» degani.",
+        "examples": [
+          { "en": "It's rainy in spring.", "uz": "Bahorda yomg'irli bo'ladi." },
+          { "en": "Look, it's raining!", "uz": "Qarang, yomg'ir yog'yapti!" }
+        ]
+      },
+      {
+        "text": "Ob-havo haqida savol: What's the weather like? — «Ob-havo qanday?». «Like» bu yerda «yoqmoq» emas, «qanday» ma'nosini beradi.",
+        "examples": [
+          { "en": "What's the weather like today?", "uz": "Bugun ob-havo qanday?" },
+          { "en": "What's the weather like in Tashkent?", "uz": "Toshkentda ob-havo qanday?" }
+        ]
+      },
+      {
+        "text": "Harorat ham it bilan aytiladi: It's twenty degrees. Sovuq va issiqni kuchaytirish uchun very yoki really qo'shiladi.",
+        "examples": [
+          { "en": "It's thirty-five degrees today.", "uz": "Bugun o'ttiz besh daraja." },
+          { "en": "It's really cold outside.", "uz": "Tashqarida juda sovuq." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Ingliz", "O'zbek", "Fasl"],
+      "rows": [
+        ["It's hot.", "Issiq.", "yoz"],
+        ["It's cold.", "Sovuq.", "qish"],
+        ["It's warm.", "Iliq.", "bahor"],
+        ["It's cool.", "Salqin.", "kuz"],
+        ["It's sunny.", "Quyoshli.", "—"],
+        ["It's windy.", "Shamolli.", "—"],
+        ["It's cloudy.", "Bulutli.", "—"],
+        ["It's snowing.", "Qor yog'yapti.", "qish"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "Today is cold.",
+      "right": "It's cold today.",
+      "why": "Ob-havo haqida gapda ega — it. «Today» vaqt ko'rsatkichi, ega emas."
+    },
+    {
+      "wrong": "Is cold outside.",
+      "right": "It's cold outside.",
+      "why": "Ega tushib qolgan. Ingliz tilida ega hech qachon tashlab ketilmaydi."
+    },
+    {
+      "wrong": "The weather is rain.",
+      "right": "It's raining. / It's rainy.",
+      "why": "Rain — ot. Sifat rainy yoki fe'l raining kerak."
+    },
+    {
+      "wrong": "How is the weather like?",
+      "right": "What's the weather like?",
+      "why": "Bu qat'iy ibora: what + like."
+    },
+    {
+      "wrong": "It's make cold.",
+      "right": "It's cold.",
+      "why": "Sifat bilan qo'shimcha fe'l kerak emas."
+    }
+  ],
+  "words": [
+    { "en": "weather", "uz": "ob-havo", "ipa": "/ˈweðə(r)/", "example": "What's the weather like?" },
+    { "en": "hot", "uz": "issiq", "ipa": "/hɒt/", "example": "It's very hot today." },
+    { "en": "cold", "uz": "sovuq", "ipa": "/kəʊld/", "example": "It's cold in winter." },
+    { "en": "warm", "uz": "iliq", "ipa": "/wɔːm/", "example": "It's warm in spring." },
+    { "en": "sunny", "uz": "quyoshli", "ipa": "/ˈsʌni/", "example": "It's sunny today." },
+    { "en": "rain", "uz": "yomg'ir", "ipa": "/reɪn/", "example": "It's raining." },
+    { "en": "snow", "uz": "qor", "ipa": "/snəʊ/", "example": "It snows in January." },
+    { "en": "wind", "uz": "shamol", "ipa": "/wɪnd/", "example": "It's windy outside." },
+    { "en": "cloud", "uz": "bulut", "ipa": "/klaʊd/", "example": "It's cloudy." },
+    { "en": "degree", "uz": "daraja", "ipa": "/dɪˈɡriː/", "example": "It's twenty degrees." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 3, "focus": "ob-havo sifatini rasmga qarab qo'yish" },
+      { "type": 3, "count": 2, "focus": "«Today is cold» kabi gaplarni to'g'ri qolipga o'tkazish" },
+      { "type": 5, "count": 3, "focus": "ega tushib qolishi va «How is the weather like» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'z shahringiz ob-havosi haqida gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Bugun shamolli», «Yozda juda issiq»" }
+    ],
+    "final": { "type": 7, "task": "Chet ellik do'stingizga shahringizdagi to'rt faslni tasvirlab yozing: qaysi faslda qanday ob-havo. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Ob-havo ma'lumotini tinglang. Har bir shahar uchun ob-havo va haroratni yozing.",
+    "level_hint": "sekin nutq, 40 soniya"
+  },
+  "review": {
+    "topic": "It is + sifat, ob-havo",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

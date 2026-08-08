@@ -1,0 +1,112 @@
+{
+  "id": "a1-b3-l4",
+  "level": "A1",
+  "block": "a1-b3",
+  "title": "Kun haqida savol va inkor",
+  "can_do": "Odamning kundalik hayoti haqida savol berasiz va inkor gap tuzasiz",
+  "why": "Present Simple da savol va inkor yasash uchun maxsus yordamchi fe'l kerak. Uni bilmasangiz, faqat darak gap tuza olasiz — suhbat esa savoldan boshlanadi.",
+  "rule": {
+    "title": "Do va does: savol va inkor",
+    "points": [
+      {
+        "text": "Present Simple da savol yasash uchun gap boshiga do yoki does qo'yiladi. He, she, it bilan does, qolganlari bilan do.",
+        "examples": [
+          { "en": "Do you work here?", "uz": "Siz shu yerda ishlaysizmi?" },
+          { "en": "Does she live in Tashkent?", "uz": "U Toshkentda yashaydimi?" }
+        ]
+      },
+      {
+        "text": "Muhim qoida: does ishlatilganda asosiy fe'ldan -s olib tashlanadi. -s bir gapda faqat bir marta bo'ladi — yo does da, yo fe'lda.",
+        "examples": [
+          { "en": "She works. → Does she work?", "uz": "U ishlaydi. → U ishlaydimi?" },
+          { "en": "He goes. → Does he go?", "uz": "U boradi. → U boradimi?" }
+        ]
+      },
+      {
+        "text": "Inkor uchun don't yoki doesn't ishlatiladi va undan keyin fe'l lug'at shaklida qoladi.",
+        "examples": [
+          { "en": "I don't drink coffee.", "uz": "Men qahva ichmayman." },
+          { "en": "He doesn't work on Sunday.", "uz": "U yakshanba kuni ishlamaydi." }
+        ]
+      },
+      {
+        "text": "Qisqa javob do / does bilan beriladi, asosiy fe'l takrorlanmaydi: «Do you work?» — «Yes, I do.»",
+        "examples": [
+          { "en": "'Do you speak English?' 'Yes, I do.'", "uz": "«Ingliz tilida gaplashasizmi?» «Ha.»" },
+          { "en": "'Does he smoke?' 'No, he doesn't.'", "uz": "«U chekadimi?» «Yo'q.»" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shaxs", "Savol", "Inkor", "Qisqa javob"],
+      "rows": [
+        ["I / you / we / they", "Do you work?", "I don't work.", "Yes, I do. / No, I don't."],
+        ["he / she / it", "Does he work?", "He doesn't work.", "Yes, he does. / No, he doesn't."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "Does she works in a bank?",
+      "right": "Does she work in a bank?",
+      "why": "Does allaqachon -s ni o'z ichiga oladi, fe'lda takrorlanmaydi."
+    },
+    {
+      "wrong": "Do he live here?",
+      "right": "Does he live here?",
+      "why": "He bilan does ishlatiladi."
+    },
+    {
+      "wrong": "He doesn't works on Monday.",
+      "right": "He doesn't work on Monday.",
+      "why": "Doesn't dan keyin fe'l lug'at shaklida qoladi."
+    },
+    {
+      "wrong": "You work here? ",
+      "right": "Do you work here?",
+      "why": "Present Simple savolida do yordamchi fe'li shart."
+    },
+    {
+      "wrong": "'Do you like tea?' 'Yes, I like.'",
+      "right": "'Do you like tea?' 'Yes, I do.'",
+      "why": "Qisqa javobda asosiy fe'l emas, do takrorlanadi."
+    },
+    {
+      "wrong": "I not work on Sunday.",
+      "right": "I don't work on Sunday.",
+      "why": "Not yolg'iz ishlatilmaydi, unga don't kerak."
+    }
+  ],
+  "words": [
+    { "en": "do", "uz": "qilmoq (yordamchi)", "ipa": "/duː/", "example": "Do you work?" },
+    { "en": "like", "uz": "yoqmoq", "ipa": "/laɪk/", "example": "Do you like tea?" },
+    { "en": "want", "uz": "xohlamoq", "ipa": "/wɒnt/", "example": "I don't want coffee." },
+    { "en": "need", "uz": "kerak bo'lmoq", "ipa": "/niːd/", "example": "Do you need help?" },
+    { "en": "understand", "uz": "tushunmoq", "ipa": "/ˌʌndəˈstænd/", "example": "I don't understand." },
+    { "en": "know", "uz": "bilmoq", "ipa": "/nəʊ/", "example": "Do you know him?" },
+    { "en": "drink", "uz": "ichmoq", "ipa": "/drɪŋk/", "example": "She doesn't drink coffee." },
+    { "en": "eat", "uz": "yemoq", "ipa": "/iːt/", "example": "What do you eat for breakfast?" },
+    { "en": "sleep", "uz": "uxlamoq", "ipa": "/sliːp/", "example": "How many hours do you sleep?" },
+    { "en": "usually", "uz": "odatda", "ipa": "/ˈjuːʒuəli/", "example": "What do you usually do?" }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 3, "count": 4, "focus": "darak gapni savol va inkorga aylantirish" },
+      { "type": 2, "count": 2, "focus": "do yoki does ni tanlash" },
+      { "type": 5, "count": 3, "focus": "«Does she works», «He doesn't works» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "suhbatdoshga beriladigan savollar tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U yakshanba kuni ishlamaydi», «Ingliz tilida gaplashasizmi?»" }
+    ],
+    "final": { "type": 7, "task": "Yangi hamkasbingiz bilan tanishyapsiz. Uning kunlik ishi haqida 5 ta savol yozing." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Intervyuni tinglang. Berilgan savollarni va javoblarni yozing.",
+    "level_hint": "sekin nutq, 45 soniya"
+  },
+  "review": {
+    "topic": "do / does savol va inkor",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

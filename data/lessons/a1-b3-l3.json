@@ -1,0 +1,113 @@
+{
+  "id": "a1-b3-l3",
+  "level": "A1",
+  "block": "a1-b3",
+  "title": "Soatni aytish",
+  "can_do": "Soat nechaligini so'rab, ayta olasiz va vaqt belgilaysiz",
+  "why": "Uchrashuv, samolyot, dars — hammasi soatga bog'liq. Vaqtni noto'g'ri aytish kechikishga olib keladi.",
+  "rule": {
+    "title": "Soat va vaqt predloglari",
+    "points": [
+      {
+        "text": "Eng oson yo'l — raqamlarni ketma-ket aytish: 7:15 — seven fifteen, 9:40 — nine forty. Bu usul har doim to'g'ri va rasmiy nutqda ham ishlatiladi.",
+        "examples": [
+          { "en": "It's seven fifteen.", "uz": "Soat yetti-o'n besh." },
+          { "en": "The train leaves at nine forty.", "uz": "Poyezd to'qqiz-qirqda jo'naydi." }
+        ]
+      },
+      {
+        "text": "An'anaviy usulda yarim soatgacha past ishlatiladi, keyin to: 7:10 — ten past seven, 7:50 — ten to eight. Past — «o'tdi», to — «qoldi».",
+        "examples": [
+          { "en": "It's ten past seven.", "uz": "Yettidan o'n daqiqa o'tdi." },
+          { "en": "It's ten to eight.", "uz": "Sakkizga o'n daqiqa qoldi." }
+        ]
+      },
+      {
+        "text": "Maxsus so'zlar: 30 daqiqa — half past, 15 daqiqa — quarter past, 45 daqiqa — quarter to. Aniq soat — o'clock, faqat daqiqasiz.",
+        "examples": [
+          { "en": "It's half past six.", "uz": "Olti yarim." },
+          { "en": "It's quarter to nine.", "uz": "To'qqizga chorak qoldi." },
+          { "en": "It's five o'clock.", "uz": "Soat besh." }
+        ]
+      },
+      {
+        "text": "Aniq vaqt oldiga at qo'yiladi: at seven o'clock. Kun qismlari bilan in: in the morning, in the evening. Lekin «kechasi» — at night, istisno.",
+        "examples": [
+          { "en": "I start work at nine.", "uz": "Men soat to'qqizda ishni boshlayman." },
+          { "en": "She reads in the evening.", "uz": "U kechqurun kitob o'qiydi." },
+          { "en": "He works at night.", "uz": "U tunda ishlaydi." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Vaqt", "An'anaviy", "Oddiy"],
+      "rows": [
+        ["8:00", "eight o'clock", "eight"],
+        ["8:15", "quarter past eight", "eight fifteen"],
+        ["8:30", "half past eight", "eight thirty"],
+        ["8:45", "quarter to nine", "eight forty-five"],
+        ["8:20", "twenty past eight", "eight twenty"],
+        ["8:50", "ten to nine", "eight fifty"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "What time is it now? — It is eight and half.",
+      "right": "It's half past eight.",
+      "why": "O'zbekcha «sakkiz yarim» ni so'zma-so'z tarjima qilishdan chiqadigan xato."
+    },
+    {
+      "wrong": "I get up in seven o'clock.",
+      "right": "I get up at seven o'clock.",
+      "why": "Aniq soat bilan at ishlatiladi, in emas."
+    },
+    {
+      "wrong": "It's half to nine.",
+      "right": "It's half past eight.",
+      "why": "«Half to» degan shakl yo'q — yarim soat doim past bilan aytiladi."
+    },
+    {
+      "wrong": "The lesson starts at 9 o'clock 30 minutes.",
+      "right": "The lesson starts at half past nine.",
+      "why": "O'clock faqat daqiqasiz aniq soat bilan ishlatiladi."
+    },
+    {
+      "wrong": "I work in the night.",
+      "right": "I work at night.",
+      "why": "Kun qismlari in bilan, lekin «night» istisno — at night."
+    }
+  ],
+  "words": [
+    { "en": "time", "uz": "vaqt", "ipa": "/taɪm/", "example": "What time is it?" },
+    { "en": "o'clock", "uz": "soat (aniq)", "ipa": "/əˈklɒk/", "example": "It's three o'clock." },
+    { "en": "half past", "uz": "yarim", "ipa": "/ˌhɑːf ˈpɑːst/", "example": "It's half past two." },
+    { "en": "quarter", "uz": "chorak", "ipa": "/ˈkwɔːtə(r)/", "example": "It's quarter past nine." },
+    { "en": "minute", "uz": "daqiqa", "ipa": "/ˈmɪnɪt/", "example": "Wait five minutes." },
+    { "en": "hour", "uz": "soat (davomiylik)", "ipa": "/ˈaʊə(r)/", "example": "I work eight hours a day." },
+    { "en": "morning", "uz": "ertalab", "ipa": "/ˈmɔːnɪŋ/", "example": "I study in the morning." },
+    { "en": "afternoon", "uz": "tushdan keyin", "ipa": "/ˌɑːftəˈnuːn/", "example": "See you in the afternoon." },
+    { "en": "evening", "uz": "kechqurun", "ipa": "/ˈiːvnɪŋ/", "example": "We meet in the evening." },
+    { "en": "night", "uz": "tun", "ipa": "/naɪt/", "example": "He works at night." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 1, "count": 3, "focus": "raqamli vaqtga mos ingliz iborasini tanlash" },
+      { "type": 2, "count": 3, "focus": "at / in / on predloglarini vaqt bilan qo'yish" },
+      { "type": 5, "count": 2, "focus": "«eight and half», «in seven o'clock» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "o'z kun tartibingizdagi vaqtlar bilan gap tuzish" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Olti yarim», «To'qqizga chorak qoldi»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingiz bilan uchrashuvni kelishyapsiz. Qaysi kuni, soat nechada va qayerda uchrashishni yozing. 4 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Vokzalda e'lonlar aytiladi. Har bir poyezdning jo'nash vaqtini yozing.",
+    "level_hint": "sekin nutq, 35 soniya"
+  },
+  "review": {
+    "topic": "soat va vaqt predloglari",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -176,6 +176,19 @@ variables. Configure at least one:
 | `GROQ_API_KEY` | fallback (Groq, `openai/gpt-oss-120b`), used on 429/5xx |
 | `GROQ_API_KEY_2` | optional second fallback |
 | `GROQ_API_KEY_3` | optional third fallback |
+| `COHERE_API_KEY` | optional — Aya, the only multilingual-trained model in the chain |
+| `MISTRAL_API_KEY` | optional fallback |
+| `CEREBRAS_API_KEY` | optional fallback |
+| `GITHUB_MODELS_TOKEN` | optional fallback — a GitHub PAT, no extra scopes needed |
+| `OPENROUTER_API_KEY` | optional fallback |
+
+Every provider below Gemini is a stage in the same chain: a request moves down
+only when the one above fails or hits its daily cap. A provider whose key is
+missing is skipped, so leaving these unset changes nothing.
+
+These are free tiers — tens to hundreds of requests a day each. They add up and
+buy headroom, but they are not a substitute for a paid plan once there is real
+traffic.
 
 Providers are tried in that order, so a rate-limited key rolls over to the next one
 without the learner noticing.

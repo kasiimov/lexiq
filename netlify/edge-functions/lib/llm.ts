@@ -28,8 +28,22 @@ export interface Provider {
 // reasoning_effort: "none" обязателен. Gemini 2.5 по умолчанию «думает»,
 // и thinking-токены расходуют тот же max_tokens — при 700 ответ обрывался на
 // первом предложении с finish_reason: "length".
+
+// Ступени ниже Groq — запас на случай, когда суточная квота верхних кончилась.
+// Все они OpenAI-совместимы, поэтому добавляются одной строкой. Провайдер без
+// ключа в окружении просто пропускается (см. configuredProviders), так что
+// лишние строки ничего не стоят и ничего не ломают.
+//
+// Важно понимать, чем это НЕ является: это не решение для нагрузки. У бесплатных
+// тарифов лимиты в десятки-сотни запросов в сутки, они складываются, но платный
+// тариф не заменяют.
 const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions";
+const COHERE_URL = "https://api.cohere.ai/compatibility/v1/chat/completions";
+const CEREBRAS_URL = "https://api.cerebras.ai/v1/chat/completions";
+const GITHUB_URL = "https://models.github.ai/inference/chat/completions";
+const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 export const PROVIDERS: Provider[] = [
   {
@@ -53,13 +67,21 @@ export const PROVIDERS: Provider[] = [
   { name: "groq",  url: GROQ_URL, keyEnv: "GROQ_API_KEY",   model: "openai/gpt-oss-120b" },
   { name: "groq2", url: GROQ_URL, keyEnv: "GROQ_API_KEY_2", model: "openai/gpt-oss-120b" },
   { name: "groq3", url: GROQ_URL, keyEnv: "GROQ_API_KEY_3", model: "openai/gpt-oss-120b" },
+  // Cohere Aya стоит выше остальных резервов не по скорости, а по языку:
+  // это единственная в списке модель, которую специально учили многоязычию,
+  // а у нас весь продукт держится на объяснениях не по-английски.
+  { name: "cohere-aya", url: COHERE_URL, keyEnv: "COHERE_API_KEY", model: "c4ai-aya-expanse-32b" },
+  { name: "mistral", url: MISTRAL_URL, keyEnv: "MISTRAL_API_KEY", model: "mistral-small-latest" },
+  { name: "cerebras", url: CEREBRAS_URL, keyEnv: "CEREBRAS_API_KEY", model: "gpt-oss-120b" },
+  { name: "github", url: GITHUB_URL, keyEnv: "GITHUB_MODELS_TOKEN", model: "openai/gpt-4.1-mini" },
+  { name: "openrouter", url: OPENROUTER_URL, keyEnv: "OPENROUTER_API_KEY", model: "meta-llama/llama-3.3-70b-instruct:free" },
   { name: "groq-llama", url: GROQ_URL, keyEnv: "GROQ_API_KEY", model: "llama-3.3-70b-versatile" },
 ];
 
 export const LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
 export const NO_KEY_HINT =
-  "Netlify → Site configuration → Environment variables: GEMINI_API_KEY (ixtiyoriy zaxira: GROQ_API_KEY, _2, _3)";
+  "Netlify → Site configuration → Environment variables: GEMINI_API_KEY (ixtiyoriy zaxira: GROQ_API_KEY, COHERE_API_KEY, MISTRAL_API_KEY)";
 
 export function jsonError(status: number, error: string, hint?: string): Response {
   return new Response(JSON.stringify({ error, hint }), {

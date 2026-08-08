@@ -247,8 +247,9 @@ function renderShell(id) {
 
   const info = SHELL_TITLES[id];
   if (info) {
-    document.getElementById('top-title').textContent = info.title;
-    document.getElementById('top-meta').textContent = info.meta;
+    // t() возвращает ключ, если перевода ещё нет, — тогда остаётся узбекский
+    document.getElementById('top-title').textContent = t(info.title);
+    document.getElementById('top-meta').textContent = t(info.meta);
   }
 
   const navId = SHELL_NAV_OF[id] || id;
@@ -261,7 +262,7 @@ function renderShell(id) {
   try {
     const st = streakState(getStats());
     const days = st.days;
-    document.getElementById('side-streak-days').textContent = days + ' kun ketma-ket';
+    document.getElementById('side-streak-days').textContent = days + ' ' + t('kun') + ' ketma-ket';
     document.getElementById('top-streak-days').textContent = days;
     document.getElementById('side-streak-sub').textContent = st.playedToday
       ? 'Bugungi mashq bajarildi — seriya saqlanib qoldi.'

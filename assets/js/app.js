@@ -399,7 +399,7 @@ function updateHomeStats() {
   const level = getCEFRLevel();
   document.getElementById('user-level').textContent = level;
   document.getElementById('user-level-name').textContent = CEFR_NAMES[level];
-  document.getElementById('user-level-icon').textContent = CEFR_ICONS[level];
+  document.getElementById('user-level-icon').innerHTML = icon(CEFR_ICONS[level] || 'sprout', 34);
 
   const curIdx = CEFR_LEVELS.indexOf(level);
   const nextLevel = CEFR_LEVELS[Math.min(curIdx+1, 5)];
@@ -992,7 +992,7 @@ function renderStats() {
   const level = getCEFRLevel();
   document.getElementById('stats-level').textContent = level;
   document.getElementById('stats-level-name').textContent = CEFR_NAMES[level];
-  document.getElementById('stats-level-icon').textContent = CEFR_ICONS[level];
+  document.getElementById('stats-level-icon').innerHTML = icon(CEFR_ICONS[level] || 'sprout', 34);
   const curIdx = CEFR_LEVELS.indexOf(level);
   const nextLevel = CEFR_LEVELS[Math.min(curIdx+1, 5)];
   const curThr = CEFR_THRESHOLDS[level];
@@ -1877,7 +1877,7 @@ function renderStreak() {
 
   card.classList.toggle('lit', st.alive && st.days > 0);
   card.classList.toggle('cold', !st.alive || st.days === 0);
-  document.getElementById('sk-flame').textContent = stage.icon;
+  document.getElementById('sk-flame').innerHTML = icon(stage.icon, 28);
   document.getElementById('sk-count').textContent = st.days;
   document.getElementById('sk-best').textContent = streakBest(st.days);
 

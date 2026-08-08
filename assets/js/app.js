@@ -8,19 +8,33 @@ const CEFR_NAMES = {
   A1:'Beginner', A2:'Elementary', B1:'Intermediate',
   B2:'Upper-Int.', C1:'Advanced', C2:'Mastery'
 };
-const CEFR_ICONS = { A1:'🌱', A2:'🌿', B1:'🔥', B2:'⚡', C1:'💎', C2:'👑' };
+const CEFR_ICONS = { A1:'sprout', A2:'leaf', B1:'flame', B2:'zap', C1:'gem', C2:'crown' };
 const CEFR_THRESHOLDS = { A1:0, A2:500, B1:1000, B2:1750, C1:2500, C2:3000 };
 
+// Название и значок темы хранятся отдельно: раньше они лежали в одной строке
+// и код разбирал её по пробелу — из-за этого «Ob-havo» ломалось бы на любой
+// теме из двух слов.
 const TOPIC_NAMES = {
-  food:'🍎 Ovqat', family:'👨‍👩‍👧 Oila', body:'💪 Tana',
-  home:'🏠 Uy', school:'🏫 Maktab', work:'💼 Ish',
-  animals:'🐱 Hayvonlar', nature:'🌳 Tabiat', weather:'☀️ Ob-havo',
-  time:'⏰ Vaqt', numbers:'🔢 Raqamlar', colors:'🎨 Ranglar',
-  clothing:'👕 Kiyim', transport:'🚗 Transport', technology:'💻 Texnologiya',
-  sports:'⚽ Sport', emotions:'😊 Hissiyot', verbs:"⚡ Fe'llar",
-  adjectives:'✨ Sifatlar', position:'📍 Joylashuv', grammar:'📝 Grammatika',
-  common:'💬 Umumiy', place:'📍 Joy', culture:'🎭 Madaniyat',
-  objects:'📦 Buyumlar'
+  food:'Ovqat', family:'Oila', body:'Tana',
+  home:'Uy', school:'Maktab', work:'Ish',
+  animals:'Hayvonlar', nature:'Tabiat', weather:'Ob-havo',
+  time:'Vaqt', numbers:'Raqamlar', colors:'Ranglar',
+  clothing:'Kiyim', transport:'Transport', technology:'Texnologiya',
+  sports:'Sport', emotions:'Hissiyot', verbs:"Fe'llar",
+  adjectives:'Sifatlar', position:'Joylashuv', grammar:'Grammatika',
+  common:'Umumiy', place:'Joy', culture:'Madaniyat',
+  objects:'Buyumlar'
+};
+const TOPIC_ICONS = {
+  food:'apple', family:'users', body:'dumbbell',
+  home:'house', school:'graduation', work:'briefcase',
+  animals:'cat', nature:'trees', weather:'sun',
+  time:'clock', numbers:'hash', colors:'palette',
+  clothing:'shirt', transport:'car', technology:'laptop',
+  sports:'ball', emotions:'smile', verbs:'zap',
+  adjectives:'sparkles', position:'pin', grammar:'file-pen',
+  common:'message', place:'pin', culture:'drama',
+  objects:'package'
 };
 
 // SRS
@@ -362,7 +376,7 @@ function loadVocabFromFile(event) {
       }
       VOCAB = words;
       saveVocab();
-      alert("✓ " + words.length + " ta so'z yuklandi!");
+      alert("+ " + words.length + " ta so'z yuklandi!");
       show('s-home');
     } catch(err) {
       alert("JSON o'qish xatosi: " + err.message);
@@ -438,7 +452,7 @@ function renderTopics() {
   const allBtn = document.createElement('button');
   allBtn.className = 'topic-card' + (topicFilter === 'all' ? ' selected' : '');
   allBtn.innerHTML =
-    '<span class="tc-ico">🌐</span>' +
+    '<span class="tc-ico">' + icon('globe', 22) + '</span>' +
     '<span class="tc-name">Barcha mavzular</span>' +
     '<span class="tc-count">' + okWords.length + " so'z</span>";
   allBtn.onclick = () => setTopic('all');
@@ -450,15 +464,11 @@ function renderTopics() {
     const known = okWords.filter(w => w.topic === topic && srs[w.id] && srs[w.id].box >= 3).length;
     const btn = document.createElement('button');
     btn.className = 'topic-card' + (topicFilter === topic ? ' selected' : '');
-    const tname = TOPIC_NAMES[topic] || topic;
-    const parts = tname.split(' ');
-    const icon = parts[0];
-    const rest = parts.slice(1).join(' ') || topic;
     btn.innerHTML =
-      '<span class="tc-ico">' + icon + '</span>' +
-      '<span class="tc-name">' + rest + '</span>' +
+      '<span class="tc-ico">' + icon(TOPIC_ICONS[topic] || 'package', 22) + '</span>' +
+      '<span class="tc-name">' + (TOPIC_NAMES[topic] || topic) + '</span>' +
       '<span class="tc-count">' + count + " so'z</span>" +
-      (known > 0 ? '<span class="tc-prog">✓ ' + known + '</span>' : '');
+      (known > 0 ? '<span class="tc-prog">' + icon('check', 12) + ' ' + known + '</span>' : '');
     btn.onclick = () => setTopic(topic);
     grid.appendChild(btn);
   }
@@ -522,7 +532,7 @@ function renderTrainCard() {
   document.getElementById('fc-divider').style.display = 'none';
   document.getElementById('fc-translation').style.display = 'none';
   document.getElementById('fc-example').style.display = 'none';
-  document.getElementById('fc-flip').textContent = "👁 Tarjimani ko'rsatish";
+  document.getElementById('fc-flip').innerHTML = icon('eye', 15) + " Tarjimani ko'rsatish";
   document.getElementById('train-counter').textContent = (trainIdx+1) + ' / ' + trainPool.length;
   document.getElementById('train-bar').style.width = (((trainIdx+1)/trainPool.length)*100) + '%';
   document.getElementById('fc-prev').disabled = trainIdx === 0;
@@ -543,12 +553,12 @@ function flipCard() {
       document.getElementById('fc-example').innerHTML =
         '<b>«' + w.example_en + '»</b>' + (w.example_uz ? '<br>— ' + w.example_uz : '');
     }
-    document.getElementById('fc-flip').textContent = "🙈 Yashirish";
+    document.getElementById('fc-flip').innerHTML = icon('eye-off', 15) + ' Yashirish';
   } else {
     document.getElementById('fc-divider').style.display = 'none';
     document.getElementById('fc-translation').style.display = 'none';
     document.getElementById('fc-example').style.display = 'none';
-    document.getElementById('fc-flip').textContent = "👁 Tarjimani ko'rsatish";
+    document.getElementById('fc-flip').innerHTML = icon('eye', 15) + " Tarjimani ko'rsatish";
   }
 }
 
@@ -610,7 +620,7 @@ function startGame() {
   document.getElementById('g-timer-pill').style.display = (gameMode==='time') ? 'flex' : 'none';
   document.getElementById('g-lives-pill').style.display = (gameMode==='survival') ? 'flex' : 'none';
   if (gameMode==='time') document.getElementById('g-timer').textContent = '60';
-  if (gameMode==='survival') document.getElementById('g-lives-pill').textContent = '❤️❤️❤️';
+  if (gameMode==='survival') document.getElementById('g-lives-pill').innerHTML = icon('heart', 14).repeat(3);
 
   configureGameUI();
   show('s-game');
@@ -689,7 +699,7 @@ function loadWord() {
   card.className = 'word-card ' + (isEU ? 'eng-card' : 'uzb-card');
   document.getElementById('wc-badge').textContent = isEU ? "INGLIZCHA SO'Z" : "O'ZBEKCHA SO'Z";
   document.getElementById('word-counter').textContent = "So'z #" + wordNum;
-  setInd('idle','💭',"Tayyor bo'ling",'Javobingizni tanlang yoki yozing');
+  setInd('idle', icon('message', 20),"Tayyor bo'ling",'Javobingizni tanlang yoki yozing');
   document.getElementById('wc-speak-mini').style.display = isEU ? 'inline-block' : 'none';
 
   if (gameMode === 'multi') renderMultiChoice();
@@ -761,7 +771,7 @@ function renderFillGap() {
   document.getElementById('wc-badge').textContent = "GAPNI TO'LDIRING";
   document.getElementById('wc-word').textContent = sentence;
   document.getElementById('wc-word').style.fontSize = '20px';
-  document.getElementById('wc-hint').textContent = '💡 ' + currentWord.uz.join(', ');
+  document.getElementById('wc-hint').innerHTML = icon('lightbulb', 13) + ' ' + currentWord.uz.join(', ');
   const iw = document.getElementById('input-wrap');
   iw.className = 'input-wrap eng-in';
   const ff = document.getElementById('in-field');
@@ -778,7 +788,7 @@ function renderSentenceBuilder() {
   document.getElementById('wc-badge').textContent = "GAPNI QURING";
   document.getElementById('wc-word').textContent = currentWord.example_uz || currentWord.uz[0];
   document.getElementById('wc-word').style.fontSize = '18px';
-  document.getElementById('wc-hint').textContent = "⬇ So'zlardan inglizcha gap quring";
+  document.getElementById('wc-hint').innerHTML = icon('arrow-down', 13) + " So'zlardan inglizcha gap quring";
   const target = document.getElementById('sb-target');
   target.dataset.target = sentence;
   target.innerHTML = ''; target.classList.add('empty');
@@ -821,7 +831,7 @@ function checkAnswer() {
   if (gameMode === 'build') {
     const target = document.getElementById('sb-target');
     const built = Array.from(target.children).map(c => c.textContent).join(' ').trim();
-    if (!built) { setInd('loading','⚠️',"Bo'sh!","So'zlarni tanlang"); return; }
+    if (!built) { setInd('loading', icon('alert', 20),"Bo'sh!","So'zlarni tanlang"); return; }
     checked = true; sTotal++;
     document.getElementById('g-total').textContent = sTotal;
     const expected = target.dataset.target.toLowerCase().trim();
@@ -832,7 +842,7 @@ function checkAnswer() {
     return;
   }
   const val = document.getElementById('in-field').value.trim().toLowerCase();
-  if (!val) { setInd('loading','⚠️',"Javob kiriting!","Avval tarjima yozing"); return; }
+  if (!val) { setInd('loading', icon('alert', 20),"Javob kiriting!","Avval tarjima yozing"); return; }
   checked = true; sTotal++;
   document.getElementById('g-total').textContent = sTotal;
   document.getElementById('check-btn').disabled = true;
@@ -868,16 +878,18 @@ function applyResult(ok, msg, hint) {
     sScore++; sCorrect++;
     document.getElementById('g-score').textContent = sScore;
     document.getElementById('g-correct').textContent = sCorrect;
-    setInd('ok','🎉', msg, hint);
+    setInd('ok', icon('party', 20), msg, hint);
     haptic(40);
   } else {
     sWrong++;
     document.getElementById('g-wrong').textContent = sWrong;
-    setInd('fail','❌', msg, hint);
+    setInd('fail', icon('x', 20), msg, hint);
     haptic([60,40,60]);
     if (gameMode === 'survival') {
       lives--;
-      const hearts = '❤️'.repeat(Math.max(0,lives)) + '🖤'.repeat(3 - Math.max(0,lives));
+      const alive = Math.max(0, lives);
+  const hearts = icon('heart', 14).repeat(alive) +
+    icon('heart', 14, 'ic-off').repeat(3 - alive);
       document.getElementById('g-lives-pill').textContent = hearts;
       if (lives <= 0) { setTimeout(() => endGame('survival'), 900); return; }
     }
@@ -892,13 +904,13 @@ function nextWord() { wordNum++; loadWord(); }
 function endGame(reason) {
   if (timerId) { clearInterval(timerId); timerId=null; }
   clockStop();
-  const emoji = reason==='time' ? '⏱️' : (reason==='survival' ? '💔' : '🎉');
+  const emoji = icon(reason === 'time' ? 'timer' : (reason === 'survival' ? 'heart-crack' : 'party'), 40);
   const title = reason==='time' ? 'Vaqt tugadi!' : (reason==='survival' ? 'Jonlar tugadi!' : 'Tugadi!');
   let sub = '';
   if (sTotal === 0) sub = "Hech narsa qilmadingiz";
   else {
     const pct = Math.round((sCorrect/sTotal)*100);
-    if (pct >= 90) sub = "Ajoyib natija! 🌟";
+    if (pct >= 90) sub = "Ajoyib natija!";
     else if (pct >= 70) sub = "Yaxshi! Davom eting";
     else if (pct >= 50) sub = "Yomon emas";
     else sub = "Mashq qiling, yaxshi bo'ladi!";
@@ -927,6 +939,12 @@ function clearIn() {
   document.getElementById('in-field').focus();
 }
 
+// Подпись чипа со значком. Значок необязателен: у чипов с числом его нет.
+function chipHTML(item) {
+  const label = item.label || item;
+  return (item.ic ? icon(item.ic, 15) + ' ' : '') + label;
+}
+
 function setInd(type, ico, title, msg) {
   const el = document.getElementById('indicator');
   el.className = 'indicator ' + type;
@@ -943,12 +961,12 @@ function setButtons(which) {
   }
   if (which === 'check') {
     row.className = 'btn-row single';
-    row.innerHTML = '<button class="check-btn" id="check-btn" onclick="checkAnswer()">✓ Tekshirish</button>';
+    row.innerHTML = '<button class="check-btn" id="check-btn" onclick="checkAnswer()">' + icon('check', 15) + ' Tekshirish</button>';
   } else {
     row.className = 'btn-row';
     row.innerHTML =
-      '<button class="check-btn" disabled style="opacity:.3;cursor:default">✓ Tekshirildi</button>' +
-      '<button class="next-btn" onclick="nextWord()">Keyingi →</button>';
+      '<button class="check-btn" disabled style="opacity:.3;cursor:default">' + icon('check', 15) + ' Tekshirildi</button>' +
+      '<button class="next-btn" onclick="nextWord()">Keyingi ' + icon('arrow-right', 15) + '</button>';
   }
 }
 
@@ -1239,22 +1257,23 @@ const TALK_HISTORY_KEY = 'lexiq_talk_history';     // режим «Suhbat»
 const TUTOR_MAX_HISTORY = 24;
 
 // Сценарии разговора — местные ситуации, а не абстрактные диалоги.
+// Значок чипа хранится отдельно от подписи — см. chipHTML ниже
 const TALK_SCENARIOS = [
-  { id: 'tanishuv',   label: '👋 Tanishuv',   opener: 'Hello! Nice to meet you. What is your name?' },
-  { id: 'aeroport',   label: '✈️ Aeroport',   opener: 'Good morning! Can I see your passport and ticket, please?' },
-  { id: 'bozor',      label: '🍅 Bozor',      opener: 'Hello! These tomatoes are very fresh. How many kilos do you want?' },
-  { id: 'kafe',       label: '☕️ Kafe',       opener: 'Welcome! Here is the menu. What would you like to drink?' },
-  { id: 'universitet',label: '🎓 Universitet',opener: 'Hi! Are you a new student here? Which faculty are you in?' },
-  { id: 'ish',        label: '💼 Ish suhbati',opener: 'Good afternoon. Please tell me a little about yourself.' },
-  { id: 'shifokor',   label: '🩺 Shifokor',   opener: 'Hello. What is the problem? Where does it hurt?' },
-  { id: 'yol',        label: '🚌 Yo\'lda',    opener: 'Excuse me, does this bus go to the city centre?' },
+  { id: 'tanishuv',   ic: 'hand', label: 'Tanishuv',   opener: 'Hello! Nice to meet you. What is your name?' },
+  { id: 'aeroport',   ic: 'plane', label: 'Aeroport',   opener: 'Good morning! Can I see your passport and ticket, please?' },
+  { id: 'bozor',      ic: 'basket', label: 'Bozor',      opener: 'Hello! These tomatoes are very fresh. How many kilos do you want?' },
+  { id: 'kafe',       ic: 'coffee', label: 'Kafe',       opener: 'Welcome! Here is the menu. What would you like to drink?' },
+  { id: 'universitet',ic: 'graduation', label: 'Universitet',opener: 'Hi! Are you a new student here? Which faculty are you in?' },
+  { id: 'ish',        ic: 'briefcase', label: 'Ish suhbati',opener: 'Good afternoon. Please tell me a little about yourself.' },
+  { id: 'shifokor',   ic: 'stethoscope', label: 'Shifokor',   opener: 'Hello. What is the problem? Where does it hurt?' },
+  { id: 'yol',        ic: 'bus', label: 'Yo\'lda',    opener: 'Excuse me, does this bus go to the city centre?' },
 ];
 
 const TUTOR_CHIPS = [
   { label: "🆕 5 ta yangi so'z", text: "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan." },
-  { label: '✍️ Gapimni tekshiring', text: 'Men yozgan inglizcha gapni tekshiring va xatolarimni tushuntiring: ' },
-  { label: '📖 Grammatika', text: "Present Simple qoidasini oddiy qilib tushuntiring, 3 ta misol bilan." },
-  { label: '💬 Suhbat', text: "Men bilan oddiy inglizcha suhbat boshlang. Birinchi savolni bering." },
+  { ic: 'pen', label: 'Gapimni tekshiring', text: 'Men yozgan inglizcha gapni tekshiring va xatolarimni tushuntiring: ' },
+  { ic: 'book-open', label: 'Grammatika', text: "Present Simple qoidasini oddiy qilib tushuntiring, 3 ta misol bilan." },
+  { ic: 'message', label: 'Suhbat', text: "Men bilan oddiy inglizcha suhbat boshlang. Birinchi savolni bering." },
 ];
 
 let tutorHistory = [];
@@ -1298,7 +1317,7 @@ function tutorFormat(s) {
   // Разговорный режим присылает исправление двумя строками с маркерами —
   // показываем их отдельным блоком, а не как часть реплики.
   return html
-    .replace(/^\u270D\uFE0F?\s*(.+)$/gm, '<span class="cm-fix">✍️ $1</span>')
+    .replace(/^\u270D\uFE0F?\s*(.+)$/gm, '<span class="cm-fix">' + icon('pen', 14) + ' $1</span>')
     .replace(/^\u2139\uFE0F?\s*(.+)$/gm, '<span class="cm-why">ℹ️ $1</span>');
 }
 
@@ -1328,7 +1347,7 @@ function tutorRenderChips() {
   TUTOR_CHIPS.forEach(chip => {
     const b = document.createElement('button');
     b.className = 'chat-chip';
-    b.textContent = chip.label;
+    b.innerHTML = chipHTML(chip);
     b.onclick = () => {
       const input = document.getElementById('chat-input');
       input.value = chip.text;
@@ -1346,8 +1365,8 @@ function tutorRenderLog() {
   if (tutorHistory.length === 0) {
     tutorBubble('bot', tutorFormat(
       tutorMode === 'suhbat'
-        ? "Keling, ingliz tilida gaplashamiz 💬\n\nVaziyatni tanlang va inglizcha yozing. Xato qilsangiz, avval to'g'ri variantni ko'rsataman, keyin suhbatni davom ettiraman."
-        : "Salom! Men Congix Ustozman 👋\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
+        ? "Keling, ingliz tilida gaplashamiz.\n\nVaziyatni tanlang va inglizcha yozing. Xato qilsangiz, avval to'g'ri variantni ko'rsataman, keyin suhbatni davom ettiraman."
+        : "Salom! Men Congix Ustozman.\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
     ));
     return;
   }
@@ -1360,7 +1379,7 @@ function tutorSetMode(mode) {
   document.getElementById('tm-ustoz').classList.toggle('active', mode === 'ustoz');
   document.getElementById('tm-suhbat').classList.toggle('active', mode === 'suhbat');
   document.getElementById('tutor-name').textContent = mode === 'suhbat' ? 'Suhbat' : 'AI Ustoz';
-  document.getElementById('tutor-ava').textContent = mode === 'suhbat' ? '💬' : '🤖';
+  document.getElementById('tutor-ava').innerHTML = icon(mode === 'suhbat' ? 'message' : 'bot', 20);
   document.getElementById('chat-input').placeholder =
     mode === 'suhbat' ? 'Write in English...' : 'Savolingizni yozing...';
   document.getElementById('chat-scenarios').style.display = mode === 'suhbat' ? '' : 'none';
@@ -1375,7 +1394,7 @@ function tutorRenderScenarios() {
   TALK_SCENARIOS.forEach(sc => {
     const b = document.createElement('button');
     b.className = 'chat-chip' + (sc.id === talkScenario ? ' on' : '');
-    b.textContent = sc.label;
+    b.innerHTML = chipHTML(sc);
     b.onclick = () => tutorPickScenario(sc.id);
     box.appendChild(b);
   });
@@ -1517,14 +1536,14 @@ const AI_ENDPOINT = '/api/generate';
 const AI_QUIZ_SIZE = 5;
 
 const AI_TOPICS = [
-  { label: '🗣 Kundalik suhbat', topic: 'kundalik suhbat iboralari' },
-  { label: '⏰ Present Simple', topic: 'Present Simple grammatikasi' },
-  { label: '🕓 Past Simple', topic: 'Past Simple grammatikasi' },
-  { label: '✈️ Sayohat', topic: 'sayohat va aeroport so\'zlari' },
-  { label: '💼 Ish', topic: 'ish va ofis so\'zlari' },
-  { label: '🍽 Ovqat', topic: 'ovqat va restoran so\'zlari' },
-  { label: '📱 Texnologiya', topic: 'texnologiya va internet so\'zlari' },
-  { label: '🎓 Akademik', topic: "akademik va rasmiy so'zlar" },
+  { ic: 'megaphone', label: 'Kundalik suhbat', topic: 'kundalik suhbat iboralari' },
+  { ic: 'clock', label: 'Present Simple', topic: 'Present Simple grammatikasi' },
+  { ic: 'rotate', label: 'Past Simple', topic: 'Past Simple grammatikasi' },
+  { ic: 'plane', label: 'Sayohat', topic: 'sayohat va aeroport so\'zlari' },
+  { ic: 'briefcase', label: 'Ish', topic: 'ish va ofis so\'zlari' },
+  { ic: 'apple', label: 'Ovqat', topic: 'ovqat va restoran so\'zlari' },
+  { ic: 'laptop', label: 'Texnologiya', topic: 'texnologiya va internet so\'zlari' },
+  { ic: 'graduation', label: 'Akademik', topic: "akademik va rasmiy so'zlar" },
 ];
 
 const AI_VIEWS = ['ai-setup', 'ai-loading', 'ai-error', 'ai-lesson', 'ai-quiz', 'ai-result'];
@@ -1552,7 +1571,7 @@ function aiRenderTopics() {
   AI_TOPICS.forEach(t => {
     const b = document.createElement('button');
     b.className = 'chat-chip';
-    b.textContent = t.label;
+    b.innerHTML = chipHTML(t);
     b.onclick = () => {
       aiTopic = t.topic;
       document.getElementById('ai-topic').value = t.topic;
@@ -1656,7 +1675,7 @@ function aiRenderLesson(data) {
       en.textContent = p.example_en;
       const speak = document.createElement('button');
       speak.className = 'lp-speak';
-      speak.textContent = '🔊';
+      speak.innerHTML = icon('volume', 15);
       speak.onclick = () => aiSpeak(p.example_en);
       en.appendChild(speak);
       ex.appendChild(en);
@@ -1725,11 +1744,13 @@ function aiAnswer(picked) {
   const exp = document.getElementById('ai-explain');
   const ok = picked === q.correct;
   exp.className = 'ai-explain' + (ok ? '' : ' wrong');
-  exp.innerHTML = (ok ? '✅ ' : '❌ ') + tutorFormat(q.explanation || (ok ? "To'g'ri!" : "To'g'ri javob: " + q.options[q.correct]));
+  exp.innerHTML = icon(ok ? 'check' : 'x', 15) + ' ' + tutorFormat(q.explanation || (ok ? "To'g'ri!" : "To'g'ri javob: " + q.options[q.correct]));
   exp.style.display = '';
 
   const next = document.getElementById('ai-next-btn');
-  next.textContent = (aiIdx + 1 < aiQuestions.length) ? 'Keyingi →' : 'Natijani ko\'rish';
+  next.innerHTML = (aiIdx + 1 < aiQuestions.length)
+    ? 'Keyingi ' + icon('arrow-right', 15)
+    : "Natijani ko'rish";
   next.style.display = '';
 }
 
@@ -1750,7 +1771,7 @@ function aiRenderResult() {
 
   document.getElementById('ai-rc-correct').textContent = correct;
   document.getElementById('ai-rc-wrong').textContent = wrong;
-  document.getElementById('ai-rc-emoji').textContent = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪';
+  document.getElementById('ai-rc-emoji').innerHTML = icon(pct >= 80 ? 'trophy' : pct >= 50 ? 'thumbs-up' : 'dumbbell', 40);
   document.getElementById('ai-rc-title').textContent = pct >= 80 ? 'Ajoyib!' : pct >= 50 ? 'Yaxshi!' : 'Yana mashq qiling';
   document.getElementById('ai-rc-sub').textContent = pct + '% to\'g\'ri — ' + aiTopic;
 
@@ -1775,12 +1796,12 @@ function aiRenderResult() {
 
     const bad = document.createElement('div');
     bad.className = 'ai-rev-line ai-rev-bad';
-    bad.textContent = '❌ Sizning javobingiz: ' + (q.options[aiAnswers[i]] ?? '—');
+    bad.innerHTML = icon('x', 14) + ' Sizning javobingiz: ' + (q.options[aiAnswers[i]] ?? '—');
     item.appendChild(bad);
 
     const good = document.createElement('div');
     good.className = 'ai-rev-line ai-rev-good';
-    good.textContent = '✅ To\'g\'ri javob: ' + q.options[q.correct];
+    good.innerHTML = icon('check', 14) + " To'g'ri javob: " + q.options[q.correct];
     item.appendChild(good);
 
     if (q.explanation) {
@@ -1792,7 +1813,7 @@ function aiRenderResult() {
 
     const btn = document.createElement('button');
     btn.className = 'ai-rev-btn';
-    btn.textContent = '🤖 Batafsil tushuntirish';
+    btn.innerHTML = icon('bot', 14) + ' Batafsil tushuntirish';
     btn.onclick = () => tutorAsk(
       'Savol: "' + q.q + '". Men "' + (q.options[aiAnswers[i]] ?? '—') +
       '" deb javob berdim, lekin to\'g\'risi "' + q.options[q.correct] +
@@ -1813,12 +1834,12 @@ function aiRenderResult() {
 // ────────────────────────────────────────────────────────────────────
 const STREAK_BEST_KEY = 'lexiq_streak_best';
 const STREAK_STAGES = [
-  { from: 0,  icon: '🕯', text: "Bugun mashq qiling — seriya boshlanadi" },
-  { from: 1,  icon: '✨', text: "Boshlandi! Ertaga ham qaytib keling" },
-  { from: 3,  icon: '🔥', text: "Yaxshi ketyapti, olov yonmoqda" },
-  { from: 7,  icon: '🔥', text: "Bir hafta! Odat shakllanmoqda" },
-  { from: 14, icon: '🌋', text: "Ikki hafta — bu allaqachon jiddiy" },
-  { from: 30, icon: '🏆', text: "Bir oy uzluksiz. Zo'r natija" },
+  { from: 0,  icon: 'candle',  text: "Bugun mashq qiling — seriya boshlanadi" },
+  { from: 1,  icon: 'sparkles', text: "Boshlandi! Ertaga ham qaytib keling" },
+  { from: 3,  icon: 'flame',   text: "Yaxshi ketyapti, olov yonmoqda" },
+  { from: 7,  icon: 'flame',   text: "Bir hafta! Odat shakllanmoqda" },
+  { from: 14, icon: 'volcano', text: "Ikki hafta — bu allaqachon jiddiy" },
+  { from: 30, icon: 'trophy',  text: "Bir oy uzluksiz. Zo'r natija" },
 ];
 
 function daysBetween(a, b) {
@@ -2028,7 +2049,7 @@ function dailyFinish() {
   document.getElementById('daily-done').style.display = '';
   document.getElementById('dl-correct').textContent = dailyCorrect;
   document.getElementById('dl-best').textContent = (data && data.best) || dailyCorrect;
-  document.getElementById('dl-emoji').textContent = pct === 100 ? '🏆' : pct >= 70 ? '👍' : '💪';
+  document.getElementById('dl-emoji').innerHTML = icon(pct === 100 ? 'trophy' : pct >= 70 ? 'thumbs-up' : 'dumbbell', 40);
   document.getElementById('dl-title').textContent =
     pct === 100 ? "Mukammal!" : pct >= 70 ? "Yaxshi natija" : "Yana mashq kerak";
   document.getElementById('dl-sub').textContent = pct + "% to'g'ri";
@@ -2074,7 +2095,7 @@ function renderMap() {
       '<div class="city-top">' +
         '<span class="city-code">' + level + '</span>' +
         '<span class="city-name">' + (CEFR_NAMES[level] || '') + '</span>' +
-        '<span class="city-state">' + (!unlocked ? '🔒' : done ? '✅' : CEFR_ICONS[level] || '📍') + '</span>' +
+        '<span class="city-state">' + icon(!unlocked ? 'lock' : done ? 'check' : (CEFR_ICONS[level] || 'pin'), 18) + '</span>' +
       '</div>' +
       '<div class="city-bar"><i style="width:' + (unlocked ? p.pct : 0) + '%"></i></div>' +
       '<div class="city-meta">' +
@@ -2152,7 +2173,7 @@ function pronStart() {
 
   pronActive = true;
   btn.classList.add('listening');
-  btn.textContent = '🎤 Eshitilmoqda...';
+  btn.innerHTML = icon('mic', 15) + ' Eshitilmoqda...';
   pronShow('near', "Mikrofonga so'zni ayting");
 
   rec.onresult = (e) => {
@@ -2160,9 +2181,9 @@ function pronStart() {
     for (let i = 0; i < e.results[0].length; i++) heard.push(e.results[0][i].transcript.trim());
     const best = heard.reduce((acc, h) => Math.max(acc, wordSimilarity(h, word.en)), 0);
 
-    if (best >= 0.85) pronShow('ok', '✅ Zo\'r! "' + word.en + '" to\'g\'ri aytildi');
-    else if (best >= 0.55) pronShow('near', '🟡 Yaqin. Eshitildi: "' + heard[0] + '". Yana urinib ko\'ring');
-    else pronShow('bad', '❌ Eshitildi: "' + heard[0] + '". Avval 🔊 tugmasini bosib tinglang');
+    if (best >= 0.85) pronShow('ok', icon('check', 14) + ' Zo\'r! "' + word.en + '" to\'g\'ri aytildi');
+    else if (best >= 0.55) pronShow('near', icon('alert', 14) + ' Yaqin. Eshitildi: "' + heard[0] + '". Yana urinib ko\'ring');
+    else pronShow('bad', icon('x', 14) + ' Eshitildi: "' + heard[0] + '". Avval tinglash tugmasini bosing');
   };
 
   rec.onerror = (e) => {
@@ -2174,7 +2195,7 @@ function pronStart() {
   rec.onend = () => {
     pronActive = false;
     btn.classList.remove('listening');
-    btn.textContent = '🎤 Ayting';
+    btn.innerHTML = icon('mic', 15) + ' Ayting';
   };
 
   try {
@@ -2182,7 +2203,7 @@ function pronStart() {
   } catch (e) {
     pronActive = false;
     btn.classList.remove('listening');
-    btn.textContent = '🎤 Ayting';
+    btn.innerHTML = icon('mic', 15) + ' Ayting';
     pronShow('bad', 'Mikrofon ishga tushmadi');
   }
 }
@@ -2362,10 +2383,10 @@ async function syncPull() {
 // ────────────────────────────────────────────────────────────────────
 const READ_VIEWS = ['read-setup', 'read-loading', 'read-error', 'read-text', 'read-quiz', 'read-done'];
 const READ_GENRES = [
-  { id: 'hikoya',  label: '📚 Hikoya' },
-  { id: 'dialog',  label: '💬 Dialog' },
-  { id: 'yangilik',label: '📰 Yangilik' },
-  { id: 'ilmiy',   label: '🔬 Ilmiy' },
+  { id: 'hikoya',  ic: 'library', label: 'Hikoya' },
+  { id: 'dialog',  ic: 'message', label: 'Dialog' },
+  { id: 'yangilik',ic: 'clipboard', label: 'Yangilik' },
+  { id: 'ilmiy',   ic: 'search', label: 'Ilmiy' },
 ];
 const READ_TOPICS = [
   "kundalik hayot", "sayohat", "do'stlik", "texnologiya",
@@ -2399,7 +2420,7 @@ function readChips(boxId, items, current, onPick) {
     const id = item.id || item;
     const b = document.createElement('button');
     b.className = 'chat-chip' + (id === current ? ' on' : '');
-    b.textContent = item.label || item;
+    b.innerHTML = chipHTML(item);
     b.onclick = () => onPick(id);
     box.appendChild(b);
   });
@@ -2477,7 +2498,7 @@ function readRenderText(data) {
     const row = document.createElement('div');
     row.className = 'gloss-row';
     row.innerHTML = '<span class="gloss-en"></span><span class="gloss-uz"></span>' +
-      '<button class="gloss-say">🔊</button>';
+      '<button class="gloss-say">' + icon('volume', 15) + '</button>';
     row.querySelector('.gloss-en').textContent = g.en;
     row.querySelector('.gloss-uz').textContent = g.uz;
     row.querySelector('.gloss-say').onclick = () => aiSpeak(g.en);
@@ -2485,7 +2506,7 @@ function readRenderText(data) {
   });
 
   document.getElementById('rd-add').disabled = false;
-  document.getElementById('rd-add').textContent = "➕ So'zlarni lug'atga qo'shish";
+  document.getElementById('rd-add').innerHTML = icon('plus', 15) + " So'zlarni lug'atga qo'shish";
   readReveal();
   readShowView('read-text');
   window.scrollTo(0, 0);
@@ -2497,7 +2518,7 @@ function readSpeak() {
   if (speechSynthesis.speaking) {
     speechSynthesis.cancel();
     btn.classList.remove('on');
-    btn.textContent = '🔊 Tinglash';
+    btn.innerHTML = icon('volume', 14) + ' Tinglash';
     return;
   }
   if (!readData || !readData.text) return;
@@ -2506,7 +2527,7 @@ function readSpeak() {
   // На младших уровнях читаем медленнее — иначе половина слов сливается.
   const lvl = getCEFRLevel();
   u.rate = (lvl === 'A1' || lvl === 'A2') ? 0.78 : 0.92;
-  u.onend = () => { btn.classList.remove('on'); btn.textContent = '🔊 Tinglash'; };
+  u.onend = () => { btn.classList.remove('on'); btn.innerHTML = icon('volume', 14) + ' Tinglash'; };
   btn.classList.add('on');
   btn.textContent = '⏹ To\'xtatish';
   speechSynthesis.speak(u);
@@ -2534,7 +2555,7 @@ function readAddWords() {
   saveVocab();
   const btn = document.getElementById('rd-add');
   btn.disabled = true;
-  btn.textContent = added ? '✓ ' + added + " ta so'z qo'shildi" : "Bu so'zlar allaqachon lug'atda";
+  btn.innerHTML = added ? icon('check', 14) + ' ' + added + " ta so'z qo'shildi" : "Bu so'zlar allaqachon lug'atda";
 }
 
 function readStartQuiz() {
@@ -2578,7 +2599,7 @@ function readAnswer(picked) {
 
   const exp = document.getElementById('rd-explain');
   exp.className = 'ai-explain' + (picked === q.correct ? '' : ' wrong');
-  exp.textContent = (picked === q.correct ? '✅ ' : '❌ ') +
+  exp.innerHTML = icon(picked === q.correct ? 'check' : 'x', 15) + ' ' +
     (q.explanation || ("To'g'ri javob: " + q.options[q.correct]));
   exp.style.display = '';
 
@@ -2594,7 +2615,7 @@ function readNext() {
   } else {
     const total = readData.questions.length;
     const pct = Math.round((readCorrect / total) * 100);
-    document.getElementById('rd-emoji').textContent = pct >= 75 ? '🏆' : pct >= 50 ? '👍' : '💪';
+    document.getElementById('rd-emoji').innerHTML = icon(pct >= 75 ? 'trophy' : pct >= 50 ? 'thumbs-up' : 'dumbbell', 40);
     document.getElementById('rd-title2').textContent =
       pct >= 75 ? 'Matnni yaxshi tushundingiz' : pct >= 50 ? "Yomon emas" : "Matnni qayta o'qing";
     document.getElementById('rd-sub').textContent = readCorrect + ' / ' + total + " to'g'ri";
@@ -2611,11 +2632,11 @@ function readNext() {
 // ────────────────────────────────────────────────────────────────────
 const WRITE_VIEWS = ['write-setup', 'write-loading', 'write-error', 'write-result'];
 const WRITE_TASKS = [
-  { id: 'kun',     label: '📅 Kunim',       text: "Bugungi kuningiz haqida yozing: nima qildingiz, kim bilan uchrashdingiz." },
-  { id: 'dost',    label: '✉️ Do\'stga xat', text: "Do'stingizga xat yozing: qanday yashayotganingizni va yaqin rejalaringizni ayting." },
-  { id: 'shahar',  label: '🏙 Mening shahrim', text: "O'z shahringizni tasvirlang: nimasi yoqadi, nimasini o'zgartirgan bo'lardingiz." },
-  { id: 'orzu',    label: '🌟 Orzuim',      text: "Kelajakdagi orzuingiz haqida yozing va unga qanday erishmoqchisiz." },
-  { id: 'fikr',    label: '💭 Fikrim',      text: "Telefon bolalarga foydali yoki zararli? O'z fikringizni asoslab yozing." },
+  { id: 'kun',     ic: 'clock', label: 'Kunim',       text: "Bugungi kuningiz haqida yozing: nima qildingiz, kim bilan uchrashdingiz." },
+  { id: 'dost',    ic: 'send', label: 'Do\'stga xat', text: "Do'stingizga xat yozing: qanday yashayotganingizni va yaqin rejalaringizni ayting." },
+  { id: 'shahar',  ic: 'map', label: 'Mening shahrim', text: "O'z shahringizni tasvirlang: nimasi yoqadi, nimasini o'zgartirgan bo'lardingiz." },
+  { id: 'orzu',    ic: 'star', label: 'Orzuim',      text: "Kelajakdagi orzuingiz haqida yozing va unga qanday erishmoqchisiz." },
+  { id: 'fikr',    ic: 'message', label: 'Fikrim',      text: "Telefon bolalarga foydali yoki zararli? O'z fikringizni asoslab yozing." },
 ];
 
 let writeTask = WRITE_TASKS[0];
@@ -2639,7 +2660,7 @@ function writeInit() {
   WRITE_TASKS.forEach(t => {
     const b = document.createElement('button');
     b.className = 'chat-chip' + (t.id === writeTask.id ? ' on' : '');
-    b.textContent = t.label;
+    b.innerHTML = chipHTML(t);
     b.onclick = () => { writeTask = t; writeInit(); };
     box.appendChild(b);
   });
@@ -2748,18 +2769,18 @@ function readReveal() {
 // ────────────────────────────────────────────────────────────────────
 const WORDS_VIEWS = ['words-setup', 'words-loading', 'words-error', 'words-done'];
 const WORDS_CATEGORIES = [
-  { id: 'kundalik',   label: '🏠 Kundalik hayot' },
-  { id: 'oila',       label: '👨‍👩‍👧 Oila' },
-  { id: 'ovqat',      label: '🍽 Ovqat' },
-  { id: 'sayohat',    label: '✈️ Sayohat' },
-  { id: 'ish',        label: '💼 Ish' },
-  { id: 'talim',      label: "🎓 Ta'lim" },
-  { id: 'texnologiya',label: '📱 Texnologiya' },
-  { id: 'sogliq',     label: "🩺 Sog'liq" },
-  { id: 'tabiat',     label: '🌳 Tabiat' },
-  { id: 'sport',      label: '⚽️ Sport' },
-  { id: 'hissiyot',   label: "💭 His-tuyg'ular" },
-  { id: 'akademik',   label: '📚 Akademik' },
+  { id: 'kundalik',   ic: 'house', label: 'Kundalik hayot' },
+  { id: 'oila',       ic: 'users', label: 'Oila' },
+  { id: 'ovqat',      ic: 'apple', label: 'Ovqat' },
+  { id: 'sayohat',    ic: 'plane', label: 'Sayohat' },
+  { id: 'ish',        ic: 'briefcase', label: 'Ish' },
+  { id: 'talim',      ic: 'graduation', label: "Ta'lim" },
+  { id: 'texnologiya',ic: 'laptop', label: 'Texnologiya' },
+  { id: 'sogliq',     ic: 'stethoscope', label: "Sog'liq" },
+  { id: 'tabiat',     ic: 'trees', label: 'Tabiat' },
+  { id: 'sport',      ic: 'ball', label: 'Sport' },
+  { id: 'hissiyot',   ic: 'smile', label: "His-tuyg'ular" },
+  { id: 'akademik',   ic: 'library', label: 'Akademik' },
 ];
 const WORDS_COUNTS = [10, 15, 20, 30];
 
@@ -2784,7 +2805,7 @@ function wordsInit() {
   WORDS_CATEGORIES.forEach(c => {
     const b = document.createElement('button');
     b.className = 'chat-chip' + (c.id === wordsCategory.id ? ' on' : '');
-    b.textContent = c.label;
+    b.innerHTML = chipHTML(c);
     b.onclick = () => {
       wordsCategory = c;
       document.getElementById('words-topic').value = '';
@@ -2807,7 +2828,7 @@ function wordsInit() {
   wordsShowView('words-setup');
 }
 
-// Из подписи вида «🏠 Kundalik hayot» для запроса берём только текст темы.
+// Для запроса к ИИ нужен только текст темы, без значка.
 function wordsPickedTopic() {
   const typed = document.getElementById('words-topic').value.trim();
   return typed || wordsCategory.label.replace(/^\S+\s/, '');
@@ -2845,7 +2866,8 @@ async function wordsGenerate() {
     fresh.forEach(w => {
       const row = document.createElement('div');
       row.className = 'gloss-row';
-      row.innerHTML = '<span class="gloss-en"></span><span class="gloss-uz"></span><button class="gloss-say">🔊</button>';
+      row.innerHTML = '<span class="gloss-en"></span><span class="gloss-uz"></span>' +
+      '<button class="gloss-say">' + icon('volume', 15) + '</button>';
       row.querySelector('.gloss-en').textContent = w.en;
       row.querySelector('.gloss-uz').textContent = Array.isArray(w.uz) ? w.uz.join(', ') : w.uz;
       row.querySelector('.gloss-say').onclick = () => aiSpeak(w.en);

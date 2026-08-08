@@ -96,6 +96,8 @@ body {
    макета они выглядели наклейками, разными на каждой платформе. */
 .ic-svg { flex:none; vertical-align:-0.18em; }
 .ic { display:inline-block; width:1em; height:1em; }
+/* Потерянная жизнь в режиме Survival: тот же контур, приглушённый */
+.ic-svg.ic-off { color:var(--line); }
 
 .side-head { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:0 4px 0 8px; }
 .side-logo {

@@ -10,8 +10,8 @@
 // ASSET_V должен совпадать с ?v= в ссылках на стили и скрипты в HTML.
 // Иначе в кэш ляжет один адрес, а страница попросит другой, и офлайн-старт
 // останется без стилей.
-const ASSET_V = '6';
-const VERSION = 'lexiq-v6';
+const ASSET_V = '7';
+const VERSION = 'congix-v7';
 const SHELL = [
   '/',
   '/app.html',

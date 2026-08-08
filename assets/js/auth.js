@@ -11,7 +11,7 @@
 // Наружу отдаётся один объект CongixAuth, чтобы app.js не зависел от того,
 // какой режим включён.
 
-const AUTH_STORAGE_KEY = 'lexiq_user';
+const AUTH_STORAGE_KEY = 'congix_user';
 
 const CongixAuth = (function () {
   let user = null;                  // { name, email, uid, guest }

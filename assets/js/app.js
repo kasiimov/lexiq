@@ -41,11 +41,11 @@ const TOPIC_ICONS = {
 const SRS_INTERVALS_MIN = [0, 10, 1440, 4320, 10080, 20160, 43200];
 
 function srsLoad() {
-  try { return JSON.parse(localStorage.getItem('lx_srs') || '{}'); }
+  try { return JSON.parse(localStorage.getItem('congix_srs') || '{}'); }
   catch(e) { return {}; }
 }
 function srsSave(data) {
-  try { localStorage.setItem('lx_srs', JSON.stringify(data)); } catch(e) {}
+  try { localStorage.setItem('congix_srs', JSON.stringify(data)); } catch(e) {}
 }
 function srsGetWord(id) {
   const all = srsLoad();
@@ -86,11 +86,11 @@ function srsPickWords(pool, count) {
 
 // STATS
 function statsLoad() {
-  try { return JSON.parse(localStorage.getItem('lx_stats') || '{}'); }
+  try { return JSON.parse(localStorage.getItem('congix_stats') || '{}'); }
   catch(e) { return {}; }
 }
 function statsSave(data) {
-  try { localStorage.setItem('lx_stats', JSON.stringify(data)); } catch(e) {}
+  try { localStorage.setItem('congix_stats', JSON.stringify(data)); } catch(e) {}
 }
 function getStats() {
   return Object.assign({
@@ -224,7 +224,7 @@ function sideToggle() {
     btn.setAttribute('aria-expanded', on ? 'false' : 'true');
     btn.setAttribute('aria-label', on ? "Menyuni ochish" : "Menyuni yig'ish");
   }
-  try { localStorage.setItem('lexiq_side_collapsed', on ? '1' : '0'); } catch (e) {}
+  try { localStorage.setItem('congix_side_collapsed', on ? '1' : '0'); } catch (e) {}
 }
 
 // Класс проставлен в <head>, а разметка кнопки всегда приходит развёрнутой —
@@ -275,7 +275,7 @@ function renderShell(id) {
 // ────────────────────────────────────────────────────────────────────
 // VOCAB LOADING
 // ────────────────────────────────────────────────────────────────────
-const VOCAB_STORAGE_KEY = 'lexiq_vocab';
+const VOCAB_STORAGE_KEY = 'congix_vocab';
 
 function saveVocab() {
   try { localStorage.setItem(VOCAB_STORAGE_KEY, JSON.stringify(VOCAB)); } catch(e) {}
@@ -1063,8 +1063,8 @@ function logoTap() { /* removed admin — admin is now separate file */ }
 
 function resetProgress() {
   if (!confirm("Haqiqatdan ham barcha statistikani nolga keltirmoqchimisiz?")) return;
-  localStorage.removeItem('lx_srs');
-  localStorage.removeItem('lx_stats');
+  localStorage.removeItem('congix_srs');
+  localStorage.removeItem('congix_stats');
   alert("Statistika tozalandi");
   show('s-home');
 }
@@ -1253,8 +1253,8 @@ CongixAuth.init();
 // и читает ответ потоком, дописывая текст в пузырь по мере прихода.
 // ────────────────────────────────────────────────────────────────────
 const TUTOR_ENDPOINT = '/api/tutor';
-const TUTOR_HISTORY_KEY = 'lexiq_tutor_history';   // режим «Ustoz»
-const TALK_HISTORY_KEY = 'lexiq_talk_history';     // режим «Suhbat»
+const TUTOR_HISTORY_KEY = 'congix_tutor_history';   // режим «Ustoz»
+const TALK_HISTORY_KEY = 'congix_talk_history';     // режим «Suhbat»
 const TUTOR_MAX_HISTORY = 24;
 
 // Сценарии разговора — местные ситуации, а не абстрактные диалоги.
@@ -1831,7 +1831,7 @@ function aiRenderResult() {
 // SERIYA — визуальный слой над streakDays, который уже считается.
 // Огонь растёт вместе с серией и гаснет, если день пропущен.
 // ────────────────────────────────────────────────────────────────────
-const STREAK_BEST_KEY = 'lexiq_streak_best';
+const STREAK_BEST_KEY = 'congix_streak_best';
 const STREAK_STAGES = [
   { from: 0,  icon: 'candle',  text: "Bugun mashq qiling — seriya boshlanadi" },
   { from: 1,  icon: 'sparkles', text: "Boshlandi! Ertaga ham qaytib keling" },
@@ -1907,7 +1907,7 @@ function renderStreak() {
 // Слова выбираются детерминированно по дате, поэтому общий сервер не нужен:
 // у двух людей в один день набор совпадает.
 // ────────────────────────────────────────────────────────────────────
-const DAILY_KEY = 'lexiq_daily';
+const DAILY_KEY = 'congix_daily';
 const DAILY_SIZE = 10;
 
 // Простой детерминированный генератор: одна и та же дата — одна и та же выборка.

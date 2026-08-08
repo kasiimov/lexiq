@@ -616,7 +616,7 @@
     },
   };
 
-  const KEY = 'lexiq_lang';
+  const KEY = 'congix_lang';
   let current = 'uz';
 
   try {

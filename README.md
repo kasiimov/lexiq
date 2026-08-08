@@ -2,7 +2,7 @@
 
 An interactive web-based English learning application designed for Uzbek speakers, featuring game-based vocabulary practice, spaced repetition (Leitner algorithm) and CEFR-aligned word levels.
 
-**Live:** https://lexiq-uz.netlify.app
+**Live:** https://congix-english.netlify.app
 
 ## 🎯 Project Overview
 
@@ -29,22 +29,26 @@ the current direction, [the roadmap](docs/roadmap.md) tracks the rest.
 ## 📁 Project Structure
 
 ```
-lexiq/
+congix-english/
 ├── index.html            # Landing page — the public site
 ├── app.html              # The application itself, behind the sign-in screen
-├── admin.html            # Admin panel for vocabulary management
+├── admin.html            # Admin panel: registered users and their progress
+├── admin-words.html      # Admin panel: vocabulary editing
 ├── 404.html
 ├── assets/
 │   ├── css/
 │   │   ├── site.css      # Landing styles
 │   │   ├── app.css       # Application styles
-│   │   └── admin.css     # Admin panel styles
+│   │   ├── admin.css     # Admin panel styles
+│   │   └── admin-users.css  # Users table styles
 │   ├── js/
+│   │   ├── storage-migrate.js  # Renames pre-Congix localStorage keys
 │   │   ├── auth.js       # Sign-in layer: Firebase or guest mode
 │   │   ├── app.js        # Application logic
-│   │   └── admin.js      # Admin panel logic
+│   │   ├── admin.js      # Vocabulary editor logic
+│   │   └── admin-users.js   # Users panel logic
 │   ├── favicon.svg
-│   └── og-image.png      # Social preview, 1200x630
+│   └── og-image.png      # Social preview
 ├── docs/                 # Plans and decisions
 ├── netlify/
 │   └── edge-functions/
@@ -149,13 +153,15 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-Admin panel: http://localhost:8000/admin.html
+Admin panel: http://localhost:8000/admin.html (users) and
+`/admin-words.html` (vocabulary). Both sit behind a login in production —
+see the Admin access section below.
 
 If the dictionary cannot be loaded, the app falls back to a manual JSON upload screen.
 
 ### Editing the vocabulary
 
-1. Open `admin.html`
+1. Open `admin-words.html`
 2. Add or edit words
 3. Press **"💾 JSON eksport"**
 4. Replace `data/vocabulary.json` with the exported file and commit
@@ -222,9 +228,32 @@ questions is reported as an error instead of being shown.
 After a quiz, every mistake gets a **"Batafsil tushuntirish"** button that opens the AI
 tutor with the question, the learner's answer and the correct one already filled in.
 
+## 🔐 Admin access
+
+Both admin pages sit behind a login. The check runs on the server, in the
+`admin-gate` edge function, so the password never reaches the browser — only a
+signed `HttpOnly` session cookie does, good for 12 hours. Missing environment
+variables close the door rather than open it.
+
+| Variable | Purpose |
+|----------|---------|
+| `ADMIN_EMAIL` | administrator's email |
+| `ADMIN_PASSWORD` | password |
+| `ADMIN_SESSION_SECRET` | random string that signs the session cookie |
+| `FIREBASE_SERVICE_ACCOUNT` | full JSON of a Firebase service-account key — lets the users panel read accounts and progress |
+
+`/admin` lists registered users and their progress, `/admin-words.html` edits the
+dictionary, `/admin/logout` ends the session. The users panel reads Firebase
+through `/api/admin/users`, which checks the same cookie: without it the endpoint
+would be a way around the password.
+
+Firestore rules deliberately stop one learner from reading another's profile, so
+the panel never queries the database from the browser — the edge function does it
+with the service account.
+
 ## 🌐 Deployment
 
-Hosted on Netlify as project `lexiq-uz`, connected to this repository. Every push to `main` triggers an automatic deploy — there is no build command, the repository root is published directly.
+Hosted on Netlify as project `congix-english`, connected to this repository. Every push to `main` triggers an automatic deploy — there is no build command, the repository root is published directly.
 
 `netlify.toml` also keeps one legacy path alive: `/ang.html`, the old entry point, redirects to the app.
 

@@ -13,7 +13,7 @@ const PAGE_SIZE = 30;
 let unsavedChanges = false;
 let editingId = null;
 
-const STORAGE_KEY = 'lexiq_admin_vocab';
+const STORAGE_KEY = 'congix_admin_vocab';
 
 function saveToStorage() {
   try {

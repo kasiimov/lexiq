@@ -10,12 +10,15 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="assets/css/app.css?v=6">
+<link rel="stylesheet" href="assets/css/app.css?v=7">
+<!-- Перенос ключей LexiQ → Congix. Обязан идти до кода ниже: тот уже читает
+     новое имя, и без переноса свёрнутое меню сбрасывалось бы у всех. -->
+<script src="assets/js/storage-migrate.js?v=7"></script>
 <script>
 // Свёрнуто меню или нет — читаем до первой отрисовки. Если сделать это в
 // app.js, меню успеет мигнуть развёрнутым при каждой загрузке.
 try {
-  if (localStorage.getItem('lexiq_side_collapsed') === '1') {
+  if (localStorage.getItem('congix_side_collapsed') === '1') {
     document.documentElement.classList.add('side-collapsed');
   }
 } catch (e) {}
@@ -980,11 +983,11 @@ try {
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <!-- Конфига может не быть: тогда включается режим «Mehmon» -->
-<script src="assets/js/icons.js?v=6"></script>
-<script src="assets/js/i18n.js?v=6"></script>
-<script src="assets/js/firebase-config.js?v=6" onerror="console.info('firebase-config.js yo\'q — mehmon rejimi')"></script>
-<script src="assets/js/auth.js?v=6"></script>
-<script src="assets/js/app.js?v=6"></script>
+<script src="assets/js/icons.js?v=7"></script>
+<script src="assets/js/i18n.js?v=7"></script>
+<script src="assets/js/firebase-config.js?v=7" onerror="console.info('firebase-config.js yo\'q — mehmon rejimi')"></script>
+<script src="assets/js/auth.js?v=7"></script>
+<script src="assets/js/app.js?v=7"></script>
 <script>
 // Офлайн-режим. Регистрация не должна ронять страницу, если браузер не умеет.
 if ('serviceWorker' in navigator) {

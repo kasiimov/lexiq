@@ -120,7 +120,7 @@ export default async function handler(request: Request): Promise<Response> {
     headers: {
       "content-type": "text/plain; charset=utf-8",
       "cache-control": "no-store",
-      "x-lexiq-provider": result.provider ?? "",
+      "x-congix-provider": result.provider ?? "",
     },
   });
 }

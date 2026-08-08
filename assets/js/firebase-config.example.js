@@ -2,7 +2,7 @@
    Congix English — конфигурация Firebase (вход и регистрация).
 
    Как включить настоящие аккаунты:
-   1. console.firebase.google.com → Add project → назовите «lexiq»
+   1. console.firebase.google.com → Add project → назовите «congix-english»
    2. Build → Authentication → Sign-in method → включите
       «Email/Password» и «Google»
    3. ⚙️ Project settings → Your apps → </> Web → зарегистрируйте

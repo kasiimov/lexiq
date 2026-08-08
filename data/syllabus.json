@@ -13,10 +13,34 @@
           "title": "Harflar va tovushlar",
           "situation": "Ingliz tilida o'qishni boshlash",
           "lessons": [
-            { "id": "st-b1-l1", "can_do": "Ingliz alifbosini o'qiy olasiz", "grammar": "alifbo, harflar nomi", "function": "harflarni aytish va tanish", "lexis": "alifbo" },
-            { "id": "st-b1-l2", "can_do": "Unli tovushlarni to'g'ri o'qiysiz", "grammar": "a, e, i, o, u — ochiq va yopiq bo'g'in", "function": "so'zni bo'g'inlab o'qish", "lexis": "cat, name, big, hope" },
-            { "id": "st-b1-l3", "can_do": "O'zbek tilida yo'q tovushlarni aytasiz", "grammar": "th, w, r, ng", "function": "talaffuz", "lexis": "this, water, right, sing" },
-            { "id": "st-b1-l4", "can_do": "Tanish bo'lmagan so'zni bo'g'inlab o'qiysiz", "grammar": "bo'g'inga bo'lish", "function": "o'qish", "lexis": "kundalik so'zlar" }
+            {
+              "id": "st-b1-l1",
+              "can_do": "Ingliz alifbosini o'qiy olasiz",
+              "grammar": "alifbo, harflar nomi",
+              "function": "harflarni aytish va tanish",
+              "lexis": "alifbo"
+            },
+            {
+              "id": "st-b1-l2",
+              "can_do": "Unli tovushlarni to'g'ri o'qiysiz",
+              "grammar": "a, e, i, o, u — ochiq va yopiq bo'g'in",
+              "function": "so'zni bo'g'inlab o'qish",
+              "lexis": "cat, name, big, hope"
+            },
+            {
+              "id": "st-b1-l3",
+              "can_do": "O'zbek tilida yo'q tovushlarni aytasiz",
+              "grammar": "th, w, r, ng",
+              "function": "talaffuz",
+              "lexis": "this, water, right, sing"
+            },
+            {
+              "id": "st-b1-l4",
+              "can_do": "Tanish bo'lmagan so'zni bo'g'inlab o'qiysiz",
+              "grammar": "bo'g'inga bo'lish",
+              "function": "o'qish",
+              "lexis": "kundalik so'zlar"
+            }
           ]
         },
         {
@@ -24,10 +48,34 @@
           "title": "Birinchi so'zlar",
           "situation": "Atrofdagi narsalarni atash",
           "lessons": [
-            { "id": "st-b2-l1", "can_do": "0 dan 100 gacha sanaysiz", "grammar": "sonlar", "function": "sanash, narx va yoshni aytish", "lexis": "sonlar" },
-            { "id": "st-b2-l2", "can_do": "Ranglarni aytasiz", "grammar": "sifat + ot", "function": "narsani tasvirlash", "lexis": "ranglar" },
-            { "id": "st-b2-l3", "can_do": "Atrofdagi narsalarni atayasiz", "grammar": "ot", "function": "nomlash", "lexis": "uy va sinf buyumlari" },
-            { "id": "st-b2-l4", "can_do": "Hafta kunlari va oylarni aytasiz", "grammar": "on Monday, in May", "function": "vaqtni aytish", "lexis": "kunlar, oylar" }
+            {
+              "id": "st-b2-l1",
+              "can_do": "0 dan 100 gacha sanaysiz",
+              "grammar": "sonlar",
+              "function": "sanash, narx va yoshni aytish",
+              "lexis": "sonlar"
+            },
+            {
+              "id": "st-b2-l2",
+              "can_do": "Ranglarni aytasiz",
+              "grammar": "sifat + ot",
+              "function": "narsani tasvirlash",
+              "lexis": "ranglar"
+            },
+            {
+              "id": "st-b2-l3",
+              "can_do": "Atrofdagi narsalarni atayasiz",
+              "grammar": "ot",
+              "function": "nomlash",
+              "lexis": "uy va sinf buyumlari"
+            },
+            {
+              "id": "st-b2-l4",
+              "can_do": "Hafta kunlari va oylarni aytasiz",
+              "grammar": "on Monday, in May",
+              "function": "vaqtni aytish",
+              "lexis": "kunlar, oylar"
+            }
           ]
         },
         {
@@ -35,10 +83,34 @@
           "title": "Men va sen",
           "situation": "Tanishish",
           "lessons": [
-            { "id": "st-b3-l1", "can_do": "Ismingizni aytasiz va so'raysiz", "grammar": "I, you; What is your name?", "function": "tanishish", "lexis": "salomlashish" },
-            { "id": "st-b3-l2", "can_do": "Boshqa odam haqida gapirasiz", "grammar": "he, she, it", "function": "uchinchi shaxs", "lexis": "oila a'zolari" },
-            { "id": "st-b3-l3", "can_do": "«Men ... man» deb ayta olasiz", "grammar": "to be: am, is, are", "function": "o'zini tanishtirish", "lexis": "kasblar" },
-            { "id": "st-b3-l4", "can_do": "Kimning narsasi ekanini aytasiz", "grammar": "my, your, his, her", "function": "egalik", "lexis": "shaxsiy buyumlar" }
+            {
+              "id": "st-b3-l1",
+              "can_do": "Ismingizni aytasiz va so'raysiz",
+              "grammar": "I, you; What is your name?",
+              "function": "tanishish",
+              "lexis": "salomlashish"
+            },
+            {
+              "id": "st-b3-l2",
+              "can_do": "Boshqa odam haqida gapirasiz",
+              "grammar": "he, she, it",
+              "function": "uchinchi shaxs",
+              "lexis": "oila a'zolari"
+            },
+            {
+              "id": "st-b3-l3",
+              "can_do": "«Men ... man» deb ayta olasiz",
+              "grammar": "to be: am, is, are",
+              "function": "o'zini tanishtirish",
+              "lexis": "kasblar"
+            },
+            {
+              "id": "st-b3-l4",
+              "can_do": "Kimning narsasi ekanini aytasiz",
+              "grammar": "my, your, his, her",
+              "function": "egalik",
+              "lexis": "shaxsiy buyumlar"
+            }
           ]
         },
         {
@@ -46,9 +118,27 @@
           "title": "Bitta va ko'p",
           "situation": "Narsalarni sanash va ko'rsatish",
           "lessons": [
-            { "id": "st-b4-l1", "can_do": "Ko'plikni yasaysiz", "grammar": "-s, -es; nostandart ko'plik", "function": "sanash", "lexis": "buyumlar" },
-            { "id": "st-b4-l2", "can_do": "«Bu» va «ana u» deb ko'rsatasiz", "grammar": "this / that / these / those", "function": "ko'rsatish", "lexis": "do'kondagi narsalar" },
-            { "id": "st-b4-l3", "can_do": "a va an ni to'g'ri qo'yasiz", "grammar": "artikl a / an", "function": "nomlash", "lexis": "kundalik ot" }
+            {
+              "id": "st-b4-l1",
+              "can_do": "Ko'plikni yasaysiz",
+              "grammar": "-s, -es; nostandart ko'plik",
+              "function": "sanash",
+              "lexis": "buyumlar"
+            },
+            {
+              "id": "st-b4-l2",
+              "can_do": "«Bu» va «ana u» deb ko'rsatasiz",
+              "grammar": "this / that / these / those",
+              "function": "ko'rsatish",
+              "lexis": "do'kondagi narsalar"
+            },
+            {
+              "id": "st-b4-l3",
+              "can_do": "a va an ni to'g'ri qo'yasiz",
+              "grammar": "artikl a / an",
+              "function": "nomlash",
+              "lexis": "kundalik ot"
+            }
           ]
         },
         {
@@ -56,9 +146,27 @@
           "title": "Oddiy harakat",
           "situation": "Nima qilishini aytish",
           "lessons": [
-            { "id": "st-b5-l1", "can_do": "Nima yoqishini aytasiz", "grammar": "Present Simple: I / you", "function": "yoqtirish", "lexis": "like, want, have" },
-            { "id": "st-b5-l2", "can_do": "Savol berasiz", "grammar": "Do you ...?", "function": "so'rash", "lexis": "kundalik fe'llar" },
-            { "id": "st-b5-l3", "can_do": "Inkor gap tuzasiz", "grammar": "I don't ...", "function": "rad etish", "lexis": "kundalik fe'llar" }
+            {
+              "id": "st-b5-l1",
+              "can_do": "Nima yoqishini aytasiz",
+              "grammar": "Present Simple: I / you",
+              "function": "yoqtirish",
+              "lexis": "like, want, have"
+            },
+            {
+              "id": "st-b5-l2",
+              "can_do": "Savol berasiz",
+              "grammar": "Do you ...?",
+              "function": "so'rash",
+              "lexis": "kundalik fe'llar"
+            },
+            {
+              "id": "st-b5-l3",
+              "can_do": "Inkor gap tuzasiz",
+              "grammar": "I don't ...",
+              "function": "rad etish",
+              "lexis": "kundalik fe'llar"
+            }
           ]
         }
       ]
@@ -74,10 +182,34 @@
           "title": "Tanishuv",
           "situation": "Yangi odam bilan tanishish",
           "lessons": [
-            { "id": "a1-b1-l1", "can_do": "O'zingizni tanishtirasiz", "grammar": "to be: am, is, are — barcha shaxslarda", "function": "tanishish, ism va kasbni aytish", "lexis": "salomlashish, kasblar" },
-            { "id": "a1-b1-l2", "can_do": "Savol berasiz va javob olasiz", "grammar": "to be bilan savol: Are you ...? Where is ...?", "function": "ma'lumot so'rash", "lexis": "savol so'zlari" },
-            { "id": "a1-b1-l3", "can_do": "«Yo'q, men emas» deb ayta olasiz", "grammar": "to be inkori: am not, isn't, aren't", "function": "aniqlik kiritish", "lexis": "sifatlar" },
-            { "id": "a1-b1-l4", "can_do": "Qayerdanligingizni aytasiz", "grammar": "from + mamlakat; millat sifatlari", "function": "kelib chiqishni aytish", "lexis": "mamlakatlar, millatlar" }
+            {
+              "id": "a1-b1-l1",
+              "can_do": "O'zingizni tanishtirasiz",
+              "grammar": "to be: am, is, are — barcha shaxslarda",
+              "function": "tanishish, ism va kasbni aytish",
+              "lexis": "salomlashish, kasblar"
+            },
+            {
+              "id": "a1-b1-l2",
+              "can_do": "Savol berasiz va javob olasiz",
+              "grammar": "to be bilan savol: Are you ...? Where is ...?",
+              "function": "ma'lumot so'rash",
+              "lexis": "savol so'zlari"
+            },
+            {
+              "id": "a1-b1-l3",
+              "can_do": "«Yo'q, men emas» deb ayta olasiz",
+              "grammar": "to be inkori: am not, isn't, aren't",
+              "function": "aniqlik kiritish",
+              "lexis": "sifatlar"
+            },
+            {
+              "id": "a1-b1-l4",
+              "can_do": "Qayerdanligingizni aytasiz",
+              "grammar": "from + mamlakat; millat sifatlari",
+              "function": "kelib chiqishni aytish",
+              "lexis": "mamlakatlar, millatlar"
+            }
           ]
         },
         {
@@ -85,9 +217,27 @@
           "title": "Oilam va narsalarim",
           "situation": "Yaqinlaringiz haqida gapirish",
           "lessons": [
-            { "id": "a1-b2-l1", "can_do": "Nima borligini aytasiz", "grammar": "have got / has got", "function": "egalik", "lexis": "oila a'zolari" },
-            { "id": "a1-b2-l2", "can_do": "Kimning narsasi ekanini aytasiz", "grammar": "egalik olmoshlari va 's", "function": "tegishlilik", "lexis": "shaxsiy buyumlar" },
-            { "id": "a1-b2-l3", "can_do": "Odamni tasvirlaysiz", "grammar": "sifat tartibi: a tall young man", "function": "tashqi ko'rinish", "lexis": "tashqi ko'rinish sifatlari" }
+            {
+              "id": "a1-b2-l1",
+              "can_do": "Nima borligini aytasiz",
+              "grammar": "have got / has got",
+              "function": "egalik",
+              "lexis": "oila a'zolari"
+            },
+            {
+              "id": "a1-b2-l2",
+              "can_do": "Kimning narsasi ekanini aytasiz",
+              "grammar": "egalik olmoshlari va 's",
+              "function": "tegishlilik",
+              "lexis": "shaxsiy buyumlar"
+            },
+            {
+              "id": "a1-b2-l3",
+              "can_do": "Odamni tasvirlaysiz",
+              "grammar": "sifat tartibi: a tall young man",
+              "function": "tashqi ko'rinish",
+              "lexis": "tashqi ko'rinish sifatlari"
+            }
           ]
         },
         {
@@ -95,10 +245,34 @@
           "title": "Mening kunim",
           "situation": "Kundalik tartib",
           "lessons": [
-            { "id": "a1-b3-l1", "can_do": "Har kuni nima qilishingizni aytasiz", "grammar": "Present Simple, barcha shaxslar, -s qo'shimchasi", "function": "kundalik ish", "lexis": "kundalik fe'llar" },
-            { "id": "a1-b3-l2", "can_do": "Qanchalik tez-tez qilishingizni aytasiz", "grammar": "always, usually, often, sometimes, never", "function": "chastota", "lexis": "vaqt ifodalari" },
-            { "id": "a1-b3-l3", "can_do": "Soatni aytasiz", "grammar": "What time is it? at 7 o'clock", "function": "vaqt", "lexis": "soat, kun qismlari" },
-            { "id": "a1-b3-l4", "can_do": "Kuningiz haqida savol berasiz", "grammar": "Do / Does bilan savol va inkor", "function": "so'rash", "lexis": "kundalik fe'llar" }
+            {
+              "id": "a1-b3-l1",
+              "can_do": "Har kuni nima qilishingizni aytasiz",
+              "grammar": "Present Simple, barcha shaxslar, -s qo'shimchasi",
+              "function": "kundalik ish",
+              "lexis": "kundalik fe'llar"
+            },
+            {
+              "id": "a1-b3-l2",
+              "can_do": "Qanchalik tez-tez qilishingizni aytasiz",
+              "grammar": "always, usually, often, sometimes, never",
+              "function": "chastota",
+              "lexis": "vaqt ifodalari"
+            },
+            {
+              "id": "a1-b3-l3",
+              "can_do": "Soatni aytasiz",
+              "grammar": "What time is it? at 7 o'clock",
+              "function": "vaqt",
+              "lexis": "soat, kun qismlari"
+            },
+            {
+              "id": "a1-b3-l4",
+              "can_do": "Kuningiz haqida savol berasiz",
+              "grammar": "Do / Does bilan savol va inkor",
+              "function": "so'rash",
+              "lexis": "kundalik fe'llar"
+            }
           ]
         },
         {
@@ -106,10 +280,34 @@
           "title": "Mening shahrim",
           "situation": "Yo'l so'rash va shaharni tasvirlash",
           "lessons": [
-            { "id": "a1-b4-l1", "can_do": "Shahringizda nima borligini aytasiz", "grammar": "there is / there are", "function": "mavjudlik", "lexis": "shahar joylari" },
-            { "id": "a1-b4-l2", "can_do": "Narsa qayerdaligini aytasiz", "grammar": "o'rin predloglari: in, on, under, next to", "function": "joylashuv", "lexis": "shahar joylari" },
-            { "id": "a1-b4-l3", "can_do": "Yo'l so'raysiz va ko'rsatasiz", "grammar": "buyruq gap: go, turn, take", "function": "yo'nalish", "lexis": "yo'l ifodalari" },
-            { "id": "a1-b4-l4", "can_do": "Transportdan foydalanasiz", "grammar": "by bus, on foot", "function": "harakatlanish", "lexis": "transport" }
+            {
+              "id": "a1-b4-l1",
+              "can_do": "Shahringizda nima borligini aytasiz",
+              "grammar": "there is / there are",
+              "function": "mavjudlik",
+              "lexis": "shahar joylari"
+            },
+            {
+              "id": "a1-b4-l2",
+              "can_do": "Narsa qayerdaligini aytasiz",
+              "grammar": "o'rin predloglari: in, on, under, next to",
+              "function": "joylashuv",
+              "lexis": "shahar joylari"
+            },
+            {
+              "id": "a1-b4-l3",
+              "can_do": "Yo'l so'raysiz va ko'rsatasiz",
+              "grammar": "buyruq gap: go, turn, take",
+              "function": "yo'nalish",
+              "lexis": "yo'l ifodalari"
+            },
+            {
+              "id": "a1-b4-l4",
+              "can_do": "Transportdan foydalanasiz",
+              "grammar": "by bus, on foot",
+              "function": "harakatlanish",
+              "lexis": "transport"
+            }
           ]
         },
         {
@@ -117,10 +315,34 @@
           "title": "Ovqat va xarid",
           "situation": "Bozor va kafe",
           "lessons": [
-            { "id": "a1-b5-l1", "can_do": "Sanaladigan va sanalmaydigan so'zlarni ajratasiz", "grammar": "countable / uncountable", "function": "ovqat haqida gapirish", "lexis": "mahsulotlar" },
-            { "id": "a1-b5-l2", "can_do": "«Biroz» va «hech» deb ayta olasiz", "grammar": "some / any", "function": "miqdor", "lexis": "mahsulotlar" },
-            { "id": "a1-b5-l3", "can_do": "Narx va miqdorni so'raysiz", "grammar": "How much / How many", "function": "xarid", "lexis": "pul, o'lchov" },
-            { "id": "a1-b5-l4", "can_do": "Kafeda buyurtma berasiz", "grammar": "I'd like ...", "function": "buyurtma", "lexis": "kafe menyusi" }
+            {
+              "id": "a1-b5-l1",
+              "can_do": "Sanaladigan va sanalmaydigan so'zlarni ajratasiz",
+              "grammar": "countable / uncountable",
+              "function": "ovqat haqida gapirish",
+              "lexis": "mahsulotlar"
+            },
+            {
+              "id": "a1-b5-l2",
+              "can_do": "«Biroz» va «hech» deb ayta olasiz",
+              "grammar": "some / any",
+              "function": "miqdor",
+              "lexis": "mahsulotlar"
+            },
+            {
+              "id": "a1-b5-l3",
+              "can_do": "Narx va miqdorni so'raysiz",
+              "grammar": "How much / How many",
+              "function": "xarid",
+              "lexis": "pul, o'lchov"
+            },
+            {
+              "id": "a1-b5-l4",
+              "can_do": "Kafeda buyurtma berasiz",
+              "grammar": "I'd like ...",
+              "function": "buyurtma",
+              "lexis": "kafe menyusi"
+            }
           ]
         },
         {
@@ -128,9 +350,27 @@
           "title": "Qo'limdan keladi",
           "situation": "Imkoniyat va ob-havo",
           "lessons": [
-            { "id": "a1-b6-l1", "can_do": "Nima qila olishingizni aytasiz", "grammar": "can / can't", "function": "qobiliyat va ruxsat", "lexis": "ko'nikmalar" },
-            { "id": "a1-b6-l2", "can_do": "Vaqt predloglarini to'g'ri qo'yasiz", "grammar": "in, on, at — vaqt", "function": "vaqt", "lexis": "fasllar, sanalar" },
-            { "id": "a1-b6-l3", "can_do": "Ob-havo haqida gapirasiz", "grammar": "It is + sifat", "function": "ob-havo", "lexis": "ob-havo, fasllar" }
+            {
+              "id": "a1-b6-l1",
+              "can_do": "Nima qila olishingizni aytasiz",
+              "grammar": "can / can't",
+              "function": "qobiliyat va ruxsat",
+              "lexis": "ko'nikmalar"
+            },
+            {
+              "id": "a1-b6-l2",
+              "can_do": "Vaqt predloglarini to'g'ri qo'yasiz",
+              "grammar": "in, on, at — vaqt",
+              "function": "vaqt",
+              "lexis": "fasllar, sanalar"
+            },
+            {
+              "id": "a1-b6-l3",
+              "can_do": "Ob-havo haqida gapirasiz",
+              "grammar": "It is + sifat",
+              "function": "ob-havo",
+              "lexis": "ob-havo, fasllar"
+            }
           ]
         },
         {
@@ -138,10 +378,287 @@
           "title": "Kecha",
           "situation": "O'tgan kun haqida hikoya",
           "lessons": [
-            { "id": "a1-b7-l1", "can_do": "Qayerda bo'lganingizni aytasiz", "grammar": "was / were", "function": "o'tgan holat", "lexis": "joylar" },
-            { "id": "a1-b7-l2", "can_do": "Kecha nima qilganingizni aytasiz", "grammar": "Past Simple: to'g'ri fe'llar, -ed", "function": "o'tgan harakat", "lexis": "kundalik fe'llar" },
-            { "id": "a1-b7-l3", "can_do": "Ko'p ishlatiladigan noto'g'ri fe'llarni bilasiz", "grammar": "20 ta noto'g'ri fe'l: go, see, have, do ...", "function": "o'tgan harakat", "lexis": "noto'g'ri fe'llar" },
-            { "id": "a1-b7-l4", "can_do": "O'tgan hafta haqida savol berasiz", "grammar": "Did you ...? I didn't ...", "function": "so'rash va inkor", "lexis": "dam olish kuni" }
+            {
+              "id": "a1-b7-l1",
+              "can_do": "Qayerda bo'lganingizni aytasiz",
+              "grammar": "was / were",
+              "function": "o'tgan holat",
+              "lexis": "joylar"
+            },
+            {
+              "id": "a1-b7-l2",
+              "can_do": "Kecha nima qilganingizni aytasiz",
+              "grammar": "Past Simple: to'g'ri fe'llar, -ed",
+              "function": "o'tgan harakat",
+              "lexis": "kundalik fe'llar"
+            },
+            {
+              "id": "a1-b7-l3",
+              "can_do": "Ko'p ishlatiladigan noto'g'ri fe'llarni bilasiz",
+              "grammar": "20 ta noto'g'ri fe'l: go, see, have, do ...",
+              "function": "o'tgan harakat",
+              "lexis": "noto'g'ri fe'llar"
+            },
+            {
+              "id": "a1-b7-l4",
+              "can_do": "O'tgan hafta haqida savol berasiz",
+              "grammar": "Did you ...? I didn't ...",
+              "function": "so'rash va inkor",
+              "lexis": "dam olish kuni"
+            }
+          ]
+        }
+      ]
+    },
+    "A2": {
+      "title": "A2",
+      "subtitle": "Elementary",
+      "description": "O'tmish va rejalar haqida gapirasiz, taqqoslaysiz va fikr bildirasiz",
+      "words_target": 1200,
+      "blocks": [
+        {
+          "id": "a2-b1",
+          "title": "Hozir nima bo'lyapti",
+          "situation": "Ayni damdagi ish haqida gapirish",
+          "lessons": [
+            {
+              "id": "a2-b1-l1",
+              "can_do": "Hozir nima qilayotganingizni aytasiz",
+              "grammar": "Present Continuous: am/is/are + -ing",
+              "function": "ayni damdagi ishni bildirish",
+              "lexis": "kundalik harakatlar"
+            },
+            {
+              "id": "a2-b1-l2",
+              "can_do": "Doimiy ish bilan hozirgi ishni farqlaysiz",
+              "grammar": "Present Simple va Present Continuous farqi",
+              "function": "odat va vaqtinchalik ishni ajratish",
+              "lexis": "vaqt ifodalari: now, usually"
+            },
+            {
+              "id": "a2-b1-l3",
+              "can_do": "Kiyim va tashqi ko'rinishni tasvirlaysiz",
+              "grammar": "Present Continuous bilan tasvirlash",
+              "function": "odamni kiyimiga qarab tanitish",
+              "lexis": "kiyim, ranglar, naqshlar"
+            },
+            {
+              "id": "a2-b1-l4",
+              "can_do": "Artikllarni to'g'ri qo'yasiz",
+              "grammar": "a / an / the / artiklsiz",
+              "function": "tanish va notanish narsani ajratish",
+              "lexis": "kundalik otlar"
+            }
+          ]
+        },
+        {
+          "id": "a2-b2",
+          "title": "O'tgan voqealar",
+          "situation": "Bo'lib o'tgan voqeani hikoya qilish",
+          "lessons": [
+            {
+              "id": "a2-b2-l1",
+              "can_do": "Ko'proq noto'g'ri fe'llarni ishlatasiz",
+              "grammar": "Past Simple: kengaytirilgan noto'g'ri fe'llar",
+              "function": "o'tmish haqida gapirish",
+              "lexis": "40 ta noto'g'ri fe'l"
+            },
+            {
+              "id": "a2-b2-l2",
+              "can_do": "O'tmish haqida savol berasiz va inkor qilasiz",
+              "grammar": "Past Simple savol va inkor, Wh- savollar",
+              "function": "tafsilot so'rash",
+              "lexis": "savol so'zlari"
+            },
+            {
+              "id": "a2-b2-l3",
+              "can_do": "Voqealarni tartib bilan bog'laysiz",
+              "grammar": "vaqt bog'lovchilari: then, after that, finally",
+              "function": "hikoyani tartibga solish",
+              "lexis": "o'tgan vaqt ifodalari"
+            },
+            {
+              "id": "a2-b2-l4",
+              "can_do": "Hikoya aytasiz va qiziqish bildirasiz",
+              "grammar": "hikoya qiliplari va qisqa javoblar",
+              "function": "suhbatni qo'llab-quvvatlash",
+              "lexis": "Really? That's great!"
+            }
+          ]
+        },
+        {
+          "id": "a2-b3",
+          "title": "Maslahat va majburiyat",
+          "situation": "Maslahat berish va qoidalarni tushuntirish",
+          "lessons": [
+            {
+              "id": "a2-b3-l1",
+              "can_do": "Maslahat berasiz",
+              "grammar": "should / shouldn't",
+              "function": "maslahat va tavsiya",
+              "lexis": "salomatlik, odatlar"
+            },
+            {
+              "id": "a2-b3-l2",
+              "can_do": "Nima majburiy ekanini aytasiz",
+              "grammar": "have to / don't have to / must",
+              "function": "qoida va majburiyat",
+              "lexis": "ish va hujjatlar"
+            },
+            {
+              "id": "a2-b3-l3",
+              "can_do": "O'tmishdagi imkoniyat haqida gapirasiz",
+              "grammar": "could / couldn't",
+              "function": "o'tgan qobiliyatni bildirish",
+              "lexis": "bolalik, ko'nikmalar"
+            },
+            {
+              "id": "a2-b3-l4",
+              "can_do": "Odobli iltimos va taklif qilasiz",
+              "grammar": "Could you ...? Would you like ...?",
+              "function": "iltimos, taklif, rozilik",
+              "lexis": "xizmat iboralari"
+            }
+          ]
+        },
+        {
+          "id": "a2-b4",
+          "title": "Taqqoslash",
+          "situation": "Tanlov qilish va afzallik berish",
+          "lessons": [
+            {
+              "id": "a2-b4-l1",
+              "can_do": "Ikki narsani taqqoslaysiz",
+              "grammar": "qiyosiy daraja: -er, more, than",
+              "function": "taqqoslash",
+              "lexis": "sifatlar"
+            },
+            {
+              "id": "a2-b4-l2",
+              "can_do": "Eng yaxshisini aytasiz",
+              "grammar": "orttirma daraja: the -est, the most",
+              "function": "eng yuqori darajani bildirish",
+              "lexis": "shahar, tabiat"
+            },
+            {
+              "id": "a2-b4-l3",
+              "can_do": "Tenglik va farqni ifodalaysiz",
+              "grammar": "as ... as, not as ... as",
+              "function": "o'xshashlikni aytish",
+              "lexis": "o'lcham, narx"
+            },
+            {
+              "id": "a2-b4-l4",
+              "can_do": "Afzalligingizni sabab bilan aytasiz",
+              "grammar": "prefer, because",
+              "function": "tanlovni asoslash",
+              "lexis": "tabiat va geografiya"
+            }
+          ]
+        },
+        {
+          "id": "a2-b5",
+          "title": "Rejalar",
+          "situation": "Kelajak haqida kelishish",
+          "lessons": [
+            {
+              "id": "a2-b5-l1",
+              "can_do": "Rejalaringizni aytasiz",
+              "grammar": "going to: reja va niyat",
+              "function": "rejani bildirish",
+              "lexis": "loyihalar, maqsadlar"
+            },
+            {
+              "id": "a2-b5-l2",
+              "can_do": "Nima uchun qilayotganingizni tushuntirasiz",
+              "grammar": "maqsad infinitivi: to + fe'l",
+              "function": "sababni tushuntirish",
+              "lexis": "sabab va maqsad"
+            },
+            {
+              "id": "a2-b5-l3",
+              "can_do": "Va'da berasiz va qaror aytasiz",
+              "grammar": "will / won't",
+              "function": "tez qaror, va'da",
+              "lexis": "kelajak ifodalari"
+            },
+            {
+              "id": "a2-b5-l4",
+              "can_do": "Uchrashuv belgilaysiz",
+              "grammar": "kelajak uchun Present Continuous",
+              "function": "kelishuv",
+              "lexis": "jadval, uchrashuv"
+            }
+          ]
+        },
+        {
+          "id": "a2-b6",
+          "title": "Ovqat va miqdor",
+          "situation": "Oshxona va restoran",
+          "lessons": [
+            {
+              "id": "a2-b6-l1",
+              "can_do": "Miqdorni aniq aytasiz",
+              "grammar": "much / many / a lot of",
+              "function": "miqdorni bildirish",
+              "lexis": "mahsulotlar"
+            },
+            {
+              "id": "a2-b6-l2",
+              "can_do": "«Yetarli» va «ortiqcha» deysiz",
+              "grammar": "enough / too much / too many",
+              "function": "yetarlilikni baholash",
+              "lexis": "o'lchov"
+            },
+            {
+              "id": "a2-b6-l3",
+              "can_do": "Retseptni tushuntirasiz",
+              "grammar": "buyruq gap va ketma-ketlik",
+              "function": "ko'rsatma berish",
+              "lexis": "pishirish fe'llari"
+            },
+            {
+              "id": "a2-b6-l4",
+              "can_do": "Joy tavsiya qilasiz va buyurtma berasiz",
+              "grammar": "tavsiya qoliplari",
+              "function": "tavsiya va buyurtma",
+              "lexis": "restoran"
+            }
+          ]
+        },
+        {
+          "id": "a2-b7",
+          "title": "Tajriba",
+          "situation": "Hayotiy tajriba haqida gapirish",
+          "lessons": [
+            {
+              "id": "a2-b7-l1",
+              "can_do": "Hayotingizda nima bo'lganini aytasiz",
+              "grammar": "Present Perfect: have / has + 3-shakl",
+              "function": "tajribani bildirish",
+              "lexis": "sayohat, tajriba"
+            },
+            {
+              "id": "a2-b7-l2",
+              "can_do": "Fe'lning uchinchi shaklini yasaysiz",
+              "grammar": "past participle: -ed va noto'g'ri shakllar",
+              "function": "shakl yasash",
+              "lexis": "30 ta uchinchi shakl"
+            },
+            {
+              "id": "a2-b7-l3",
+              "can_do": "Present Perfect va Past Simple ni ajratasiz",
+              "grammar": "ever / never / already / yet va aniq vaqt",
+              "function": "vaqtni to'g'ri tanlash",
+              "lexis": "vaqt belgilari"
+            },
+            {
+              "id": "a2-b7-l4",
+              "can_do": "Film va kitob haqida fikr bildirasiz",
+              "grammar": "fikr qoliplari va sifatlar",
+              "function": "baho berish",
+              "lexis": "san'at, kino"
+            }
           ]
         }
       ]

@@ -1,0 +1,116 @@
+{
+  "id": "a2-b1-l2",
+  "level": "A2",
+  "block": "a2-b1",
+  "title": "Doimiy ish va hozirgi ish",
+  "can_do": "Odat bilan ayni damdagi ishni ajratib gapirasiz",
+  "why": "«Men Toshkentda yashayman» va «Men Toshkentda yashab turibman» — o'zbekchada ham farq bor. Ingliz tilida bu farq ikki xil zamon bilan beriladi, va uni chalkashtirish ma'noni butunlay o'zgartiradi.",
+  "rule": {
+    "title": "Present Simple va Present Continuous farqi",
+    "points": [
+      {
+        "text": "Present Simple — doimiy holat, odat, har doim to'g'ri bo'lgan gap. Present Continuous — ayni damda yoki shu davrda bo'layotgan, vaqtinchalik ish.",
+        "examples": [
+          { "en": "I work in a bank.", "uz": "Men bankda ishlayman. (doimiy ish)" },
+          { "en": "I'm working at home this week.", "uz": "Bu hafta uyda ishlayapman. (vaqtinchalik)" }
+        ]
+      },
+      {
+        "text": "Har bir zamonning o'z belgi so'zlari bor. Simple: always, usually, often, every day, never. Continuous: now, at the moment, today, this week, right now.",
+        "examples": [
+          { "en": "She usually takes the bus.", "uz": "U odatda avtobusda yuradi." },
+          { "en": "She is taking a taxi today.", "uz": "Bugun u taksida ketyapti." }
+        ]
+      },
+      {
+        "text": "Holat fe'llari Continuous shaklida ishlatilmaydi. Bular: know, understand, like, love, want, need, have (egalik ma'nosida), believe. Ular doim Simple da qoladi.",
+        "examples": [
+          { "en": "I understand you.", "uz": "Men sizni tushunaman." },
+          { "en": "She has two brothers.", "uz": "Uning ikkita akasi bor." }
+        ]
+      },
+      {
+        "text": "Ba'zi fe'llar ikkala zamonda ham ishlatiladi, lekin ma'nosi o'zgaradi. Have egalik bo'lsa Simple, harakat bo'lsa Continuous: I have a car / I'm having lunch.",
+        "examples": [
+          { "en": "I have a car.", "uz": "Mening mashinam bor." },
+          { "en": "I'm having lunch.", "uz": "Men tushlik qilyapman." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["", "Present Simple", "Present Continuous"],
+      "rows": [
+        ["Ma'no", "odat, doimiy", "hozir, vaqtinchalik"],
+        ["Shakl", "I work", "I am working"],
+        ["Belgi so'zlar", "always, every day", "now, at the moment"],
+        ["Savol", "Do you work?", "Are you working?"],
+        ["Inkor", "I don't work", "I'm not working"],
+        ["Holat fe'llari", "I know, I want", "ishlatilmaydi"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I am working in a bank. (doimiy ish haqida)",
+      "right": "I work in a bank.",
+      "why": "Doimiy kasb Present Simple bilan aytiladi. Continuous «vaqtincha shu yerda ishlayapman» degan ma'no beradi."
+    },
+    {
+      "wrong": "Look! It rains.",
+      "right": "Look! It's raining.",
+      "why": "«Look!» ayni damni ko'rsatadi — Continuous kerak."
+    },
+    {
+      "wrong": "I am wanting a coffee.",
+      "right": "I want a coffee.",
+      "why": "Want — holat fe'li, -ing shaklida ishlatilmaydi."
+    },
+    {
+      "wrong": "She is knowing the answer.",
+      "right": "She knows the answer.",
+      "why": "Know ham holat fe'li."
+    },
+    {
+      "wrong": "Every day I am going to work by bus.",
+      "right": "Every day I go to work by bus.",
+      "why": "«Every day» odatni bildiradi — Simple kerak."
+    },
+    {
+      "wrong": "What do you do now?",
+      "right": "What are you doing now?",
+      "why": "«Now» bilan Continuous ishlatiladi. «What do you do?» esa kasbni so'raydi."
+    }
+  ],
+  "words": [
+    { "en": "usually", "uz": "odatda", "ipa": "/ˈjuːʒuəli/", "example": "I usually walk to work." },
+    { "en": "today", "uz": "bugun", "ipa": "/təˈdeɪ/", "example": "Today I'm taking the bus." },
+    { "en": "this week", "uz": "bu hafta", "ipa": "/ðɪs ˈwiːk/", "example": "I'm busy this week." },
+    { "en": "know", "uz": "bilmoq", "ipa": "/nəʊ/", "example": "I know his name." },
+    { "en": "understand", "uz": "tushunmoq", "ipa": "/ˌʌndəˈstænd/", "example": "I don't understand." },
+    { "en": "want", "uz": "xohlamoq", "ipa": "/wɒnt/", "example": "She wants a new phone." },
+    { "en": "believe", "uz": "ishonmoq", "ipa": "/bɪˈliːv/", "example": "I believe you." },
+    { "en": "stay", "uz": "turmoq, qolmoq", "ipa": "/steɪ/", "example": "I'm staying with friends." },
+    { "en": "temporary", "uz": "vaqtinchalik", "ipa": "/ˈtemprəri/", "example": "It's a temporary job." },
+    { "en": "at the moment", "uz": "ayni damda", "ipa": "/ət ðə ˈməʊmənt/", "example": "He's out at the moment." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 5, "focus": "belgi so'ziga qarab zamonni tanlash" },
+      { "type": 1, "count": 2, "focus": "holat fe'lini aniqlash" },
+      { "type": 5, "count": 3, "focus": "«I am wanting», «Every day I am going» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "bir mavzuda ikki zamonda gap tuzish: doimiy va hozirgi" },
+      { "type": 6, "count": 3, "focus": "o'zbekchadan tarjima: «Odatda avtobusda yuraman, bugun taksida ketyapman»" }
+    ],
+    "final": { "type": 7, "task": "O'zingiz haqingizda yozing: odatda nima qilasiz va shu hafta nima o'zgargan. Ikki zamonni aralashtirib, 6 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam odatdagi kuni va bugungi kuni haqida gapiradi. Qaysi ish odat, qaysisi vaqtinchalik ekanini ajrating.",
+    "level_hint": "o'rtacha tezlik, 45 soniya"
+  },
+  "review": {
+    "topic": "Present Simple va Continuous farqi",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

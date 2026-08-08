@@ -1,0 +1,113 @@
+{
+  "id": "a2-b1-l3",
+  "level": "A2",
+  "block": "a2-b1",
+  "title": "Kiyim va tashqi ko'rinishni tasvirlash",
+  "can_do": "Odamni kiyimiga qarab tanita olasiz",
+  "why": "Aeroportda kutib olish, olomonda odam ko'rsatish, do'konda kiyim tanlash — hammasida bir qolip ishlaydi: wear fe'li Present Continuous da.",
+  "rule": {
+    "title": "wear va kiyim tasviri",
+    "points": [
+      {
+        "text": "Ayni damda kiyilgan kiyim haqida wear fe'li Continuous da ishlatiladi: She is wearing a red dress. Bu «hozir egnida» degani.",
+        "examples": [
+          { "en": "She is wearing a blue coat.", "uz": "U ko'k palto kiygan." },
+          { "en": "The man in the black jacket is my brother.", "uz": "Qora kurtkali odam — mening akam." }
+        ]
+      },
+      {
+        "text": "Doimiy odat haqida bo'lsa, Simple ishlatiladi: He always wears a suit at work. Farq o'sha — hozir yoki har doim.",
+        "examples": [
+          { "en": "He always wears a suit to work.", "uz": "U ishga doim kostyum kiyadi." },
+          { "en": "Today he's wearing jeans.", "uz": "Bugun u jinsi kiygan." }
+        ]
+      },
+      {
+        "text": "Ba'zi kiyimlar ingliz tilida doim ko'plikda: trousers, jeans, shorts, glasses. Ular «a» olmaydi va are bilan keladi. Bittasini aytish uchun a pair of ishlatiladi.",
+        "examples": [
+          { "en": "My jeans are new.", "uz": "Jinsim yangi." },
+          { "en": "I need a pair of shoes.", "uz": "Menga bir juft tufli kerak." }
+        ]
+      },
+      {
+        "text": "Kiyim tasvirida sifat tartibi ishlaydi: o'lcham → rang → tur. A long black coat. Naqsh uchun striped, checked, plain ishlatiladi.",
+        "examples": [
+          { "en": "She's wearing a long black coat.", "uz": "U uzun qora palto kiygan." },
+          { "en": "He's got a striped shirt on.", "uz": "U yo'l-yo'l ko'ylak kiygan." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Kiyim", "O'zbekcha", "Shakl"],
+      "rows": [
+        ["shirt", "ko'ylak (erkak)", "birlik"],
+        ["dress", "ko'ylak (ayol)", "birlik"],
+        ["coat", "palto", "birlik"],
+        ["jacket", "kurtka", "birlik"],
+        ["trousers", "shim", "doim ko'plik"],
+        ["jeans", "jinsi", "doim ko'plik"],
+        ["shoes", "tufli", "juft"],
+        ["glasses", "ko'zoynak", "doim ko'plik"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "She wears a red dress now.",
+      "right": "She is wearing a red dress now.",
+      "why": "«Now» ayni damni bildiradi — Continuous kerak."
+    },
+    {
+      "wrong": "I have a new trouser.",
+      "right": "I have new trousers. / I have a new pair of trousers.",
+      "why": "Trousers doim ko'plikda ishlatiladi."
+    },
+    {
+      "wrong": "My jeans is blue.",
+      "right": "My jeans are blue.",
+      "why": "Ko'plik ot bilan are keladi."
+    },
+    {
+      "wrong": "She is wearing a black long coat.",
+      "right": "She is wearing a long black coat.",
+      "why": "Sifat tartibi: o'lcham rangdan oldin turadi."
+    },
+    {
+      "wrong": "He is dressing a suit.",
+      "right": "He is wearing a suit.",
+      "why": "Dress — kiyintirmoq jarayoni. Egnida bo'lgan kiyim uchun wear ishlatiladi."
+    }
+  ],
+  "words": [
+    { "en": "wear", "uz": "kiymoq", "ipa": "/weə(r)/", "example": "She is wearing a hat." },
+    { "en": "shirt", "uz": "ko'ylak", "ipa": "/ʃɜːt/", "example": "He's wearing a white shirt." },
+    { "en": "dress", "uz": "ayollar ko'ylagi", "ipa": "/dres/", "example": "That dress is beautiful." },
+    { "en": "trousers", "uz": "shim", "ipa": "/ˈtraʊzəz/", "example": "My trousers are black." },
+    { "en": "jeans", "uz": "jinsi", "ipa": "/dʒiːnz/", "example": "I usually wear jeans." },
+    { "en": "coat", "uz": "palto", "ipa": "/kəʊt/", "example": "Take your coat, it's cold." },
+    { "en": "shoes", "uz": "tufli", "ipa": "/ʃuːz/", "example": "These shoes are new." },
+    { "en": "hat", "uz": "shlyapa, do'ppi", "ipa": "/hæt/", "example": "He's wearing a hat." },
+    { "en": "wear glasses", "uz": "ko'zoynak taqmoq", "ipa": "/weə ˈɡlɑːsɪz/", "example": "She wears glasses." },
+    { "en": "a pair of", "uz": "bir juft", "ipa": "/ə ˈpeər əv/", "example": "A pair of shoes." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 3, "focus": "wear fe'lini to'g'ri zamonda qo'yish" },
+      { "type": 1, "count": 2, "focus": "birlik yoki ko'plik kiyim nomini aniqlash" },
+      { "type": 5, "count": 3, "focus": "«a trouser», «jeans is», sifat tartibi xatolarini topish" },
+      { "type": 4, "count": 3, "focus": "rasmda odamning kiyimini tasvirlash" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «U uzun qora palto kiygan», «Jinsim yangi»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingizni aeroportda kutib olishadi. Bugun nima kiyganingizni batafsil yozing, toki sizni topa olishsin. 5 gap." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam olomondagi kishini kiyimiga qarab tasvirlaydi. Kiyimlar va ranglarni yozing.",
+    "level_hint": "o'rtacha tezlik, 40 soniya"
+  },
+  "review": {
+    "topic": "wear, kiyim leksikasi",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "id": "a2-b1-l1",
+  "level": "A2",
+  "block": "a2-b1",
+  "title": "Hozir nima qilayotganingizni aytish",
+  "can_do": "Ayni damda bo'layotgan ish haqida gapira olasiz",
+  "why": "Telefonda «Nima qilyapsan?» degan savolga javob berish uchun Present Simple yaramaydi. Ingliz tilida hozirgi payt uchun alohida zamon bor — va u o'zbek tilidagi «-yapman» ga to'g'ri keladi.",
+  "rule": {
+    "title": "Present Continuous: am / is / are + fe'l-ing",
+    "points": [
+      {
+        "text": "Ayni damda bo'layotgan ish uchun ikki qismli qolip ishlatiladi: to be fe'li (am, is, are) va asosiy fe'lga -ing qo'shimchasi. Ikkalasi ham bo'lishi shart — biri tushib qolsa, gap buziladi.",
+        "examples": [
+          { "en": "I am working now.", "uz": "Men hozir ishlayapman." },
+          { "en": "She is cooking dinner.", "uz": "U kechki ovqat pishiryapti." }
+        ]
+      },
+      {
+        "text": "To be shakli shaxsga qarab tanlanadi, xuddi oddiy gapdagidek: I am, he / she / it is, you / we / they are. Og'zaki nutqda qisqartiriladi: I'm working, she's cooking.",
+        "examples": [
+          { "en": "They are waiting outside.", "uz": "Ular tashqarida kutishyapti." },
+          { "en": "We're having lunch.", "uz": "Biz tushlik qilyapmiz." }
+        ]
+      },
+      {
+        "text": "-ing qo'shishning qoidalari: odatda shunchaki -ing (work → working). Oxirida jim -e bo'lsa, u tushadi (make → making). Qisqa bo'g'inda oxirgi undosh takrorlanadi (sit → sitting, run → running).",
+        "examples": [
+          { "en": "He is making tea.", "uz": "U choy damlayapti." },
+          { "en": "The children are running in the garden.", "uz": "Bolalar bog'da yugurishyapti." }
+        ]
+      },
+      {
+        "text": "Inkor uchun to be dan keyin not qo'yiladi, savol uchun to be oldinga chiqadi. Asosiy fe'l -ing bilan qolaveradi.",
+        "examples": [
+          { "en": "I'm not sleeping.", "uz": "Men uxlamayapman." },
+          { "en": "Are you listening to me?", "uz": "Meni eshityapsizmi?" }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Shakl", "Misol", "O'zbekcha"],
+      "rows": [
+        ["Darak", "I am reading.", "O'qiyapman."],
+        ["Inkor", "I'm not reading.", "O'qimayapman."],
+        ["Savol", "Are you reading?", "O'qiyapsizmi?"],
+        ["Qisqa javob", "Yes, I am. / No, I'm not.", "Ha. / Yo'q."],
+        ["-e tushadi", "make → making", "—"],
+        ["undosh ikkilanadi", "sit → sitting", "—"]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I working now.",
+      "right": "I am working now.",
+      "why": "To be tushib qolgan. Present Continuous ikki qismdan iborat va biri yetarli emas."
+    },
+    {
+      "wrong": "She is cook dinner.",
+      "right": "She is cooking dinner.",
+      "why": "Asosiy fe'lga -ing qo'shilishi shart."
+    },
+    {
+      "wrong": "He is makeing tea.",
+      "right": "He is making tea.",
+      "why": "Jim -e tushib qoladi: make → making."
+    },
+    {
+      "wrong": "I am siting here.",
+      "right": "I am sitting here.",
+      "why": "Qisqa bo'g'inda oxirgi undosh ikkilanadi: sit → sitting."
+    },
+    {
+      "wrong": "Do you working now?",
+      "right": "Are you working now?",
+      "why": "Bu zamonda savol to be bilan yasaladi, do bilan emas."
+    },
+    {
+      "wrong": "I am knowing the answer.",
+      "right": "I know the answer.",
+      "why": "Know, like, want, understand kabi holat fe'llari -ing shaklida ishlatilmaydi."
+    }
+  ],
+  "words": [
+    { "en": "now", "uz": "hozir", "ipa": "/naʊ/", "example": "I'm busy now." },
+    { "en": "at the moment", "uz": "ayni damda", "ipa": "/ət ðə ˈməʊmənt/", "example": "She's working at the moment." },
+    { "en": "wait", "uz": "kutmoq", "ipa": "/weɪt/", "example": "They are waiting outside." },
+    { "en": "listen", "uz": "eshitmoq", "ipa": "/ˈlɪsn/", "example": "Are you listening?" },
+    { "en": "sit", "uz": "o'tirmoq", "ipa": "/sɪt/", "example": "He is sitting near the window." },
+    { "en": "run", "uz": "yugurmoq", "ipa": "/rʌn/", "example": "The children are running." },
+    { "en": "wear", "uz": "kiymoq", "ipa": "/weə(r)/", "example": "She is wearing a red dress." },
+    { "en": "carry", "uz": "ko'tarib yurmoq", "ipa": "/ˈkæri/", "example": "He is carrying a big bag." },
+    { "en": "look for", "uz": "izlamoq", "ipa": "/ˈlʊk fɔː(r)/", "example": "I'm looking for my keys." },
+    { "en": "happen", "uz": "sodir bo'lmoq", "ipa": "/ˈhæpən/", "example": "What is happening?" }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 4, "focus": "to be va -ing shaklini to'g'ri qo'yish" },
+      { "type": 3, "count": 3, "focus": "darak gapni savol va inkorga aylantirish" },
+      { "type": 5, "count": 3, "focus": "«I working», «Do you working», «makeing» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "rasmda nima bo'layotganini tasvirlash" },
+      { "type": 6, "count": 3, "focus": "o'zbekchadan tarjima: «Men hozir ishlayapman», «Meni eshityapsizmi?»" }
+    ],
+    "final": { "type": 7, "task": "Do'stingiz qo'ng'iroq qildi va «Hozir nima qilyapsan?» deb so'radi. Uyingizda kim nima qilayotganini 5 gapda yozing." }
+  },
+  "skill_task": {
+    "kind": "listening",
+    "task": "Odam telefonda hozir nima qilayotganini aytadi. Har bir kishi nima qilayotganini yozing.",
+    "level_hint": "o'rtacha tezlik, 40 soniya"
+  },
+  "review": {
+    "topic": "Present Continuous",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

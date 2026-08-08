@@ -1,0 +1,118 @@
+{
+  "id": "a2-b1-l4",
+  "level": "A2",
+  "block": "a2-b1",
+  "title": "Artikllarni to'g'ri qo'yish",
+  "can_do": "a, an, the ni to'g'ri tanlaysiz va qachon artikl kerak emasligini bilasiz",
+  "why": "O'zbek tilida artikl umuman yo'q, shuning uchun bu mavzu eng ko'p xato beradigan joy. Yaxshi xabar: butun tizim bitta savolga tayanadi — tinglovchi qaysi narsa haqida gapirayotganingizni biladimi yoki yo'q.",
+  "rule": {
+    "title": "a / an / the / artiklsiz",
+    "points": [
+      {
+        "text": "Asosiy qoida: birinchi marta eslatilsa a / an, keyin o'sha narsa haqida gapirilsa the. Birinchi gapda tinglovchi qaysi kitob ekanini bilmaydi, ikkinchisida — biladi.",
+        "examples": [
+          { "en": "I bought a book. The book is very good.", "uz": "Men kitob sotib oldim. Kitob juda yaxshi." },
+          { "en": "There is a café near here. The café is cheap.", "uz": "Bu yaqinda kafe bor. Kafe arzon." }
+        ]
+      },
+      {
+        "text": "A yoki an tanlash yozilishga emas, tovushga qarab bo'ladi: unli tovush oldidan an. Shuning uchun an hour (h o'qilmaydi), lekin a university (yu tovushi).",
+        "examples": [
+          { "en": "an apple, an hour, an engineer", "uz": "olma, soat, muhandis" },
+          { "en": "a university, a European country", "uz": "universitet, Yevropa davlati" }
+        ]
+      },
+      {
+        "text": "The yagona narsa bilan ham ishlatiladi — dunyoda bittagina bo'lganda yoki vaziyatdan aniq bo'lganda: the sun, the internet, the kitchen (bizning oshxona).",
+        "examples": [
+          { "en": "The sun is very hot today.", "uz": "Bugun quyosh juda qizdiryapti." },
+          { "en": "Can you close the door?", "uz": "Eshikni yopa olasizmi?" }
+        ]
+      },
+      {
+        "text": "Artikl umuman qo'yilmaydi: ko'plikda umumiy ma'noda (Cats are nice), sanalmaydigan otlarda (Water is important), shahar va davlat nomlarida (I live in Tashkent), ovqat nomlarida (I like rice).",
+        "examples": [
+          { "en": "Books are expensive.", "uz": "Kitoblar qimmat." },
+          { "en": "I like coffee.", "uz": "Menga qahva yoqadi." }
+        ]
+      }
+    ],
+    "table": {
+      "head": ["Holat", "Artikl", "Misol"],
+      "rows": [
+        ["birinchi marta, birlik", "a / an", "I saw a dog."],
+        ["ikkinchi marta", "the", "The dog was big."],
+        ["yagona narsa", "the", "the sun, the moon"],
+        ["vaziyatdan aniq", "the", "Open the window."],
+        ["ko'plik, umumiy", "—", "Dogs are friendly."],
+        ["sanalmaydigan", "—", "Water is cold."],
+        ["shahar, davlat", "—", "I live in Tashkent."],
+        ["kasb", "a / an", "She is a doctor."]
+      ]
+    }
+  },
+  "common_errors": [
+    {
+      "wrong": "I am student.",
+      "right": "I am a student.",
+      "why": "Kasb va maqom oldidan birlikda artikl shart."
+    },
+    {
+      "wrong": "I like the coffee.",
+      "right": "I like coffee.",
+      "why": "Umumiy ma'noda sanalmaydigan ot artiklsiz ishlatiladi. «The coffee» aniq bir qahvani bildiradi."
+    },
+    {
+      "wrong": "an university",
+      "right": "a university",
+      "why": "An yozilishga emas, tovushga qarab qo'yiladi. University «yu» bilan boshlanadi."
+    },
+    {
+      "wrong": "a hour",
+      "right": "an hour",
+      "why": "Hour da h o'qilmaydi, unli tovush bilan boshlanadi."
+    },
+    {
+      "wrong": "The cats are nice animals. (umuman mushuklar haqida)",
+      "right": "Cats are nice animals.",
+      "why": "Umumiy ma'nodagi ko'plikda artikl qo'yilmaydi."
+    },
+    {
+      "wrong": "I go to the Tashkent.",
+      "right": "I go to Tashkent.",
+      "why": "Shahar nomlari artiklsiz. Istisnolar: the USA, the UK."
+    }
+  ],
+  "words": [
+    { "en": "a", "uz": "bir (noaniq)", "ipa": "/ə/", "example": "I have a car." },
+    { "en": "an", "uz": "bir (unli oldidan)", "ipa": "/ən/", "example": "She is an engineer." },
+    { "en": "the", "uz": "aniq artikl", "ipa": "/ðə/", "example": "Close the door." },
+    { "en": "sun", "uz": "quyosh", "ipa": "/sʌn/", "example": "The sun is bright." },
+    { "en": "moon", "uz": "oy", "ipa": "/muːn/", "example": "Look at the moon." },
+    { "en": "door", "uz": "eshik", "ipa": "/dɔː(r)/", "example": "Open the door, please." },
+    { "en": "window", "uz": "deraza", "ipa": "/ˈwɪndəʊ/", "example": "Close the window." },
+    { "en": "hour", "uz": "soat", "ipa": "/ˈaʊə(r)/", "example": "I waited an hour." },
+    { "en": "university", "uz": "universitet", "ipa": "/ˌjuːnɪˈvɜːsəti/", "example": "She studies at a university." },
+    { "en": "animal", "uz": "hayvon", "ipa": "/ˈænɪml/", "example": "Cats are clever animals." }
+  ],
+  "practice_spec": {
+    "note": "Mashqlarni AI shu spetsifikatsiya bo'yicha yaratadi. Tur raqamlari — docs/mashqlar.md dagi shkala.",
+    "items": [
+      { "type": 2, "count": 5, "focus": "a / an / the yoki bo'sh qoldirishni tanlash" },
+      { "type": 1, "count": 2, "focus": "tovushga qarab a yoki an ni aniqlash" },
+      { "type": 5, "count": 3, "focus": "«I am student», «I like the coffee», «an university» xatolarini topish" },
+      { "type": 4, "count": 2, "focus": "ikki gapli matn tuzish: birinchisida a, ikkinchisida the" },
+      { "type": 6, "count": 2, "focus": "o'zbekchadan tarjima: «Men talabaman», «Eshikni yoping»" }
+    ],
+    "final": { "type": 7, "task": "Kecha ko'chada ko'rgan bir voqeani yozing. Har bir narsani birinchi marta a bilan, keyin the bilan eslatib. 6 gap." }
+  },
+  "skill_task": {
+    "kind": "reading",
+    "task": "Qisqa matnni o'qing va har bir artikl nega o'sha yerda turganini tushuntiring.",
+    "level_hint": "80 so'z"
+  },
+  "review": {
+    "topic": "artikllar a / an / the",
+    "schedule_days": [3, 7, 21, 60]
+  }
+}

@@ -201,6 +201,28 @@ const SHELL_NAV_OF = {
   's-modes': 's-topics', 's-train': 's-topics', 's-game': 's-topics', 's-result': 's-topics',
 };
 
+// Свернуть или развернуть меню. Состояние живёт в localStorage и читается
+// в <head>, поэтому при загрузке меню не мигает.
+function sideToggle() {
+  const on = document.documentElement.classList.toggle('side-collapsed');
+  const btn = document.getElementById('side-toggle');
+  if (btn) {
+    btn.setAttribute('aria-expanded', on ? 'false' : 'true');
+    btn.setAttribute('aria-label', on ? "Menyuni ochish" : "Menyuni yig'ish");
+  }
+  try { localStorage.setItem('lexiq_side_collapsed', on ? '1' : '0'); } catch (e) {}
+}
+
+// Класс проставлен в <head>, а разметка кнопки всегда приходит развёрнутой —
+// приводим её в соответствие, иначе скринридер скажет неправду.
+(function () {
+  if (!document.documentElement.classList.contains('side-collapsed')) return;
+  const btn = document.getElementById('side-toggle');
+  if (!btn) return;
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-label', 'Menyuni ochish');
+})();
+
 function renderShell(id) {
   // На экране «словарь не загружен» меню остаётся: оттуда человек уходит
   // в «Yangi so'zlar» и собирает словарь заново, а без меню он бы застрял.

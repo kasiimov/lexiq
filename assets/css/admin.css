@@ -75,6 +75,8 @@ header {
   transition:background-color .15s, border-color .15s, color .15s, transform .12s;
   display:inline-flex; align-items:center; gap:6px;
   white-space:nowrap;
+  /* Кнопка выхода — ссылка, а не button: без сброса она приезжает подчёркнутой. */
+  text-decoration:none;
 }
 .btn:active { transform:scale(.96); }
 .btn-primary { background:var(--lime); color:var(--ink); }

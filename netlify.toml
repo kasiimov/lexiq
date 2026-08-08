@@ -12,6 +12,20 @@
   path = "/api/generate"
   function = "generate"
 
+# Вход в админку. Пароль сверяется здесь, на сервере, поэтому в браузер он
+# не попадает; статический admin.html без валидной куки просто не отдаётся.
+[[edge_functions]]
+  path = "/admin"
+  function = "admin-gate"
+
+[[edge_functions]]
+  path = "/admin.html"
+  function = "admin-gate"
+
+[[edge_functions]]
+  path = "/admin/logout"
+  function = "admin-gate"
+
 # Короткий адрес приложения
 [[redirects]]
   from = "/app"

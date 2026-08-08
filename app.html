@@ -21,9 +21,9 @@ try {
 } catch (e) {}
 </script>
 </head>
-<!-- Приложение открывается на экране входа: меню и шапка там ни к чему,
-     поэтому классы стоят сразу в разметке — иначе они мигнут до первого show() -->
-<body class="no-chrome flush">
+<!-- Стартовый экран — загрузка: меню и шапка на нём не нужны, поэтому класс
+     стоит сразу в разметке, иначе они мигнут до первого show() -->
+<body class="no-chrome">
 
 <div class="shell">
 
@@ -135,7 +135,7 @@ try {
 <div class="app">
 
 <!-- KIRISH -->
-<div id="s-auth" class="screen active">
+<div id="s-auth" class="screen">
 
   <aside class="auth-aside">
     <a class="auth-aside-logo" href="/">
@@ -144,24 +144,24 @@ try {
     </a>
 
     <div>
-      <h2>Kuniga 10 daqiqa — va so'zlar esda qoladi</h2>
+      <h2 data-t>Kuniga 10 daqiqa — va so'zlar esda qoladi</h2>
       <ul class="auth-points">
         <li class="auth-point">
           <i class="ic auth-check" data-i="check" data-s="12"></i>
-          <span>Oltita mashq rejimi — bir so'z har safar boshqacha so'raladi</span>
+          <span data-t>Oltita mashq rejimi — bir so'z har safar boshqacha so'raladi</span>
         </li>
         <li class="auth-point">
           <i class="ic auth-check" data-i="check" data-s="12"></i>
-          <span>Leitner takrorlash: qiyin so'zlar o'zi qaytib keladi</span>
+          <span data-t>Leitner takrorlash: qiyin so'zlar o'zi qaytib keladi</span>
         </li>
         <li class="auth-point">
           <i class="ic auth-check" data-i="check" data-s="12"></i>
-          <span>AI ustoz xatoni o'zbek tilida tushuntiradi</span>
+          <span data-t>AI ustoz xatoni o'zbek tilida tushuntiradi</span>
         </li>
       </ul>
     </div>
 
-    <p class="auth-aside-note">2 400+ o'quvchi haftada 4 kun mashq qiladi</p>
+    <p class="auth-aside-note" data-t>2 400+ o'quvchi haftada 4 kun mashq qiladi</p>
   </aside>
 
   <div class="auth-main">
@@ -176,38 +176,38 @@ try {
     </div>
 
     <div class="auth-box">
-      <h1 class="auth-title" id="auth-title">Qaytganingizdan xursandmiz</h1>
-      <p class="auth-sub" id="auth-sub">Seriyangiz sizni kutib turadi — kirib, bugungi 10 daqiqani yopamiz.</p>
+      <h1 class="auth-title" id="auth-title" data-t>Qaytganingizdan xursandmiz</h1>
+      <p class="auth-sub" id="auth-sub" data-t>Seriyangiz sizni kutib turadi — kirib, bugungi 10 daqiqani yopamiz.</p>
 
       <div class="auth-tabs" id="auth-tabs">
-        <button class="auth-tab active" id="auth-tab-in" onclick="authTab('in')">Kirish</button>
-        <button class="auth-tab" id="auth-tab-up" onclick="authTab('up')">Ro'yxatdan o'tish</button>
+        <button class="auth-tab active" id="auth-tab-in" onclick="authTab('in')" data-t>Kirish</button>
+        <button class="auth-tab" id="auth-tab-up" onclick="authTab('up')" data-t>Ro'yxatdan o'tish</button>
       </div>
 
       <div class="auth-fields">
         <div class="auth-field" id="auth-name-row" style="display:none">
-          <label for="auth-name">Ismingiz</label>
-          <input id="auth-name" type="text" autocomplete="name" placeholder="Masalan: Dilnoza">
+          <label for="auth-name" data-t>Ismingiz</label>
+          <input id="auth-name" type="text" autocomplete="name" placeholder="Masalan: Dilnoza" data-t-ph="Masalan: Dilnoza">
         </div>
         <div class="auth-field">
           <label for="auth-email">Email</label>
           <input id="auth-email" type="email" autocomplete="email" placeholder="siz@example.com">
         </div>
         <div class="auth-field">
-          <label for="auth-pass">Parol</label>
-          <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Kamida 6 ta belgi">
+          <label for="auth-pass" data-t>Parol</label>
+          <input id="auth-pass" type="password" autocomplete="current-password" placeholder="Kamida 6 ta belgi" data-t-ph="Kamida 6 ta belgi">
         </div>
       </div>
 
       <div class="auth-err" id="auth-err" style="display:none"></div>
 
-      <button class="big-btn primary" id="auth-submit" onclick="authSubmit()">Kirish</button>
-      <button class="big-btn secondary" id="auth-google" onclick="authGoogle()">Google bilan kirish</button>
+      <button class="big-btn primary" id="auth-submit" onclick="authSubmit()" data-t>Kirish</button>
+      <button class="big-btn secondary" id="auth-google" onclick="authGoogle()" data-t>Google bilan kirish</button>
 
-      <div class="auth-sep"><span>yoki</span></div>
+      <div class="auth-sep"><span data-t>yoki</span></div>
 
-      <button class="big-btn secondary" onclick="authGuest()">Mehmon sifatida davom etish</button>
-      <div class="auth-note" id="auth-note">
+      <button class="big-btn secondary" onclick="authGuest()" data-t>Mehmon sifatida davom etish</button>
+      <div class="auth-note" id="auth-note" data-t>
         Mehmon rejimida natijalar faqat shu qurilmada saqlanadi.
       </div>
     </div>
@@ -215,11 +215,11 @@ try {
 </div>
 
 <!-- LOADING -->
-<div id="s-loading" class="screen">
+<div id="s-loading" class="screen active">
   <div class="loading-screen">
     <div class="spinner"></div>
     <div class="ls-title">Congix English</div>
-    <div class="ls-sub" id="ls-sub">Lug'at yuklanmoqda...</div>
+    <div class="ls-sub" id="ls-sub" data-t>Hisobingiz tekshirilmoqda...</div>
   </div>
 </div>
 
@@ -229,12 +229,12 @@ try {
     <div class="logo-box">C</div>
     <div class="logo-text">
       <div class="t1">Congix English</div>
-      <div class="t2">Ingliz tilini o'rganish</div>
+      <div class="t2" data-t>Ingliz tilini o'rganish</div>
     </div>
   </div>
   <div class="error-screen">
     <div class="es-icon"><i class="ic" data-i="library" data-s="40"></i></div>
-    <div class="es-title">Lug'at yuklanmagan</div>
+    <div class="es-title" data-t>Lug'at yuklanmagan</div>
     <div class="es-sub" id="error-msg">vocabulary.json fayl topilmadi.<br>So'zlar lug'atini yuklash kerak.</div>
 
     <div class="file-input-wrap">
@@ -260,7 +260,7 @@ try {
       <div class="logo-box">C</div>
       <div class="logo-text">
         <div class="t1">Congix English</div>
-        <div class="t2">Ingliz tilini o'rganish</div>
+        <div class="t2" data-t>Ingliz tilini o'rganish</div>
       </div>
     </div>
     <div class="user-chip" id="user-chip">
@@ -274,7 +274,7 @@ try {
   <div class="level-card">
     <div class="lc-row">
       <div>
-        <div class="lc-label">Sizning darajangiz</div>
+        <div class="lc-label" data-t>Sizning darajangiz</div>
         <div class="lc-level" id="user-level">A1</div>
         <div class="lc-sub" id="user-level-name">Beginner</div>
       </div>
@@ -299,17 +299,17 @@ try {
 
   <button class="daily-card" id="daily-card" onclick="dailyStart()">
     <div class="dc-top">
-      <span class="dc-tag">Kun topshirig'i</span>
-      <span class="dc-state" id="dc-state">Bajarilmagan</span>
+      <span class="dc-tag" data-t>Kun topshirig'i</span>
+      <span class="dc-state" id="dc-state" data-t>Bajarilmagan</span>
     </div>
-    <div class="dc-title" id="dc-title">Bugungi 10 ta so'z</div>
-    <div class="dc-sub" id="dc-sub">Hamma uchun bir xil. Xatosiz bajaring va rekordni yangilang.</div>
+    <div class="dc-title" id="dc-title" data-t>Bugungi 10 ta so'z</div>
+    <div class="dc-sub" id="dc-sub" data-t>Hamma uchun bir xil. Xatosiz bajaring va rekordni yangilang.</div>
   </button>
 
   <div class="mini-stats">
     <div class="ms-box"><div class="ms-v streak" id="ms-streak">0</div><div class="ms-l"><i class="ic" data-i="flame" data-s="12"></i> Kun</div></div>
     <div class="ms-box"><div class="ms-v known" id="ms-known">0</div><div class="ms-l"><i class="ic" data-i="check" data-s="12"></i> So'z</div></div>
-    <div class="ms-box"><div class="ms-v daily" id="ms-today">0</div><div class="ms-l">Bugun</div></div>
+    <div class="ms-box"><div class="ms-v daily" id="ms-today">0</div><div class="ms-l" data-t>Bugun</div></div>
   </div>
 
   <div class="daily-goal">
@@ -327,33 +327,33 @@ try {
   <div class="action-grid">
     <button class="action-card" onclick="show('s-stats')">
       <span class="ac-ico"><i class="ic" data-i="chart" data-s="22"></i></span>
-      <span class="ac-title">Statistika</span>
-      <span class="ac-sub">Batafsil natijalar</span>
+      <span class="ac-title" data-t>Statistika</span>
+      <span class="ac-sub" data-t>Batafsil natijalar</span>
     </button>
     <button class="action-card tutor-card" onclick="show('s-tutor')">
       <span class="ac-ico"><i class="ic" data-i="bot" data-s="22"></i></span>
-      <span class="ac-title">AI Ustoz</span>
-      <span class="ac-sub">Savol bering</span>
+      <span class="ac-title" data-t>AI Ustoz</span>
+      <span class="ac-sub" data-t>Savol bering</span>
     </button>
     <button class="action-card" onclick="show('s-map')">
       <span class="ac-ico"><i class="ic" data-i="map" data-s="22"></i></span>
-      <span class="ac-title">Xarita</span>
-      <span class="ac-sub">Yo'lingiz</span>
+      <span class="ac-title" data-t>Xarita</span>
+      <span class="ac-sub" data-t>Yo'lingiz</span>
     </button>
     <button class="action-card tutor-card" onclick="show('s-write')">
       <span class="ac-ico"><i class="ic" data-i="pen" data-s="22"></i></span>
-      <span class="ac-title">Yozish</span>
-      <span class="ac-sub">Matn va tekshiruv</span>
+      <span class="ac-title" data-t>Yozish</span>
+      <span class="ac-sub" data-t>Matn va tekshiruv</span>
     </button>
     <button class="action-card tutor-card" onclick="show('s-read')">
       <span class="ac-ico"><i class="ic" data-i="book-open" data-s="22"></i></span>
-      <span class="ac-title">O'qish</span>
-      <span class="ac-sub">Matn va savollar</span>
+      <span class="ac-title" data-t>O'qish</span>
+      <span class="ac-sub" data-t>Matn va savollar</span>
     </button>
     <button class="action-card tutor-card" onclick="show('s-ai')">
       <span class="ac-ico"><i class="ic" data-i="brain" data-s="22"></i></span>
-      <span class="ac-title">AI mashq</span>
-      <span class="ac-sub">Dars va test</span>
+      <span class="ac-title" data-t>AI mashq</span>
+      <span class="ac-sub" data-t>Dars va test</span>
     </button>
   </div>
 </div>
@@ -362,9 +362,9 @@ try {
 <div id="s-topics" class="screen">
   <button class="back-btn" onclick="show('s-home')"><i class="ic" data-i="arrow-left" data-s="15"></i> Orqaga</button>
   <div>
-    <div class="sec-lbl">Daraja</div>
+    <div class="sec-lbl" data-t>Daraja</div>
     <div class="level-pills" id="level-pills">
-      <button class="lvl-pill active" data-lvl="all" onclick="setLevelFilter('all')">Hammasi</button>
+      <button class="lvl-pill active" data-lvl="all" onclick="setLevelFilter('all')" data-t>Hammasi</button>
       <button class="lvl-pill" data-lvl="A1" onclick="setLevelFilter('A1')">A1</button>
       <button class="lvl-pill" data-lvl="A2" onclick="setLevelFilter('A2')">A2</button>
       <button class="lvl-pill" data-lvl="B1" onclick="setLevelFilter('B1')">B1</button>
@@ -373,10 +373,10 @@ try {
     </div>
   </div>
   <div>
-    <div class="sec-lbl">Mavzu tanlang</div>
+    <div class="sec-lbl" data-t>Mavzu tanlang</div>
     <div class="topics-grid" id="topics-grid"></div>
   </div>
-  <button class="big-btn primary" onclick="show('s-modes')">Davom etish <i class="ic" data-i="arrow-right" data-s="15"></i></button>
+  <button class="big-btn primary" onclick="show('s-modes')" data-t>Davom etish <i class="ic" data-i="arrow-right" data-s="15"></i></button>
   <button class="big-btn secondary" onclick="show('s-words')"><i class="ic" data-i="bot" data-s="16"></i> Yangi so'zlar qo'shish</button>
 </div>
 
@@ -384,7 +384,7 @@ try {
 <div id="s-modes" class="screen">
   <button class="back-btn" onclick="show('s-topics')"><i class="ic" data-i="arrow-left" data-s="15"></i> Orqaga</button>
   <div>
-    <div class="sec-lbl">Tarjima yo'nalishi</div>
+    <div class="sec-lbl" data-t>Tarjima yo'nalishi</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
       <button class="gm-card selected" id="dir-eu" onclick="setDir('en-uz')">
         <span class="gm-ico"><i class="ic" data-i="globe" data-s="22"></i></span>
@@ -397,25 +397,25 @@ try {
     </div>
   </div>
   <div>
-    <div class="sec-lbl">Mashq rejimi</div>
+    <div class="sec-lbl" data-t>Mashq rejimi</div>
     <div class="gm-grid">
       <button class="gm-card selected" data-gm="classic" onclick="setGameMode('classic')">
-        <span class="gm-ico"><i class="ic" data-i="layers" data-s="22"></i></span><span class="gm-name">Classic</span><span class="gm-desc">Oddiy rejim</span>
+        <span class="gm-ico"><i class="ic" data-i="layers" data-s="22"></i></span><span class="gm-name">Classic</span><span class="gm-desc" data-t>Oddiy rejim</span>
       </button>
       <button class="gm-card" data-gm="multi" onclick="setGameMode('multi')">
-        <span class="gm-ico"><i class="ic" data-i="target" data-s="22"></i></span><span class="gm-name">4 variant</span><span class="gm-desc">Eng oson rejim</span>
+        <span class="gm-ico"><i class="ic" data-i="target" data-s="22"></i></span><span class="gm-name">4 variant</span><span class="gm-desc" data-t>Eng oson rejim</span>
       </button>
       <button class="gm-card" data-gm="time" onclick="setGameMode('time')">
-        <span class="gm-ico"><i class="ic" data-i="timer" data-s="22"></i></span><span class="gm-name">Time Attack</span><span class="gm-desc">60 soniya</span>
+        <span class="gm-ico"><i class="ic" data-i="timer" data-s="22"></i></span><span class="gm-name">Time Attack</span><span class="gm-desc" data-t>60 soniya</span>
       </button>
       <button class="gm-card" data-gm="survival" onclick="setGameMode('survival')">
-        <span class="gm-ico"><i class="ic" data-i="heart" data-s="22"></i></span><span class="gm-name">Survival</span><span class="gm-desc">3 jon</span>
+        <span class="gm-ico"><i class="ic" data-i="heart" data-s="22"></i></span><span class="gm-name">Survival</span><span class="gm-desc" data-t>3 jon</span>
       </button>
       <button class="gm-card" data-gm="fill" onclick="setGameMode('fill')">
-        <span class="gm-ico"><i class="ic" data-i="file-pen" data-s="22"></i></span><span class="gm-name">Fill gap</span><span class="gm-desc">Gapdagi bo'sh joy</span>
+        <span class="gm-ico"><i class="ic" data-i="file-pen" data-s="22"></i></span><span class="gm-name">Fill gap</span><span class="gm-desc" data-t>Gapdagi bo'sh joy</span>
       </button>
       <button class="gm-card" data-gm="build" onclick="setGameMode('build')">
-        <span class="gm-ico"><i class="ic" data-i="blocks" data-s="22"></i></span><span class="gm-name">Sentence</span><span class="gm-desc">Gap qurish</span>
+        <span class="gm-ico"><i class="ic" data-i="blocks" data-s="22"></i></span><span class="gm-name">Sentence</span><span class="gm-desc" data-t>Gap qurish</span>
       </button>
     </div>
   </div>
@@ -423,7 +423,7 @@ try {
     <div class="train-toggle-row">
       <div>
         <div class="tt-t1"><i class="ic" data-i="graduation" data-s="15"></i> Avval o'rganish</div>
-        <div class="tt-t2">Testdan oldin so'zlarni ko'rib chiqing</div>
+        <div class="tt-t2" data-t>Testdan oldin so'zlarni ko'rib chiqing</div>
       </div>
       <div class="toggle-sw on" id="train-sw" onclick="toggleTrain()"></div>
     </div>
@@ -479,9 +479,9 @@ try {
     </div>
   </div>
   <div class="stats-row">
-    <div class="st-box"><div class="st-v c" id="g-correct">0</div><div class="st-l">To'g'ri</div></div>
-    <div class="st-box"><div class="st-v w" id="g-wrong">0</div><div class="st-l">Xato</div></div>
-    <div class="st-box"><div class="st-v t" id="g-total">0</div><div class="st-l">Jami</div></div>
+    <div class="st-box"><div class="st-v c" id="g-correct">0</div><div class="st-l" data-t>To'g'ri</div></div>
+    <div class="st-box"><div class="st-v w" id="g-wrong">0</div><div class="st-l" data-t>Xato</div></div>
+    <div class="st-box"><div class="st-v t" id="g-total">0</div><div class="st-l" data-t>Jami</div></div>
   </div>
   <div class="word-card eng-card" id="word-card">
     <div class="wc-badge" id="wc-badge">INGLIZCHA SO'Z</div>
@@ -492,7 +492,7 @@ try {
   <div class="input-wrap uzb-in" id="input-wrap">
     <div class="input-inner">
       <span class="in-flag" id="in-flag">🇺🇿</span>
-      <input class="in-field" id="in-field" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="O'zbekcha tarjima..." onkeydown="handleKey(event)">
+      <input class="in-field" id="in-field" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="O'zbekcha tarjima..." data-t-ph="O'zbekcha tarjima..." onkeydown="handleKey(event)">
       <button class="in-clear" onclick="clearIn()"><i class="ic" data-i="x" data-s="14"></i></button>
     </div>
   </div>
@@ -504,8 +504,8 @@ try {
   <div class="indicator idle" id="indicator">
     <span class="ind-ico"><i class="ic" data-i="message" data-s="20"></i></span>
     <div class="ind-body">
-      <div class="ind-title">Tayyor bo'ling</div>
-      <div class="ind-msg" id="ind-msg">Javobingizni tanlang yoki yozing</div>
+      <div class="ind-title" data-t>Tayyor bo'ling</div>
+      <div class="ind-msg" id="ind-msg" data-t>Javobingizni tanlang yoki yozing</div>
     </div>
   </div>
   <div class="btn-row single" id="btn-row">
@@ -518,13 +518,13 @@ try {
 <div id="s-result" class="screen">
   <div class="result-card">
     <div class="rc-emoji" id="rc-emoji"><i class="ic" data-i="party" data-s="40"></i></div>
-    <div class="rc-title" id="rc-title">O'yin tugadi!</div>
-    <div class="rc-sub" id="rc-sub">Natijangiz ajoyib</div>
+    <div class="rc-title" id="rc-title" data-t>O'yin tugadi!</div>
+    <div class="rc-sub" id="rc-sub" data-t>Natijangiz ajoyib</div>
     <div class="rc-stats">
-      <div class="rc-stat"><div class="rc-sv ok" id="rc-correct">0</div><div class="rc-sl">To'g'ri</div></div>
-      <div class="rc-stat"><div class="rc-sv bad" id="rc-wrong">0</div><div class="rc-sl">Xato</div></div>
-      <div class="rc-stat"><div class="rc-sv ok" id="rc-score">0</div><div class="rc-sl">Ball</div></div>
-      <div class="rc-stat"><div class="rc-sv" id="rc-time">0:00</div><div class="rc-sl">Vaqt</div></div>
+      <div class="rc-stat"><div class="rc-sv ok" id="rc-correct">0</div><div class="rc-sl" data-t>To'g'ri</div></div>
+      <div class="rc-stat"><div class="rc-sv bad" id="rc-wrong">0</div><div class="rc-sl" data-t>Xato</div></div>
+      <div class="rc-stat"><div class="rc-sv ok" id="rc-score">0</div><div class="rc-sl" data-t>Ball</div></div>
+      <div class="rc-stat"><div class="rc-sv" id="rc-time">0:00</div><div class="rc-sl" data-t>Vaqt</div></div>
     </div>
     <div class="rc-new" id="rc-new" style="display:none">+ N ta yangi so'z o'rgandingiz!</div>
   </div>
@@ -538,7 +538,7 @@ try {
   <div class="level-card">
     <div class="lc-row">
       <div>
-        <div class="lc-label">Joriy daraja</div>
+        <div class="lc-label" data-t>Joriy daraja</div>
         <div class="lc-level" id="stats-level">A1</div>
         <div class="lc-sub" id="stats-level-name">Beginner</div>
       </div>
@@ -564,7 +564,7 @@ try {
       <div class="ng-level" id="next-level">A2</div>
       <div class="ng-sub" id="next-need">A2 gacha: 500 so'z</div>
       <div class="ng-bar"><i id="next-bar" style="width:0%"></i></div>
-      <div class="ng-hint" id="next-hint">Har kuni 10 daqiqa — eng ishonchli yo'l</div>
+      <div class="ng-hint" id="next-hint" data-t>Har kuni 10 daqiqa — eng ishonchli yo'l</div>
     </div>
   </div>
   <button class="big-btn secondary" onclick="resetProgress()" style="font-size:13px;padding:14px;"><i class="ic" data-i="rotate" data-s="15"></i> Statistikani tozalash</button>
@@ -578,30 +578,30 @@ try {
     <div class="tutor-head">
       <div class="tutor-ava"><i class="ic" data-i="bot" data-s="20"></i></div>
       <div class="tutor-head-txt">
-        <div class="tutor-name">Yangi so'zlar</div>
+        <div class="tutor-name" data-t>Yangi so'zlar</div>
         <div class="tutor-sub" id="words-level-label">Daraja: A1</div>
       </div>
     </div>
 
-    <div class="sec-lbl">Kategoriya</div>
+    <div class="sec-lbl" data-t>Kategoriya</div>
     <div class="chat-chips" id="words-topics"></div>
 
     <div class="ai-topic-wrap">
       <input class="ai-topic-input" id="words-topic" type="text" autocomplete="off"
-             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80" oninput="wordsSummary()">
+             placeholder="Yoki o'z mavzungizni yozing..." data-t-ph="Yoki o'z mavzungizni yozing..." maxlength="80" oninput="wordsSummary()">
     </div>
 
-    <div class="sec-lbl">Nechta so'z</div>
+    <div class="sec-lbl" data-t>Nechta so'z</div>
     <div class="chat-chips" id="words-counts"></div>
 
     <div class="words-summary" id="words-summary">—</div>
-    <button class="big-btn primary" onclick="wordsGenerate()">Davom etish <i class="ic" data-i="arrow-right" data-s="15"></i></button>
+    <button class="big-btn primary" onclick="wordsGenerate()" data-t>Davom etish <i class="ic" data-i="arrow-right" data-s="15"></i></button>
   </div>
 
   <div id="words-loading" style="display:none">
     <div class="ai-loading-box">
       <span class="chat-typing"><i></i><i></i><i></i></span>
-      <div class="ai-loading-txt" id="words-loading-txt">So'zlar tayyorlanmoqda...</div>
+      <div class="ai-loading-txt" id="words-loading-txt" data-t>So'zlar tayyorlanmoqda...</div>
     </div>
   </div>
 
@@ -613,7 +613,7 @@ try {
   <div id="words-done" style="display:none">
     <div class="result-card">
       <div class="rc-emoji"><i class="ic" data-i="library" data-s="40"></i></div>
-      <div class="rc-title" id="words-done-title">Qo'shildi</div>
+      <div class="rc-title" id="words-done-title" data-t>Qo'shildi</div>
       <div class="rc-sub" id="words-done-sub"></div>
     </div>
     <div class="read-gloss" id="words-list"></div>
@@ -630,28 +630,28 @@ try {
     <div class="tutor-head">
       <div class="tutor-ava"><i class="ic" data-i="pen" data-s="20"></i></div>
       <div class="tutor-head-txt">
-        <div class="tutor-name">Yozish</div>
+        <div class="tutor-name" data-t>Yozish</div>
         <div class="tutor-sub" id="write-level-label">Daraja: A1</div>
       </div>
     </div>
 
-    <div class="sec-lbl">Topshiriq</div>
+    <div class="sec-lbl" data-t>Topshiriq</div>
     <div class="chat-chips" id="write-tasks"></div>
 
     <div class="write-task" id="write-task-text">—</div>
 
     <textarea class="write-area" id="write-area" rows="8"
-              placeholder="Ingliz tilida yozing..." oninput="writeCount()"></textarea>
-    <div class="write-meter"><span id="write-words">0 so'z</span><span id="write-hint">kamida 10 ta so'z</span></div>
+              placeholder="Ingliz tilida yozing..." data-t-ph="Ingliz tilida yozing..." oninput="writeCount()"></textarea>
+    <div class="write-meter"><span id="write-words">0 so'z</span><span id="write-hint" data-t>kamida 10 ta so'z</span></div>
 
     <button class="big-btn primary" onclick="writeCheck()" id="write-btn"><i class="ic" data-i="check" data-s="15"></i> Tekshirish</button>
-    <div class="ai-note">Baho imtihon bali emas — bu 1 dan 5 gacha oddiy shkala, nimani yaxshilash kerakligini ko'rsatadi.</div>
+    <div class="ai-note" data-t>Baho imtihon bali emas — bu 1 dan 5 gacha oddiy shkala, nimani yaxshilash kerakligini ko'rsatadi.</div>
   </div>
 
   <div id="write-loading" style="display:none">
     <div class="ai-loading-box">
       <span class="chat-typing"><i></i><i></i><i></i></span>
-      <div class="ai-loading-txt">Matningiz tekshirilmoqda...</div>
+      <div class="ai-loading-txt" data-t>Matningiz tekshirilmoqda...</div>
     </div>
   </div>
 
@@ -662,19 +662,19 @@ try {
 
   <div id="write-result" style="display:none">
     <div class="score-grid">
-      <div class="score-box"><div class="sc-v" id="sc-task">3</div><div class="sc-l">Topshiriq</div></div>
-      <div class="score-box"><div class="sc-v" id="sc-grammar">3</div><div class="sc-l">Grammatika</div></div>
-      <div class="score-box"><div class="sc-v" id="sc-vocab">3</div><div class="sc-l">So'z boyligi</div></div>
-      <div class="score-box"><div class="sc-v" id="sc-coh">3</div><div class="sc-l">Bog'lanish</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-task">3</div><div class="sc-l" data-t>Topshiriq</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-grammar">3</div><div class="sc-l" data-t>Grammatika</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-vocab">3</div><div class="sc-l" data-t>So'z boyligi</div></div>
+      <div class="score-box"><div class="sc-v" id="sc-coh">3</div><div class="sc-l" data-t>Bog'lanish</div></div>
     </div>
 
     <div class="write-comment" id="write-comment"></div>
     <div class="write-level" id="write-level"></div>
 
-    <div class="sec-lbl">Tuzatilgan matn</div>
+    <div class="sec-lbl" data-t>Tuzatilgan matn</div>
     <div class="write-fixed" id="write-fixed"></div>
 
-    <div class="sec-lbl" id="notes-lbl">Xatolar ustida</div>
+    <div class="sec-lbl" id="notes-lbl" data-t>Xatolar ustida</div>
     <div id="write-notes"></div>
 
     <button class="big-btn primary" onclick="writeBack()"><i class="ic" data-i="pen" data-s="16"></i> Yana yozish</button>
@@ -690,31 +690,31 @@ try {
     <div class="tutor-head">
       <div class="tutor-ava"><i class="ic" data-i="book-open" data-s="20"></i></div>
       <div class="tutor-head-txt">
-        <div class="tutor-name">O'qish</div>
+        <div class="tutor-name" data-t>O'qish</div>
         <div class="tutor-sub" id="read-level-label">Daraja: A1</div>
       </div>
     </div>
 
-    <div class="sec-lbl">Janr</div>
+    <div class="sec-lbl" data-t>Janr</div>
     <div class="chat-chips" id="read-genres"></div>
 
-    <div class="sec-lbl">Mavzu</div>
+    <div class="sec-lbl" data-t>Mavzu</div>
     <div class="chat-chips" id="read-topics"></div>
 
     <div class="ai-topic-wrap">
       <input class="ai-topic-input" id="read-topic" type="text" autocomplete="off"
-             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80">
+             placeholder="Yoki o'z mavzungizni yozing..." data-t-ph="Yoki o'z mavzungizni yozing..." maxlength="80">
     </div>
 
     <button class="big-btn primary" onclick="readGenerate()"><i class="ic" data-i="book-open" data-s="16"></i> Matn tayyorlash</button>
-    <div class="ai-note">Matn sizning darajangizga moslab yoziladi. So'ngida tushunish savollari bo'ladi.</div>
+    <div class="ai-note" data-t>Matn sizning darajangizga moslab yoziladi. So'ngida tushunish savollari bo'ladi.</div>
   </div>
 
   <!-- загрузка -->
   <div id="read-loading" style="display:none">
     <div class="ai-loading-box">
       <span class="chat-typing"><i></i><i></i><i></i></span>
-      <div class="ai-loading-txt">Matn yozilmoqda...</div>
+      <div class="ai-loading-txt" data-t>Matn yozilmoqda...</div>
     </div>
   </div>
 
@@ -738,11 +738,11 @@ try {
       <div class="read-body" id="rd-body"></div>
       <div class="read-hidden" id="rd-hidden" style="display:none">
         <i class="ic" data-i="headphones" data-s="15"></i> Matn yopiq — avval tinglang, keyin savollarga javob bering.
-        <button class="read-reveal" onclick="readReveal()">Matnni ochish</button>
+        <button class="read-reveal" onclick="readReveal()" data-t>Matnni ochish</button>
       </div>
     </div>
 
-    <div class="sec-lbl">Yangi so'zlar</div>
+    <div class="sec-lbl" data-t>Yangi so'zlar</div>
     <div class="read-gloss" id="rd-gloss"></div>
     <button class="big-btn secondary" onclick="readAddWords()" id="rd-add"><i class="ic" data-i="plus" data-s="16"></i> So'zlarni lug'atga qo'shish</button>
     <button class="big-btn primary" onclick="readStartQuiz()"><i class="ic" data-i="check" data-s="15"></i> Savollarga o'tish</button>
@@ -752,19 +752,19 @@ try {
   <div id="read-quiz" style="display:none">
     <div class="ai-quiz-top">
       <div class="ai-q-counter" id="rd-counter">1 / 4</div>
-      <div class="ai-q-topic">Matn bo'yicha savol</div>
+      <div class="ai-q-topic" data-t>Matn bo'yicha savol</div>
     </div>
     <div class="ai-q-card" id="rd-q">—</div>
     <div class="mc-grid" id="rd-options"></div>
     <div class="ai-explain" id="rd-explain" style="display:none"></div>
-    <button class="big-btn primary" id="rd-next" onclick="readNext()" style="display:none">Keyingi <i class="ic" data-i="arrow-right" data-s="15"></i></button>
+    <button class="big-btn primary" id="rd-next" onclick="readNext()" style="display:none" data-t>Keyingi <i class="ic" data-i="arrow-right" data-s="15"></i></button>
   </div>
 
   <!-- итог -->
   <div id="read-done" style="display:none">
     <div class="result-card">
       <div class="rc-emoji" id="rd-emoji"><i class="ic" data-i="target" data-s="40"></i></div>
-      <div class="rc-title" id="rd-title2">Tugadi!</div>
+      <div class="rc-title" id="rd-title2" data-t>Tugadi!</div>
       <div class="rc-sub" id="rd-sub"></div>
     </div>
     <button class="big-btn primary" onclick="readGenerate()"><i class="ic" data-i="book-open" data-s="16"></i> Yangi matn</button>
@@ -780,14 +780,14 @@ try {
     <div class="pf-ava" id="pf-ava">M</div>
     <div class="pf-name" id="pf-name">Mehmon</div>
     <div class="pf-mail" id="pf-mail"></div>
-    <div class="pf-kind" id="pf-kind">Mehmon rejimi</div>
+    <div class="pf-kind" id="pf-kind" data-t>Mehmon rejimi</div>
   </div>
 
   <div class="pf-grid">
-    <div class="pf-box"><div class="pf-v" id="pf-level">A1</div><div class="pf-l">Daraja</div></div>
-    <div class="pf-box"><div class="pf-v" id="pf-known">0</div><div class="pf-l">O'rganilgan so'z</div></div>
-    <div class="pf-box"><div class="pf-v" id="pf-streak">0</div><div class="pf-l">Seriya</div></div>
-    <div class="pf-box"><div class="pf-v" id="pf-record">0</div><div class="pf-l">Rekord seriya</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-level">A1</div><div class="pf-l" data-t>Daraja</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-known">0</div><div class="pf-l" data-t>O'rganilgan so'z</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-streak">0</div><div class="pf-l" data-t>Seriya</div></div>
+    <div class="pf-box"><div class="pf-v" id="pf-record">0</div><div class="pf-l" data-t>Rekord seriya</div></div>
   </div>
 
   <div class="pf-note" id="pf-note"></div>
@@ -800,8 +800,8 @@ try {
 <div id="s-map" class="screen">
   <button class="back-btn" onclick="show('s-home')"><i class="ic" data-i="arrow-left" data-s="15"></i> Orqaga</button>
   <div class="map-head">
-    <div class="mh-title">Sizning yo'lingiz</div>
-    <div class="mh-sub">Har bir daraja — shahar. Uni ochish uchun oldingisini yarmidan ko'pini o'rganing.</div>
+    <div class="mh-title" data-t>Sizning yo'lingiz</div>
+    <div class="mh-sub" data-t>Har bir daraja — shahar. Uni ochish uchun oldingisini yarmidan ko'pini o'rganing.</div>
   </div>
   <div class="map-path" id="map-path"></div>
 </div>
@@ -812,7 +812,7 @@ try {
 
   <div class="daily-head">
     <div class="dh-date" id="dh-date">—</div>
-    <div class="dh-title">Kun topshirig'i</div>
+    <div class="dh-title" data-t>Kun topshirig'i</div>
     <div class="dh-sub">10 ta so'z · hamma uchun bir xil</div>
   </div>
 
@@ -831,15 +831,15 @@ try {
   <div id="daily-done" style="display:none">
     <div class="result-card">
       <div class="rc-emoji" id="dl-emoji"><i class="ic" data-i="target" data-s="40"></i></div>
-      <div class="rc-title" id="dl-title">Bajarildi!</div>
+      <div class="rc-title" id="dl-title" data-t>Bajarildi!</div>
       <div class="rc-sub" id="dl-sub"></div>
       <div class="rc-stats">
-        <div class="rc-stat"><div class="rc-sv" id="dl-correct">0</div><div class="rc-sl">To'g'ri</div></div>
-        <div class="rc-stat"><div class="rc-sv" id="dl-best">0</div><div class="rc-sl">Rekord</div></div>
+        <div class="rc-stat"><div class="rc-sv" id="dl-correct">0</div><div class="rc-sl" data-t>To'g'ri</div></div>
+        <div class="rc-stat"><div class="rc-sv" id="dl-best">0</div><div class="rc-sl" data-t>Rekord</div></div>
       </div>
     </div>
     <div class="lb-head">
-      <span class="lb-title">Bugungi reyting</span>
+      <span class="lb-title" data-t>Bugungi reyting</span>
       <span class="lb-sub" id="lb-sub">yuklanmoqda...</span>
     </div>
     <div class="leaderboard" id="leaderboard"></div>
@@ -857,17 +857,17 @@ try {
     <div class="tutor-head">
       <div class="tutor-ava"><i class="ic" data-i="brain" data-s="20"></i></div>
       <div class="tutor-head-txt">
-        <div class="tutor-name">AI mashq</div>
+        <div class="tutor-name" data-t>AI mashq</div>
         <div class="tutor-sub" id="ai-level-label">Daraja: A1</div>
       </div>
     </div>
 
-    <div class="sec-lbl">Mavzu tanlang</div>
+    <div class="sec-lbl" data-t>Mavzu tanlang</div>
     <div class="chat-chips" id="ai-topics"></div>
 
     <div class="ai-topic-wrap">
       <input class="ai-topic-input" id="ai-topic" type="text" autocomplete="off"
-             placeholder="Yoki o'z mavzungizni yozing..." maxlength="80">
+             placeholder="Yoki o'z mavzungizni yozing..." data-t-ph="Yoki o'z mavzungizni yozing..." maxlength="80">
     </div>
 
     <div class="ai-btn-row">
@@ -876,14 +876,14 @@ try {
     </div>
     <button class="big-btn secondary" id="ai-weak-btn" onclick="aiWeakSpots()"><i class="ic" data-i="target" data-s="15"></i> Mening xatolarim ustida</button>
 
-    <div class="ai-note">Materialni sun'iy intellekt sizning darajangiz uchun tayyorlaydi.</div>
+    <div class="ai-note" data-t>Materialni sun'iy intellekt sizning darajangiz uchun tayyorlaydi.</div>
   </div>
 
   <!-- 2. Загрузка -->
   <div id="ai-loading" style="display:none">
     <div class="ai-loading-box">
       <span class="chat-typing"><i></i><i></i><i></i></span>
-      <div class="ai-loading-txt" id="ai-loading-txt">Tayyorlanmoqda...</div>
+      <div class="ai-loading-txt" id="ai-loading-txt" data-t>Tayyorlanmoqda...</div>
     </div>
   </div>
 
@@ -914,21 +914,21 @@ try {
     <div class="ai-q-card" id="ai-q-text">—</div>
     <div class="mc-grid" id="ai-options"></div>
     <div class="ai-explain" id="ai-explain" style="display:none"></div>
-    <button class="big-btn primary" id="ai-next-btn" onclick="aiNext()" style="display:none">Keyingi <i class="ic" data-i="arrow-right" data-s="15"></i></button>
+    <button class="big-btn primary" id="ai-next-btn" onclick="aiNext()" style="display:none" data-t>Keyingi <i class="ic" data-i="arrow-right" data-s="15"></i></button>
   </div>
 
   <!-- 6. Результат теста -->
   <div id="ai-result" style="display:none">
     <div class="result-card">
       <div class="rc-emoji" id="ai-rc-emoji"><i class="ic" data-i="target" data-s="40"></i></div>
-      <div class="rc-title" id="ai-rc-title">Test tugadi!</div>
+      <div class="rc-title" id="ai-rc-title" data-t>Test tugadi!</div>
       <div class="rc-sub" id="ai-rc-sub"></div>
       <div class="rc-stats">
-        <div class="rc-stat"><div class="rc-sv ok" id="ai-rc-correct">0</div><div class="rc-sl">To'g'ri</div></div>
-        <div class="rc-stat"><div class="rc-sv bad" id="ai-rc-wrong">0</div><div class="rc-sl">Xato</div></div>
+        <div class="rc-stat"><div class="rc-sv ok" id="ai-rc-correct">0</div><div class="rc-sl" data-t>To'g'ri</div></div>
+        <div class="rc-stat"><div class="rc-sv bad" id="ai-rc-wrong">0</div><div class="rc-sl" data-t>Xato</div></div>
       </div>
     </div>
-    <div class="sec-lbl" id="ai-review-lbl" style="display:none">Xatolar ustida ishlash</div>
+    <div class="sec-lbl" id="ai-review-lbl" style="display:none" data-t>Xatolar ustida ishlash</div>
     <div id="ai-review"></div>
     <button class="big-btn primary" onclick="aiGenerate('quiz')"><i class="ic" data-i="rotate" data-s="15"></i> Yana test</button>
     <button class="big-btn secondary" onclick="aiBackToSetup()"><i class="ic" data-i="arrow-left" data-s="15"></i> Boshqa mavzu</button>
@@ -942,7 +942,7 @@ try {
   <div class="tutor-head">
     <div class="tutor-ava" id="tutor-ava"><i class="ic" data-i="bot" data-s="20"></i></div>
     <div class="tutor-head-txt">
-      <div class="tutor-name" id="tutor-name">AI Ustoz</div>
+      <div class="tutor-name" id="tutor-name" data-t>AI Ustoz</div>
       <div class="tutor-sub" id="tutor-level-label">Daraja: A1</div>
     </div>
     <button class="tutor-clear" onclick="tutorReset()" title="Suhbatni tozalash"><i class="ic" data-i="trash" data-s="15"></i></button>
@@ -960,7 +960,7 @@ try {
   <div class="chat-chips" id="chat-chips"></div>
 
   <div class="chat-input-row">
-    <textarea id="chat-input" class="chat-input" rows="1" placeholder="Savolingizni yozing..." oninput="tutorAutoGrow(this)"></textarea>
+    <textarea id="chat-input" class="chat-input" rows="1" placeholder="Savolingizni yozing..." data-t-ph="Savolingizni yozing..." oninput="tutorAutoGrow(this)"></textarea>
     <button class="chat-send" id="chat-send" onclick="tutorSend()" aria-label="Yuborish"><i class="ic" data-i="send" data-s="16"></i></button>
   </div>
 </div>
@@ -975,11 +975,11 @@ try {
 <div class="modal-back" id="logout-modal" onclick="logoutClose(event)">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="logout-title">
     <div class="modal-ico"><i class="ic" data-i="power" data-s="28"></i></div>
-    <div class="modal-title" id="logout-title">Chiqasizmi?</div>
-    <div class="modal-text" id="logout-text">Hisobingizdan chiqasiz. Progress hisobingizda saqlanib qoladi.</div>
+    <div class="modal-title" id="logout-title" data-t>Chiqasizmi?</div>
+    <div class="modal-text" id="logout-text" data-t>Hisobingizdan chiqasiz. Progress hisobingizda saqlanib qoladi.</div>
     <div class="modal-actions">
-      <button class="big-btn secondary" onclick="logoutClose()">Bekor qilish</button>
-      <button class="big-btn danger" onclick="logoutConfirm()">Ha, chiqish</button>
+      <button class="big-btn secondary" onclick="logoutClose()" data-t>Bekor qilish</button>
+      <button class="big-btn danger" onclick="logoutConfirm()" data-t>Ha, chiqish</button>
     </div>
   </div>
 </div>

@@ -23,8 +23,18 @@
   function = "admin-gate"
 
 [[edge_functions]]
+  path = "/admin-words.html"
+  function = "admin-gate"
+
+[[edge_functions]]
   path = "/admin/logout"
   function = "admin-gate"
+
+# Список учеников. Читает Firebase сервисным аккаунтом и проверяет ту же куку,
+# что и страница: иначе адрес стал бы чёрным ходом в обход пароля.
+[[edge_functions]]
+  path = "/api/admin/users"
+  function = "admin-api"
 
 # Короткий адрес приложения
 [[redirects]]

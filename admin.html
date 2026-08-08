@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Congix English Admin — Lug'at tahrirlash</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Congix English Admin — Foydalanuvchilar</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/admin.css?v=7">
+<link rel="stylesheet" href="assets/css/admin-users.css?v=1">
 </head>
 <body>
 
@@ -12,198 +15,80 @@
 
 <header>
   <div class="logo-wrap">
-    <div class="logo-box">🔧</div>
+    <div class="logo-box">C</div>
     <div class="logo-text">
       <div class="t1">Congix English Admin</div>
-      <div class="t2">Lug'at boshqaruv paneli</div>
+      <div class="t2">Foydalanuvchilar paneli</div>
     </div>
   </div>
+  <nav class="admin-tabs">
+    <a href="/admin" class="active">Foydalanuvchilar</a>
+    <a href="/admin-words.html">Lug'at</a>
+  </nav>
   <div class="header-actions">
-    <div class="file-input-wrap">
-      <button class="btn btn-secondary">📥 JSON yuklash</button>
-      <input type="file" accept=".json,application/json" onchange="importJSON(event)">
-    </div>
-    <button class="btn btn-secondary" onclick="openBulkAddModal()">📋 Ko'p so'z</button>
-    <button class="btn btn-secondary" onclick="openAddModal()">➕ Yangi so'z</button>
-    <button class="btn btn-primary" onclick="exportJSON()">💾 JSON eksport</button>
+    <button class="btn btn-secondary" onclick="loadUsers()">🔄 Yangilash</button>
+    <button class="btn btn-primary" onclick="exportUsersCSV()">💾 CSV eksport</button>
     <a class="btn btn-secondary" href="/admin/logout">🚪 Chiqish</a>
   </div>
 </header>
-
-<div class="help-bar">
-  <b>💡 Maslahat:</b> Foydalanuvchilar faqat <span style="color:var(--ok)">✓ OK</span> belgisi bo'lgan so'zlarni ko'radi.
-  <span style="color:var(--todo)">⏳ Todo</span> — tekshirilishi kerak.
-  Tahrirlardan keyin <b>"💾 JSON eksport"</b> tugmasini bosing — fayl yuklab olinadi.
-  Barcha o'zgartirishlar avtomatik saqlanadi (brauzerda).
-</div>
 
 <div class="stats-grid" id="stats-grid"></div>
 
 <div class="controls">
   <div class="search-row">
-    <input type="text" class="search-input" id="search-input" placeholder="🔍 So'z yoki tarjima bo'yicha qidirish..." oninput="onSearchChange()">
+    <input type="text" class="search-input" id="search-input"
+           placeholder="🔍 Ism yoki email bo'yicha qidirish..." oninput="renderUsers()">
   </div>
 
-  <div class="filter-row" style="margin-bottom:10px;">
+  <div class="filter-row">
     <span class="filter-label">Holat:</span>
-    <div class="filter-pills" id="status-pills">
-      <button class="pill active todo" data-status="todo" onclick="setStatusFilter('todo')">⏳ Todo</button>
-      <button class="pill" data-status="ok" onclick="setStatusFilter('ok')">✓ OK</button>
-      <button class="pill" data-status="review" onclick="setStatusFilter('review')">⚠ Review</button>
-      <button class="pill" data-status="all" onclick="setStatusFilter('all')">Hammasi</button>
+    <div class="filter-pills" id="activity-pills">
+      <button class="pill active" data-activity="all" onclick="setActivityFilter('all')">Hammasi</button>
+      <button class="pill" data-activity="today" onclick="setActivityFilter('today')">Bugun faol</button>
+      <button class="pill" data-activity="week" onclick="setActivityFilter('week')">7 kun ichida</button>
+      <button class="pill" data-activity="idle" onclick="setActivityFilter('idle')">Nofaol</button>
+      <button class="pill" data-activity="never" onclick="setActivityFilter('never')">Boshlamagan</button>
     </div>
   </div>
 
   <div class="filter-row">
-    <span class="filter-label">Daraja:</span>
-    <select class="filter-select" id="level-filter" onchange="onFilterChange()">
+    <span class="filter-label">Kirish usuli:</span>
+    <select class="filter-select" id="provider-filter" onchange="renderUsers()">
       <option value="all">Hammasi</option>
-      <option value="A1">A1</option>
-      <option value="A2">A2</option>
-      <option value="B1">B1</option>
-      <option value="B2">B2</option>
-      <option value="C1">C1</option>
-      <option value="C2">C2</option>
-    </select>
-
-    <span class="filter-label" style="margin-left:8px;">Mavzu:</span>
-    <select class="filter-select" id="topic-filter" onchange="onFilterChange()">
-      <option value="all">Hammasi</option>
+      <option value="password">Email / parol</option>
+      <option value="google">Google</option>
     </select>
 
     <span class="filter-label" style="margin-left:8px;">Saralash:</span>
-    <select class="filter-select" id="sort-by" onchange="onFilterChange()">
-      <option value="alpha">A-Z</option>
-      <option value="alpha-desc">Z-A</option>
-      <option value="recent">So'nggi qo'shilgan</option>
-      <option value="level">Daraja bo'yicha</option>
+    <select class="filter-select" id="sort-by" onchange="renderUsers()">
+      <option value="recent">So'nggi kirgan</option>
+      <option value="new">Yangi ro'yxatdan o'tgan</option>
+      <option value="words">Ko'p so'z o'rgangan</option>
+      <option value="streak">Uzun streak</option>
+      <option value="accuracy">Aniqlik bo'yicha</option>
+      <option value="name">Ism (A-Z)</option>
     </select>
   </div>
 </div>
 
-<div id="words-list-container"></div>
-
-<div class="pagination" id="pagination" style="display:none">
-  <button class="btn btn-secondary btn-sm" id="prev-page" onclick="prevPage()">← Oldingi</button>
-  <span class="page-info" id="page-info">1 / 1</span>
-  <button class="btn btn-secondary btn-sm" id="next-page" onclick="nextPage()">Keyingi →</button>
-</div>
+<div id="users-container"></div>
 
 </div>
 
-<!-- ADD/EDIT MODAL -->
-<div class="modal-backdrop" id="add-modal">
+<!-- USER DETAIL MODAL -->
+<div class="modal-backdrop" id="user-modal">
   <div class="modal">
-    <h2 id="add-modal-title">➕ Yangi so'z qo'shish</h2>
-    <input type="hidden" id="add-id">
-    <div class="field">
-      <label class="field-label">English word *</label>
-      <input type="text" class="field-input" id="add-en" placeholder="apple">
-    </div>
-    <div class="field">
-      <label class="field-label">O'zbekcha tarjima(lar) * (vergul bilan)</label>
-      <input type="text" class="field-input uz" id="add-uz" placeholder="olma, mevali olma">
-    </div>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-      <div class="field">
-        <label class="field-label">Daraja</label>
-        <select class="field-input" id="add-level">
-          <option value="A1">A1 — Beginner</option>
-          <option value="A2">A2 — Elementary</option>
-          <option value="B1">B1 — Intermediate</option>
-          <option value="B2">B2 — Upper-Int.</option>
-          <option value="C1">C1 — Advanced</option>
-          <option value="C2">C2 — Mastery</option>
-        </select>
-      </div>
-      <div class="field">
-        <label class="field-label">Mavzu</label>
-        <input type="text" class="field-input" id="add-topic" placeholder="food" list="topics-datalist">
-        <datalist id="topics-datalist"></datalist>
-      </div>
-    </div>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-      <div class="field">
-        <label class="field-label">So'z turi (pos)</label>
-        <select class="field-input" id="add-pos">
-          <option value="noun">noun (ot)</option>
-          <option value="verb">verb (fe'l)</option>
-          <option value="adj">adj (sifat)</option>
-          <option value="adv">adv (ravish)</option>
-          <option value="prep">prep (ko'makchi)</option>
-          <option value="pron">pron (olmosh)</option>
-          <option value="conj">conj (bog'lovchi)</option>
-          <option value="det">det</option>
-          <option value="article">article</option>
-          <option value="interj">interj</option>
-          <option value="modal">modal</option>
-          <option value="noun/verb">noun/verb</option>
-        </select>
-      </div>
-      <div class="field">
-        <label class="field-label">Transkripsiya (ixtiyoriy)</label>
-        <input type="text" class="field-input" id="add-phon" placeholder="/aepl/">
-      </div>
-    </div>
-    <div class="field">
-      <label class="field-label">Misol — Inglizcha</label>
-      <input type="text" class="field-input example" id="add-example-en" placeholder="I eat an apple every day.">
-    </div>
-    <div class="field">
-      <label class="field-label">Misol — O'zbekcha tarjima</label>
-      <input type="text" class="field-input example" id="add-example-uz" placeholder="Men har kuni olma yeyman.">
-    </div>
-    <div class="field">
-      <label class="field-label">Holat</label>
-      <select class="field-input" id="add-status">
-        <option value="ok">✓ OK — foydalanuvchilarga ko'rsatish</option>
-        <option value="todo">⏳ Todo — tekshirish kerak</option>
-        <option value="review">⚠ Review — qayta ko'rib chiqish</option>
-      </select>
-    </div>
+    <h2 id="user-modal-title">Foydalanuvchi</h2>
+    <div id="user-modal-body"></div>
     <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeAddModal()">Bekor qilish</button>
-      <button class="btn btn-primary" onclick="saveNewWord()">💾 Saqlash</button>
-    </div>
-  </div>
-</div>
-
-<!-- BULK ADD MODAL -->
-<div class="modal-backdrop" id="bulk-modal">
-  <div class="modal" style="max-width:680px;">
-    <h2>📋 Ko'p so'z qo'shish</h2>
-    <div class="bulk-help">
-      <b style="color:var(--ok)">Format:</b> Har bir qatorda bitta so'z, ustunlar <code>|</code> bilan ajraladi:<br><br>
-      <code>en | uz | level | topic | example_en | example_uz</code><br><br>
-      <b style="color:var(--todo)">Misol:</b><br>
-      <code>book | kitob | A1 | objects | I read a book. | Men kitob o'qiyman.</code><br>
-      <code>cat | mushuk | A1 | animals | The cat is white. | Mushuk oq.</code><br><br>
-      <b>en</b> va <b>uz</b> majburiy. Boshqalari ixtiyoriy.<br>
-      Bir nechta tarjima — <code>vergul</code> bilan: <code>do'st, o'rtoq</code><br>
-      Standart: <b>level=A1</b>, <b>topic=common</b>
-    </div>
-    <div class="field">
-      <label class="field-label">So'zlar (har qator — bitta so'z)</label>
-      <textarea class="bulk-textarea" id="bulk-text" placeholder="apple | olma | A1 | food | I eat an apple. | Men olma yeyman."></textarea>
-    </div>
-    <div class="field">
-      <label class="field-label">Holat (yangi so'zlar uchun)</label>
-      <select class="field-input" id="bulk-status">
-        <option value="todo">⏳ Todo — tekshirish kerak</option>
-        <option value="ok">✓ OK — foydalanuvchilarga ko'rsatish</option>
-        <option value="review">⚠ Review</option>
-      </select>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeBulkAddModal()">Bekor qilish</button>
-      <button class="btn btn-primary" onclick="processBulkAdd()">📥 Qo'shish</button>
+      <button class="btn btn-secondary" onclick="closeUserModal()">Yopish</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script src="assets/js/admin.js?v=6"></script>
+<script src="assets/js/admin-users.js?v=1"></script>
 
 </body>
 </html>

@@ -14,90 +14,14 @@
 // открывать панель, поэтому проверка падает в отказ, а не пропускает.
 
 import type { Context } from "https://edge.netlify.com/";
-
-const COOKIE = "congix_admin";
-
-// Двенадцать часов: рабочий день правки словаря укладывается в одну сессию,
-// а забытая открытой вкладка к утру всё равно попросит пароль заново.
-const SESSION_SECONDS = 12 * 60 * 60;
-
-const encoder = new TextEncoder();
-
-function base64urlEncode(bytes: Uint8Array): string {
-  let binary = "";
-  for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-
-function base64urlDecode(value: string): Uint8Array | null {
-  try {
-    const padded = value.replace(/-/g, "+").replace(/_/g, "/");
-    const binary = atob(padded + "=".repeat((4 - (padded.length % 4)) % 4));
-    return Uint8Array.from(binary, (char) => char.charCodeAt(0));
-  } catch {
-    return null;
-  }
-}
-
-async function hmac(secret: string, message: string): Promise<Uint8Array> {
-  const key = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(secret),
-    { name: "HMAC", hash: "SHA-256" },
-    false,
-    ["sign"],
-  );
-  const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(message));
-  return new Uint8Array(signature);
-}
-
-// Сравнение за постоянное время: обычное === выходит на первом несовпавшем
-// байте, и по времени ответа пароль можно подбирать посимвольно.
-function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
-  return diff === 0;
-}
-
-// Сами секреты тоже сравниваем не напрямую, а по их HMAC: длина введённого
-// пароля тогда ничего не выдаёт, потому что дайджест всегда 32 байта.
-async function secretsMatch(secret: string, expected: string, given: string): Promise<boolean> {
-  if (!expected) return false;
-  const [left, right] = await Promise.all([hmac(secret, expected), hmac(secret, given)]);
-  return timingSafeEqual(left, right);
-}
-
-async function issueToken(secret: string, email: string): Promise<string> {
-  const payload = `${email}|${Math.floor(Date.now() / 1000) + SESSION_SECONDS}`;
-  const signature = await hmac(secret, payload);
-  return `${base64urlEncode(encoder.encode(payload))}.${base64urlEncode(signature)}`;
-}
-
-async function tokenIsValid(secret: string, token: string): Promise<boolean> {
-  const [payloadPart, signaturePart] = token.split(".");
-  if (!payloadPart || !signaturePart) return false;
-
-  const payloadBytes = base64urlDecode(payloadPart);
-  const givenSignature = base64urlDecode(signaturePart);
-  if (!payloadBytes || !givenSignature) return false;
-
-  const payload = new TextDecoder().decode(payloadBytes);
-  const expected = await hmac(secret, payload);
-  if (!timingSafeEqual(expected, givenSignature)) return false;
-
-  const expiresAt = Number(payload.split("|")[1]);
-  return Number.isFinite(expiresAt) && expiresAt > Math.floor(Date.now() / 1000);
-}
-
-function readCookie(request: Request, name: string): string {
-  const header = request.headers.get("cookie") ?? "";
-  for (const part of header.split(";")) {
-    const [key, ...rest] = part.trim().split("=");
-    if (key === name) return rest.join("=");
-  }
-  return "";
-}
+import {
+  COOKIE,
+  issueToken,
+  readCookie,
+  secretsMatch,
+  SESSION_SECONDS,
+  tokenIsValid,
+} from "./lib/admin-session.ts";
 
 function escapeHtml(value: string): string {
   return value
@@ -110,6 +34,10 @@ function escapeHtml(value: string): string {
 // Страница входа отдаётся самой функцией, а не лежит отдельным файлом:
 // статический login.html пришлось бы отдавать всем, и он стал бы ещё одной
 // дверью, которую нужно стеречь. Скриптов здесь нет вовсе — обычная форма.
+//
+// Палитра и шрифты берутся из site.css, а не переписываются здесь своими
+// значениями: иначе дверь в Congix выглядит дверью в чужой дом, и при смене
+// фирменных цветов эта страница осталась бы старой.
 function loginPage(message: string, status: number): Response {
   const alert = message
     ? `<p class="alert">${escapeHtml(message)}</p>`
@@ -123,55 +51,64 @@ function loginPage(message: string, status: number): Response {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Congix English Admin — Kirish</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/site.css?v=6">
 <style>
-  :root { color-scheme: dark; }
-  * { box-sizing: border-box; }
   body {
-    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: #1C1A18; color: #F2EFEA; padding: 24px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--ink); padding:24px;
   }
-  .card {
-    width: 100%; max-width: 380px; background: #2A2724; border: 1px solid #3A3632;
-    border-radius: 16px; padding: 32px 28px;
+  .login-card {
+    width:100%; max-width:400px;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:20px; padding:36px 32px;
   }
-  .mark {
-    width: 44px; height: 44px; border-radius: 12px; background: #F0EADF; color: #1C1A18;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; font-weight: 700; margin-bottom: 18px;
+  .login-brand { display:flex; align-items:center; gap:12px; margin-bottom:28px; }
+  .login-title { font-family:var(--font-display); font-weight:600; font-size:24px;
+    letter-spacing:-0.02em; margin:0 0 6px; }
+  .login-sub { color:var(--muted); font-size:15px; margin:0 0 28px; }
+  .login-field { margin-bottom:18px; }
+  .login-field label {
+    display:block; font-size:13px; font-weight:500; color:var(--muted); margin-bottom:7px;
   }
-  h1 { font-size: 20px; margin: 0 0 4px; }
-  .sub { margin: 0 0 24px; color: #9C948A; font-size: 14px; }
-  label { display: block; font-size: 13px; color: #9C948A; margin-bottom: 6px; }
-  input {
-    width: 100%; padding: 11px 13px; margin-bottom: 16px; font-size: 15px;
-    background: #211E1B; color: #F2EFEA; border: 1px solid #3A3632; border-radius: 9px;
+  .login-field input {
+    width:100%; padding:13px 15px; font:inherit; font-size:15px;
+    background:var(--ink); color:var(--cream);
+    border:1px solid var(--line); border-radius:12px;
+    transition:border-color .15s;
   }
-  input:focus { outline: none; border-color: #6FD3C7; }
-  button {
-    width: 100%; padding: 12px; font-size: 15px; font-weight: 600; cursor: pointer;
-    background: #F0EADF; color: #1C1A18; border: 0; border-radius: 9px;
-  }
-  button:hover { background: #fff; }
+  .login-field input:focus { outline:none; border-color:var(--lime); }
+  .login-card .btn { width:100%; margin-top:6px; }
   .alert {
-    background: #3A2422; border: 1px solid #7A3B33; color: #F3B8AF;
-    padding: 10px 13px; border-radius: 9px; font-size: 14px; margin: 0 0 18px;
+    background:var(--surface-2); border:1px solid var(--clay); color:var(--clay);
+    padding:12px 15px; border-radius:12px; font-size:14px; margin:0 0 20px;
   }
-  .back { display: block; margin-top: 20px; text-align: center; color: #9C948A; font-size: 13px; }
+  .login-back {
+    display:block; margin-top:24px; text-align:center;
+    color:var(--faint); font-size:14px; transition:color .15s;
+  }
+  .login-back:hover { color:var(--cream); }
 </style>
 </head>
 <body>
-  <form class="card" method="POST" action="/admin.html">
-    <div class="mark">C</div>
-    <h1>Admin paneli</h1>
-    <p class="sub">Lug'atni tahrirlash uchun kiring</p>
+  <form class="login-card" method="POST" action="/admin.html">
+    <div class="login-brand">
+      <span class="brand-mark">C</span>
+      <span class="brand-name">Congix English</span>
+    </div>
+    <h1 class="login-title">Admin paneli</h1>
+    <p class="login-sub">Davom etish uchun tizimga kiring</p>
     ${alert}
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" autocomplete="username" required autofocus>
-    <label for="password">Parol</label>
-    <input type="password" id="password" name="password" autocomplete="current-password" required>
-    <button type="submit">Kirish</button>
-    <a class="back" href="/">&larr; Saytga qaytish</a>
+    <div class="login-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="username" required autofocus>
+    </div>
+    <div class="login-field">
+      <label for="password">Parol</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Kirish</button>
+    <a class="login-back" href="/">&larr; Saytga qaytish</a>
   </form>
 </body>
 </html>`,
@@ -257,4 +194,6 @@ export default async function handler(request: Request, context: Context): Promi
   return response;
 }
 
-export const config = { path: ["/admin", "/admin.html", "/admin/logout"] };
+export const config = {
+  path: ["/admin", "/admin.html", "/admin-words.html", "/admin/logout"],
+};

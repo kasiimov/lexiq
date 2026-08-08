@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /admin.html
+Disallow: /admin-words.html
 Disallow: /api/
 
 Sitemap: https://congix-english.netlify.app/sitemap.xml

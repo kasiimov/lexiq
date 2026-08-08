@@ -265,10 +265,10 @@ function renderShell(id) {
     document.getElementById('side-streak-days').textContent = days + ' ' + t('kun') + ' ketma-ket';
     document.getElementById('top-streak-days').textContent = days;
     document.getElementById('side-streak-sub').textContent = st.playedToday
-      ? 'Bugungi mashq bajarildi — seriya saqlanib qoldi.'
-      : 'Bugun mashq qiling — seriya uzilmaydi.';
+      ? t('Bugungi mashq bajarildi — seriya saqlanib qoldi.')
+      : t('Bugun mashq qiling — seriya uzilmaydi.');
     document.getElementById('side-meta').textContent =
-      'CEFR ' + getCEFRLevel() + ' · ' + getKnownWordsCount() + " so'z";
+      'CEFR ' + getCEFRLevel() + ' · ' + t('{n} so\'z').replace('{n}', getKnownWordsCount());
   } catch (e) { /* статистика ещё не готова */ }
 }
 
@@ -407,9 +407,9 @@ function updateHomeStats() {
   const nextThr = CEFR_THRESHOLDS[nextLevel];
   const pct = nextLevel === level ? 100 : ((known - curThr) / (nextThr - curThr)) * 100;
   document.getElementById('lc-bar').style.width = Math.min(100, Math.max(0, pct)) + '%';
-  document.getElementById('lc-bar-current').textContent = known + " so'z";
+  document.getElementById('lc-bar-current').textContent = t('{n} so\'z').replace('{n}', known);
   document.getElementById('lc-bar-next').textContent =
-    nextLevel === level ? 'Maksimum darajada!' : nextLevel + ' gacha: ' + (nextThr - known) + " so'z";
+    nextLevel === level ? t('Maksimum darajada!') : t('gacha') .replace('{lvl}', nextLevel).replace('{n}', nextThr - known);
 
   document.getElementById('ms-streak').textContent = stats.streakDays || 0;
   renderStreak();
@@ -454,8 +454,8 @@ function renderTopics() {
   allBtn.className = 'topic-card' + (topicFilter === 'all' ? ' selected' : '');
   allBtn.innerHTML =
     '<span class="tc-ico">' + icon('globe', 22) + '</span>' +
-    '<span class="tc-name">Barcha mavzular</span>' +
-    '<span class="tc-count">' + okWords.length + " so'z</span>";
+    '<span class="tc-name">' + t('Barcha mavzular') + '</span>' +
+    '<span class="tc-count">' + t("{n} so'z").replace('{n}', okWords.length) + '</span>';
   allBtn.onclick = () => setTopic('all');
   grid.appendChild(allBtn);
 
@@ -467,8 +467,8 @@ function renderTopics() {
     btn.className = 'topic-card' + (topicFilter === topic ? ' selected' : '');
     btn.innerHTML =
       '<span class="tc-ico">' + icon(TOPIC_ICONS[topic] || 'package', 22) + '</span>' +
-      '<span class="tc-name">' + (TOPIC_NAMES[topic] || topic) + '</span>' +
-      '<span class="tc-count">' + count + " so'z</span>" +
+      '<span class="tc-name">' + t(TOPIC_NAMES[topic] || topic) + '</span>' +
+      '<span class="tc-count">' + t("{n} so'z").replace('{n}', count) + '</span>' +
       (known > 0 ? '<span class="tc-prog">' + icon('check', 12) + ' ' + known + '</span>' : '');
     btn.onclick = () => setTopic(topic);
     grid.appendChild(btn);
@@ -527,7 +527,7 @@ function renderTrainCard() {
   if (!w) return;
   trainFlipped = false;
   const isEU = direction === 'en-uz';
-  document.getElementById('fc-badge').textContent = isEU ? 'INGLIZCHA' : "O'ZBEKCHA";
+  document.getElementById('fc-badge').textContent = isEU ? t('INGLIZCHA') : t("O'ZBEKCHA");
   document.getElementById('fc-word').textContent = isEU ? w.en : (w.uz[0] || w.en);
   document.getElementById('fc-phon').textContent = (isEU && w.phon) ? w.phon : '';
   document.getElementById('fc-divider').style.display = 'none';
@@ -698,8 +698,8 @@ function loadWord() {
   const isEU = direction === 'en-uz';
   const card = document.getElementById('word-card');
   card.className = 'word-card ' + (isEU ? 'eng-card' : 'uzb-card');
-  document.getElementById('wc-badge').textContent = isEU ? "INGLIZCHA SO'Z" : "O'ZBEKCHA SO'Z";
-  document.getElementById('word-counter').textContent = "So'z #" + wordNum;
+  document.getElementById('wc-badge').textContent = isEU ? t("INGLIZCHA SO'Z") : t("O'ZBEKCHA SO'Z");
+  document.getElementById('word-counter').textContent = t("So'z #") + wordNum;
   setInd('idle', icon('message', 20),"Tayyor bo'ling",'Javobingizni tanlang yoki yozing');
   document.getElementById('wc-speak-mini').style.display = isEU ? 'inline-block' : 'none';
 
@@ -942,7 +942,7 @@ function clearIn() {
 
 // Подпись чипа со значком. Значок необязателен: у чипов с числом его нет.
 function chipHTML(item) {
-  const label = item.label || item;
+  const label = t(item.label || item);
   return (item.ic ? icon(item.ic, 15) + ' ' : '') + label;
 }
 
@@ -999,9 +999,9 @@ function renderStats() {
   const nextThr = CEFR_THRESHOLDS[nextLevel];
   const pct = nextLevel === level ? 100 : ((known - curThr) / (nextThr - curThr)) * 100;
   document.getElementById('stats-bar').style.width = Math.min(100, Math.max(0, pct)) + '%';
-  document.getElementById('stats-bar-current').textContent = known + " so'z";
+  document.getElementById('stats-bar-current').textContent = t('{n} so\'z').replace('{n}', known);
   document.getElementById('stats-bar-next').textContent =
-    nextLevel === level ? 'Maksimum darajada!' : nextLevel + ' gacha: ' + (nextThr - known) + " so'z";
+    nextLevel === level ? t('Maksimum darajada!') : t('gacha') .replace('{lvl}', nextLevel).replace('{n}', nextThr - known);
 
   const { counts, totals } = getKnownByLevel();
   const barsEl = document.getElementById('cefr-bars');
@@ -1051,12 +1051,12 @@ function renderStats() {
   document.getElementById('next-level').textContent = goalNext === goalCur ? goalCur : goalNext;
   document.getElementById('next-need').textContent = goalNext === goalCur
     ? 'Eng yuqori darajadasiz'
-    : goalNext + ' gacha: ' + Math.max(0, goalTo - goalKnown) + " so'z";
+    : t('gacha').replace('{lvl}', goalNext).replace('{n}', Math.max(0, goalTo - goalKnown));
   document.getElementById('next-bar').style.width = goalPct + '%';
-  document.getElementById('next-hint').textContent =
+  document.getElementById('next-hint').textContent = t(
     goalPct >= 80 ? "Keyingi daraja juda yaqin — bir necha kun qoldi"
       : goalPct >= 40 ? "Yarim yo'lni bosib o'tdingiz"
-      : "Har kuni 10 daqiqa — eng ishonchli yo'l";
+      : "Har kuni 10 daqiqa — eng ishonchli yo'l");
 }
 
 function logoTap() { /* removed admin — admin is now separate file */ }
@@ -1271,7 +1271,7 @@ const TALK_SCENARIOS = [
 ];
 
 const TUTOR_CHIPS = [
-  { label: "🆕 5 ta yangi so'z", text: "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan." },
+  { ic: 'sparkles', label: "5 ta yangi so'z", text: "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan." },
   { ic: 'pen', label: 'Gapimni tekshiring', text: 'Men yozgan inglizcha gapni tekshiring va xatolarimni tushuntiring: ' },
   { ic: 'book-open', label: 'Grammatika', text: "Present Simple qoidasini oddiy qilib tushuntiring, 3 ta misol bilan." },
   { ic: 'message', label: 'Suhbat', text: "Men bilan oddiy inglizcha suhbat boshlang. Birinchi savolni bering." },
@@ -1366,8 +1366,8 @@ function tutorRenderLog() {
   if (tutorHistory.length === 0) {
     tutorBubble('bot', tutorFormat(
       tutorMode === 'suhbat'
-        ? "Keling, ingliz tilida gaplashamiz.\n\nVaziyatni tanlang va inglizcha yozing. Xato qilsangiz, avval to'g'ri variantni ko'rsataman, keyin suhbatni davom ettiraman."
-        : "Salom! Men Congix Ustozman.\n\nIngliz tili bo'yicha istalgan savolingizni bering: so'z ma'nosi, grammatika, gap tuzish yoki xatolarni tekshirish. Pastdagi tugmalardan ham boshlashingiz mumkin."
+        ? t("tutor-greeting-suhbat")
+        : t("tutor-greeting-ustoz")
     ));
     return;
   }
@@ -1415,7 +1415,7 @@ function tutorPickScenario(id) {
 
 function tutorInit() {
   const level = getCEFRLevel();
-  document.getElementById('tutor-level-label').textContent = 'Daraja: ' + level;
+  document.getElementById('tutor-level-label').textContent = t('Daraja') + ': ' + level;
 
   if (!tutorWired) {
     tutorLoadHistory();
@@ -1584,7 +1584,7 @@ function aiRenderTopics() {
 }
 
 function aiInit() {
-  document.getElementById('ai-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  document.getElementById('ai-level-label').textContent = t('Daraja') + ': ' + getCEFRLevel();
   if (!aiWired) {
     aiRenderTopics();
     aiWired = true;
@@ -1886,7 +1886,7 @@ function renderStreak() {
     const left = 24 - new Date().getHours();
     sub = `Seriya ${left} soatdan keyin uziladi — bugun mashq qiling`;
   }
-  document.getElementById('sk-sub').textContent = sub;
+  document.getElementById('sk-sub').textContent = t(sub);
 
   // Полоски последней недели: закрашены дни, попавшие внутрь серии.
   const week = document.getElementById('sk-week');
@@ -1986,10 +1986,10 @@ function renderDailyCard() {
   document.getElementById('dc-state').textContent = done ? `${done.score} / ${DAILY_SIZE}` : 'Bajarilmagan';
   document.getElementById('dc-title').textContent = done
     ? "Bugungi topshiriq bajarildi"
-    : `Bugungi ${DAILY_SIZE} ta so'z`;
-  document.getElementById('dc-sub').textContent = done
+    : t('Bugungi 10 ta so\'z');
+  document.getElementById('dc-sub').textContent = t(done
     ? "Ertaga yangi topshiriq. Yana urinib ko'rishingiz mumkin."
-    : "Hamma uchun bir xil. Xatosiz bajaring va rekordni yangilang.";
+    : "Hamma uchun bir xil. Xatosiz bajaring va rekordni yangilang.");
 }
 
 function dailyStart() {
@@ -2100,8 +2100,8 @@ function renderMap() {
       '</div>' +
       '<div class="city-bar"><i style="width:' + (unlocked ? p.pct : 0) + '%"></i></div>' +
       '<div class="city-meta">' +
-        '<span>' + (unlocked ? p.known + ' / ' + p.total + " so'z" : "Yopiq") + '</span>' +
-        '<span>' + (unlocked ? p.pct + '%' : 'Oldingi darajani ' + CITY_UNLOCK_PCT + '% ga yeting') + '</span>' +
+        '<span>' + (unlocked ? p.known + ' / ' + p.total + ' ' + t('so\'z') : "Yopiq") + '</span>' +
+        '<span>' + (unlocked ? p.pct + '%' : t('Oldingi darajani {n}% ga yeting').replace('{n}', CITY_UNLOCK_PCT)) + '</span>' +
       '</div>';
 
     if (unlocked) {
@@ -2428,12 +2428,12 @@ function readChips(boxId, items, current, onPick) {
 }
 
 function readInit() {
-  document.getElementById('read-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  document.getElementById('read-level-label').textContent = t('Daraja') + ': ' + getCEFRLevel();
   if (!readWired) {
     readWired = true;
   }
   readChips('read-genres', READ_GENRES, readGenre, id => { readGenre = id; readInit(); });
-  readChips('read-topics', READ_TOPICS, readTopic, id => {
+  readChips('read-topics', READ_TOPICS.map(x => x), readTopic, id => {
     readTopic = id;
     document.getElementById('read-topic').value = id;
     readInit();
@@ -2556,7 +2556,7 @@ function readAddWords() {
   saveVocab();
   const btn = document.getElementById('rd-add');
   btn.disabled = true;
-  btn.innerHTML = added ? icon('check', 14) + ' ' + added + " ta so'z qo'shildi" : "Bu so'zlar allaqachon lug'atda";
+  btn.innerHTML = added ? icon('check', 14) + ' ' + t("ta so'z qo'shildi").replace('{n}', added) : t("Bu so'zlar allaqachon lug'atda");
 }
 
 function readStartQuiz() {
@@ -2655,7 +2655,7 @@ function writeBack() {
 }
 
 function writeInit() {
-  document.getElementById('write-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  document.getElementById('write-level-label').textContent = t('Daraja') + ': ' + getCEFRLevel();
   const box = document.getElementById('write-tasks');
   box.innerHTML = '';
   WRITE_TASKS.forEach(t => {
@@ -2665,23 +2665,23 @@ function writeInit() {
     b.onclick = () => { writeTask = t; writeInit(); };
     box.appendChild(b);
   });
-  document.getElementById('write-task-text').textContent = writeTask.text;
+  document.getElementById('write-task-text').textContent = t(writeTask.text);
   writeCount();
   writeShowView('write-setup');
 }
 
 function writeCount() {
   const words = document.getElementById('write-area').value.split(/\s+/).filter(Boolean).length;
-  document.getElementById('write-words').textContent = words + " so'z";
+  document.getElementById('write-words').textContent = t("{n} so'z").replace('{n}', words);
   const hint = document.getElementById('write-hint');
-  hint.textContent = words < 10 ? "kamida 10 ta so'z" : words < 40 ? 'yaxshi, davom eting' : 'yetarli';
+  hint.textContent = words < 10 ? t("kamida 10 ta so'z") : words < 40 ? t('yaxshi, davom eting') : t('yetarli');
 }
 
 async function writeCheck() {
   if (writeBusy) return;
   const text = document.getElementById('write-area').value.trim();
   if (text.split(/\s+/).filter(Boolean).length < 10) {
-    document.getElementById('write-hint').textContent = "kamida 10 ta so'z kerak";
+    document.getElementById('write-hint').textContent = t("kamida 10 ta so'z kerak");
     return;
   }
 
@@ -2799,7 +2799,7 @@ function wordsShowView(id) {
 function wordsBack() { wordsShowView('words-setup'); }
 
 function wordsInit() {
-  document.getElementById('words-level-label').textContent = 'Daraja: ' + getCEFRLevel();
+  document.getElementById('words-level-label').textContent = t('Daraja') + ': ' + getCEFRLevel();
 
   const cats = document.getElementById('words-topics');
   cats.innerHTML = '';
@@ -2837,7 +2837,7 @@ function wordsPickedTopic() {
 
 function wordsSummary() {
   document.getElementById('words-summary').textContent =
-    getCEFRLevel() + ' darajasi · ' + wordsPickedTopic() + ' · ' + wordsCount + " ta so'z";
+    t('daraja-summary').replace('{lvl}', getCEFRLevel()).replace('{topic}', wordsPickedTopic()).replace('{n}', wordsCount);
 }
 
 async function wordsGenerate() {
@@ -2847,7 +2847,7 @@ async function wordsGenerate() {
   const level = getCEFRLevel();
 
   wordsShowView('words-loading');
-  document.getElementById('words-loading-txt').textContent = wordsCount + " ta so'z tayyorlanmoqda...";
+  document.getElementById('words-loading-txt').textContent = t("ta so'z tayyorlanmoqda...").replace('{n}', wordsCount);
 
   try {
     const words = await vocabFetchWords(level, topic, wordsCount);

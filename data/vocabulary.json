@@ -1,10 +1,10 @@
 {
   "meta": {
     "version": "1.0",
-    "total_words": 581,
+    "total_words": 628,
     "language": "Uzbek (Latin)",
     "exported_at": "2026-05-18T14:53:24.369Z",
-    "status_ok": 581,
+    "status_ok": 628,
     "status_todo": 0,
     "status_review": 0
   },
@@ -34,7 +34,8 @@
       "pos": "prep",
       "example_en": "This book is about animals.",
       "example_uz": "Bu kitob hayvonlar haqida.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/əˈbaʊt/"
     },
     {
       "id": "a003",
@@ -383,7 +384,8 @@
       "pos": "noun",
       "example_en": "I like red apples.",
       "example_uz": "Men qizil olmalarni yaxshi ko'raman.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈæpl/"
     },
     {
       "id": "a029",
@@ -561,7 +563,8 @@
       "pos": "noun",
       "example_en": "My bag is heavy.",
       "example_uz": "Mening sumkam og'ir.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/bæɡ/"
     },
     {
       "id": "b005",
@@ -908,7 +911,8 @@
       "pos": "noun",
       "example_en": "I read a book every night.",
       "example_uz": "Men har kechasi kitob o'qiyman.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/bʊk/"
     },
     {
       "id": "b031",
@@ -1082,7 +1086,8 @@
       "pos": "noun",
       "example_en": "That building is very tall.",
       "example_uz": "O'sha bino juda baland.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈbɪldɪŋ/"
     },
     {
       "id": "b044",
@@ -1095,7 +1100,8 @@
       "pos": "noun",
       "example_en": "I take the bus to school.",
       "example_uz": "Men maktabga avtobusda boraman.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/bʌs/"
     },
     {
       "id": "b045",
@@ -1393,7 +1399,8 @@
       "pos": "noun",
       "example_en": "Our class is small.",
       "example_uz": "Bizning sinfimiz kichik.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/klɑːs/"
     },
     {
       "id": "c018",
@@ -1565,7 +1572,8 @@
       "pos": "noun",
       "example_en": "I work at a big company.",
       "example_uz": "Men katta kompaniyada ishlayman.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈkʌmpəni/"
     },
     {
       "id": "c031",
@@ -1917,7 +1925,8 @@
       "pos": "noun",
       "example_en": "My sister is a doctor.",
       "example_uz": "Singlim shifokor.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈdɒktə(r)/"
     },
     {
       "id": "d018",
@@ -2121,7 +2130,8 @@
       "pos": "noun/adj",
       "example_en": "I am learning English.",
       "example_uz": "Men ingliz tilini o'rganyapman.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈɪŋɡlɪʃ/"
     },
     {
       "id": "e008",
@@ -2660,7 +2670,8 @@
       "pos": "noun",
       "example_en": "He is my best friend.",
       "example_uz": "U mening eng yaqin do'stim.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/frend/"
     },
     {
       "id": "f029",
@@ -2768,7 +2779,8 @@
       "pos": "noun",
       "example_en": "My grandmother loves her garden.",
       "example_uz": "Buvim o'z bog'ini yaxshi ko'radi.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈɡɑːdn/"
     },
     {
       "id": "g003",
@@ -3215,7 +3227,8 @@
       "pos": "noun",
       "example_en": "He works at a hospital.",
       "example_uz": "U kasalxonada ishlaydi.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈhɒspɪtl/"
     },
     {
       "id": "h023",
@@ -3488,7 +3501,8 @@
       "pos": "noun",
       "example_en": "He has a good job.",
       "example_uz": "Uning yaxshi ishi bor.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/dʒɒb/"
     },
     {
       "id": "j002",
@@ -3529,7 +3543,8 @@
       "pos": "noun",
       "example_en": "Where are my keys?",
       "example_uz": "Kalitlarim qayerda?",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/kiː/"
     },
     {
       "id": "k002",
@@ -3705,7 +3720,8 @@
       "pos": "noun",
       "example_en": "I wrote a letter.",
       "example_uz": "Men xat yozdim.",
-      "status": "ok"
+      "status": "ok",
+      "phon": "/ˈletə(r)/"
     },
     {
       "id": "l011",
@@ -3934,7 +3950,7 @@
       "level": "A2",
       "topic": "travel",
       "pos": "",
-      "phon": "",
+      "phon": "/ˈeəpɔːt/",
       "example_en": "We arrived at the airport early.",
       "example_uz": "Biz aeroportga erta yetib keldik.",
       "status": "ok"
@@ -4424,7 +4440,7 @@
       "level": "A2",
       "topic": "places",
       "pos": "",
-      "phon": "",
+      "phon": "/ˈrestrɒnt/",
       "example_en": "We ate at a nice restaurant.",
       "example_uz": "Biz yaxshi restoranda ovqatlandik.",
       "status": "ok"
@@ -8001,6 +8017,665 @@
       "phon": "/tuː/",
       "example_en": "'Nice to meet you, Gary.' 'You too.'",
       "example_uz": "«Tanishganimdan xursandman, Gari.» «Men ham.»",
+      "status": "ok"
+    },
+    {
+      "id": "w003",
+      "en": "what",
+      "uz": [
+        "nima"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "pron",
+      "phon": "/wɒt/",
+      "example_en": "What's your first name?",
+      "example_uz": "Ismingiz nima?",
+      "status": "ok"
+    },
+    {
+      "id": "w004",
+      "en": "where",
+      "uz": [
+        "qayerda"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "adv",
+      "phon": "/weə(r)/",
+      "example_en": "Where are you from?",
+      "example_uz": "Qayerdansiz?",
+      "status": "ok"
+    },
+    {
+      "id": "y001",
+      "en": "yes",
+      "uz": [
+        "ha"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "interj",
+      "phon": "/jes/",
+      "example_en": "'Are you from the UK?' 'Yes, I am.'",
+      "example_uz": "«Siz Buyuk Britaniyadanmisiz?» «Ha.»",
+      "status": "ok"
+    },
+    {
+      "id": "y002",
+      "en": "you",
+      "uz": [
+        "siz",
+        "sen"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "pron",
+      "phon": "/juː/",
+      "example_en": "Hello. Are you Angela?",
+      "example_uz": "Salom. Siz Anjelamisiz?",
+      "status": "ok"
+    },
+    {
+      "id": "y003",
+      "en": "your",
+      "uz": [
+        "sizning"
+      ],
+      "level": "A1",
+      "topic": "grammar",
+      "pos": "det",
+      "phon": "/jɔː(r)/",
+      "example_en": "What's your email address?",
+      "example_uz": "Elektron pochtangiz qanday?",
+      "status": "ok"
+    },
+    {
+      "id": "o010",
+      "en": "one",
+      "uz": [
+        "bir"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/wʌn/",
+      "example_en": "I have one brother.",
+      "example_uz": "Mening bitta akam bor.",
+      "status": "ok"
+    },
+    {
+      "id": "t009",
+      "en": "two",
+      "uz": [
+        "ikki"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/tuː/",
+      "example_en": "She has two children.",
+      "example_uz": "Uning ikkita bolasi bor.",
+      "status": "ok"
+    },
+    {
+      "id": "t010",
+      "en": "three",
+      "uz": [
+        "uch"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/θriː/",
+      "example_en": "Three coffees, please.",
+      "example_uz": "Uchta qahva, iltimos.",
+      "status": "ok"
+    },
+    {
+      "id": "f047",
+      "en": "four",
+      "uz": [
+        "to'rt"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/fɔː(r)/",
+      "example_en": "We are four people.",
+      "example_uz": "Biz to'rt kishimiz.",
+      "status": "ok"
+    },
+    {
+      "id": "f048",
+      "en": "five",
+      "uz": [
+        "besh"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/faɪv/",
+      "example_en": "The lesson is five minutes.",
+      "example_uz": "Dars besh daqiqa.",
+      "status": "ok"
+    },
+    {
+      "id": "s015",
+      "en": "six",
+      "uz": [
+        "olti"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/sɪks/",
+      "example_en": "I get up at six.",
+      "example_uz": "Men soat oltida turaman.",
+      "status": "ok"
+    },
+    {
+      "id": "s016",
+      "en": "seven",
+      "uz": [
+        "yetti"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/ˈsevn/",
+      "example_en": "There are seven days in a week.",
+      "example_uz": "Bir haftada yetti kun bor.",
+      "status": "ok"
+    },
+    {
+      "id": "e047",
+      "en": "eight",
+      "uz": [
+        "sakkiz"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/eɪt/",
+      "example_en": "Work starts at eight.",
+      "example_uz": "Ish soat sakkizda boshlanadi.",
+      "status": "ok"
+    },
+    {
+      "id": "n007",
+      "en": "nine",
+      "uz": [
+        "to'qqiz"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/naɪn/",
+      "example_en": "The shop opens at nine.",
+      "example_uz": "Do'kon soat to'qqizda ochiladi.",
+      "status": "ok"
+    },
+    {
+      "id": "t011",
+      "en": "ten",
+      "uz": [
+        "o'n"
+      ],
+      "level": "A1",
+      "topic": "numbers",
+      "pos": "noun",
+      "phon": "/ten/",
+      "example_en": "Ten minutes, please.",
+      "example_uz": "O'n daqiqa, iltimos.",
+      "status": "ok"
+    },
+    {
+      "id": "a076",
+      "en": "Australia",
+      "uz": [
+        "Avstraliya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ɒˈstreɪliə/",
+      "example_en": "She is from Australia.",
+      "example_uz": "U Avstraliyadan.",
+      "status": "ok"
+    },
+    {
+      "id": "b056",
+      "en": "Brazil",
+      "uz": [
+        "Braziliya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/brəˈzɪl/",
+      "example_en": "I'm from Brazil.",
+      "example_uz": "Men Braziliyadanman.",
+      "status": "ok"
+    },
+    {
+      "id": "c080",
+      "en": "China",
+      "uz": [
+        "Xitoy"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˈtʃaɪnə/",
+      "example_en": "China is a big country.",
+      "example_uz": "Xitoy katta davlat.",
+      "status": "ok"
+    },
+    {
+      "id": "i038",
+      "en": "Indonesia",
+      "uz": [
+        "Indoneziya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˌɪndəˈniːʒə/",
+      "example_en": "He works in Indonesia.",
+      "example_uz": "U Indoneziyada ishlaydi.",
+      "status": "ok"
+    },
+    {
+      "id": "j006",
+      "en": "Japan",
+      "uz": [
+        "Yaponiya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/dʒəˈpæn/",
+      "example_en": "They are from Japan.",
+      "example_uz": "Ular Yaponiyadan.",
+      "status": "ok"
+    },
+    {
+      "id": "r020",
+      "en": "Russia",
+      "uz": [
+        "Rossiya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˈrʌʃə/",
+      "example_en": "Russia is very big.",
+      "example_uz": "Rossiya juda katta.",
+      "status": "ok"
+    },
+    {
+      "id": "s017",
+      "en": "Spain",
+      "uz": [
+        "Ispaniya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/speɪn/",
+      "example_en": "We are on holiday in Spain.",
+      "example_uz": "Biz Ispaniyada ta'tildamiz.",
+      "status": "ok"
+    },
+    {
+      "id": "t012",
+      "en": "Turkey",
+      "uz": [
+        "Turkiya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˈtɜːki/",
+      "example_en": "Turkey is near Uzbekistan.",
+      "example_uz": "Turkiya O'zbekistonga yaqin.",
+      "status": "ok"
+    },
+    {
+      "id": "t013",
+      "en": "the UK",
+      "uz": [
+        "Buyuk Britaniya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ðə ˌjuː ˈkeɪ/",
+      "example_en": "Are you from the UK?",
+      "example_uz": "Siz Buyuk Britaniyadanmisiz?",
+      "status": "ok"
+    },
+    {
+      "id": "t014",
+      "en": "the USA",
+      "uz": [
+        "AQSh"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ðə ˌjuː es ˈeɪ/",
+      "example_en": "She lives in the USA.",
+      "example_uz": "U AQShda yashaydi.",
+      "status": "ok"
+    },
+    {
+      "id": "a077",
+      "en": "Argentina",
+      "uz": [
+        "Argentina"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˌɑːdʒənˈtiːnə/",
+      "example_en": "This is my friend Romina. She's from Argentina.",
+      "example_uz": "Bu do'stim Romina. U Argentinadan.",
+      "status": "ok"
+    },
+    {
+      "id": "c081",
+      "en": "chef",
+      "uz": [
+        "oshpaz"
+      ],
+      "level": "A1",
+      "topic": "jobs",
+      "pos": "noun",
+      "phon": "/ʃef/",
+      "example_en": "Pedro isn't a student. He's a chef in a restaurant.",
+      "example_uz": "Pedro talaba emas. U restoranda oshpaz.",
+      "status": "ok"
+    },
+    {
+      "id": "e048",
+      "en": "email",
+      "uz": [
+        "elektron pochta"
+      ],
+      "level": "A1",
+      "topic": "communication",
+      "pos": "noun",
+      "phon": "/ˈiːmeɪl/",
+      "example_en": "Thanks for your email.",
+      "example_uz": "Xatingiz uchun rahmat.",
+      "status": "ok"
+    },
+    {
+      "id": "e049",
+      "en": "engineer",
+      "uz": [
+        "muhandis"
+      ],
+      "level": "A1",
+      "topic": "jobs",
+      "pos": "noun",
+      "phon": "/ˌendʒɪˈnɪə(r)/",
+      "example_en": "I'm an engineer for a telecoms company.",
+      "example_uz": "Men telekom kompaniyasida muhandisman.",
+      "status": "ok"
+    },
+    {
+      "id": "g019",
+      "en": "guy",
+      "uz": [
+        "yigit"
+      ],
+      "level": "A1",
+      "topic": "people",
+      "pos": "noun",
+      "phon": "/ɡaɪ/",
+      "example_en": "He's a nice guy.",
+      "example_uz": "U yaxshi yigit.",
+      "status": "ok"
+    },
+    {
+      "id": "i039",
+      "en": "Italian",
+      "uz": [
+        "italyan"
+      ],
+      "level": "A1",
+      "topic": "culture",
+      "pos": "adj",
+      "phon": "/ɪˈtæliən/",
+      "example_en": "She's a chef in an Italian restaurant.",
+      "example_uz": "U italyan restoranida oshpaz.",
+      "status": "ok"
+    },
+    {
+      "id": "i040",
+      "en": "Italy",
+      "uz": [
+        "Italiya"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˈɪtəli/",
+      "example_en": "I'm Gio from Italy.",
+      "example_uz": "Men Italiyadan Jioman.",
+      "status": "ok"
+    },
+    {
+      "id": "l029",
+      "en": "language school",
+      "uz": [
+        "til maktabi"
+      ],
+      "level": "A1",
+      "topic": "education",
+      "pos": "noun",
+      "phon": "/ˈlæŋɡwɪdʒ skuːl/",
+      "example_en": "He is a teacher at a language school.",
+      "example_uz": "U til maktabida o'qituvchi.",
+      "status": "ok"
+    },
+    {
+      "id": "l030",
+      "en": "laptop",
+      "uz": [
+        "noutbuk"
+      ],
+      "level": "A1",
+      "topic": "technology",
+      "pos": "noun",
+      "phon": "/ˈlæptɒp/",
+      "example_en": "I've got an old laptop.",
+      "example_uz": "Menda eski noutbuk bor.",
+      "status": "ok"
+    },
+    {
+      "id": "m012",
+      "en": "Mexico",
+      "uz": [
+        "Meksika"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/ˈmeksɪkəʊ/",
+      "example_en": "He's a teacher at a school in Mexico.",
+      "example_uz": "U Meksikadagi maktabda o'qituvchi.",
+      "status": "ok"
+    },
+    {
+      "id": "m013",
+      "en": "museum",
+      "uz": [
+        "muzey"
+      ],
+      "level": "A1",
+      "topic": "place",
+      "pos": "noun",
+      "phon": "/mjuˈziːəm/",
+      "example_en": "The Palace Museum is in Beijing.",
+      "example_uz": "Saroy muzeyi Pekinda.",
+      "status": "ok"
+    },
+    {
+      "id": "n008",
+      "en": "near",
+      "uz": [
+        "yaqin"
+      ],
+      "level": "A1",
+      "topic": "position",
+      "pos": "adv",
+      "phon": "/nɪə(r)/",
+      "example_en": "It's near the Science Museum.",
+      "example_uz": "U Fan muzeyi yaqinida.",
+      "status": "ok"
+    },
+    {
+      "id": "n009",
+      "en": "next to",
+      "uz": [
+        "yonida"
+      ],
+      "level": "A1",
+      "topic": "position",
+      "pos": "adv",
+      "phon": "/ˈnekst tuː/",
+      "example_en": "It's next to the City Hall.",
+      "example_uz": "U shahar hokimiyati yonida.",
+      "status": "ok"
+    },
+    {
+      "id": "n010",
+      "en": "nice",
+      "uz": [
+        "yoqimli"
+      ],
+      "level": "A1",
+      "topic": "adjectives",
+      "pos": "adj",
+      "phon": "/naɪs/",
+      "example_en": "Have a nice day.",
+      "example_uz": "Kuningiz xayrli o'tsin.",
+      "status": "ok"
+    },
+    {
+      "id": "n011",
+      "en": "notepad",
+      "uz": [
+        "daftar"
+      ],
+      "level": "A1",
+      "topic": "objects",
+      "pos": "noun",
+      "phon": "/ˈnəʊtpæd/",
+      "example_en": "It's a notepad.",
+      "example_uz": "Bu daftar.",
+      "status": "ok"
+    },
+    {
+      "id": "n012",
+      "en": "nurse",
+      "uz": [
+        "hamshira"
+      ],
+      "level": "A1",
+      "topic": "jobs",
+      "pos": "noun",
+      "phon": "/nɜːs/",
+      "example_en": "He's a nurse at Westmore Hospital.",
+      "example_uz": "U Westmore shifoxonasida hamshira.",
+      "status": "ok"
+    },
+    {
+      "id": "o011",
+      "en": "object",
+      "uz": [
+        "narsa"
+      ],
+      "level": "A1",
+      "topic": "objects",
+      "pos": "noun",
+      "phon": "/ˈɒbdʒɪkt/",
+      "example_en": "This is an interesting object.",
+      "example_uz": "Bu qiziqarli narsa.",
+      "status": "ok"
+    },
+    {
+      "id": "o012",
+      "en": "o'clock",
+      "uz": [
+        "soat"
+      ],
+      "level": "A1",
+      "topic": "time",
+      "pos": "adv",
+      "phon": "/əˈklɒk/",
+      "example_en": "Is the film at eight o'clock?",
+      "example_uz": "Film soat sakkizdami?",
+      "status": "ok"
+    },
+    {
+      "id": "o013",
+      "en": "office",
+      "uz": [
+        "ofis"
+      ],
+      "level": "A1",
+      "topic": "work",
+      "pos": "noun",
+      "phon": "/ˈɒfɪs/",
+      "example_en": "Where are the ENI offices?",
+      "example_uz": "ENI ofislari qayerda?",
+      "status": "ok"
+    },
+    {
+      "id": "p025",
+      "en": "pen",
+      "uz": [
+        "ruchka"
+      ],
+      "level": "A1",
+      "topic": "objects",
+      "pos": "noun",
+      "phon": "/pen/",
+      "example_en": "This is a pen.",
+      "example_uz": "Bu ruchka.",
+      "status": "ok"
+    },
+    {
+      "id": "p026",
+      "en": "phone",
+      "uz": [
+        "telefon"
+      ],
+      "level": "A1",
+      "topic": "technology",
+      "pos": "noun",
+      "phon": "/fəʊn/",
+      "example_en": "It's a new phone.",
+      "example_uz": "Bu yangi telefon.",
+      "status": "ok"
+    },
+    {
+      "id": "p027",
+      "en": "photo",
+      "uz": [
+        "surat"
+      ],
+      "level": "A1",
+      "topic": "objects",
+      "pos": "noun",
+      "phon": "/ˈfəʊtəʊ/",
+      "example_en": "In this photo I'm with Nevin.",
+      "example_uz": "Bu suratda men Nevin bilanman.",
       "status": "ok"
     }
   ]

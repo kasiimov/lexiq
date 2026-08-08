@@ -1693,3 +1693,35 @@ body.flush .app { max-width:none; }
   background:var(--surface-2); border:1px solid var(--line);
   border-radius:20px; padding:40px 20px; text-align:center; color:var(--muted);
 }
+
+/* ── Dars ichidagi mashqlar va sxema ─────────────────────────────── */
+.lesson-visual {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:16px; padding:18px; margin:0 0 20px;
+}
+.lesson-visual svg { width:100%; height:auto; display:block; }
+.lesson-visual figcaption {
+  font-size:13px; color:var(--muted-2); margin-top:10px; text-align:center;
+}
+.ex-list { display:flex; flex-direction:column; gap:10px; }
+.ex-card {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:14px; padding:14px 16px;
+}
+.ex-q { font-size:15px; color:var(--cream); margin-bottom:10px; }
+.ex-q b { color:var(--lime); }
+.ex-opts { display:flex; flex-wrap:wrap; gap:8px; }
+.ex-opt {
+  padding:9px 15px; border-radius:10px; cursor:pointer;
+  background:var(--surface-3); color:var(--cream);
+  border:1px solid var(--line); font-size:14px; font-family:var(--font-sans);
+  transition:background-color .15s, border-color .15s, color .15s;
+}
+.ex-opt:hover:not(:disabled) { border-color:var(--muted-2); }
+.ex-opt:disabled { cursor:default; }
+.ex-opt.right { background:var(--lime); color:var(--ink); border-color:var(--lime); }
+.ex-opt.wrong { background:transparent; color:var(--clay); border-color:var(--clay); }
+.ex-why {
+  font-size:13.5px; color:var(--muted); margin-top:10px;
+  padding-top:10px; border-top:1px solid var(--line-soft); line-height:1.6;
+}

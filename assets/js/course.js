@@ -162,6 +162,34 @@ async function openLesson(id) {
       </table>
     </div>` : '';
 
+  // Схема рисуется нами (inline SVG в файле урока), а не берётся из учебника.
+  // Для времён и предлогов картинка объясняет быстрее абзаца текста.
+  const visual = lesson.visual ? `
+    <figure class="lesson-visual">
+      ${lesson.visual.svg}
+      ${lesson.visual.caption ? `<figcaption>${esc(lesson.visual.caption)}</figcaption>` : ''}
+    </figure>` : '';
+
+  // Задания лежат в самом уроке: прочитал правило — тут же решаешь, не уходя
+  // на другой экран. Проверка мгновенная, с разбором, почему именно так.
+  const exercises = (lesson.exercises || []).length ? `
+    <div class="lesson-section">
+      <h3 class="ls-title">${t('Mashqlar')}</h3>
+      <p class="ls-note">${t('Javobni tanlang — nega shundayligi darhol ko\'rsatiladi')}</p>
+      <div class="ex-list">
+        ${lesson.exercises.map((ex, i) => `
+          <div class="ex-card" id="ex-${i}">
+            <p class="ex-q"><b>${i + 1}.</b> ${esc(ex.q)}</p>
+            <div class="ex-opts">
+              ${(ex.options || []).map((o) => `
+                <button class="ex-opt" onclick="answerEx(${i}, this)"
+                        data-correct="${o === ex.answer ? '1' : '0'}">${esc(o)}</button>`).join('')}
+            </div>
+            <p class="ex-why" style="display:none">${esc(ex.why || '')}</p>
+          </div>`).join('')}
+      </div>
+    </div>` : '';
+
   const errors = (lesson.common_errors || []).map((e) => `
     <div class="err-card">
       <div class="err-line wrong"><span class="err-tag">✗</span> ${esc(e.wrong)}</div>
@@ -192,9 +220,12 @@ async function openLesson(id) {
 
     <div class="lesson-section">
       <h3 class="ls-title">${esc(lesson.rule.title)}</h3>
+      ${visual}
       ${points}
       ${table}
     </div>
+
+    ${exercises}
 
     ${errors ? `<div class="lesson-section">
       <h3 class="ls-title">${t('Tipik xatolar')}</h3>
@@ -234,4 +265,21 @@ function practiceLesson() {
   if (!currentLesson) return;
   window.__lessonSpec = currentLesson;
   show('s-ai');
+}
+
+// Проверка ответа на месте. Правильный подсвечивается лаймом, неправильный —
+// глиняным, и сразу открывается объяснение: ошибка без разбора ничему не учит.
+function answerEx(index, button) {
+  const card = document.getElementById('ex-' + index);
+  if (!card || card.dataset.answered === '1') return;
+  card.dataset.answered = '1';
+
+  card.querySelectorAll('.ex-opt').forEach((b) => {
+    b.disabled = true;
+    if (b.dataset.correct === '1') b.classList.add('right');
+  });
+  if (button.dataset.correct !== '1') button.classList.add('wrong');
+
+  const why = card.querySelector('.ex-why');
+  if (why) why.style.display = '';
 }

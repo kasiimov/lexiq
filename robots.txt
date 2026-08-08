@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin.html
 Disallow: /api/
 
-Sitemap: https://lexiq-uz.netlify.app/sitemap.xml
+Sitemap: https://congix-english.netlify.app/sitemap.xml

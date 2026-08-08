@@ -10,7 +10,7 @@
    4. Сохраните этот файл как assets/js/firebase-config.js
       (он в .gitignore — в репозиторий не попадёт)
    5. Authentication → Settings → Authorized domains → добавьте
-      lexiq-uz.netlify.app
+      congix-english.netlify.app
 
    Пока файла нет, приложение работает в режиме «Mehmon»:
    профиль хранится в браузере, регистрация скрыта.

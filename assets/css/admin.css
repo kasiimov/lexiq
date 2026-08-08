@@ -140,24 +140,62 @@ header {
 .search-input:focus { border-color:var(--lime); }
 
 .filter-row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
-.filter-label { font-size:11px; color:var(--faint); font-weight:500; letter-spacing:0.14em; text-transform:uppercase; }
-.filter-select {
-  background:var(--surface-3); border:1px solid var(--line);
-  border-radius:10px; padding:7px 12px;
-  color:var(--cream); font-family:var(--font-sans);
-  font-weight:400; font-size:12px; cursor:pointer; outline:none;
+
+/* Подписи фильтров стоят отдельной колонкой, чтобы «Holat», «Kirish usuli» и
+   «Saralash» начинались с одной вертикали. Раньше они шли в потоке и каждая
+   строка съезжала на свою длину подписи. */
+.filter-grid {
+  display:grid; grid-template-columns:max-content 1fr;
+  gap:12px 16px; align-items:center;
 }
-.filter-select:focus { border-color:var(--lime); }
+.filter-label {
+  font-size:11px; color:var(--faint); font-weight:500;
+  letter-spacing:0.12em; text-transform:uppercase; white-space:nowrap;
+}
+.filter-controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+@media (max-width: 560px) {
+  /* На узком экране колонка подписей отнимает половину ширины у самих
+     фильтров — там они встают друг под друга. */
+  .filter-grid { grid-template-columns:1fr; gap:6px; }
+  .filter-grid .filter-label:not(:first-child) { margin-top:8px; }
+}
+
+/* Системный вид select'а в тёмной панели выглядит чужим: macOS рисует свою
+   светлую стрелку и свои отступы. Гасим оформление и ставим свою стрелку. */
+.filter-select {
+  appearance:none; -webkit-appearance:none;
+  background:var(--surface-3)
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23A79F92' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 12px center;
+  background-size:12px 12px;
+  border:1px solid var(--line);
+  border-radius:10px; padding:8px 34px 8px 13px;
+  color:var(--cream); font-family:var(--font-sans);
+  font-weight:400; font-size:13px; line-height:1.2;
+  cursor:pointer; outline:none;
+  transition:border-color .15s;
+}
+.filter-select:hover { border-color:var(--muted-2); }
+.filter-select:focus-visible { border-color:var(--lime); }
+/* Список вариантов рисует система; на Windows и Linux он унаследует
+   белый фон, если цвет не задать явно. */
+.filter-select option { background:var(--surface-2); color:var(--cream); }
 
 .filter-pills { display:flex; gap:6px; flex-wrap:wrap; }
 .pill {
   border:1px solid var(--line); cursor:pointer;
   background:transparent; color:var(--muted);
-  padding:6px 14px; border-radius:99px;
-  font-size:12px; font-weight:400;
+  padding:8px 15px; border-radius:99px;
+  font-size:13px; font-weight:400; line-height:1.2;
   transition:background-color .15s, border-color .15s, color .15s, transform .12s;
 }
 .pill:hover { border-color:var(--muted-2); color:var(--cream); }
+/* Базовое состояние «выбрано». Без него подсветка была только у кнопок,
+   которым скрипт вешал второй класс — статусы словаря. Фильтры панели
+   пользователей второго класса не имеют, и выбранная кнопка ничем не
+   отличалась от остальных. */
+.pill.active { background:var(--lime); color:var(--ink); border-color:var(--lime); font-weight:500; }
 .pill.active.todo { background:var(--cream); color:var(--ink); border-color:var(--cream); }
 .pill.active.ok { background:var(--lime); color:var(--ink); border-color:var(--lime); }
 .pill.active.review { background:var(--muted); color:var(--ink); border-color:var(--muted); }

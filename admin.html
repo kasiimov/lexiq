@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Congix English Admin — Foydalanuvchilar</title>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/css/admin.css?v=7">
+<link rel="stylesheet" href="assets/css/admin.css?v=8">
 <link rel="stylesheet" href="assets/css/admin-users.css?v=1">
 </head>
 <body>
@@ -40,8 +40,8 @@
            placeholder="🔍 Ism yoki email bo'yicha qidirish..." oninput="renderUsers()">
   </div>
 
-  <div class="filter-row">
-    <span class="filter-label">Holat:</span>
+  <div class="filter-grid">
+    <span class="filter-label">Holat</span>
     <div class="filter-pills" id="activity-pills">
       <button class="pill active" data-activity="all" onclick="setActivityFilter('all')">Hammasi</button>
       <button class="pill" data-activity="today" onclick="setActivityFilter('today')">Bugun faol</button>
@@ -49,25 +49,27 @@
       <button class="pill" data-activity="idle" onclick="setActivityFilter('idle')">Nofaol</button>
       <button class="pill" data-activity="never" onclick="setActivityFilter('never')">Boshlamagan</button>
     </div>
-  </div>
 
-  <div class="filter-row">
-    <span class="filter-label">Kirish usuli:</span>
-    <select class="filter-select" id="provider-filter" onchange="renderUsers()">
-      <option value="all">Hammasi</option>
-      <option value="password">Email / parol</option>
-      <option value="google">Google</option>
-    </select>
+    <span class="filter-label">Kirish usuli</span>
+    <div class="filter-controls">
+      <select class="filter-select" id="provider-filter" onchange="renderUsers()">
+        <option value="all">Hammasi</option>
+        <option value="password">Email / parol</option>
+        <option value="google">Google</option>
+      </select>
+    </div>
 
-    <span class="filter-label" style="margin-left:8px;">Saralash:</span>
-    <select class="filter-select" id="sort-by" onchange="renderUsers()">
-      <option value="recent">So'nggi kirgan</option>
-      <option value="new">Yangi ro'yxatdan o'tgan</option>
-      <option value="words">Ko'p so'z o'rgangan</option>
-      <option value="streak">Uzun streak</option>
-      <option value="accuracy">Aniqlik bo'yicha</option>
-      <option value="name">Ism (A-Z)</option>
-    </select>
+    <span class="filter-label">Saralash</span>
+    <div class="filter-controls">
+      <select class="filter-select" id="sort-by" onchange="renderUsers()">
+        <option value="recent">So'nggi kirgan</option>
+        <option value="new">Yangi ro'yxatdan o'tgan</option>
+        <option value="words">Ko'p so'z o'rgangan</option>
+        <option value="streak">Uzun streak</option>
+        <option value="accuracy">Aniqlik bo'yicha</option>
+        <option value="name">Ism (A-Z)</option>
+      </select>
+    </div>
   </div>
 </div>
 

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Congix English Admin — Lug'at tahrirlash</title>
-<link rel="stylesheet" href="assets/css/admin.css?v=7">
+<link rel="stylesheet" href="assets/css/admin.css?v=8">
 </head>
 <body>
 
@@ -48,40 +48,44 @@
     <input type="text" class="search-input" id="search-input" placeholder="🔍 So'z yoki tarjima bo'yicha qidirish..." oninput="onSearchChange()">
   </div>
 
-  <div class="filter-row" style="margin-bottom:10px;">
-    <span class="filter-label">Holat:</span>
+  <div class="filter-grid">
+    <span class="filter-label">Holat</span>
     <div class="filter-pills" id="status-pills">
       <button class="pill active todo" data-status="todo" onclick="setStatusFilter('todo')">⏳ Todo</button>
       <button class="pill" data-status="ok" onclick="setStatusFilter('ok')">✓ OK</button>
       <button class="pill" data-status="review" onclick="setStatusFilter('review')">⚠ Review</button>
       <button class="pill" data-status="all" onclick="setStatusFilter('all')">Hammasi</button>
     </div>
-  </div>
 
-  <div class="filter-row">
-    <span class="filter-label">Daraja:</span>
-    <select class="filter-select" id="level-filter" onchange="onFilterChange()">
-      <option value="all">Hammasi</option>
-      <option value="A1">A1</option>
-      <option value="A2">A2</option>
-      <option value="B1">B1</option>
-      <option value="B2">B2</option>
-      <option value="C1">C1</option>
-      <option value="C2">C2</option>
-    </select>
+    <span class="filter-label">Daraja</span>
+    <div class="filter-controls">
+      <select class="filter-select" id="level-filter" onchange="onFilterChange()">
+        <option value="all">Hammasi</option>
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+        <option value="C1">C1</option>
+        <option value="C2">C2</option>
+      </select>
+    </div>
 
-    <span class="filter-label" style="margin-left:8px;">Mavzu:</span>
-    <select class="filter-select" id="topic-filter" onchange="onFilterChange()">
-      <option value="all">Hammasi</option>
-    </select>
+    <span class="filter-label">Mavzu</span>
+    <div class="filter-controls">
+      <select class="filter-select" id="topic-filter" onchange="onFilterChange()">
+        <option value="all">Hammasi</option>
+      </select>
+    </div>
 
-    <span class="filter-label" style="margin-left:8px;">Saralash:</span>
-    <select class="filter-select" id="sort-by" onchange="onFilterChange()">
-      <option value="alpha">A-Z</option>
-      <option value="alpha-desc">Z-A</option>
-      <option value="recent">So'nggi qo'shilgan</option>
-      <option value="level">Daraja bo'yicha</option>
-    </select>
+    <span class="filter-label">Saralash</span>
+    <div class="filter-controls">
+      <select class="filter-select" id="sort-by" onchange="onFilterChange()">
+        <option value="alpha">A-Z</option>
+        <option value="alpha-desc">Z-A</option>
+        <option value="recent">So'nggi qo'shilgan</option>
+        <option value="level">Daraja bo'yicha</option>
+      </select>
+    </div>
   </div>
 </div>
 

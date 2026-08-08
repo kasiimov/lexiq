@@ -262,7 +262,8 @@ function renderShell(id) {
   try {
     const st = streakState(getStats());
     const days = st.days;
-    document.getElementById('side-streak-days').textContent = days + ' ' + t('kun') + ' ketma-ket';
+    document.getElementById('side-streak-days').textContent =
+      days + ' ' + t('kun') + ' ' + t('ketma-ket');
     document.getElementById('top-streak-days').textContent = days;
     document.getElementById('side-streak-sub').textContent = st.playedToday
       ? t('Bugungi mashq bajarildi — seriya saqlanib qoldi.')
@@ -862,7 +863,13 @@ function checkAnswer() {
       correctText = currentWord.en;
     }
   }
-  applyResult(ok, ok ? "To'g'ri!" : 'Xato', ok ? '«' + correctText + "» — a'lo!" : "To'g'ri: «" + correctText + '»');
+  // Само слово не переводим — оно и есть ответ; переводится только обрамление.
+  applyResult(
+    ok,
+    ok ? "To'g'ri!" : 'Xato',
+    ok ? '«' + correctText + '» — ' + t("a'lo!")
+       : t("To'g'ri:") + ' «' + correctText + '»'
+  );
   setButtons('next');
 }
 
@@ -900,6 +907,17 @@ function applyResult(ok, msg, hint) {
 
 function haptic(p) { if (navigator.vibrate) navigator.vibrate(p); }
 
+// Текст, который ставится из кода, минует разметку с data-t и потому оставался
+// узбекским при любом выбранном языке. Здесь ключ и переводится сразу, и
+// остаётся в data-t — оттуда его возьмёт applyLang(), если язык переключат
+// уже после того, как экран отрисован.
+function setT(id, key) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.dataset.t = key;
+  el.textContent = t(key);
+}
+
 function nextWord() { wordNum++; loadWord(); }
 
 function endGame(reason) {
@@ -916,16 +934,22 @@ function endGame(reason) {
     else if (pct >= 50) sub = "Yomon emas";
     else sub = "Mashq qiling, yaxshi bo'ladi!";
   }
-  document.getElementById('rc-emoji').textContent = emoji;
-  document.getElementById('rc-title').textContent = title;
-  document.getElementById('rc-sub').textContent = sub;
+  // icon() возвращает разметку <svg>. Через textContent она печаталась как
+  // текст, а line-height:0 у .rc-emoji сваливал все её строки на одну —
+  // отсюда полоса нечитаемых символов над заголовком.
+  document.getElementById('rc-emoji').innerHTML = emoji;
+  setT('rc-title', title);
+  setT('rc-sub', sub);
   document.getElementById('rc-correct').textContent = sCorrect;
   document.getElementById('rc-wrong').textContent = sWrong;
   document.getElementById('rc-score').textContent = sScore;
   document.getElementById('rc-time').textContent = fmtClock(clockElapsed);
   if (newWordsThisSession > 0) {
     document.getElementById('rc-new').style.display = 'block';
-    document.getElementById('rc-new').textContent = '+ ' + newWordsThisSession + " ta yangi so'z ko'rdingiz!";
+    // Число подставляется в строку, поэтому переводится только хвост —
+    // целиком такую фразу в словарь не положить.
+    document.getElementById('rc-new').textContent =
+      '+ ' + newWordsThisSession + ' ' + t("ta yangi so'z ko'rdingiz!");
   } else {
     document.getElementById('rc-new').style.display = 'none';
   }
@@ -949,9 +973,12 @@ function chipHTML(item) {
 function setInd(type, ico, title, msg) {
   const el = document.getElementById('indicator');
   el.className = 'indicator ' + type;
+  // Перевод делаем здесь, а не в каждом вызове: точек вызова несколько, и
+  // достаточно один раз забыть обернуть строку, чтобы подсказка снова
+  // осталась узбекской при английском интерфейсе.
   el.innerHTML = '<span class="ind-ico">' + ico + '</span>' +
-    '<div class="ind-body"><div class="ind-title">' + title + '</div>' +
-    '<div class="ind-msg">' + (msg||'') + '</div></div>';
+    '<div class="ind-body"><div class="ind-title">' + t(title) + '</div>' +
+    '<div class="ind-msg">' + (msg ? t(msg) : '') + '</div></div>';
 }
 
 function setButtons(which) {

@@ -1561,3 +1561,135 @@ body.flush .app { max-width:none; }
   padding:7px 12px; border-radius:99px;
   font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--muted);
 }
+
+/* ── Kurs: dastur, bloklar va dars sahifasi ──────────────────────────
+   Уроки лежали в data/lessons и не показывались нигде — этот экран их и
+   открывает. Палитра и радиусы те же, что у остальных карточек. */
+
+.course-tabs { display:flex; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+.course-tab {
+  padding:8px 18px; border-radius:99px; cursor:pointer;
+  background:transparent; color:var(--muted);
+  border:1px solid var(--line); font-size:14px; font-weight:500;
+  transition:background-color .15s, color .15s, border-color .15s;
+}
+.course-tab:hover { color:var(--cream); border-color:var(--muted-2); }
+.course-tab.active { background:var(--lime); color:var(--ink); border-color:var(--lime); }
+
+.course-head {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:20px; padding:20px; margin-bottom:18px;
+}
+.ch-title { font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--cream); }
+.ch-desc { font-size:14px; color:var(--muted); margin-top:4px; }
+.ch-bar { height:6px; background:var(--line); border-radius:3px; margin-top:14px; overflow:hidden; }
+.ch-bar i { display:block; height:100%; background:var(--lime); border-radius:3px; transition:width .3s; }
+.ch-count { font-size:12px; color:var(--muted-2); margin-top:7px; }
+
+.course-block { margin-bottom:16px; }
+.cb-head { padding:0 4px 10px; }
+.cb-title { font-family:var(--font-display); font-size:17px; font-weight:600; color:var(--cream); }
+.cb-sub { font-size:13px; color:var(--muted-2); margin-top:2px; }
+.cb-lessons {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:18px; overflow:hidden;
+}
+
+.course-lesson-row {
+  display:flex; align-items:center; gap:14px; width:100%;
+  padding:14px 16px; cursor:pointer; text-align:left;
+  background:transparent; border:none; border-bottom:1px solid var(--line-soft);
+  transition:background-color .12s;
+}
+.course-lesson-row:last-child { border-bottom:none; }
+.course-lesson-row:hover { background:var(--surface-3); }
+.cl-num {
+  flex:none; width:34px; height:34px; border-radius:10px;
+  background:var(--surface-3); color:var(--muted);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:600;
+}
+.course-lesson-row.done .cl-num { background:var(--lime); color:var(--ink); }
+.cl-text { flex:1; min-width:0; }
+.cl-can { display:block; font-size:14.5px; color:var(--cream); font-weight:500; }
+.cl-gram { display:block; font-size:12.5px; color:var(--muted-2); margin-top:2px; }
+.cl-mark { flex:none; color:var(--lime); font-size:16px; }
+
+/* ── Sahifa: mavzu tushuntirilishi ───────────────────────────────── */
+.lesson-head { margin:16px 0 22px; }
+.lh-level {
+  font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--faint);
+}
+.lh-title {
+  font-family:var(--font-display); font-size:26px; font-weight:600;
+  letter-spacing:-0.02em; color:var(--cream); margin:6px 0 12px;
+}
+.lh-can { font-size:15px; color:var(--cream); margin-bottom:8px; }
+.lh-can b { color:var(--lime); font-weight:500; }
+.lh-why {
+  font-size:14px; color:var(--muted); line-height:1.65;
+  border-left:3px solid var(--lime); padding-left:14px;
+}
+
+.lesson-section { margin-bottom:26px; }
+.ls-title {
+  font-family:var(--font-display); font-size:19px; font-weight:600;
+  color:var(--cream); margin-bottom:6px;
+}
+.ls-note { font-size:13px; color:var(--muted-2); margin-bottom:14px; }
+
+.rule-point { display:flex; gap:12px; margin-bottom:18px; }
+.rp-num {
+  flex:none; width:26px; height:26px; border-radius:8px;
+  background:var(--lime); color:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:700;
+}
+.rp-body { flex:1; min-width:0; }
+.rp-text { font-size:15px; color:var(--cream); line-height:1.65; margin-bottom:10px; }
+.rp-ex {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:12px; padding:11px 14px; margin-bottom:7px;
+}
+.rp-en { display:block; font-size:15px; color:var(--lime); font-weight:500; }
+.rp-uz { display:block; font-size:13.5px; color:var(--muted); margin-top:3px; }
+
+.rule-table-wrap { overflow-x:auto; border-radius:14px; border:1px solid var(--line); }
+.rule-table { width:100%; border-collapse:collapse; min-width:340px; }
+.rule-table th {
+  background:var(--surface-3); color:var(--muted-2);
+  font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  text-align:left; padding:11px 14px; white-space:nowrap;
+}
+.rule-table td {
+  padding:11px 14px; font-size:14px; color:var(--cream);
+  border-top:1px solid var(--line-soft);
+}
+
+.err-card {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:14px; padding:14px 16px; margin-bottom:10px;
+}
+.err-line { font-size:14.5px; margin-bottom:5px; }
+.err-line.wrong { color:var(--clay); text-decoration:line-through; }
+.err-line.right { color:var(--lime); }
+.err-tag { display:inline-block; width:16px; text-decoration:none; }
+.err-why { font-size:13.5px; color:var(--muted); margin-top:8px; line-height:1.6; }
+
+.lesson-words {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:16px; overflow:hidden;
+}
+.lw-row { padding:12px 16px; border-bottom:1px solid var(--line-soft); }
+.lw-row:last-child { border-bottom:none; }
+.lw-main { display:flex; align-items:baseline; gap:9px; flex-wrap:wrap; }
+.lw-en { font-size:15.5px; font-weight:500; color:var(--cream); }
+.lw-ipa { font-size:12.5px; color:var(--faint); }
+.lw-uz { font-size:14px; color:var(--lime); margin-top:2px; }
+.lw-ex { font-size:13px; color:var(--muted-2); margin-top:4px; font-style:italic; }
+
+.lesson-actions { display:flex; flex-direction:column; gap:10px; margin:26px 0 40px; }
+.course-empty {
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:20px; padding:40px 20px; text-align:center; color:var(--muted);
+}

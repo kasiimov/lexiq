@@ -180,6 +180,7 @@ function show(id) {
   if (id === 's-read') readInit();
   if (id === 's-write') writeInit();
   if (id === 's-words') wordsInit();
+  if (id === 's-course') courseInit();
   renderShell(id);
   window.scrollTo(0,0);
 }

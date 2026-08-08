@@ -242,14 +242,7 @@ try {
       <input type="file" accept=".json,application/json" onchange="loadVocabFromFile(event)">
     </div>
 
-    <div class="es-help">
-      <b><i class="ic" data-i="lightbulb" data-s="15"></i> <span data-t>Qanday qilish kerak:</span></b><br><br>
-      1. <code>admin.html</code> faylini oching (kompyuterda)<br>
-      2. So'zlarni qo'shing yoki tahrirlang<br>
-      3. <b>"<i class="ic" data-i="save" data-s="14"></i> <span data-t>JSON eksport"</span></b> tugmasini bosing<br>
-      4. Yuklab olingan <code>vocabulary-...json</code> faylni shu yerda yuklang<br><br>
-      Yoki <code>vocabulary.json</code> faylni <code>data/</code> papkasiga qo'ying — avtomatik yuklanadi.
-    </div>
+    <div class="es-help"><span data-t>es-help</span></div>
   </div>
 </div>
 
@@ -402,7 +395,7 @@ try {
         <span class="gm-ico"><i class="ic" data-i="layers" data-s="22"></i></span><span class="gm-name">Classic</span><span class="gm-desc" data-t>Oddiy rejim</span>
       </button>
       <button class="gm-card" data-gm="multi" onclick="setGameMode('multi')">
-        <span class="gm-ico"><i class="ic" data-i="target" data-s="22"></i></span><span class="gm-name">4 variant</span><span class="gm-desc" data-t>Eng oson rejim</span>
+        <span class="gm-ico"><i class="ic" data-i="target" data-s="22"></i></span><span class="gm-name" data-t>4 variant</span><span class="gm-desc" data-t>Eng oson rejim</span>
       </button>
       <button class="gm-card" data-gm="time" onclick="setGameMode('time')">
         <span class="gm-ico"><i class="ic" data-i="timer" data-s="22"></i></span><span class="gm-name">Time Attack</span><span class="gm-desc" data-t>60 soniya</span>
@@ -443,7 +436,7 @@ try {
     <div class="train-counter" id="train-counter">0 / 0</div>
   </div>
   <div class="flashcard">
-    <div class="fc-badge" id="fc-badge">INGLIZCHA</div>
+    <div class="fc-badge" id="fc-badge" data-t>INGLIZCHA</div>
     <div class="fc-word" id="fc-word">...</div>
     <div class="fc-phon" id="fc-phon"></div>
     <div class="fc-actions">
@@ -818,7 +811,7 @@ try {
   <div id="daily-play">
     <div class="ai-quiz-top">
       <div class="ai-q-counter" id="dl-counter">1 / 10</div>
-      <div class="ai-q-topic" id="dl-score">0 ball</div>
+      <div class="ai-q-topic" id="dl-score">0 <span data-t>ball</span></div>
     </div>
     <div class="word-card eng-card">
       <div class="wc-badge" data-t>INGLIZCHA SO'Z</div>

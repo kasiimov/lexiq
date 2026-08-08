@@ -286,6 +286,31 @@
       "Bugun mashq qiling — seriya uzilmaydi.": "Позанимайтесь сегодня — серия не прервётся.",
       "Bugungi mashq bajarildi — seriya saqlanib qoldi.": "Сегодняшняя практика выполнена — серия сохранена.",
       "so'z": "слов",
+      "es-help": "Что делать: откройте admin.html на компьютере, добавьте или отредактируйте слова, нажмите «JSON eksport» и загрузите скачанный файл здесь. Либо положите vocabulary.json в папку data/ — он подхватится сам.",
+      "So'zlarni tayyorlab bo'lmadi: Xatolik 501": "Не удалось подготовить слова: ошибка 501",
+      "Beginner": "Начальный",
+      "Elementary": "Элементарный",
+      "Intermediate": "Средний",
+      "Upper-Int.": "Выше среднего",
+      "Advanced": "Продвинутый",
+      "Proficient": "Свободный",
+      "Bajarilmagan": "Не выполнено",
+      "Bajarildi": "Выполнено",
+      "Yopiq": "Закрыто",
+      "ball": "баллов",
+      "{n} ta": "{n} шт.",
+      "4 variant": "4 варианта",
+      "Ro'yxatdan o'tsangiz, progress hisobingizda saqlanadi va boshqa qurilmada ham ochiladi. Reytingda ham qatnasha olasiz.": "Если зарегистрируетесь, прогресс сохранится в аккаунте и откроется на другом устройстве. И вы попадёте в рейтинг.",
+      "Progress hisobingizga saqlanmoqda — istalgan qurilmadan kirsangiz, davom ettirasiz.": "Прогресс сохраняется в аккаунте — зайдёте с любого устройства и продолжите.",
+      "sayohat": "путешествия",
+      "do'stlik": "дружба",
+      "texnologiya": "технологии",
+      "sport": "спорт",
+      "ovqat": "еда",
+      "maktab va universitet": "школа и университет",
+      "ish": "работа",
+      "Present Simple": "Present Simple",
+      "So'zlarni tayyorlab bo'lmadi": "Не удалось подготовить слова",
       "Keyingi daraja juda yaqin — bir necha kun qoldi": "Следующий уровень совсем близко — осталось несколько дней",
       "Yarim yo'lni bosib o'tdingiz": "Вы прошли половину пути",
       "tutor-greeting-ustoz": "Здравствуйте! Я наставник Congix.\n\nЗадайте любой вопрос по английскому: значение слова, грамматика, построение предложения или проверка ошибок. Начать можно и с кнопок ниже.",
@@ -557,6 +582,31 @@
       "Bugun mashq qiling — seriya uzilmaydi.": "Practise today so the streak holds.",
       "Bugungi mashq bajarildi — seriya saqlanib qoldi.": "Today's practice is done — the streak is safe.",
       "so'z": "words",
+      "es-help": "What to do: open admin.html on a computer, add or edit the words, press “JSON eksport”, then upload the downloaded file here. Or drop vocabulary.json into the data/ folder and it loads by itself.",
+      "So'zlarni tayyorlab bo'lmadi: Xatolik 501": "Could not prepare the words: error 501",
+      "Beginner": "Beginner",
+      "Elementary": "Elementary",
+      "Intermediate": "Intermediate",
+      "Upper-Int.": "Upper-Int.",
+      "Advanced": "Advanced",
+      "Proficient": "Proficient",
+      "Bajarilmagan": "Not done",
+      "Bajarildi": "Done",
+      "Yopiq": "Locked",
+      "ball": "points",
+      "{n} ta": "{n}",
+      "4 variant": "4 options",
+      "Ro'yxatdan o'tsangiz, progress hisobingizda saqlanadi va boshqa qurilmada ham ochiladi. Reytingda ham qatnasha olasiz.": "Sign up and your progress is kept in the account and opens on any device. You also join the ranking.",
+      "Progress hisobingizga saqlanmoqda — istalgan qurilmadan kirsangiz, davom ettirasiz.": "Your progress is saved to the account — sign in from any device and carry on.",
+      "sayohat": "travel",
+      "do'stlik": "friendship",
+      "texnologiya": "technology",
+      "sport": "sport",
+      "ovqat": "food",
+      "maktab va universitet": "school and university",
+      "ish": "work",
+      "Present Simple": "Present Simple",
+      "So'zlarni tayyorlab bo'lmadi": "Could not prepare the words",
       "Keyingi daraja juda yaqin — bir necha kun qoldi": "The next level is close — a few days to go",
       "Yarim yo'lni bosib o'tdingiz": "You are halfway there",
       "tutor-greeting-ustoz": "Hello! I am your Congix tutor.\n\nAsk me anything about English: what a word means, grammar, how to build a sentence, or checking your mistakes. You can also start with the buttons below.",
@@ -608,11 +658,10 @@
     document.querySelectorAll('.lang-btn').forEach(function (b) {
       b.classList.toggle('on', b.dataset.lang === id);
     });
-    // Экраны, которые рисует JS, перерисовываем сами
-    if (typeof global.renderShell === 'function') {
-      const active = document.querySelector('.screen.active');
-      if (active) global.renderShell(active.id);
-    }
+    // Экран перерисовываем целиком: подписи чипов, карточек и списков
+    // собираются в init-функциях экрана, одной шапки тут мало.
+    const active = document.querySelector('.screen.active');
+    if (active && typeof global.show === 'function') global.show(active.id);
   }
 
   function lang() { return current; }

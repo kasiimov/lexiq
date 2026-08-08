@@ -398,7 +398,7 @@ function updateHomeStats() {
   const known = getKnownWordsCount();
   const level = getCEFRLevel();
   document.getElementById('user-level').textContent = level;
-  document.getElementById('user-level-name').textContent = CEFR_NAMES[level];
+  document.getElementById('user-level-name').textContent = t(CEFR_NAMES[level]);
   document.getElementById('user-level-icon').innerHTML = icon(CEFR_ICONS[level] || 'sprout', 34);
 
   const curIdx = CEFR_LEVELS.indexOf(level);
@@ -991,7 +991,7 @@ function renderStats() {
   const known = getKnownWordsCount();
   const level = getCEFRLevel();
   document.getElementById('stats-level').textContent = level;
-  document.getElementById('stats-level-name').textContent = CEFR_NAMES[level];
+  document.getElementById('stats-level-name').textContent = t(CEFR_NAMES[level]);
   document.getElementById('stats-level-icon').innerHTML = icon(CEFR_ICONS[level] || 'sprout', 34);
   const curIdx = CEFR_LEVELS.indexOf(level);
   const nextLevel = CEFR_LEVELS[Math.min(curIdx+1, 5)];
@@ -1179,7 +1179,7 @@ function renderProfile() {
   document.getElementById('pf-mail').textContent = user.email || '';
 
   const kind = document.getElementById('pf-kind');
-  kind.textContent = user.guest ? 'Mehmon rejimi' : 'Hisob faol';
+  kind.textContent = t(user.guest ? 'Mehmon rejimi' : 'Hisob faol');
   kind.classList.toggle('online', !user.guest);
 
   document.getElementById('pf-level').textContent = getCEFRLevel();
@@ -1187,9 +1187,9 @@ function renderProfile() {
   document.getElementById('pf-streak').textContent = st.days;
   document.getElementById('pf-record').textContent = streakBest(st.days);
 
-  document.getElementById('pf-note').textContent = user.guest
+  document.getElementById('pf-note').textContent = t(user.guest
     ? "Ro'yxatdan o'tsangiz, progress hisobingizda saqlanadi va boshqa qurilmada ham ochiladi. Reytingda ham qatnasha olasiz."
-    : "Progress hisobingizga saqlanmoqda — istalgan qurilmadan kirsangiz, davom ettirasiz.";
+    : "Progress hisobingizga saqlanmoqda — istalgan qurilmadan kirsangiz, davom ettirasiz.");
 }
 
 // Без настроенного Firebase регистрация невозможна — показываем только вход гостем,
@@ -1417,10 +1417,10 @@ function tutorInit() {
   const level = getCEFRLevel();
   document.getElementById('tutor-level-label').textContent = t('Daraja') + ': ' + level;
 
+  tutorRenderChips();
+  tutorRenderScenarios();
   if (!tutorWired) {
     tutorLoadHistory();
-    tutorRenderChips();
-    tutorRenderScenarios();
     const input = document.getElementById('chat-input');
     input.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); tutorSend(); }
@@ -1585,10 +1585,8 @@ function aiRenderTopics() {
 
 function aiInit() {
   document.getElementById('ai-level-label').textContent = t('Daraja') + ': ' + getCEFRLevel();
-  if (!aiWired) {
-    aiRenderTopics();
-    aiWired = true;
-  }
+  aiRenderTopics();
+  aiWired = true;
   aiShowView('ai-setup');
 }
 
@@ -1983,7 +1981,7 @@ function renderDailyCard() {
   if (!card) return;
   const done = dailyLoad();
   card.classList.toggle('done', !!done);
-  document.getElementById('dc-state').textContent = done ? `${done.score} / ${DAILY_SIZE}` : 'Bajarilmagan';
+  document.getElementById('dc-state').textContent = done ? `${done.score} / ${DAILY_SIZE}` : t('Bajarilmagan');
   document.getElementById('dc-title').textContent = done
     ? "Bugungi topshiriq bajarildi"
     : t('Bugungi 10 ta so\'z');
@@ -2007,7 +2005,7 @@ function dailyStart() {
 function dailyRender() {
   const q = dailyWords[dailyIdx];
   document.getElementById('dl-counter').textContent = (dailyIdx + 1) + ' / ' + dailyWords.length;
-  document.getElementById('dl-score').textContent = dailyCorrect + ' ball';
+  document.getElementById('dl-score').textContent = dailyCorrect + ' ' + t('ball');
   document.getElementById('dl-word').textContent = q.word.en;
 
   const grid = document.getElementById('dl-options');
@@ -2095,12 +2093,12 @@ function renderMap() {
     card.innerHTML =
       '<div class="city-top">' +
         '<span class="city-code">' + level + '</span>' +
-        '<span class="city-name">' + (CEFR_NAMES[level] || '') + '</span>' +
+        '<span class="city-name">' + t(CEFR_NAMES[level] || '') + '</span>' +
         '<span class="city-state">' + icon(!unlocked ? 'lock' : done ? 'check' : (CEFR_ICONS[level] || 'pin'), 18) + '</span>' +
       '</div>' +
       '<div class="city-bar"><i style="width:' + (unlocked ? p.pct : 0) + '%"></i></div>' +
       '<div class="city-meta">' +
-        '<span>' + (unlocked ? p.known + ' / ' + p.total + ' ' + t('so\'z') : "Yopiq") + '</span>' +
+        '<span>' + (unlocked ? p.known + ' / ' + p.total + ' ' + t('so\'z') : t("Yopiq")) + '</span>' +
         '<span>' + (unlocked ? p.pct + '%' : t('Oldingi darajani {n}% ga yeting').replace('{n}', CITY_UNLOCK_PCT)) + '</span>' +
       '</div>';
 
@@ -2820,7 +2818,7 @@ function wordsInit() {
   WORDS_COUNTS.forEach(n => {
     const b = document.createElement('button');
     b.className = 'chat-chip' + (n === wordsCount ? ' on' : '');
-    b.textContent = n + ' ta';
+    b.textContent = t('{n} ta').replace('{n}', n);
     b.onclick = () => { wordsCount = n; wordsInit(); };
     counts.appendChild(b);
   });

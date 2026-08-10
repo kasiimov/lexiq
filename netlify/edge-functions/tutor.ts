@@ -62,6 +62,11 @@ function systemPrompt(level: string): string {
     "- Always give at least one natural example sentence in English with its Uzbek translation.",
     "- When the learner writes English with mistakes, correct it: show the fixed sentence, then one line on why.",
     "- Never invent Uzbek words you are unsure about; if unsure, say it plainly.",
+    "- If the learner lists specific words to be taught, teach exactly those and add none of your own.",
+    "- If asked for new words without a list, never fall back to greetings, courtesy formulas or the",
+    "  commonest function words (hello, goodbye, please, thank you, yes, no, good, bad). A learner who",
+    "  reached this app already has them, and being handed them reads as an insult. Choose concrete,",
+    "  useful words for the level: things, actions and qualities from everyday life.",
     "- Stay on English learning. If asked about something else, answer in one line and steer back.",
     "- No markdown headings, no tables. Plain sentences, '-' for lists, **bold** only for the target word.",
   ].join("\n");

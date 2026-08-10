@@ -1298,8 +1298,41 @@ const TALK_SCENARIOS = [
   { id: 'yol',        ic: 'bus', label: 'Yo\'lda',    opener: 'Excuse me, does this bus go to the city centre?' },
 ];
 
+// «5 ta yangi so'z» просил у модели «пять слов моего уровня» — и она каждый раз
+// отдавала hello, goodbye, thank you, please, yes. Формально это A1, по сути —
+// слова, которые человек знает до первого урока: модель, когда её просят «частое
+// и простое», берёт вершину частотного списка, и там всегда одно и то же.
+// Поэтому слова выбираем сами: из курируемого словаря, по уровню ученика, среди
+// тех, что он ещё не закрыл по Лейтнеру. Модели остаётся объяснить готовый набор.
+function tutorPickNewWords(n) {
+  const srs = srsLoad();
+  const level = getCEFRLevel();
+  const fresh = (lvl) => VOCAB.filter((w) =>
+    w.status === 'ok' && w.level === lvl && w.topic !== 'grammar' &&
+    !(srs[w.id] && srs[w.id].box >= 3));
+
+  // Если на своём уровне свободных слов не осталось, берём следующий: это
+  // честнее, чем показать те же слова по второму кругу.
+  let pool = fresh(level);
+  if (pool.length < n) {
+    const next = CEFR_LEVELS[CEFR_LEVELS.indexOf(level) + 1];
+    if (next) pool = pool.concat(fresh(next));
+  }
+
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, n).map((w) => w.en);
+}
+
 const TUTOR_CHIPS = [
-  { ic: 'sparkles', label: "5 ta yangi so'z", text: "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan." },
+  { ic: 'sparkles', label: "5 ta yangi so'z", text: () => {
+      const words = tutorPickNewWords(5);
+      if (!words.length) return "Mening darajam uchun 5 ta yangi so'z bering, har biriga misol gap bilan.";
+      return "Menga shu 5 ta so'zni o'rgating: " + words.join(', ') +
+        ". Har biriga o'zbekcha tarjimasi va bitta misol gap bering.";
+    } },
   { ic: 'pen', label: 'Gapimni tekshiring', text: 'Men yozgan inglizcha gapni tekshiring va xatolarimni tushuntiring: ' },
   { ic: 'book-open', label: 'Grammatika', text: "Present Simple qoidasini oddiy qilib tushuntiring, 3 ta misol bilan." },
   { ic: 'message', label: 'Suhbat', text: "Men bilan oddiy inglizcha suhbat boshlang. Birinchi savolni bering." },
@@ -1378,11 +1411,14 @@ function tutorRenderChips() {
     b.className = 'chat-chip';
     b.innerHTML = chipHTML(chip);
     b.onclick = () => {
+      // Текст чипа может быть функцией: она собирает запрос в момент нажатия,
+      // по текущему прогрессу ученика, а не один раз при загрузке страницы.
+      const text = typeof chip.text === 'function' ? chip.text() : chip.text;
       const input = document.getElementById('chat-input');
-      input.value = chip.text;
+      input.value = text;
       input.focus();
       tutorAutoGrow(input);
-      if (!chip.text.endsWith(' ')) tutorSend();
+      if (!text.endsWith(' ')) tutorSend();
     };
     box.appendChild(b);
   });

@@ -74,7 +74,11 @@ export const PROVIDERS: Provider[] = [
   { name: "mistral", url: MISTRAL_URL, keyEnv: "MISTRAL_API_KEY", model: "mistral-small-latest" },
   { name: "cerebras", url: CEREBRAS_URL, keyEnv: "CEREBRAS_API_KEY", model: "gpt-oss-120b" },
   { name: "github", url: GITHUB_URL, keyEnv: "GITHUB_MODELS_TOKEN", model: "openai/gpt-4.1-mini" },
-  { name: "openrouter", url: OPENROUTER_URL, keyEnv: "OPENROUTER_API_KEY", model: "meta-llama/llama-3.3-70b-instruct:free" },
+  // Бесплатные слоты на OpenRouter живут недолго: llama-3.3-70b:free, стоявшая
+  // здесь раньше, перестала быть бесплатной и отвечала 404 с советом перейти на
+  // платный slug. Nemotron проверен на нашем сценарии — узбекский плюс JSON —
+  // и единственный из бесплатных вернул и то, и другое без правки.
+  { name: "openrouter", url: OPENROUTER_URL, keyEnv: "OPENROUTER_API_KEY", model: "nvidia/nemotron-3-super-120b-a12b:free" },
   { name: "groq-llama", url: GROQ_URL, keyEnv: "GROQ_API_KEY", model: "llama-3.3-70b-versatile" },
 ];
 

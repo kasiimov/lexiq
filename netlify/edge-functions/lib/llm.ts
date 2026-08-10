@@ -105,16 +105,8 @@ export function failureResponse(failures: string[]): Response {
   return jsonError(502, "AI hozir javob bermayapti", failures.join("; "));
 }
 
-// ВРЕМЕННО: цепочка сведена к одному провайдеру, чтобы проверить ключ Mistral.
-// Пока Gemini отвечает, до Mistral очередь не доходит, и понять, рабочий у нас
-// ключ или мёртвый, невозможно — 401 просто некому показать.
-// Вернуть всю цепочку: удалить ONLY и фильтр по нему ниже. Список провайдеров
-// при этом не тронут, вместе со всеми доводами, почему они стоят в таком порядке.
-const ONLY: string | null = "mistral";
-
 export function configuredProviders(): Provider[] {
-  const configured = PROVIDERS.filter((p) => !!Deno.env.get(p.keyEnv));
-  return ONLY ? configured.filter((p) => p.name === ONLY) : configured;
+  return PROVIDERS.filter((p) => !!Deno.env.get(p.keyEnv));
 }
 
 export function normalizeLevel(value: unknown): string {
